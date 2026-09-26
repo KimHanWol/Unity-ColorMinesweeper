@@ -88,18 +88,35 @@ namespace ColorMinesweeper.Game
                 stage.RevealWithFlood(g, seen, opened);
             }
 
-            return revealStart + PlayReveal(opened, revealStart);
+            return revealStart + PlayReveal(session, opened, revealStart);
         }
 
-        /// <summary>펼쳐진 칸을 거리 순서로 연다. 연출이 끝나는 데 걸리는 시간을 돌려준다.</summary>
-        public float PlayReveal(List<RevealedCell> opened, float startDelay = 0f)
+        /// <summary>
+        /// 펼쳐진 칸을 거리 순서로 열고, 새로 열린 칸 주변 단서 칩의 남은 개수를 갱신한다.
+        /// 연출이 끝나는 데 걸리는 시간을 돌려준다.
+        /// </summary>
+        public float PlayReveal(PuzzleSession session, List<RevealedCell> opened, float startDelay = 0f)
         {
             int maxDepth = 0;
+            var affected = new HashSet<int>();
             foreach (RevealedCell r in opened)
             {
-                cells[r.Cell].AnimateReveal(startDelay + r.Depth * RevealStepDelay);
                 cells[r.Cell].SetFocus(focus);
+                cells[r.Cell].UpdateRemaining(session, false);
+                cells[r.Cell].AnimateReveal(startDelay + r.Depth * RevealStepDelay);
                 maxDepth = Mathf.Max(maxDepth, r.Depth);
+                foreach (int n in stage.Neighbors(r.Cell))
+                {
+                    affected.Add(n);
+                }
+            }
+
+            foreach (int n in affected)
+            {
+                if (session.IsRevealed(n))
+                {
+                    cells[n].UpdateRemaining(session, true);
+                }
             }
 
             // 펼침 깊이마다 음이 한 칸씩 올라간다. 너무 많으면 시끄러우니 8단까지만.
@@ -111,6 +128,15 @@ namespace ColorMinesweeper.Game
             }
 
             return maxDepth * RevealStepDelay + 0.45f;
+        }
+
+        /// <summary>칩 표시 방식(전체/남은 개수) 설정이 바뀌었을 때.</summary>
+        public void RefreshClueDigits()
+        {
+            foreach (CellView cell in cells)
+            {
+                cell.RefreshDigits();
+            }
         }
 
         public void PlayWrong(int cell, Color chosen)

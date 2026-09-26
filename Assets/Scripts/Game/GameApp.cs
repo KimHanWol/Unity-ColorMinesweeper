@@ -42,6 +42,7 @@ namespace ColorMinesweeper.Game
             Application.targetFrameRate = 60;
             Input.multiTouchEnabled = true;
             Haptics.EnsurePermissionReference();
+            Settings.Apply();
 
             Sfx.Create(transform);
             BoardCamera = BoardCamera.Create(transform);

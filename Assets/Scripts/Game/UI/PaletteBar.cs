@@ -65,6 +65,7 @@ namespace ColorMinesweeper.Game
         Swatch CreateSwatch(Transform parent, Stage stage, int color, Vector2 position, float scale)
         {
             Rgb rgb = stage.Colors[color].Color;
+            bool background = color == stage.BackgroundColor;
             Transform root = Draw.Node(parent, "Swatch" + color, position);
             Transform visual = Draw.Node(root, "Visual");
             visual.localScale = Vector3.one * scale;
@@ -74,18 +75,29 @@ namespace ColorMinesweeper.Game
                 Root = root,
                 Base = root.localPosition,
                 Visual = visual,
-                Ring = Draw.Sprite(visual, "Ring", SpriteFactory.Circle(), Theme.Accent, 92, Vector2.zero,
-                    Vector2.one * (SwatchSize + 0.24f)),
-                Fill = Draw.Sprite(visual, "Fill", SpriteFactory.Circle(), Theme.ToColor(rgb), 94, Vector2.zero,
-                    Vector2.one * SwatchSize),
+                Ring = Shape(visual, "Ring", background, Theme.Accent, 92, SwatchSize + 0.24f),
+                Fill = Shape(visual, "Fill", background, Theme.ToColor(rgb), 94, SwatchSize),
             };
             // 밝은 색(흰색, 배경 크림색)은 흰 바탕에 묻히므로 얇은 회색 테두리를 둔다.
-            Draw.Sprite(visual, "Edge", SpriteFactory.Circle(), new Color(0f, 0f, 0f, 0.1f), 93, Vector2.zero,
-                Vector2.one * (SwatchSize + 0.06f));
+            Shape(visual, "Edge", background, new Color(0f, 0f, 0f, 0.1f), 93, SwatchSize + 0.06f);
             swatch.Count = PixelText.Create(visual, "Count", "0", Theme.InkOn(rgb), 95, Vector2.zero, 0.34f);
+            if (background)
+            {
+                // 배경색은 단서 칩에 나오지 않는다. 모양(네모)과 이름으로 다른 색과 구분한다.
+                Label.Create(visual, "BackgroundTag", "배경", Theme.SubInk, 95, new Vector2(0f, -SwatchSize / 2f - 0.32f),
+                    0.3f, TextAnchor.MiddleCenter, true);
+            }
             swatch.Ring.enabled = false;
             swatch.Button = UiButton.Attach(root, Vector2.one * 1.5f * scale, 96, () => Select(color, true), visual);
             return swatch;
+        }
+
+        /// <summary>그림 색은 동그라미, 배경색은 둥근 네모.</summary>
+        static SpriteRenderer Shape(Transform parent, string name, bool square, Color color, int order, float size)
+        {
+            return square
+                ? Draw.Panel(parent, name, Vector2.one * size, color, order, Vector2.zero, size * 0.28f)
+                : Draw.Sprite(parent, name, SpriteFactory.Circle(), color, order, Vector2.zero, Vector2.one * size);
         }
 
         public void Refresh(PuzzleSession session)

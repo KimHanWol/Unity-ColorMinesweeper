@@ -29,6 +29,8 @@ namespace ColorMinesweeper.Game
                 TextAnchor.MiddleCenter, true);
             Label.Create(header, "Subtitle", "단서를 보고 칠하면 그림이 완성돼요", Theme.SubInk, 151, new Vector2(0f, -0.55f),
                 0.42f);
+            UiKit.IconButton(header, "Settings", PixelGlyphs.Icon("gear", PixelGlyphs.Gear),
+                new Vector2(Ui.Safe.width / 2f - 1.05f, 1.2f), 152, () => SettingsPanel.Open(transform, Ui, 300, null));
 
             content = Draw.Node(transform, "Content");
             for (int i = 0; i < StageCatalog.All.Count; i++)

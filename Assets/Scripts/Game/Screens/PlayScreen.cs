@@ -37,7 +37,7 @@ namespace ColorMinesweeper.Game
 
             top = Draw.Node(transform, "Top");
             bottom = Draw.Node(transform, "Bottom");
-            hud = Hud.Create(top, Ui, stageIndex + 1, stage.Name, () => App.ShowSelect());
+            hud = Hud.Create(top, Ui, stageIndex + 1, stage.Name, () => App.ShowSelect(), OpenSettings);
             palette = PaletteBar.Create(bottom, Ui, stage, OnSelectColor);
             Layout();
 
@@ -48,6 +48,28 @@ namespace ColorMinesweeper.Game
             busy = true;
             float intro = board.PlayIntro(session);
             Tween.Delay(this, intro * 0.7f, () => busy = false);
+            Settings.Changed += OnSettingsChanged;
+        }
+
+        protected override void OnDestroy()
+        {
+            Settings.Changed -= OnSettingsChanged;
+            base.OnDestroy();
+        }
+
+        void OnSettingsChanged()
+        {
+            board.RefreshClueDigits();
+        }
+
+        void OpenSettings()
+        {
+            if (modal != null || session.IsCleared || session.IsGameOver)
+            {
+                return;
+            }
+
+            modal = SettingsPanel.Open(transform, Ui, ModalOrder, () => modal = null);
         }
 
         /// <summary>남은 칸이 있는 색 중 배경이 아닌 첫 색. 그림 색부터 칠하는 게 더 재미있다.</summary>
@@ -108,7 +130,7 @@ namespace ColorMinesweeper.Game
             if (result.Outcome == PaintOutcome.Correct)
             {
                 Haptics.Light();
-                float duration = board.PlayReveal(result.Revealed);
+                float duration = board.PlayReveal(session, result.Revealed);
                 palette.Refresh(session);
                 if (result.Cleared)
                 {

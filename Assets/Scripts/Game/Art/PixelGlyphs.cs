@@ -107,6 +107,29 @@ namespace ColorMinesweeper.Game
             "#########",
         };
 
+        public static readonly string[] Gear =
+        {
+            "...###...",
+            ".#.###.#.",
+            "#########",
+            ".###.###.",
+            "###...###",
+            ".###.###.",
+            "#########",
+            ".#.###.#.",
+            "...###...",
+        };
+
+        public static readonly string[] Check =
+        {
+            ".......##",
+            "......##.",
+            "##...##..",
+            ".##.##...",
+            "..###....",
+            "...#.....",
+        };
+
         public static readonly string[] Sparkle =
         {
             "..#..",
