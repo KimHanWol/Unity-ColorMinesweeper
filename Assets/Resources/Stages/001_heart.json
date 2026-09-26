@@ -1,0 +1,22 @@
+{
+  "id": "heart",
+  "name": "하트",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F3EEE4" },
+    { "key": "R", "color": "#E8505B" },
+    { "key": "P", "color": "#FFB3C1" }
+  ],
+  "pixels": [
+    ".........",
+    ".RR...RR.",
+    "RRPR.RRRR",
+    "RPRRRRRRR",
+    "RRRRRRRRR",
+    ".RRRRRRR.",
+    "..RRRRR..",
+    "...RRR...",
+    "....R...."
+  ],
+  "givens": [63]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "cat",
+  "name": "고양이",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EFE9F4" },
+    { "key": "O", "color": "#F4A259" },
+    { "key": "K", "color": "#3B3B4F" },
+    { "key": "P", "color": "#F28DA0" }
+  ],
+  "pixels": [
+    ".O.......O.",
+    ".OO.....OO.",
+    ".OOOOOOOOO.",
+    "OOOOOOOOOOO",
+    "OOKOOOOOKOO",
+    "OOOOOPOOOOO",
+    "OOOOKOKOOOO",
+    ".OOOOOOOOO.",
+    "..OOOOOOO..",
+    "..........."
+  ],
+  "givens": [4]
+}

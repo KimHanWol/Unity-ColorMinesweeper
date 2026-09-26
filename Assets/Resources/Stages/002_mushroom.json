@@ -1,0 +1,25 @@
+{
+  "id": "mushroom",
+  "name": "버섯",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CFE8D5" },
+    { "key": "R", "color": "#E8505B" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "S", "color": "#F2D7A6" },
+    { "key": "K", "color": "#3B3B4F" }
+  ],
+  "pixels": [
+    "...RRRR...",
+    "..RWWRRR..",
+    ".RRWWRRRR.",
+    ".RRRRRWWR.",
+    "RWWRRRWWRR",
+    "RWWRRRRRRR",
+    "..SSSSSS..",
+    "..SSKSKS..",
+    "..SSSSSS..",
+    "...SSSS..."
+  ],
+  "givens": [70]
+}
