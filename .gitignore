@@ -104,3 +104,8 @@ InitTestScene*.unity*
 
 # Auto-generated cache in Assets folder
 /[Aa]ssets/[Ss]ceneDependencyCache*
+
+# dotnet 로 도는 코어 테스트/도구 (Unity 밖)
+!/Tools/**/*.csproj
+/Tools/**/bin/
+/Tools/**/obj/
