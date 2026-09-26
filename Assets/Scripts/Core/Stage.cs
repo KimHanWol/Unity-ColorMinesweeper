@@ -34,6 +34,12 @@ namespace ColorMinesweeper.Core
         /// <summary>처음부터 열려 있는 칸. 비어 있으면 게임이 생성한다.</summary>
         public int[] Givens { get; set; }
 
+        /// <summary>
+        /// givens 를 고를 때 플레이어에게 요구할 가장 어려운 추론. 초반 스테이지는 <see cref="Technique.Direct"/>
+        /// (JSON "basic")로 두면 열린 칸이 조금 늘어나는 대신 항상 순서대로 풀린다.
+        /// </summary>
+        public Technique Logic { get; set; } = Technique.Pair;
+
         readonly int[] pixels;
         readonly int[][] neighbors;
         readonly int[] clues;

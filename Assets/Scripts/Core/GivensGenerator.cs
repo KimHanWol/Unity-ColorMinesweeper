@@ -11,6 +11,12 @@ namespace ColorMinesweeper.Core
     {
         const int SamplesPerStep = 12;
 
+        /// <summary>id 로 만든 시드와 스테이지의 <see cref="Stage.Logic"/> 로 생성한다. 게임·도구가 모두 이것을 쓴다.</summary>
+        public static int[] Generate(Stage stage)
+        {
+            return Generate(stage, XorShiftRandom.SeedFrom(stage.Id), stage.Logic);
+        }
+
         public static int[] Generate(Stage stage, int seed, Technique maxTechnique = Technique.Pair)
         {
             var rng = new XorShiftRandom(seed);

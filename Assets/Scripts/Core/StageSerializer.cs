@@ -174,7 +174,19 @@ namespace ColorMinesweeper.Core
                 }
             }
 
-            return new Stage(id, name, colors, backgroundIndex, width, height, pixels, givens);
+            var stage = new Stage(id, name, colors, backgroundIndex, width, height, pixels, givens);
+            if (obj.TryGetValue("logic", out object logicValue) && logicValue != null)
+            {
+                if (!(logicValue is string logic) || (logic != "basic" && logic != "medium" && logic != "full"))
+                {
+                    throw new StageFormatException(
+                        "logic 은 \"basic\"(순서대로), \"medium\"(제외 기억까지), \"full\"(조합까지) 중 하나여야 합니다");
+                }
+
+                stage.Logic = logic == "basic" ? Technique.Direct : logic == "medium" ? Technique.Single : Technique.Pair;
+            }
+
+            return stage;
         }
 
         public static string ToJson(Stage stage)
@@ -183,6 +195,11 @@ namespace ColorMinesweeper.Core
             sb.Append("{\n");
             sb.Append("  \"id\": ").Append(MiniJson.Quote(stage.Id)).Append(",\n");
             sb.Append("  \"name\": ").Append(MiniJson.Quote(stage.Name)).Append(",\n");
+            if (stage.Logic != Technique.Pair)
+            {
+                sb.Append("  \"logic\": ").Append(stage.Logic == Technique.Direct ? "\"basic\"" : "\"medium\"").Append(",\n");
+            }
+
             sb.Append("  \"background\": ")
                 .Append(MiniJson.Quote(stage.Colors[stage.BackgroundColor].Key.ToString())).Append(",\n");
             sb.Append("  \"palette\": [\n");

@@ -187,7 +187,7 @@ namespace ColorMinesweeper.EditorTools
                 GUI.enabled = entry.Stage != null;
                 if (GUILayout.Button(new GUIContent("givens 생성 후 저장", "추론만으로 풀리게 처음 열어 둘 칸을 다시 고른다")))
                 {
-                    entry.Stage.Givens = GivensGenerator.Generate(entry.Stage, XorShiftRandom.SeedFrom(entry.Stage.Id));
+                    entry.Stage.Givens = GivensGenerator.Generate(entry.Stage);
                     entry.Text = StageSerializer.ToJson(entry.Stage);
                     Save(entry);
                 }

@@ -47,7 +47,7 @@ namespace ColorMinesweeper.Game
         {
             if (stage.Givens.Length == 0)
             {
-                stage.Givens = GivensGenerator.Generate(stage, XorShiftRandom.SeedFrom(stage.Id));
+                stage.Givens = GivensGenerator.Generate(stage);
             }
 
             return stage.Givens;

@@ -13,6 +13,8 @@ namespace ColorMinesweeper.Core
 
         /// <summary>검사에 쓴 givens. 파일에 없으면 게임과 같은 시드로 생성한 값이다.</summary>
         public readonly int[] Givens;
+
+        public readonly Difficulty Difficulty;
         public readonly List<string> Errors = new List<string>();
         public readonly List<string> Warnings = new List<string>();
 
@@ -27,7 +29,7 @@ namespace ColorMinesweeper.Core
             if (stage.Givens.Length == 0)
             {
                 Warnings.Add("givens 가 비어 있습니다. 게임이 실행할 때 생성하지만, 배포 전에 생성해 저장해 두세요.");
-                Givens = GivensGenerator.Generate(stage, XorShiftRandom.SeedFrom(stage.Id));
+                Givens = GivensGenerator.Generate(stage);
             }
             else
             {
@@ -35,6 +37,7 @@ namespace ColorMinesweeper.Core
             }
 
             Result = new Solver(stage).Solve(Givens);
+            Difficulty = Difficulty.Rate(stage, Result);
 
             if (!Result.Solved)
             {
@@ -59,7 +62,7 @@ namespace ColorMinesweeper.Core
         {
             return Stage.Width + "x" + Stage.Height + ", " + Stage.ColorCount + "색, givens " + Givens.Length +
                    ", 시작 " + Result.InitialRevealed + "칸 열림, " + Result.Waves.Count + "단계" +
-                   (Result.UsedPair ? ", 두 단서 추론 필요" : "");
+                   " — " + Difficulty;
         }
     }
 }
