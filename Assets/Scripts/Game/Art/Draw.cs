@@ -31,6 +31,16 @@ namespace ColorMinesweeper.Game
             return renderer;
         }
 
+        /// <summary>모서리가 둥근 사각 패널. size 는 월드 유닛.</summary>
+        public static SpriteRenderer Panel(Transform parent, string name, Vector2 size, Color color, int order,
+            Vector2 localPosition = default, float cornerRadius = 0.35f)
+        {
+            SpriteRenderer renderer = Sprite(parent, name, SpriteFactory.Panel(cornerRadius), color, order, localPosition);
+            renderer.drawMode = SpriteDrawMode.Sliced;
+            renderer.size = size;
+            return renderer;
+        }
+
         public static void SetAlpha(SpriteRenderer renderer, float alpha)
         {
             Color c = renderer.color;

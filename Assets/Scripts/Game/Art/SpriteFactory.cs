@@ -52,6 +52,37 @@ namespace ColorMinesweeper.Game
             });
         }
 
+        /// <summary>
+        /// 9-slice 둥근 패널. 늘려도 모서리 반지름(월드 유닛)이 그대로라 판, 카드, 버튼 바탕에 쓴다.
+        /// SpriteRenderer.drawMode = Sliced 로 써야 한다(<see cref="Draw.Panel"/>).
+        /// </summary>
+        public static Sprite Panel(float cornerRadius)
+        {
+            return Cached("panel" + cornerRadius, () =>
+            {
+                const int size = 64;
+                const int radius = 24;
+                var tex = NewTexture(size, size, FilterMode.Bilinear);
+                var pixels = new Color32[size * size];
+                for (int py = 0; py < size; py++)
+                {
+                    for (int px = 0; px < size; px++)
+                    {
+                        float x = px + 0.5f - size / 2f;
+                        float y = py + 0.5f - size / 2f;
+                        float d = RoundedBoxDistance(x, y, size / 2f, size / 2f, radius);
+                        pixels[py * size + px] = new Color32(255, 255, 255, (byte)(Mathf.Clamp01(0.5f - d) * 255f));
+                    }
+                }
+
+                tex.SetPixels32(pixels);
+                tex.Apply();
+                const float border = radius + 2;
+                return Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), radius / cornerRadius, 0,
+                    SpriteMeshType.FullRect, new Vector4(border, border, border, border));
+            });
+        }
+
         public static Sprite Circle()
         {
             return Cached("circle", () => Shape((x, y) => Mathf.Sqrt(x * x + y * y) - 0.5f, 1f));
