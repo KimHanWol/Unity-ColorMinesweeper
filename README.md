@@ -49,12 +49,29 @@
 - `palette.key` 는 한 글자. `pixels` 의 각 글자가 팔레트 키다. 모든 줄 길이가 같아야 한다.
 - `givens` 는 처음부터 열려 있는 칸의 인덱스(`y * width + x`). 비워 두면 게임이 시드 기반으로 생성한다.
   배포할 스테이지는 에디터 도구로 생성해 저장해 둔다.
+- `logic`(선택): givens 를 고를 때 플레이어에게 요구할 가장 어려운 추론. 생략하면 `full`.
+
+### 추론 단계와 난이도
+
+| logic | 추론 | 플레이어가 하는 일 |
+| --- | --- | --- |
+| `basic` | 순서대로 | 열린 단서 하나만 보면 칸이 정해진다. 기억할 것이 없다. |
+| `medium` | 제외 기억 | "이 칸은 분홍이 아니다"를 기억하며 여러 단서를 잇는다. |
+| `full` | 조합 | 겹치는 두 단서의 경우의 수를 따진다. |
+
+경우의 수를 머릿속으로 조합하는 판이 어렵다는 플레이 피드백에 따라, 순서대로 풀리는 판을 앞에 두고
+조합이 필요한 판은 뒤로 보낸다. 초반은 색이 적고 작은 그림부터 나온다.
+
+난이도 점수(`Core/Difficulty.cs`)는 솔버가 매 순간 가장 쉬운 추론부터 시도하며 남긴 기록으로 매긴다.
+단계마다 필요한 추론(순서대로 1, 제외 기억 2, 조합 4)에, 판 크기와 색 수(비중을 일부러 높임), 끝까지 필요한
+가장 어려운 추론의 가산점을 더한다. `StageTool sort` 가 이 점수 순으로 파일 번호를 다시 매긴다.
 
 ### 개발용 도구
 
 - Unity 메뉴 **Tools > Color Minesweeper > Stage Preview**: 그림 미리보기, 형식 오류, 풀이 가능 여부,
   솔버 단계별 재생, givens 생성·저장.
-- Unity 없이: `dotnet run --project Tools/StageTool -- validate` / `-- generate` (모든 스테이지 검증 / givens 채우기).
+- Unity 없이: `dotnet run --project Tools/StageTool -- validate` / `-- generate` / `-- sort`
+  (모든 스테이지 검증과 난이도 표시 / givens 채우기 / 난이도 순으로 번호 다시 매기기).
 - 코어 테스트: `dotnet test Tools/CoreTests`.
 - Unity 없이 게임·에디터 스크립트 컴파일 검사: `dotnet build Tools/UnityCompileCheck`
   (설치된 Unity 6 의 엔진 DLL 을 참조한다. 경로가 다르면 `-p:UnityEditorPath=...`).
