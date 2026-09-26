@@ -56,3 +56,11 @@
   솔버 단계별 재생, givens 생성·저장.
 - Unity 없이: `dotnet run --project Tools/StageTool -- validate` / `-- generate` (모든 스테이지 검증 / givens 채우기).
 - 코어 테스트: `dotnet test Tools/CoreTests`.
+- Unity 없이 게임·에디터 스크립트 컴파일 검사: `dotnet build Tools/UnityCompileCheck`
+  (설치된 Unity 6 의 엔진 DLL 을 참조한다. 경로가 다르면 `-p:UnityEditorPath=...`).
+
+## 처음 열 때
+
+Unity Hub 에서 6000.3.8f1 로 이 폴더를 연다. 처음 열리면 `ProjectBootstrap` 이 `Assets/Scenes/Main.unity` 를 만들어
+빌드 목록에 올리고 Player Settings(패키지 이름, 세로 고정)를 채운다. 씬은 비어 있어도 되고, 재생하면 `GameApp` 이 스스로 뜬다.
+Unity 가 만든 `.meta` 와 `ProjectSettings/` 는 커밋한다.
