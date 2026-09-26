@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Unity 에디터를 띄우지 않고 게임/에디터 스크립트의 컴파일 오류를 잡는다.
+    Unity 가 쓰는 것과 같은 엔진 모듈 DLL 을 참조한다. 설치 경로가 다르면 -p:UnityEditorPath=... 로 넘긴다.
+    dotnet build Tools/UnityCompileCheck
+  -->
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+    <LangVersion>9.0</LangVersion>
+    <Nullable>disable</Nullable>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <DefineConstants>$(DefineConstants);UNITY_EDITOR;UNITY_2023_1_OR_NEWER</DefineConstants>
+    <NoWarn>$(NoWarn);CS0649;CS0414</NoWarn>
+    <UnityEditorPath Condition="'$(UnityEditorPath)' == ''">C:\Program Files\Unity\Hub\Editor\6000.3.8f1\Editor</UnityEditorPath>
+    <UnityManaged>$(UnityEditorPath)\Data\Managed</UnityManaged>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="../../Assets/Scripts/**/*.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="$(UnityManaged)\UnityEngine\*.dll" Private="false" />
+  </ItemGroup>
+</Project>

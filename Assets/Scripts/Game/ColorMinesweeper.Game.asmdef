@@ -1,0 +1,16 @@
+{
+    "name": "ColorMinesweeper.Game",
+    "rootNamespace": "ColorMinesweeper.Game",
+    "references": [
+        "ColorMinesweeper.Core"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
