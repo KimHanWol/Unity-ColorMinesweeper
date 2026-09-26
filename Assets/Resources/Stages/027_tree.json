@@ -1,0 +1,26 @@
+{
+  "id": "tree",
+  "name": "크리스마스 트리",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "G", "color": "#2D6A4F" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "B", "color": "#7F5539" }
+  ],
+  "pixels": [
+    "....Y....",
+    "...GGG...",
+    "..GGGGG..",
+    "...GGG...",
+    "..GGRGG..",
+    ".GGGGGGG.",
+    "..GGGGG..",
+    ".GGRGGRG.",
+    "GGGGGGGGG",
+    "....B....",
+    "....B...."
+  ],
+  "givens": [0]
+}

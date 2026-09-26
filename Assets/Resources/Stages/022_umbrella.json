@@ -1,0 +1,26 @@
+{
+  "id": "umbrella",
+  "name": "우산",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#D6EFFF" },
+    { "key": "R", "color": "#EF476F" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#3D405B" }
+  ],
+  "pixels": [
+    ".....K.....",
+    "...RRWRR...",
+    "..RRRWRRR..",
+    ".RRRRWRRRR.",
+    "RRRRRWRRRRR",
+    "R.R.RWR.R.R",
+    ".....K.....",
+    ".....K.....",
+    ".....K.....",
+    "...K.K.....",
+    "....K......"
+  ],
+  "givens": [84]
+}

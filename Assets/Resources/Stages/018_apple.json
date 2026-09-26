@@ -1,0 +1,24 @@
+{
+  "id": "apple",
+  "name": "사과",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8E7" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFD6DA" },
+    { "key": "B", "color": "#6B4226" },
+    { "key": "L", "color": "#52B788" }
+  ],
+  "pixels": [
+    ".....B...",
+    "....BLL..",
+    "..RR.RR..",
+    ".RRRRRRR.",
+    "RRWRRRRRR",
+    "RWRRRRRRR",
+    "RRRRRRRRR",
+    ".RRRRRRR.",
+    "..RR.RR.."
+  ],
+  "givens": [0]
+}

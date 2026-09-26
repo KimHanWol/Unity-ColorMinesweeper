@@ -1,0 +1,26 @@
+{
+  "id": "coffee",
+  "name": "커피",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F2C57C" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "B", "color": "#6F4E37" },
+    { "key": "S", "color": "#D9D9D9" },
+    { "key": "R", "color": "#E76F51" }
+  ],
+  "pixels": [
+    "...S..S....",
+    "..S..S.....",
+    "...S..S....",
+    "...........",
+    "WWWWWWWWW..",
+    "WBBBBBBBWWW",
+    "WWWWWWWWW.W",
+    "WRRRRRRRW.W",
+    "WWWWWWWWWWW",
+    ".WWWWWWW...",
+    "..WWWWW...."
+  ],
+  "givens": [8]
+}

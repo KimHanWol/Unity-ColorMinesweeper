@@ -1,0 +1,22 @@
+{
+  "id": "smile",
+  "name": "스마일",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "K", "color": "#3B3B4F" }
+  ],
+  "pixels": [
+    "..YYYY..",
+    ".YYYYYY.",
+    "YYKYYKYY",
+    "YYKYYKYY",
+    "YYYYYYYY",
+    "YKYYYYKY",
+    ".YKKKKY.",
+    "..YYYY.."
+  ],
+  "givens": [8, 40, 49, 56]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "sailboat",
+  "name": "돛단배",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CAF0F8" },
+    { "key": "K", "color": "#6B4226" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "B", "color": "#E63946" },
+    { "key": "L", "color": "#48CAE4" }
+  ],
+  "pixels": [
+    ".....K.....",
+    ".....KW....",
+    "....WKWW...",
+    "...WWKWWW..",
+    "..WWWKWWWW.",
+    ".WWWWKWWWWW",
+    ".....K.....",
+    "BBBBBBBBBBB",
+    ".BBBBBBBBB.",
+    "..BBBBBBB..",
+    "LLLLLLLLLLL"
+  ],
+  "givens": [0]
+}

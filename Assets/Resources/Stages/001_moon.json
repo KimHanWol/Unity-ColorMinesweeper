@@ -1,0 +1,20 @@
+{
+  "id": "moon",
+  "name": "초승달",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2B2D42" },
+    { "key": "Y", "color": "#FFD166" }
+  ],
+  "pixels": [
+    "..YYY..",
+    ".YY....",
+    "YY.....",
+    "YY.....",
+    "YY.....",
+    ".YY....",
+    "..YYY.."
+  ],
+  "givens": [6]
+}

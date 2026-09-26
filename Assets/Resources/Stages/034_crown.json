@@ -1,0 +1,22 @@
+{
+  "id": "crown",
+  "name": "왕관",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#6A4C93" },
+    { "key": "Y", "color": "#FFC300" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "G", "color": "#06D6A0" }
+  ],
+  "pixels": [
+    "Y....Y....Y",
+    "YY..YYY..YY",
+    "YYY.YYY.YYY",
+    "YYYYYYYYYYY",
+    "YRYYBYYGYRY",
+    "YYYYYYYYYYY",
+    ".YYYYYYYYY."
+  ],
+  "givens": [6, 7]
+}

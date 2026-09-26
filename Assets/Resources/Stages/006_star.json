@@ -1,0 +1,23 @@
+{
+  "id": "star",
+  "name": "별",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2B2D42" },
+    { "key": "Y", "color": "#FFC53D" },
+    { "key": "O", "color": "#FF9F1C" }
+  ],
+  "pixels": [
+    "....Y....",
+    "....Y....",
+    "...YYY...",
+    "YYYYYYYYY",
+    ".YYYOYYY.",
+    "..YYYYY..",
+    "..YYYYY..",
+    ".YY...YY.",
+    ".Y.....Y."
+  ],
+  "givens": [0]
+}

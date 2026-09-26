@@ -1,0 +1,25 @@
+{
+  "id": "pumpkin",
+  "name": "호박",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2E2A47" },
+    { "key": "O", "color": "#F77F00" },
+    { "key": "K", "color": "#3D2C2E" },
+    { "key": "G", "color": "#588157" }
+  ],
+  "pixels": [
+    ".....GG.....",
+    "......G.....",
+    "..OOOOOOOO..",
+    ".OOOOOOOOOO.",
+    "OOKKOOOOKKOO",
+    "OOKKOOOOKKOO",
+    "OOOOOOOOOOOO",
+    "OOKOOOOOOKOO",
+    ".OOKKKKKKOO.",
+    "..OOOOOOOO.."
+  ],
+  "givens": [0]
+}

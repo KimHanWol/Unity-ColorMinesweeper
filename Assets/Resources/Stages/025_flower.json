@@ -1,0 +1,26 @@
+{
+  "id": "flower",
+  "name": "꽃",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5F7" },
+    { "key": "P", "color": "#FF7AA2" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "G", "color": "#2D6A4F" },
+    { "key": "L", "color": "#74C69D" }
+  ],
+  "pixels": [
+    "..P...P..",
+    ".PPP.PPP.",
+    ".PPPYPPP.",
+    "..PYYYP..",
+    ".PPPYPPP.",
+    ".PPP.PPP.",
+    "..P.G.P..",
+    "....G....",
+    "..LLG....",
+    "...LG.LL.",
+    "....GLL.."
+  ],
+  "givens": [63]
+}

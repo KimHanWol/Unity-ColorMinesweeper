@@ -1,0 +1,30 @@
+{
+  "id": "rocket",
+  "name": "로켓",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1D1E3A" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#F1FAEE" },
+    { "key": "B", "color": "#457B9D" },
+    { "key": "O", "color": "#F77F00" },
+    { "key": "Y", "color": "#FCBF49" }
+  ],
+  "pixels": [
+    "....R....",
+    "...RRR...",
+    "...WWW...",
+    "..WWWWW..",
+    "..WBBBW..",
+    "..WBBBW..",
+    "..WWWWW..",
+    "..WWWWW..",
+    ".RWWWWWR.",
+    "RRWWWWWRR",
+    "RR.WWW.RR",
+    "...OYO...",
+    "...YOY...",
+    "....O...."
+  ],
+  "givens": [0]
+}

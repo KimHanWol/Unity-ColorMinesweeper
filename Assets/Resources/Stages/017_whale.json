@@ -1,0 +1,24 @@
+{
+  "id": "whale",
+  "name": "고래",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CAF0F8" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "K", "color": "#0B132B" },
+    { "key": "L", "color": "#BDE0FE" },
+    { "key": "W", "color": "#48CAE4" }
+  ],
+  "pixels": [
+    "..........W.W.",
+    "...........W..",
+    "...BBBBBB..W..",
+    ".BBBBBBBBBB...",
+    "BBBKBBBBBBBB.B",
+    "BBBBBBBBBBBBBB",
+    "LLLLLLLLLLLBB.",
+    ".LLLLLLLLLB.BB",
+    "..LLLLLLL....."
+  ],
+  "givens": [0]
+}

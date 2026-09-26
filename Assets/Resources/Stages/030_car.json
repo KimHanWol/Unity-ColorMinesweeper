@@ -1,0 +1,24 @@
+{
+  "id": "car",
+  "name": "자동차",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9ECEF" },
+    { "key": "R", "color": "#F94144" },
+    { "key": "B", "color": "#A8DADC" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "....RRRRRR....",
+    "...RBBRBBRR...",
+    "..RRBBRBBRRR..",
+    "RRRRRRRRRRRRRR",
+    "RWRRRRRRRRRRYR",
+    "RRRRRRRRRRRRRR",
+    "..KKK....KKK..",
+    "...K......K..."
+  ],
+  "givens": [0]
+}

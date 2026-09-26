@@ -1,0 +1,18 @@
+{
+  "id": "cloud",
+  "name": "구름",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#9ED8F5" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "...WW...",
+    ".WWWWWW.",
+    "WWWWWWWW",
+    "WWWWWWWW",
+    ".WWWWWW."
+  ],
+  "givens": [39]
+}

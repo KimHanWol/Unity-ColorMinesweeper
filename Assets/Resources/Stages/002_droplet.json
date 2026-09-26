@@ -1,0 +1,21 @@
+{
+  "id": "droplet",
+  "name": "물방울",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F1F7FF" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    "...B...",
+    "...B...",
+    "..BBB..",
+    ".BBBBB.",
+    "BBBBBBB",
+    "BBBBBBB",
+    ".BBBBB.",
+    "..BBB.."
+  ],
+  "givens": [0]
+}

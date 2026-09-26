@@ -1,0 +1,27 @@
+{
+  "id": "owl",
+  "name": "부엉이",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1B263B" },
+    { "key": "B", "color": "#7F5539" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#1B1B2F" },
+    { "key": "O", "color": "#F4A261" },
+    { "key": "L", "color": "#E6CCB2" }
+  ],
+  "pixels": [
+    ".B......B.",
+    ".BBBBBBBB.",
+    "BBWWBBWWBB",
+    "BWKWBBWKWB",
+    "BBWWOOWWBB",
+    "BBBBOOBBBB",
+    "BLLLLLLLLB",
+    "BLBLBLBLLB",
+    "BLLLLLLLLB",
+    ".BBBBBBBB.",
+    "..OO..OO.."
+  ],
+  "givens": [2, 3]
+}

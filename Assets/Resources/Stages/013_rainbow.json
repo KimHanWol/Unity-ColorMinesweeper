@@ -1,0 +1,25 @@
+{
+  "id": "rainbow",
+  "name": "무지개",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#BDE0FE" },
+    { "key": "R", "color": "#FF595E" },
+    { "key": "O", "color": "#FF924C" },
+    { "key": "Y", "color": "#FFCA3A" },
+    { "key": "G", "color": "#8AC926" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "...RRRRRRRR...",
+    "..ROOOOOOOOR..",
+    ".ROYYYYYYYYOR.",
+    "ROYGGGGGGGGYOR",
+    "ROYG......GYOR",
+    "ROYG......GYOR",
+    "WWWW......WWWW",
+    "WWWWW....WWWWW",
+    ".WWW......WWW."
+  ],
+  "givens": [75]
+}

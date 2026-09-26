@@ -1,0 +1,28 @@
+{
+  "id": "icecream",
+  "name": "아이스크림",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E7F0FF" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "M", "color": "#95D5B2" },
+    { "key": "C", "color": "#E9C46A" },
+    { "key": "K", "color": "#C08A3E" }
+  ],
+  "pixels": [
+    "..PPPP..",
+    ".PPWPPP.",
+    "PPPPPPPP",
+    "PPPPPWPP",
+    ".MMMMMM.",
+    "MMMMWMMM",
+    "MMMMMMMM",
+    ".CCCCCC.",
+    ".CKCCKC.",
+    "..CCCC..",
+    "..CKCC..",
+    "...CC..."
+  ],
+  "givens": [80]
+}

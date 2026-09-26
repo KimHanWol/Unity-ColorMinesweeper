@@ -1,0 +1,27 @@
+{
+  "id": "house",
+  "name": "집",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#DDF1FF" },
+    { "key": "R", "color": "#D1495B" },
+    { "key": "W", "color": "#F4E1C1" },
+    { "key": "B", "color": "#6EC6FF" },
+    { "key": "D", "color": "#8B5A2B" },
+    { "key": "G", "color": "#7BC96F" }
+  ],
+  "pixels": [
+    ".....R.....",
+    "....RRR....",
+    "...RRRRR...",
+    "..RRRRRRR..",
+    ".RRRRRRRRR.",
+    "..WWWWWWW..",
+    "..WBBWWWW..",
+    "..WBBWDDW..",
+    "..WWWWDDW..",
+    "..WWWWDDW..",
+    "GGGGGGGGGGG"
+  ],
+  "givens": [0]
+}

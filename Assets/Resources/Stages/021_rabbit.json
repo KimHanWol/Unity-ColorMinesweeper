@@ -1,0 +1,25 @@
+{
+  "id": "rabbit",
+  "name": "토끼",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CDEAC0" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "P", "color": "#FFB5C2" },
+    { "key": "K", "color": "#3B3B4F" }
+  ],
+  "pixels": [
+    "..W....W..",
+    ".WPW..WPW.",
+    ".WPW..WPW.",
+    ".WPW..WPW.",
+    "..WWWWWW..",
+    ".WWWWWWWW.",
+    ".WKWWWWKW.",
+    ".WWWPPWWW.",
+    ".WWWWWWWW.",
+    "..WWWWWW.."
+  ],
+  "givens": [60, 62]
+}

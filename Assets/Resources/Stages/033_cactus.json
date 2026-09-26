@@ -1,0 +1,27 @@
+{
+  "id": "cactus",
+  "name": "선인장",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FEFAE0" },
+    { "key": "P", "color": "#FF70A6" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "O", "color": "#BC6C25" },
+    { "key": "R", "color": "#DDA15E" }
+  ],
+  "pixels": [
+    "....P....",
+    "...GGG...",
+    "...GGG.G.",
+    ".G.GGG.G.",
+    ".G.GGGGG.",
+    ".GGGGG...",
+    "...GGG...",
+    "...GGG...",
+    ".OOOOOOO.",
+    ".ORRRRRO.",
+    "..OOOOO..",
+    "..OOOOO.."
+  ],
+  "givens": [0]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "gem",
+  "name": "보석",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#3A0CA3" },
+    { "key": "C", "color": "#4CC9F0" },
+    { "key": "L", "color": "#CAF0F8" }
+  ],
+  "pixels": [
+    "..CCCCC..",
+    ".CLLCLLC.",
+    "CCCCCCCCC",
+    ".CLCCCLC.",
+    "..CLCLC..",
+    "...CCC...",
+    "....C...."
+  ],
+  "givens": [17, 45, 50, 57]
+}

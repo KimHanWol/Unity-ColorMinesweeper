@@ -1,0 +1,25 @@
+{
+  "id": "frog",
+  "name": "개구리",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E8F7FF" },
+    { "key": "G", "color": "#80B918" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#1B1B2F" },
+    { "key": "R", "color": "#E5383B" },
+    { "key": "L", "color": "#55A630" }
+  ],
+  "pixels": [
+    ".GGG....GGG.",
+    "GWWKG..GWWKG",
+    "GWWKGGGGWWKG",
+    "GGGGGGGGGGGG",
+    "GGRGGGGGGRGG",
+    "GGGRRRRRRGGG",
+    ".GGGGGGGGGG.",
+    ".LLGGGGGGLL.",
+    "LL.LL..LL.LL"
+  ],
+  "givens": [5, 17]
+}

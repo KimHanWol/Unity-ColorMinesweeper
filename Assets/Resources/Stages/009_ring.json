@@ -1,0 +1,23 @@
+{
+  "id": "ring",
+  "name": "반지",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FDF0F5" },
+    { "key": "S", "color": "#ADB5BD" },
+    { "key": "C", "color": "#7BDFF2" }
+  ],
+  "pixels": [
+    "...CCC...",
+    "..CCCCC..",
+    "...CCC...",
+    "....S....",
+    "..SSSSS..",
+    ".SS...SS.",
+    ".S.....S.",
+    ".SS...SS.",
+    "..SSSSS.."
+  ],
+  "givens": [0, 11]
+}

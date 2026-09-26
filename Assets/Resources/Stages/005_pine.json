@@ -1,0 +1,22 @@
+{
+  "id": "pine",
+  "name": "소나무",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF6FF" },
+    { "key": "G", "color": "#2D6A4F" },
+    { "key": "B", "color": "#7F5539" }
+  ],
+  "pixels": [
+    "...G...",
+    "..GGG..",
+    ".GGGGG.",
+    "..GGG..",
+    ".GGGGG.",
+    "GGGGGGG",
+    "...B...",
+    "...B..."
+  ],
+  "givens": [49]
+}

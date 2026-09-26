@@ -1,0 +1,19 @@
+{
+  "id": "heart_small",
+  "name": "작은 하트",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF1F3" },
+    { "key": "R", "color": "#E8505B" }
+  ],
+  "pixels": [
+    ".RR.RR.",
+    "RRRRRRR",
+    "RRRRRRR",
+    ".RRRRR.",
+    "..RRR..",
+    "...R..."
+  ],
+  "givens": [0, 35]
+}
