@@ -10,6 +10,9 @@ namespace ColorMinesweeper.Core
     {
         public readonly Stage Stage;
         public readonly SolveResult Result;
+
+        /// <summary>검사에 쓴 givens. 파일에 없으면 게임과 같은 시드로 생성한 값이다.</summary>
+        public readonly int[] Givens;
         public readonly List<string> Errors = new List<string>();
         public readonly List<string> Warnings = new List<string>();
 
@@ -24,12 +27,14 @@ namespace ColorMinesweeper.Core
             if (stage.Givens.Length == 0)
             {
                 Warnings.Add("givens 가 비어 있습니다. 게임이 실행할 때 생성하지만, 배포 전에 생성해 저장해 두세요.");
-                Result = new Solver(stage).Solve(GivensGenerator.Generate(stage, XorShiftRandom.SeedFrom(stage.Id)));
+                Givens = GivensGenerator.Generate(stage, XorShiftRandom.SeedFrom(stage.Id));
             }
             else
             {
-                Result = new Solver(stage).Solve(stage.Givens);
+                Givens = stage.Givens;
             }
+
+            Result = new Solver(stage).Solve(Givens);
 
             if (!Result.Solved)
             {
@@ -37,7 +42,7 @@ namespace ColorMinesweeper.Core
                            "칸 남음). givens 를 다시 생성하세요.");
             }
 
-            int givens = stage.Givens.Length;
+            int givens = Givens.Length;
             if (givens > GivensBudget)
             {
                 Warnings.Add("열어 줘야 하는 칸이 " + givens + "개로 많습니다(기준 " + GivensBudget +
@@ -52,7 +57,7 @@ namespace ColorMinesweeper.Core
 
         public string Summary()
         {
-            return Stage.Width + "x" + Stage.Height + ", " + Stage.ColorCount + "색, givens " + Stage.Givens.Length +
+            return Stage.Width + "x" + Stage.Height + ", " + Stage.ColorCount + "색, givens " + Givens.Length +
                    ", 시작 " + Result.InitialRevealed + "칸 열림, " + Result.Waves.Count + "단계" +
                    (Result.UsedPair ? ", 두 단서 추론 필요" : "");
         }

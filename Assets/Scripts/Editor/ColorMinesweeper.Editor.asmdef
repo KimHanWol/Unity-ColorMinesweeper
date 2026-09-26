@@ -1,0 +1,19 @@
+{
+    "name": "ColorMinesweeper.Editor",
+    "rootNamespace": "ColorMinesweeper.EditorTools",
+    "references": [
+        "ColorMinesweeper.Core",
+        "ColorMinesweeper.Game"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
