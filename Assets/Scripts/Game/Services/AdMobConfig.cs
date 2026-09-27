@@ -13,9 +13,9 @@ namespace ColorMinesweeper.Game
     {
         // 실제 ID (AdMob → 앱 → 광고 단위). 비어 있으면 테스트 ID로 돈다.
         public const string AndroidAppId = "ca-app-pub-7890402400874906~1143647502";
-        const string AndroidRevive = "";
-        const string AndroidHint = "";
-        const string AndroidInterstitial = "";
+        const string AndroidRevive = "ca-app-pub-7890402400874906/5303393529";
+        const string AndroidHint = "ca-app-pub-7890402400874906/1088816343";
+        const string AndroidInterstitial = "ca-app-pub-7890402400874906/1555720204";
 
         public const string IosAppId = "";
         const string IosRevive = "";
