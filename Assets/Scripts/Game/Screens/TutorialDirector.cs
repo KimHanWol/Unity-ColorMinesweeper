@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ColorMinesweeper.Game
 {
     /// <summary>
-    /// 처음 시작하기를 누르면 보여 주는 튜토리얼. 작은 연습 판(1색 하트) 위에서 말풍선으로 규칙을 안내하고,
+    /// 처음 시작하기를 누르면 보여 주는 튜토리얼. 4x4 연습 판(1색 하트) 위에서 말풍선으로 규칙을 안내하고,
     /// 솔버의 <see cref="Solver.Hint"/> 로 "지금 칠할 수 있는 칸과 그 근거"를 실제 숫자로 짚어 준다.
     ///
     /// 흐름: 소개 → 팔레트 설명 → 짚어 주는 추론 한 번 → 근거만 비추고 스스로 찾기 → 배경도 색이라는 것
@@ -23,7 +23,7 @@ namespace ColorMinesweeper.Game
         const int DimOrder = 56;
         const int MarkOrder = 60;
 
-        /// <summary>연습 판. 7x6 작은 하트. 배경이 둘러 있어 시작 칸이 펼쳐지고, 한 색만 보고 순서대로 7단계에 풀린다.</summary>
+        /// <summary>연습 판. 4x4 하트. 한 색만 보고 순서대로 3단계에 풀리고, 첫 추론에서 빨간색 5칸이 한꺼번에 열린다.</summary>
         const string StageJson = @"{
   ""id"": ""tutorial"",
   ""name"": ""하트"",
@@ -34,12 +34,10 @@ namespace ColorMinesweeper.Game
     { ""key"": ""R"", ""color"": ""#E8505B"" }
   ],
   ""pixels"": [
-    ""......."",
-    "".RR.RR."",
-    "".RRRRR."",
-    ""..RRR.."",
-    ""...R..."",
-    "".......""
+    "".R.R"",
+    ""RRRR"",
+    ""RRRR"",
+    "".RR.""
   ]
 }";
 
