@@ -147,7 +147,16 @@ namespace ColorMinesweeper.Game
                 Debug.LogWarning("[AdMob] 보상형 광고를 보여 주지 못했습니다: " + error.GetMessage());
                 Finish();
             };
-            showing.Show(_ => earned = true);
+            try
+            {
+                showing.Show(_ => earned = true);
+            }
+            catch (Exception e)
+            {
+                // 광고를 띄우다 예외가 나도 버튼이 눌린 채 멈추거나 음악이 꺼진 채 남지 않게 끝낸 것으로 친다.
+                Debug.LogWarning("[AdMob] 보상형 광고를 띄우지 못했습니다: " + e.Message);
+                Finish();
+            }
         }
 
         void Load()
@@ -223,7 +232,15 @@ namespace ColorMinesweeper.Game
                 Debug.LogWarning("[AdMob] 전면 광고를 보여 주지 못했습니다: " + error.GetMessage());
                 Finish();
             };
-            showing.Show();
+            try
+            {
+                showing.Show();
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("[AdMob] 전면 광고를 띄우지 못했습니다: " + e.Message);
+                Finish();
+            }
         }
 
         void Load()
