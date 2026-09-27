@@ -1,6 +1,7 @@
 {
   "id": "cow",
   "name": "소",
+  "names": { "en": "Cow" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#D8F3DC" },

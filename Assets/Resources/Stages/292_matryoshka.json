@@ -1,6 +1,7 @@
 {
   "id": "matryoshka",
   "name": "마트료시카",
+  "names": { "en": "Matryoshka" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8EE" },

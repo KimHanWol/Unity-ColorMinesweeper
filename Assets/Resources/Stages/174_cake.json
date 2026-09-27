@@ -1,6 +1,7 @@
 {
   "id": "cake",
   "name": "케이크",
+  "names": { "en": "Cake" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F4EEFF" },

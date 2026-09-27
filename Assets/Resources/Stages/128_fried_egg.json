@@ -1,6 +1,7 @@
 {
   "id": "fried_egg",
   "name": "계란프라이",
+  "names": { "en": "Fried Egg" },
   "logic": "basic",
   "background": ".",
   "palette": [

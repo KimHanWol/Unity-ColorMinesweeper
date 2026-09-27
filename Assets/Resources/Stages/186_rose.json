@@ -1,6 +1,7 @@
 {
   "id": "rose",
   "name": "장미",
+  "names": { "en": "Rose" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF5F7" },

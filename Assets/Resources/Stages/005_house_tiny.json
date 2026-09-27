@@ -1,6 +1,7 @@
 {
   "id": "house_tiny",
   "name": "집",
+  "names": { "en": "House" },
   "logic": "basic",
   "background": ".",
   "palette": [

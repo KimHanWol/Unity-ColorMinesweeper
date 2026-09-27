@@ -1,6 +1,7 @@
 {
   "id": "chick",
   "name": "병아리",
+  "names": { "en": "Chick" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "club",
   "name": "클로버",
+  "names": { "en": "Clover" },
   "logic": "basic",
   "background": ".",
   "palette": [

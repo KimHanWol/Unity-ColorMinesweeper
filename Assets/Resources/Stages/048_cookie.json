@@ -1,6 +1,7 @@
 {
   "id": "cookie",
   "name": "쿠키",
+  "names": { "en": "Cookie" },
   "logic": "basic",
   "background": ".",
   "palette": [

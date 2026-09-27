@@ -1,6 +1,7 @@
 {
   "id": "tropical_fish",
   "name": "열대어",
+  "names": { "en": "Tropical Fish" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

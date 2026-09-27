@@ -1,6 +1,7 @@
 {
   "id": "sock",
   "name": "양말",
+  "names": { "en": "Sock" },
   "logic": "basic",
   "background": ".",
   "palette": [

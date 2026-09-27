@@ -1,6 +1,7 @@
 {
   "id": "tiger",
   "name": "호랑이",
+  "names": { "en": "Tiger" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

@@ -1,6 +1,7 @@
 {
   "id": "envelope",
   "name": "편지",
+  "names": { "en": "Letter" },
   "logic": "basic",
   "background": ".",
   "palette": [

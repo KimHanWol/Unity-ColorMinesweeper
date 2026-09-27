@@ -1,6 +1,7 @@
 {
   "id": "paint_palette",
   "name": "물감 팔레트",
+  "names": { "en": "Paint Palette" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EAF4FF" },

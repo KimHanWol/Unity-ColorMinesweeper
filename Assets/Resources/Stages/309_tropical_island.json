@@ -1,6 +1,7 @@
 {
   "id": "tropical_island",
   "name": "열대 섬",
+  "names": { "en": "Tropical Island" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#BDE0FE" },

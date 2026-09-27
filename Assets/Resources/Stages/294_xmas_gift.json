@@ -1,6 +1,7 @@
 {
   "id": "xmas_gift",
   "name": "크리스마스 선물",
+  "names": { "en": "Christmas Present" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1D3557" },

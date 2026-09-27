@@ -1,6 +1,7 @@
 {
   "id": "starfish",
   "name": "불가사리",
+  "names": { "en": "Starfish" },
   "logic": "basic",
   "background": ".",
   "palette": [

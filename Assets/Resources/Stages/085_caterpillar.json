@@ -1,6 +1,7 @@
 {
   "id": "caterpillar",
   "name": "애벌레",
+  "names": { "en": "Caterpillar" },
   "logic": "basic",
   "background": ".",
   "palette": [

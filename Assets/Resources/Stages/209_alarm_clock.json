@@ -1,6 +1,7 @@
 {
   "id": "alarm_clock",
   "name": "알람시계",
+  "names": { "en": "Alarm Clock" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EAF4FF" },

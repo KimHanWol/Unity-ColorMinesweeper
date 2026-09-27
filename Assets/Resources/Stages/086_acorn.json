@@ -1,6 +1,7 @@
 {
   "id": "acorn",
   "name": "도토리",
+  "names": { "en": "Acorn" },
   "logic": "basic",
   "background": ".",
   "palette": [

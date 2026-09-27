@@ -1,6 +1,7 @@
 {
   "id": "storm_cloud",
   "name": "먹구름",
+  "names": { "en": "Storm Cloud" },
   "logic": "basic",
   "background": ".",
   "palette": [

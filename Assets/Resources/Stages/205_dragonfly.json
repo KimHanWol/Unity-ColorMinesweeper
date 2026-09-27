@@ -1,6 +1,7 @@
 {
   "id": "dragonfly",
   "name": "잠자리",
+  "names": { "en": "Dragonfly" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF9E6" },

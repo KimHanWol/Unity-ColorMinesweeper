@@ -1,6 +1,7 @@
 {
   "id": "carousel",
   "name": "회전목마",
+  "names": { "en": "Carousel" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F4F1FF" },

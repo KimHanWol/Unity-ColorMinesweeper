@@ -1,6 +1,7 @@
 {
   "id": "strawberry_small",
   "name": "딸기",
+  "names": { "en": "Strawberry" },
   "logic": "basic",
   "background": ".",
   "palette": [

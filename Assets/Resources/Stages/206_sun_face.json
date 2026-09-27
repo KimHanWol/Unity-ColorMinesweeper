@@ -1,6 +1,7 @@
 {
   "id": "sun_face",
   "name": "햇님",
+  "names": { "en": "Smiling Sun" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#BDE0FE" },

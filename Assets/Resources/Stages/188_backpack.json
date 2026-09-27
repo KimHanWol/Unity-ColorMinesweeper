@@ -1,6 +1,7 @@
 {
   "id": "backpack",
   "name": "배낭",
+  "names": { "en": "Backpack" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EAF4FF" },

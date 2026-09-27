@@ -1,6 +1,7 @@
 {
   "id": "bingsu",
   "name": "빙수",
+  "names": { "en": "Shaved Ice" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#BDE0FE" },

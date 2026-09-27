@@ -1,6 +1,7 @@
 {
   "id": "saturn",
   "name": "토성",
+  "names": { "en": "Saturn" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1D1E3A" },

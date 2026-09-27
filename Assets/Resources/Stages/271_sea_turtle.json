@@ -1,6 +1,7 @@
 {
   "id": "sea_turtle",
   "name": "바다거북",
+  "names": { "en": "Sea Turtle" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

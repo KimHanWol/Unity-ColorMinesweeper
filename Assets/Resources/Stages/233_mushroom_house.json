@@ -1,6 +1,7 @@
 {
   "id": "mushroom_house",
   "name": "버섯 집",
+  "names": { "en": "Mushroom House" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#DDF1FF" },

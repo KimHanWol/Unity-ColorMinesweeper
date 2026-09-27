@@ -1,6 +1,7 @@
 {
   "id": "seahorse",
   "name": "해마",
+  "names": { "en": "Seahorse" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

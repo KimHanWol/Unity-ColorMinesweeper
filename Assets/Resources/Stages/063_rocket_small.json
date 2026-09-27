@@ -1,6 +1,7 @@
 {
   "id": "rocket_small",
   "name": "로켓",
+  "names": { "en": "Rocket" },
   "logic": "basic",
   "background": ".",
   "palette": [

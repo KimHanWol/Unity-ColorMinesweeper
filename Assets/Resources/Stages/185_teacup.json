@@ -1,6 +1,7 @@
 {
   "id": "teacup",
   "name": "찻잔",
+  "names": { "en": "Teacup" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#BDE0FE" },

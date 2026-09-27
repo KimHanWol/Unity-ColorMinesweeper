@@ -1,6 +1,7 @@
 {
   "id": "parasol",
   "name": "파라솔",
+  "names": { "en": "Beach Umbrella" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

@@ -1,6 +1,7 @@
 {
   "id": "key",
   "name": "열쇠",
+  "names": { "en": "Key" },
   "logic": "basic",
   "background": ".",
   "palette": [

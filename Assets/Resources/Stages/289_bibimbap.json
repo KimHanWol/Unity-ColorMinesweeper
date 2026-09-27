@@ -1,6 +1,7 @@
 {
   "id": "bibimbap",
   "name": "비빔밥",
+  "names": { "en": "Bibimbap" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF3E0" },

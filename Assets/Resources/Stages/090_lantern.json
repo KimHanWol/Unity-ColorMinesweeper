@@ -1,6 +1,7 @@
 {
   "id": "lantern",
   "name": "등불",
+  "names": { "en": "Lantern" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "penguin",
   "name": "황제펭귄",
+  "names": { "en": "Emperor Penguin" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#BDE0FE" },

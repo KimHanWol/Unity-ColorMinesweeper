@@ -1,6 +1,7 @@
 {
   "id": "windmill",
   "name": "풍차",
+  "names": { "en": "Windmill" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#DDF1FF" },

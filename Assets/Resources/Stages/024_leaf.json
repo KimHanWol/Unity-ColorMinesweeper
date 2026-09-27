@@ -1,6 +1,7 @@
 {
   "id": "leaf",
   "name": "나뭇잎",
+  "names": { "en": "Leaf" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "parrot",
   "name": "앵무새",
+  "names": { "en": "Parrot" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF9E6" },

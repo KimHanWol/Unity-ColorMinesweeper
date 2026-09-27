@@ -1,6 +1,7 @@
 {
   "id": "guitar",
   "name": "기타",
+  "names": { "en": "Guitar" },
   "logic": "basic",
   "background": ".",
   "palette": [

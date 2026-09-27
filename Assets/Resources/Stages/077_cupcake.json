@@ -1,6 +1,7 @@
 {
   "id": "cupcake",
   "name": "컵케이크",
+  "names": { "en": "Cupcake" },
   "logic": "basic",
   "background": ".",
   "palette": [

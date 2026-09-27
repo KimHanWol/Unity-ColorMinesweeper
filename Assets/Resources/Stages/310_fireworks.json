@@ -1,6 +1,7 @@
 {
   "id": "fireworks",
   "name": "불꽃놀이",
+  "names": { "en": "Fireworks" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#10002B" },

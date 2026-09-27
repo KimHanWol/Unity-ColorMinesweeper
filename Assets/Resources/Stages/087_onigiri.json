@@ -1,6 +1,7 @@
 {
   "id": "onigiri",
   "name": "주먹밥",
+  "names": { "en": "Rice Ball" },
   "logic": "basic",
   "background": ".",
   "palette": [

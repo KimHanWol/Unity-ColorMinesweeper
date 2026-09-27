@@ -1,6 +1,7 @@
 {
   "id": "gift",
   "name": "선물 상자",
+  "names": { "en": "Gift Box" },
   "logic": "basic",
   "background": ".",
   "palette": [

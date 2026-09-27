@@ -1,6 +1,7 @@
 {
   "id": "bird",
   "name": "새",
+  "names": { "en": "Bird" },
   "logic": "basic",
   "background": ".",
   "palette": [

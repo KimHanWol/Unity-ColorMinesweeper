@@ -1,6 +1,7 @@
 {
   "id": "sword",
   "name": "검",
+  "names": { "en": "Sword" },
   "logic": "basic",
   "background": ".",
   "palette": [

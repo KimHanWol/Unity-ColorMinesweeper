@@ -1,6 +1,7 @@
 {
   "id": "fox",
   "name": "여우",
+  "names": { "en": "Fox" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

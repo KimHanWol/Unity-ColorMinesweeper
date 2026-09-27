@@ -1,6 +1,7 @@
 {
   "id": "lemon",
   "name": "레몬",
+  "names": { "en": "Lemon" },
   "logic": "basic",
   "background": ".",
   "palette": [

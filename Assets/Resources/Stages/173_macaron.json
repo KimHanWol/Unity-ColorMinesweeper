@@ -1,6 +1,7 @@
 {
   "id": "macaron",
   "name": "마카롱",
+  "names": { "en": "Macaron" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F1F7FF" },

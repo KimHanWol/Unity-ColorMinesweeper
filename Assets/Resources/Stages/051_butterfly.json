@@ -1,6 +1,7 @@
 {
   "id": "butterfly",
   "name": "나비",
+  "names": { "en": "Butterfly" },
   "logic": "basic",
   "background": ".",
   "palette": [

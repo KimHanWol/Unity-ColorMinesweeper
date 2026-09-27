@@ -1,6 +1,7 @@
 {
   "id": "mountain",
   "name": "산",
+  "names": { "en": "Mountain" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "alien",
   "name": "외계인",
+  "names": { "en": "Alien" },
   "logic": "basic",
   "background": ".",
   "palette": [

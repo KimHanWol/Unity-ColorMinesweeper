@@ -1,6 +1,7 @@
 {
   "id": "treasure",
   "name": "보물상자",
+  "names": { "en": "Treasure Chest" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E0FBFC" },

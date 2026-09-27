@@ -1,6 +1,7 @@
 {
   "id": "juice",
   "name": "주스",
+  "names": { "en": "Juice" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#2A9D8F" },

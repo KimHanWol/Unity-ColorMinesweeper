@@ -1,6 +1,7 @@
 {
   "id": "coffee",
   "name": "커피",
+  "names": { "en": "Coffee" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F2C57C" },

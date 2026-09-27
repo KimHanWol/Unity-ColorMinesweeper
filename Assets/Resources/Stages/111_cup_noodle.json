@@ -1,6 +1,7 @@
 {
   "id": "cup_noodle",
   "name": "컵라면",
+  "names": { "en": "Cup Noodles" },
   "logic": "basic",
   "background": ".",
   "palette": [

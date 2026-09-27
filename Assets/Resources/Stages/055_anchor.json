@@ -1,6 +1,7 @@
 {
   "id": "anchor",
   "name": "닻",
+  "names": { "en": "Anchor" },
   "logic": "basic",
   "background": ".",
   "palette": [

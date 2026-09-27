@@ -1,6 +1,7 @@
 {
   "id": "book",
   "name": "책",
+  "names": { "en": "Book" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EAF4FF" },

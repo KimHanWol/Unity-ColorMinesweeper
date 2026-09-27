@@ -1,6 +1,7 @@
 {
   "id": "lamp",
   "name": "램프",
+  "names": { "en": "Lamp" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#2E2A47" },

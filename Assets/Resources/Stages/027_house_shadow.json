@@ -1,6 +1,7 @@
 {
   "id": "house_shadow",
   "name": "오두막",
+  "names": { "en": "Cabin" },
   "logic": "basic",
   "background": ".",
   "palette": [

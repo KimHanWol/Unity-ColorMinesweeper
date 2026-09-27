@@ -1,6 +1,7 @@
 {
   "id": "hammer",
   "name": "망치",
+  "names": { "en": "Hammer" },
   "logic": "basic",
   "background": ".",
   "palette": [

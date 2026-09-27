@@ -1,6 +1,7 @@
 {
   "id": "pineapple",
   "name": "파인애플",
+  "names": { "en": "Pineapple" },
   "logic": "basic",
   "background": ".",
   "palette": [

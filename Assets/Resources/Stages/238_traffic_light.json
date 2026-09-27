@@ -1,6 +1,7 @@
 {
   "id": "traffic_light",
   "name": "신호등",
+  "names": { "en": "Traffic Light" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#DDF1FF" },

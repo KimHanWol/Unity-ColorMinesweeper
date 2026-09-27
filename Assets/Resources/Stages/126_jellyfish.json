@@ -1,6 +1,7 @@
 {
   "id": "jellyfish",
   "name": "해파리",
+  "names": { "en": "Jellyfish" },
   "logic": "basic",
   "background": ".",
   "palette": [

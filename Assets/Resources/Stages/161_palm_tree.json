@@ -1,6 +1,7 @@
 {
   "id": "palm_tree",
   "name": "야자수",
+  "names": { "en": "Palm Tree" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

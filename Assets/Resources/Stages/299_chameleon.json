@@ -1,6 +1,7 @@
 {
   "id": "chameleon",
   "name": "카멜레온",
+  "names": { "en": "Chameleon" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF9E6" },

@@ -1,6 +1,7 @@
 {
   "id": "drum",
   "name": "드럼",
+  "names": { "en": "Drum" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F4F1FF" },

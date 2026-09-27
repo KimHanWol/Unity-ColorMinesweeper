@@ -1,6 +1,7 @@
 {
   "id": "hummingbird",
   "name": "벌새",
+  "names": { "en": "Hummingbird" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF5FA" },

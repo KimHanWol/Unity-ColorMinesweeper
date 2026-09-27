@@ -1,6 +1,7 @@
 {
   "id": "pirate_flag",
   "name": "해적 깃발",
+  "names": { "en": "Pirate Flag" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

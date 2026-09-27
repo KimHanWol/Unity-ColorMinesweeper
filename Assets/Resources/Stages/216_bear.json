@@ -1,6 +1,7 @@
 {
   "id": "bear",
   "name": "곰",
+  "names": { "en": "Bear" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EEF6FF" },

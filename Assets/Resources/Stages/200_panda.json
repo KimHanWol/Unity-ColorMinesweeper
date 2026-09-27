@@ -1,6 +1,7 @@
 {
   "id": "panda",
   "name": "판다",
+  "names": { "en": "Panda" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

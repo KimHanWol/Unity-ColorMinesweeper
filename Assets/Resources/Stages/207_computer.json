@@ -1,6 +1,7 @@
 {
   "id": "computer",
   "name": "컴퓨터",
+  "names": { "en": "Computer" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F4F1FF" },

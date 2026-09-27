@@ -1,6 +1,7 @@
 {
   "id": "question",
   "name": "물음표",
+  "names": { "en": "Question Mark" },
   "logic": "basic",
   "background": ".",
   "palette": [

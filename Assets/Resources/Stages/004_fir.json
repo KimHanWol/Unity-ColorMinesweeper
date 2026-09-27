@@ -1,6 +1,7 @@
 {
   "id": "fir",
   "name": "전나무",
+  "names": { "en": "Fir Tree" },
   "logic": "basic",
   "background": ".",
   "palette": [

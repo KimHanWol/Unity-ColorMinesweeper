@@ -1,6 +1,7 @@
 {
   "id": "astronaut",
   "name": "우주인",
+  "names": { "en": "Astronaut" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1D1E3A" },

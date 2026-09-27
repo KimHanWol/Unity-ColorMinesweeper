@@ -1,6 +1,7 @@
 {
   "id": "potion",
   "name": "물약",
+  "names": { "en": "Potion" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#2E2A47" },

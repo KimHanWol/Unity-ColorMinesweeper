@@ -1,6 +1,7 @@
 {
   "id": "castle",
   "name": "성",
+  "names": { "en": "Castle" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#DDF1FF" },

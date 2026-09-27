@@ -1,6 +1,7 @@
 {
   "id": "sailboat",
   "name": "돛단배",
+  "names": { "en": "Sailboat" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

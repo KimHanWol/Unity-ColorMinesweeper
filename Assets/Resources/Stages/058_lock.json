@@ -1,6 +1,7 @@
 {
   "id": "lock",
   "name": "자물쇠",
+  "names": { "en": "Padlock" },
   "logic": "basic",
   "background": ".",
   "palette": [

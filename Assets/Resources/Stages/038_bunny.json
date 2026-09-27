@@ -1,6 +1,7 @@
 {
   "id": "bunny",
   "name": "흰 토끼",
+  "names": { "en": "White Bunny" },
   "logic": "basic",
   "background": ".",
   "palette": [

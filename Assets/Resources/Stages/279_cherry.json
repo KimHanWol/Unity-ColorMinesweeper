@@ -1,6 +1,7 @@
 {
   "id": "cherry",
   "name": "체리",
+  "names": { "en": "Cherry" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF7E8" },

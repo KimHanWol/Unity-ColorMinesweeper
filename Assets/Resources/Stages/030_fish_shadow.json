@@ -1,6 +1,7 @@
 {
   "id": "fish_shadow",
   "name": "물고기",
+  "names": { "en": "Fish" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "elephant",
   "name": "코끼리",
+  "names": { "en": "Elephant" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8EE" },

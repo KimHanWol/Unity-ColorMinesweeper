@@ -1,6 +1,7 @@
 {
   "id": "easter_egg",
   "name": "부활절 달걀",
+  "names": { "en": "Easter Egg" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

@@ -1,6 +1,7 @@
 {
   "id": "lighthouse",
   "name": "등대",
+  "names": { "en": "Lighthouse" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

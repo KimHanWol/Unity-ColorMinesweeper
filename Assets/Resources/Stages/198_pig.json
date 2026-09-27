@@ -1,6 +1,7 @@
 {
   "id": "pig",
   "name": "돼지",
+  "names": { "en": "Pig" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F0FFF4" },

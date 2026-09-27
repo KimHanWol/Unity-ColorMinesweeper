@@ -1,6 +1,7 @@
 {
   "id": "tomato",
   "name": "토마토",
+  "names": { "en": "Tomato" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EEF8EE" },

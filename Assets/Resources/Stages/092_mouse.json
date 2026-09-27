@@ -1,6 +1,7 @@
 {
   "id": "mouse",
   "name": "쥐",
+  "names": { "en": "Mouse" },
   "logic": "basic",
   "background": ".",
   "palette": [

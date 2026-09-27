@@ -1,6 +1,7 @@
 {
   "id": "bat",
   "name": "박쥐",
+  "names": { "en": "Bat" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1D3557" },

@@ -1,6 +1,7 @@
 {
   "id": "mailbox",
   "name": "우편함",
+  "names": { "en": "Mailbox" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

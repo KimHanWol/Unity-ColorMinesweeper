@@ -1,6 +1,7 @@
 {
   "id": "crayons",
   "name": "크레파스",
+  "names": { "en": "Crayons" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF9E6" },

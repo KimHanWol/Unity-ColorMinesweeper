@@ -1,6 +1,7 @@
 {
   "id": "house",
   "name": "우리 집",
+  "names": { "en": "Our House" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#DDF1FF" },

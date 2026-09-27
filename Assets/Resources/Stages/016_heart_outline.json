@@ -1,6 +1,7 @@
 {
   "id": "heart_outline",
   "name": "빈 하트",
+  "names": { "en": "Hollow Heart" },
   "logic": "basic",
   "background": ".",
   "palette": [

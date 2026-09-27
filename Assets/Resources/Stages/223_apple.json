@@ -1,6 +1,7 @@
 {
   "id": "apple",
   "name": "햇사과",
+  "names": { "en": "Fresh Apple" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8E7" },

@@ -1,6 +1,7 @@
 {
   "id": "star",
   "name": "별",
+  "names": { "en": "Star" },
   "logic": "basic",
   "background": ".",
   "palette": [

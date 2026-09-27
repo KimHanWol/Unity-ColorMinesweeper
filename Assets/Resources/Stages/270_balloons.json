@@ -1,6 +1,7 @@
 {
   "id": "balloons",
   "name": "풍선 다발",
+  "names": { "en": "Balloon Bunch" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EAF4FF" },

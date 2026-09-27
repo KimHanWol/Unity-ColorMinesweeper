@@ -1,6 +1,7 @@
 {
   "id": "phone",
   "name": "전화기",
+  "names": { "en": "Phone" },
   "logic": "basic",
   "background": ".",
   "palette": [

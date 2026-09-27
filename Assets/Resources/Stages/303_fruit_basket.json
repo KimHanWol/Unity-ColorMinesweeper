@@ -1,6 +1,7 @@
 {
   "id": "fruit_basket",
   "name": "과일 바구니",
+  "names": { "en": "Fruit Basket" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8EE" },

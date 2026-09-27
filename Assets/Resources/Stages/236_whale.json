@@ -1,6 +1,7 @@
 {
   "id": "whale",
   "name": "고래",
+  "names": { "en": "Whale" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

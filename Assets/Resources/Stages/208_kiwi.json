@@ -1,6 +1,7 @@
 {
   "id": "kiwi",
   "name": "키위",
+  "names": { "en": "Kiwi" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8EE" },

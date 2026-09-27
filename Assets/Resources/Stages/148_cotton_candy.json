@@ -1,6 +1,7 @@
 {
   "id": "cotton_candy",
   "name": "솜사탕",
+  "names": { "en": "Cotton Candy" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#2B2D42" },

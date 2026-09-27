@@ -1,6 +1,7 @@
 {
   "id": "party_hat",
   "name": "파티 모자",
+  "names": { "en": "Party Hat" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF9E6" },

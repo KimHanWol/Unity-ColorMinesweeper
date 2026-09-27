@@ -1,6 +1,7 @@
 {
   "id": "raccoon",
   "name": "너구리",
+  "names": { "en": "Raccoon" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

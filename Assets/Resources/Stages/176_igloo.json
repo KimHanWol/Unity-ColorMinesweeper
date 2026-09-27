@@ -1,6 +1,7 @@
 {
   "id": "igloo",
   "name": "이글루",
+  "names": { "en": "Igloo" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#BDE0FE" },

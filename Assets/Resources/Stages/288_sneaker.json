@@ -1,6 +1,7 @@
 {
   "id": "sneaker",
   "name": "운동화",
+  "names": { "en": "Sneaker" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F4F1FF" },

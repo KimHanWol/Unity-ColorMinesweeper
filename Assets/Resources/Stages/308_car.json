@@ -1,6 +1,7 @@
 {
   "id": "car",
   "name": "자동차",
+  "names": { "en": "Car" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9ECEF" },

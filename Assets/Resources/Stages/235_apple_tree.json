@@ -1,6 +1,7 @@
 {
   "id": "apple_tree",
   "name": "사과나무",
+  "names": { "en": "Apple Tree" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#DDF1FF" },

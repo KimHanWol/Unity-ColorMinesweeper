@@ -1,6 +1,7 @@
 {
   "id": "camper_van",
   "name": "캠핑카",
+  "names": { "en": "Camper Van" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#DDF1FF" },

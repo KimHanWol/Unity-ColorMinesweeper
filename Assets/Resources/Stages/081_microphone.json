@@ -1,6 +1,7 @@
 {
   "id": "microphone",
   "name": "마이크",
+  "names": { "en": "Microphone" },
   "logic": "basic",
   "background": ".",
   "palette": [

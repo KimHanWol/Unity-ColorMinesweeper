@@ -1,6 +1,7 @@
 {
   "id": "ferris_wheel",
   "name": "관람차",
+  "names": { "en": "Ferris Wheel" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF3E0" },

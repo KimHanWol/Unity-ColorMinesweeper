@@ -1,6 +1,7 @@
 {
   "id": "donut",
   "name": "도넛",
+  "names": { "en": "Donut" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EAF4FF" },

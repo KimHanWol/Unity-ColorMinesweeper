@@ -1,6 +1,7 @@
 {
   "id": "bow",
   "name": "리본",
+  "names": { "en": "Bow" },
   "logic": "basic",
   "background": ".",
   "palette": [

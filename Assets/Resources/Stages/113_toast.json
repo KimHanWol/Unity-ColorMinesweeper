@@ -1,6 +1,7 @@
 {
   "id": "toast",
   "name": "식빵",
+  "names": { "en": "Toast" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "lollipop",
   "name": "막대사탕",
+  "names": { "en": "Lollipop" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EAF4FF" },

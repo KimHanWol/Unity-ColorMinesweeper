@@ -1,6 +1,7 @@
 {
   "id": "seashell",
   "name": "조개",
+  "names": { "en": "Seashell" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "watermelon_slice",
   "name": "수박 조각",
+  "names": { "en": "Watermelon Slice" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF3B0" },

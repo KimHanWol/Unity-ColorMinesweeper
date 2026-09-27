@@ -1,6 +1,7 @@
 {
   "id": "umbrella_tiny",
   "name": "우산",
+  "names": { "en": "Umbrella" },
   "logic": "basic",
   "background": ".",
   "palette": [

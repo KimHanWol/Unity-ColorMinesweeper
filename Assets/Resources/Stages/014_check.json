@@ -1,6 +1,7 @@
 {
   "id": "check",
   "name": "체크",
+  "names": { "en": "Check Mark" },
   "logic": "basic",
   "background": ".",
   "palette": [

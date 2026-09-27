@@ -1,6 +1,7 @@
 {
   "id": "chess_pawn",
   "name": "체스 말",
+  "names": { "en": "Chess Piece" },
   "logic": "basic",
   "background": ".",
   "palette": [

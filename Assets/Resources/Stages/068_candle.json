@@ -1,6 +1,7 @@
 {
   "id": "candle",
   "name": "촛불",
+  "names": { "en": "Candle" },
   "logic": "basic",
   "background": ".",
   "palette": [

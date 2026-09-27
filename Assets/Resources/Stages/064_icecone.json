@@ -1,6 +1,7 @@
 {
   "id": "icecone",
   "name": "아이스크림",
+  "names": { "en": "Ice Cream" },
   "logic": "basic",
   "background": ".",
   "palette": [

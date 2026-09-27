@@ -1,6 +1,7 @@
 {
   "id": "stairs",
   "name": "계단",
+  "names": { "en": "Stairs" },
   "logic": "basic",
   "background": ".",
   "palette": [

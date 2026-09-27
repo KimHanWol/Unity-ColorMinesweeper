@@ -1,6 +1,7 @@
 {
   "id": "kimbap",
   "name": "김밥",
+  "names": { "en": "Kimbap" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8EE" },

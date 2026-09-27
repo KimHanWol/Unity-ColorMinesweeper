@@ -1,6 +1,7 @@
 {
   "id": "pear",
   "name": "배",
+  "names": { "en": "Pear" },
   "logic": "basic",
   "background": ".",
   "palette": [

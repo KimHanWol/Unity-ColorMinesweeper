@@ -1,6 +1,7 @@
 {
   "id": "sprout",
   "name": "새싹",
+  "names": { "en": "Sprout" },
   "logic": "basic",
   "background": ".",
   "palette": [

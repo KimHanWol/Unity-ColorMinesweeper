@@ -1,6 +1,7 @@
 {
   "id": "puppy",
   "name": "멍멍이",
+  "names": { "en": "Puppy" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

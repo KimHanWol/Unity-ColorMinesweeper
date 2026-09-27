@@ -1,6 +1,7 @@
 {
   "id": "cat",
   "name": "치즈 고양이",
+  "names": { "en": "Ginger Cat" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EFE9F4" },

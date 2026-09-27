@@ -1,6 +1,7 @@
 {
   "id": "ghost_shadow",
   "name": "유령",
+  "names": { "en": "Ghost" },
   "logic": "basic",
   "background": ".",
   "palette": [

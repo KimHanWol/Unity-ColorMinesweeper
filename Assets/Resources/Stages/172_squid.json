@@ -1,6 +1,7 @@
 {
   "id": "squid",
   "name": "오징어",
+  "names": { "en": "Squid" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1D3557" },

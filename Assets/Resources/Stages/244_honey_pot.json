@@ -1,6 +1,7 @@
 {
   "id": "honey_pot",
   "name": "꿀단지",
+  "names": { "en": "Honey Pot" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

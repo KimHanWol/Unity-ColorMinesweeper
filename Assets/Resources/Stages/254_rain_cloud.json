@@ -1,6 +1,7 @@
 {
   "id": "rain_cloud",
   "name": "비구름",
+  "names": { "en": "Rain Cloud" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EAF4FF" },

@@ -1,6 +1,7 @@
 {
   "id": "radish",
   "name": "무",
+  "names": { "en": "Radish" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CDEAC0" },

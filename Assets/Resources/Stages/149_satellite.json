@@ -1,6 +1,7 @@
 {
   "id": "satellite",
   "name": "인공위성",
+  "names": { "en": "Satellite" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1D1E3A" },

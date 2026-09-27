@@ -1,6 +1,7 @@
 {
   "id": "rainbow_kite",
   "name": "무지개 연",
+  "names": { "en": "Rainbow Kite" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#DDF1FF" },

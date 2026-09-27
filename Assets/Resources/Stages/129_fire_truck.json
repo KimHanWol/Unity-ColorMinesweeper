@@ -1,6 +1,7 @@
 {
   "id": "fire_truck",
   "name": "소방차",
+  "names": { "en": "Fire Truck" },
   "logic": "basic",
   "background": ".",
   "palette": [

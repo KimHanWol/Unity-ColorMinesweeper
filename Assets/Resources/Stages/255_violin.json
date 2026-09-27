@@ -1,6 +1,7 @@
 {
   "id": "violin",
   "name": "바이올린",
+  "names": { "en": "Violin" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8EE" },

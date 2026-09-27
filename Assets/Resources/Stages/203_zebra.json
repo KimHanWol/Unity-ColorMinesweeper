@@ -1,6 +1,7 @@
 {
   "id": "zebra",
   "name": "얼룩말",
+  "names": { "en": "Zebra" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFE8D6" },

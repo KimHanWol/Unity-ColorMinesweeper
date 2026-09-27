@@ -1,6 +1,7 @@
 {
   "id": "postbox",
   "name": "우체통",
+  "names": { "en": "Postbox" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

@@ -1,6 +1,7 @@
 {
   "id": "clownfish",
   "name": "흰동가리",
+  "names": { "en": "Clownfish" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

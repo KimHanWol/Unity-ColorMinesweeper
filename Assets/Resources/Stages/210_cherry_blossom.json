@@ -1,6 +1,7 @@
 {
   "id": "cherry_blossom",
   "name": "벚꽃",
+  "names": { "en": "Cherry Blossom" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EAF4FF" },

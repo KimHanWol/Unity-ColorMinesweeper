@@ -1,6 +1,7 @@
 {
   "id": "balloon",
   "name": "풍선",
+  "names": { "en": "Balloon" },
   "logic": "basic",
   "background": ".",
   "palette": [

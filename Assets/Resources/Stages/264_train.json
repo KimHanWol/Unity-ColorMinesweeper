@@ -1,6 +1,7 @@
 {
   "id": "train",
   "name": "기차",
+  "names": { "en": "Train" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

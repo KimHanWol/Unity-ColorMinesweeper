@@ -1,6 +1,7 @@
 {
   "id": "frog",
   "name": "청개구리",
+  "names": { "en": "Tree Frog" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E8F7FF" },

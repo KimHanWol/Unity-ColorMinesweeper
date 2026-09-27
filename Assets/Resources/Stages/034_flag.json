@@ -1,6 +1,7 @@
 {
   "id": "flag",
   "name": "깃발",
+  "names": { "en": "Flag" },
   "logic": "basic",
   "background": ".",
   "palette": [

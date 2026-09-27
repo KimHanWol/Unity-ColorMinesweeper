@@ -1,6 +1,7 @@
 {
   "id": "cat_in_box",
   "name": "상자 속 고양이",
+  "names": { "en": "Cat in a Box" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

@@ -1,6 +1,7 @@
 {
   "id": "cross_mark",
   "name": "X 표",
+  "names": { "en": "X Mark" },
   "logic": "basic",
   "background": ".",
   "palette": [

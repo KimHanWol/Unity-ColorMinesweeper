@@ -1,6 +1,7 @@
 {
   "id": "smile",
   "name": "스마일",
+  "names": { "en": "Smiley" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "burger",
   "name": "햄버거",
+  "names": { "en": "Burger" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8E7" },

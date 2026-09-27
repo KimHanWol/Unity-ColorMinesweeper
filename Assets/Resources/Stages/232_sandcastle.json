@@ -1,6 +1,7 @@
 {
   "id": "sandcastle",
   "name": "모래성",
+  "names": { "en": "Sandcastle" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

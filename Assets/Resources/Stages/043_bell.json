@@ -1,6 +1,7 @@
 {
   "id": "bell",
   "name": "종",
+  "names": { "en": "Bell" },
   "logic": "basic",
   "background": ".",
   "palette": [

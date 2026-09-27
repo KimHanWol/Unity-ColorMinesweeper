@@ -1,6 +1,7 @@
 {
   "id": "paper_plane",
   "name": "종이비행기",
+  "names": { "en": "Paper Plane" },
   "logic": "basic",
   "background": ".",
   "palette": [

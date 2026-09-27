@@ -1,6 +1,7 @@
 {
   "id": "twin_cherry",
   "name": "앵두",
+  "names": { "en": "Cherries" },
   "logic": "basic",
   "background": ".",
   "palette": [

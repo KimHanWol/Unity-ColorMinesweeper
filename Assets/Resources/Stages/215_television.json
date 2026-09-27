@@ -1,6 +1,7 @@
 {
   "id": "television",
   "name": "텔레비전",
+  "names": { "en": "Television" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8EE" },

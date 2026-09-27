@@ -1,6 +1,7 @@
 {
   "id": "heart",
   "name": "반짝 하트",
+  "names": { "en": "Shiny Heart" },
   "logic": "basic",
   "background": ".",
   "palette": [

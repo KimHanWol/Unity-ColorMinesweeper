@@ -1,6 +1,7 @@
 {
   "id": "hamster",
   "name": "햄스터",
+  "names": { "en": "Hamster" },
   "logic": "basic",
   "background": ".",
   "palette": [

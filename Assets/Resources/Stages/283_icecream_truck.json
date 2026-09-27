@@ -1,6 +1,7 @@
 {
   "id": "icecream_truck",
   "name": "아이스크림 트럭",
+  "names": { "en": "Ice Cream Truck" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

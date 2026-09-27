@@ -1,6 +1,7 @@
 {
   "id": "birdhouse",
   "name": "새집",
+  "names": { "en": "Birdhouse" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#DDF1FF" },

@@ -1,6 +1,7 @@
 {
   "id": "sunglasses",
   "name": "선글라스",
+  "names": { "en": "Sunglasses" },
   "logic": "basic",
   "background": ".",
   "palette": [

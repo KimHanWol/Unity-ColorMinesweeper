@@ -1,6 +1,7 @@
 {
   "id": "shield",
   "name": "방패",
+  "names": { "en": "Shield" },
   "logic": "basic",
   "background": ".",
   "palette": [

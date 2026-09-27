@@ -1,6 +1,7 @@
 {
   "id": "droplet",
   "name": "물방울",
+  "names": { "en": "Water Drop" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "crab",
   "name": "게",
+  "names": { "en": "Crab" },
   "logic": "basic",
   "background": ".",
   "palette": [

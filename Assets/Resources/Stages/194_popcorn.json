@@ -1,6 +1,7 @@
 {
   "id": "popcorn",
   "name": "팝콘",
+  "names": { "en": "Popcorn" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#2E2A47" },

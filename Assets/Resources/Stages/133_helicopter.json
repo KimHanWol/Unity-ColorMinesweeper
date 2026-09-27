@@ -1,6 +1,7 @@
 {
   "id": "helicopter",
   "name": "헬리콥터",
+  "names": { "en": "Helicopter" },
   "logic": "basic",
   "background": ".",
   "palette": [

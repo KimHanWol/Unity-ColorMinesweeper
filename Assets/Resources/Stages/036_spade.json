@@ -1,6 +1,7 @@
 {
   "id": "spade",
   "name": "스페이드",
+  "names": { "en": "Spade" },
   "logic": "basic",
   "background": ".",
   "palette": [

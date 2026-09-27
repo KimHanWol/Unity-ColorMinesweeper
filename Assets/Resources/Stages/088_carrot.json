@@ -1,6 +1,7 @@
 {
   "id": "carrot",
   "name": "당근",
+  "names": { "en": "Carrot" },
   "logic": "basic",
   "background": ".",
   "palette": [

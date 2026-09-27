@@ -1,6 +1,7 @@
 {
   "id": "ufo",
   "name": "UFO",
+  "names": { "en": "UFO" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1D1E3A" },

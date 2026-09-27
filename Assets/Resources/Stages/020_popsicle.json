@@ -1,6 +1,7 @@
 {
   "id": "popsicle",
   "name": "막대 아이스크림",
+  "names": { "en": "Popsicle" },
   "logic": "basic",
   "background": ".",
   "palette": [

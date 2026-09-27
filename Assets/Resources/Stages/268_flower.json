@@ -1,6 +1,7 @@
 {
   "id": "flower",
   "name": "꽃",
+  "names": { "en": "Flower" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF5F7" },

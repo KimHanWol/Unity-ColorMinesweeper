@@ -1,6 +1,7 @@
 {
   "id": "tent",
   "name": "텐트",
+  "names": { "en": "Tent" },
   "logic": "basic",
   "background": ".",
   "palette": [

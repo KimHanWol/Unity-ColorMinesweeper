@@ -1,6 +1,7 @@
 {
   "id": "black_cat",
   "name": "검은 고양이",
+  "names": { "en": "Black Cat" },
   "logic": "basic",
   "background": ".",
   "palette": [

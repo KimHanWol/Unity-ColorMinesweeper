@@ -1,6 +1,7 @@
 {
   "id": "octopus",
   "name": "문어",
+  "names": { "en": "Octopus" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "pumpkin",
   "name": "호박",
+  "names": { "en": "Pumpkin" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#2E2A47" },

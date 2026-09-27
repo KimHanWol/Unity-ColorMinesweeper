@@ -1,6 +1,7 @@
 {
   "id": "cloud",
   "name": "구름",
+  "names": { "en": "Cloud" },
   "logic": "basic",
   "background": ".",
   "palette": [

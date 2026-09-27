@@ -1,6 +1,7 @@
 {
   "id": "broccoli",
   "name": "브로콜리",
+  "names": { "en": "Broccoli" },
   "logic": "basic",
   "background": ".",
   "palette": [

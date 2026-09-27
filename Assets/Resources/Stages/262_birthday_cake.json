@@ -1,6 +1,7 @@
 {
   "id": "birthday_cake",
   "name": "생일 케이크",
+  "names": { "en": "Birthday Cake" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F4F1FF" },

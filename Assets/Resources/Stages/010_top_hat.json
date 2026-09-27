@@ -1,6 +1,7 @@
 {
   "id": "top_hat",
   "name": "신사 모자",
+  "names": { "en": "Top Hat" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "ladybug",
   "name": "무당벌레",
+  "names": { "en": "Ladybug" },
   "logic": "basic",
   "background": ".",
   "palette": [

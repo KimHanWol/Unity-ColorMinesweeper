@@ -1,6 +1,7 @@
 {
   "id": "little_star",
   "name": "샛별",
+  "names": { "en": "Morning Star" },
   "logic": "basic",
   "background": ".",
   "palette": [

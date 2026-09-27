@@ -1,6 +1,7 @@
 {
   "id": "cauldron",
   "name": "가마솥",
+  "names": { "en": "Cauldron" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#2E2A47" },

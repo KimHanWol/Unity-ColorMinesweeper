@@ -1,6 +1,7 @@
 {
   "id": "koala",
   "name": "코알라",
+  "names": { "en": "Koala" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

@@ -1,6 +1,7 @@
 {
   "id": "dice",
   "name": "주사위",
+  "names": { "en": "Die" },
   "logic": "basic",
   "background": ".",
   "palette": [

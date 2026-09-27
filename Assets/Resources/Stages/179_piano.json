@@ -1,6 +1,7 @@
 {
   "id": "piano",
   "name": "피아노",
+  "names": { "en": "Piano" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8EE" },

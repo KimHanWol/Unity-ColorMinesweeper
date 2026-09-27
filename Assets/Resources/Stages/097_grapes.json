@@ -1,6 +1,7 @@
 {
   "id": "grapes",
   "name": "포도",
+  "names": { "en": "Grapes" },
   "logic": "basic",
   "background": ".",
   "palette": [

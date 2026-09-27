@@ -1,6 +1,7 @@
 {
   "id": "ice_pop",
   "name": "아이스바",
+  "names": { "en": "Ice Pop" },
   "logic": "basic",
   "background": ".",
   "palette": [

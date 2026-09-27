@@ -1,6 +1,7 @@
 {
   "id": "flashlight",
   "name": "손전등",
+  "names": { "en": "Flashlight" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#2E2A47" },

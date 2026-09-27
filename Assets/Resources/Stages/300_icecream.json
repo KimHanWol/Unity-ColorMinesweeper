@@ -1,6 +1,7 @@
 {
   "id": "icecream",
   "name": "더블 아이스크림",
+  "names": { "en": "Double Scoop" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E7F0FF" },

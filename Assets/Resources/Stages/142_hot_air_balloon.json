@@ -1,6 +1,7 @@
 {
   "id": "hot_air_balloon",
   "name": "열기구",
+  "names": { "en": "Hot Air Balloon" },
   "logic": "basic",
   "background": ".",
   "palette": [

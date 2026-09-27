@@ -1,6 +1,7 @@
 {
   "id": "rabbit",
   "name": "토끼",
+  "names": { "en": "Rabbit" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CDEAC0" },

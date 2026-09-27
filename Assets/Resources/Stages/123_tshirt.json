@@ -1,6 +1,7 @@
 {
   "id": "tshirt",
   "name": "티셔츠",
+  "names": { "en": "T-Shirt" },
   "logic": "basic",
   "background": ".",
   "palette": [

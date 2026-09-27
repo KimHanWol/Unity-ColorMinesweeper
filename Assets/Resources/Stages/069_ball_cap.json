@@ -1,6 +1,7 @@
 {
   "id": "ball_cap",
   "name": "야구 모자",
+  "names": { "en": "Baseball Cap" },
   "logic": "basic",
   "background": ".",
   "palette": [

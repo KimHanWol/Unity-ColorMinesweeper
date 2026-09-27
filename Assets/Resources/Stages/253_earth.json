@@ -1,6 +1,7 @@
 {
   "id": "earth",
   "name": "지구",
+  "names": { "en": "Earth" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1D1E3A" },

@@ -1,6 +1,7 @@
 {
   "id": "necktie",
   "name": "넥타이",
+  "names": { "en": "Necktie" },
   "logic": "basic",
   "background": ".",
   "palette": [

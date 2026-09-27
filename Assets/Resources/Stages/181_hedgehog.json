@@ -1,6 +1,7 @@
 {
   "id": "hedgehog",
   "name": "고슴도치",
+  "names": { "en": "Hedgehog" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

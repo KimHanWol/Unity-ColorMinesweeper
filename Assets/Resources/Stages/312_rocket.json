@@ -1,6 +1,7 @@
 {
   "id": "rocket",
   "name": "우주 로켓",
+  "names": { "en": "Space Rocket" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1D1E3A" },

@@ -1,6 +1,7 @@
 {
   "id": "ornament",
   "name": "오너먼트",
+  "names": { "en": "Ornament" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1D3557" },

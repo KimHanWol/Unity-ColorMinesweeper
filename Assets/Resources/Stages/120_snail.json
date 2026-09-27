@@ -1,6 +1,7 @@
 {
   "id": "snail",
   "name": "달팽이",
+  "names": { "en": "Snail" },
   "logic": "basic",
   "background": ".",
   "palette": [

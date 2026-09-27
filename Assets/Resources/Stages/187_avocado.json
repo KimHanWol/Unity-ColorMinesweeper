@@ -1,6 +1,7 @@
 {
   "id": "avocado",
   "name": "아보카도",
+  "names": { "en": "Avocado" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8EE" },

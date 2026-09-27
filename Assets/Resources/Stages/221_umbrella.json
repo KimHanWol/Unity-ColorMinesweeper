@@ -1,6 +1,7 @@
 {
   "id": "umbrella",
   "name": "줄무늬 우산",
+  "names": { "en": "Striped Umbrella" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#D6EFFF" },

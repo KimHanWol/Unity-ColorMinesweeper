@@ -1,6 +1,7 @@
 {
   "id": "dinosaur",
   "name": "공룡",
+  "names": { "en": "Dinosaur" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8EE" },

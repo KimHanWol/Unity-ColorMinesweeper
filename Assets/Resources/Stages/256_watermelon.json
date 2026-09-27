@@ -1,6 +1,7 @@
 {
   "id": "watermelon",
   "name": "수박",
+  "names": { "en": "Watermelon" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF3B0" },

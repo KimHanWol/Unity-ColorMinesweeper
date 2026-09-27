@@ -1,6 +1,7 @@
 {
   "id": "wizard_hat",
   "name": "마법 모자",
+  "names": { "en": "Wizard Hat" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF9E6" },

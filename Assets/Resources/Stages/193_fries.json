@@ -1,6 +1,7 @@
 {
   "id": "fries",
   "name": "감자튀김",
+  "names": { "en": "Fries" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8EE" },

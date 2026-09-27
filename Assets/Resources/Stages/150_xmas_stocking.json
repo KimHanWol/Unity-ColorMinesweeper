@@ -1,6 +1,7 @@
 {
   "id": "xmas_stocking",
   "name": "크리스마스 양말",
+  "names": { "en": "Christmas Stocking" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

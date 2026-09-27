@@ -1,6 +1,7 @@
 {
   "id": "umbrella_small",
   "name": "분홍 우산",
+  "names": { "en": "Pink Umbrella" },
   "logic": "basic",
   "background": ".",
   "palette": [

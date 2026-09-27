@@ -1,6 +1,7 @@
 {
   "id": "trophy",
   "name": "트로피",
+  "names": { "en": "Trophy" },
   "logic": "basic",
   "background": ".",
   "palette": [

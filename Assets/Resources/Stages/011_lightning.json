@@ -1,6 +1,7 @@
 {
   "id": "lightning",
   "name": "번개",
+  "names": { "en": "Lightning" },
   "logic": "basic",
   "background": ".",
   "palette": [

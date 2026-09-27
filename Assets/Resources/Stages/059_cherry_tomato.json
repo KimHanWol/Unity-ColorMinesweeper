@@ -1,6 +1,7 @@
 {
   "id": "cherry_tomato",
   "name": "방울토마토",
+  "names": { "en": "Cherry Tomato" },
   "logic": "basic",
   "background": ".",
   "palette": [

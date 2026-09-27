@@ -1,6 +1,7 @@
 {
   "id": "rain_boot",
   "name": "장화",
+  "names": { "en": "Rain Boot" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "moon",
   "name": "초승달",
+  "names": { "en": "Crescent Moon" },
   "logic": "basic",
   "background": ".",
   "palette": [

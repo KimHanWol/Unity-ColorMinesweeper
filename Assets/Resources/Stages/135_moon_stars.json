@@ -1,6 +1,7 @@
 {
   "id": "moon_stars",
   "name": "달과 별",
+  "names": { "en": "Moon and Stars" },
   "logic": "basic",
   "background": ".",
   "palette": [

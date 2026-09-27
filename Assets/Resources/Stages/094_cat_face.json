@@ -1,6 +1,7 @@
 {
   "id": "cat_face",
   "name": "고양이",
+  "names": { "en": "Cat" },
   "logic": "basic",
   "background": ".",
   "palette": [

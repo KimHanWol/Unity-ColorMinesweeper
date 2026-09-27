@@ -1,6 +1,7 @@
 {
   "id": "eggplant",
   "name": "가지",
+  "names": { "en": "Eggplant" },
   "logic": "basic",
   "background": ".",
   "palette": [

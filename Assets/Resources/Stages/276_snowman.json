@@ -1,6 +1,7 @@
 {
   "id": "snowman",
   "name": "눈사람",
+  "names": { "en": "Snowman" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CDE7FF" },

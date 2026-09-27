@@ -1,6 +1,7 @@
 {
   "id": "santa_hat",
   "name": "산타 모자",
+  "names": { "en": "Santa Hat" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

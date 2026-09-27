@@ -1,6 +1,7 @@
 {
   "id": "toucan",
   "name": "투칸",
+  "names": { "en": "Toucan" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

@@ -1,6 +1,7 @@
 {
   "id": "sunflower",
   "name": "해바라기",
+  "names": { "en": "Sunflower" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E3F2FD" },

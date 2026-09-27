@@ -1,6 +1,7 @@
 {
   "id": "dolphin",
   "name": "돌고래",
+  "names": { "en": "Dolphin" },
   "logic": "basic",
   "background": ".",
   "palette": [

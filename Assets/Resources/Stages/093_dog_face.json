@@ -1,6 +1,7 @@
 {
   "id": "dog_face",
   "name": "강아지",
+  "names": { "en": "Puppy Face" },
   "logic": "basic",
   "background": ".",
   "palette": [

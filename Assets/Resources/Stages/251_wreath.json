@@ -1,6 +1,7 @@
 {
   "id": "wreath",
   "name": "크리스마스 리스",
+  "names": { "en": "Christmas Wreath" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF8EE" },

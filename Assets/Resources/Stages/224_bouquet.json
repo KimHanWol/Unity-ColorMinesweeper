@@ -1,6 +1,7 @@
 {
   "id": "bouquet",
   "name": "꽃다발",
+  "names": { "en": "Bouquet" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF5F7" },

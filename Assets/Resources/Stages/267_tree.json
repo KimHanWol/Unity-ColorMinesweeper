@@ -1,6 +1,7 @@
 {
   "id": "tree",
   "name": "크리스마스 트리",
+  "names": { "en": "Christmas Tree" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EAF4FF" },

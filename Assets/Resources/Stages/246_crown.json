@@ -1,6 +1,7 @@
 {
   "id": "crown",
   "name": "왕관",
+  "names": { "en": "Crown" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#6A4C93" },

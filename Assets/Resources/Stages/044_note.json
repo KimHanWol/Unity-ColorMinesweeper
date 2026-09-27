@@ -1,6 +1,7 @@
 {
   "id": "note",
   "name": "음표",
+  "names": { "en": "Music Note" },
   "logic": "basic",
   "background": ".",
   "palette": [

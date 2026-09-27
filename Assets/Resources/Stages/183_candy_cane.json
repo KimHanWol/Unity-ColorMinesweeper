@@ -1,6 +1,7 @@
 {
   "id": "candy_cane",
   "name": "지팡이 사탕",
+  "names": { "en": "Candy Cane" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

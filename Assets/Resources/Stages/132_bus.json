@@ -1,6 +1,7 @@
 {
   "id": "bus",
   "name": "버스",
+  "names": { "en": "Bus" },
   "logic": "basic",
   "background": ".",
   "palette": [

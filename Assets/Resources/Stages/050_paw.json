@@ -1,6 +1,7 @@
 {
   "id": "paw",
   "name": "발자국",
+  "names": { "en": "Paw Print" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "flowerpot",
   "name": "화분",
+  "names": { "en": "Flowerpot" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "ferry",
   "name": "여객선",
+  "names": { "en": "Ferry" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

@@ -1,6 +1,7 @@
 {
   "id": "submarine",
   "name": "잠수함",
+  "names": { "en": "Submarine" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "mushroom_tiny",
   "name": "송이버섯",
+  "names": { "en": "Pine Mushroom" },
   "logic": "basic",
   "background": ".",
   "palette": [

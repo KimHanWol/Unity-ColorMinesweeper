@@ -1,6 +1,7 @@
 {
   "id": "ball",
   "name": "공",
+  "names": { "en": "Ball" },
   "logic": "basic",
   "background": ".",
   "palette": [

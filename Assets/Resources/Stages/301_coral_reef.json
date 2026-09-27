@@ -1,6 +1,7 @@
 {
   "id": "coral_reef",
   "name": "산호초",
+  "names": { "en": "Coral Reef" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

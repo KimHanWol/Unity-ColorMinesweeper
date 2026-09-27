@@ -1,6 +1,7 @@
 {
   "id": "cube",
   "name": "큐브",
+  "names": { "en": "Puzzle Cube" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#2B2D42" },

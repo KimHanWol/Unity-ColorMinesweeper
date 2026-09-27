@@ -1,6 +1,7 @@
 {
   "id": "pencil",
   "name": "연필",
+  "names": { "en": "Pencil" },
   "logic": "basic",
   "background": ".",
   "palette": [

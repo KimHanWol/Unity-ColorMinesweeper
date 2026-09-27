@@ -1,6 +1,7 @@
 {
   "id": "chocolate",
   "name": "초콜릿",
+  "names": { "en": "Chocolate" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF5F7" },

@@ -1,6 +1,7 @@
 {
   "id": "tangerine",
   "name": "귤",
+  "names": { "en": "Tangerine" },
   "logic": "basic",
   "background": ".",
   "palette": [

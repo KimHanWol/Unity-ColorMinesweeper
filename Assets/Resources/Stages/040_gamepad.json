@@ -1,6 +1,7 @@
 {
   "id": "gamepad",
   "name": "게임기",
+  "names": { "en": "Gamepad" },
   "logic": "basic",
   "background": ".",
   "palette": [

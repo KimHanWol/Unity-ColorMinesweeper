@@ -1,6 +1,7 @@
 {
   "id": "spinning_top",
   "name": "팽이",
+  "names": { "en": "Spinning Top" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F4F1FF" },

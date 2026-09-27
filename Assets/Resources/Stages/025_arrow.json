@@ -1,6 +1,7 @@
 {
   "id": "arrow",
   "name": "화살표",
+  "names": { "en": "Arrow" },
   "logic": "basic",
   "background": ".",
   "palette": [

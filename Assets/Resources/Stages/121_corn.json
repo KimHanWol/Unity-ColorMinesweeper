@@ -1,6 +1,7 @@
 {
   "id": "corn",
   "name": "옥수수",
+  "names": { "en": "Corn" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "peach",
   "name": "복숭아",
+  "names": { "en": "Peach" },
   "logic": "basic",
   "background": ".",
   "palette": [

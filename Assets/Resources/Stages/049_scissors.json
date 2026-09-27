@@ -1,6 +1,7 @@
 {
   "id": "scissors",
   "name": "가위",
+  "names": { "en": "Scissors" },
   "logic": "basic",
   "background": ".",
   "palette": [

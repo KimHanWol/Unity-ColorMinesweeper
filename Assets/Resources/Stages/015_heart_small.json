@@ -1,6 +1,7 @@
 {
   "id": "heart_small",
   "name": "하트",
+  "names": { "en": "Heart" },
   "logic": "basic",
   "background": ".",
   "palette": [

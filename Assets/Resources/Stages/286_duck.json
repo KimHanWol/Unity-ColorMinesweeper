@@ -1,6 +1,7 @@
 {
   "id": "duck",
   "name": "오리",
+  "names": { "en": "Duck" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E0F4FF" },

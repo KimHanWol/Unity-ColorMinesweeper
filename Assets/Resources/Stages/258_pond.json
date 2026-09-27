@@ -1,6 +1,7 @@
 {
   "id": "pond",
   "name": "연못",
+  "names": { "en": "Pond" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

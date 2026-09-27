@@ -1,6 +1,7 @@
 {
   "id": "mitten",
   "name": "벙어리장갑",
+  "names": { "en": "Mitten" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "ramen",
   "name": "라면",
+  "names": { "en": "Ramen" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF3B0" },

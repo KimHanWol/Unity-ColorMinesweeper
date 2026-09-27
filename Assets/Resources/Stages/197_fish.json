@@ -1,6 +1,7 @@
 {
   "id": "fish",
   "name": "줄무늬 물고기",
+  "names": { "en": "Striped Fish" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E0FBFC" },

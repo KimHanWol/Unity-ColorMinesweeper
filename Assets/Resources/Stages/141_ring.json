@@ -1,6 +1,7 @@
 {
   "id": "ring",
   "name": "반지",
+  "names": { "en": "Ring" },
   "logic": "basic",
   "background": ".",
   "palette": [

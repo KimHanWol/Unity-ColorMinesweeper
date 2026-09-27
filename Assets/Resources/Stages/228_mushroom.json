@@ -1,6 +1,7 @@
 {
   "id": "mushroom",
   "name": "버섯돌이",
+  "names": { "en": "Mushroom Buddy" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CFE8D5" },

@@ -1,6 +1,7 @@
 {
   "id": "door",
   "name": "문",
+  "names": { "en": "Door" },
   "logic": "basic",
   "background": ".",
   "palette": [

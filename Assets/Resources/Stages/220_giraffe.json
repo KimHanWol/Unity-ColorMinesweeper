@@ -1,6 +1,7 @@
 {
   "id": "giraffe",
   "name": "기린",
+  "names": { "en": "Giraffe" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E3F2FD" },

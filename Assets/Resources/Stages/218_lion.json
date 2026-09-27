@@ -1,6 +1,7 @@
 {
   "id": "lion",
   "name": "사자",
+  "names": { "en": "Lion" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E3F2FD" },

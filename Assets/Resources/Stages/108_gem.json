@@ -1,6 +1,7 @@
 {
   "id": "gem",
   "name": "보석",
+  "names": { "en": "Gem" },
   "logic": "basic",
   "background": ".",
   "palette": [

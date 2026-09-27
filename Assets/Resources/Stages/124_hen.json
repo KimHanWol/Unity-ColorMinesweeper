@@ -1,6 +1,7 @@
 {
   "id": "hen",
   "name": "닭",
+  "names": { "en": "Hen" },
   "logic": "basic",
   "background": ".",
   "palette": [

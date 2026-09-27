@@ -1,6 +1,7 @@
 {
   "id": "camera",
   "name": "카메라",
+  "names": { "en": "Camera" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F3EEE4" },

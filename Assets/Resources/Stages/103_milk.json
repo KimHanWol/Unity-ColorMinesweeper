@@ -1,6 +1,7 @@
 {
   "id": "milk",
   "name": "우유",
+  "names": { "en": "Milk" },
   "logic": "basic",
   "background": ".",
   "palette": [

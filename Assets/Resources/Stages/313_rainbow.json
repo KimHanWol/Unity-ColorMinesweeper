@@ -1,6 +1,7 @@
 {
   "id": "rainbow",
   "name": "무지개",
+  "names": { "en": "Rainbow" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#BDE0FE" },

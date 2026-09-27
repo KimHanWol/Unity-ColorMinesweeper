@@ -1,6 +1,7 @@
 {
   "id": "cactus_small",
   "name": "선인장",
+  "names": { "en": "Cactus" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FEFAE0" },

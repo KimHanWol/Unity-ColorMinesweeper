@@ -1,6 +1,7 @@
 {
   "id": "pudding",
   "name": "푸딩",
+  "names": { "en": "Pudding" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F4F1FF" },

@@ -1,6 +1,7 @@
 {
   "id": "swim_ring",
   "name": "튜브",
+  "names": { "en": "Swim Ring" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CAF0F8" },

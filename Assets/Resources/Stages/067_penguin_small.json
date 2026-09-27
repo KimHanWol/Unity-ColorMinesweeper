@@ -1,6 +1,7 @@
 {
   "id": "penguin_small",
   "name": "펭귄",
+  "names": { "en": "Penguin" },
   "logic": "basic",
   "background": ".",
   "palette": [

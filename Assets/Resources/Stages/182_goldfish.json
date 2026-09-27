@@ -1,6 +1,7 @@
 {
   "id": "goldfish",
   "name": "금붕어",
+  "names": { "en": "Goldfish" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E0FBFC" },

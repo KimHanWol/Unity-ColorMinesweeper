@@ -1,6 +1,7 @@
 {
   "id": "apple_small",
   "name": "사과",
+  "names": { "en": "Apple" },
   "logic": "basic",
   "background": ".",
   "palette": [

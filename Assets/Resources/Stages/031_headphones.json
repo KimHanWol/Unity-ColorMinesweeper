@@ -1,6 +1,7 @@
 {
   "id": "headphones",
   "name": "헤드폰",
+  "names": { "en": "Headphones" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "ghost",
   "name": "수줍은 유령",
+  "names": { "en": "Shy Ghost" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#2E2A47" },

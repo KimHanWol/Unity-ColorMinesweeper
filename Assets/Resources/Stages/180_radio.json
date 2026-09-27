@@ -1,6 +1,7 @@
 {
   "id": "radio",
   "name": "라디오",
+  "names": { "en": "Radio" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },

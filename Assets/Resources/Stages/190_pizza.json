@@ -1,6 +1,7 @@
 {
   "id": "pizza",
   "name": "피자",
+  "names": { "en": "Pizza" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF3E0" },

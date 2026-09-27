@@ -1,6 +1,7 @@
 {
   "id": "swallowtail",
   "name": "호랑나비",
+  "names": { "en": "Swallowtail" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E3F2FD" },

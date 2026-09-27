@@ -1,6 +1,7 @@
 {
   "id": "tulip",
   "name": "튤립",
+  "names": { "en": "Tulip" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF5FA" },

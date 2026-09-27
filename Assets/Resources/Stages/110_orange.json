@@ -1,6 +1,7 @@
 {
   "id": "orange",
   "name": "오렌지",
+  "names": { "en": "Orange" },
   "logic": "basic",
   "background": ".",
   "palette": [

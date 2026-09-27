@@ -1,6 +1,7 @@
 {
   "id": "garden",
   "name": "정원",
+  "names": { "en": "Garden" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#DDF1FF" },

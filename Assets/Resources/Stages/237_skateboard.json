@@ -1,6 +1,7 @@
 {
   "id": "skateboard",
   "name": "스케이트보드",
+  "names": { "en": "Skateboard" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F4F1FF" },

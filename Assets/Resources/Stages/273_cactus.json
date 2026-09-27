@@ -1,6 +1,7 @@
 {
   "id": "cactus",
   "name": "선인장 화분",
+  "names": { "en": "Potted Cactus" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FEFAE0" },

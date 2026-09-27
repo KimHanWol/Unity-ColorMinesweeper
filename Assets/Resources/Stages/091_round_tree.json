@@ -1,6 +1,7 @@
 {
   "id": "round_tree",
   "name": "나무",
+  "names": { "en": "Tree" },
   "logic": "basic",
   "background": ".",
   "palette": [

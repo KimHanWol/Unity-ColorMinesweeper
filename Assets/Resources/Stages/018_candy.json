@@ -1,6 +1,7 @@
 {
   "id": "candy",
   "name": "사탕",
+  "names": { "en": "Candy" },
   "logic": "basic",
   "background": ".",
   "palette": [

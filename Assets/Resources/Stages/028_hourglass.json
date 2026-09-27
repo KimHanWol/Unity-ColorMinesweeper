@@ -1,6 +1,7 @@
 {
   "id": "hourglass",
   "name": "모래시계",
+  "names": { "en": "Hourglass" },
   "logic": "basic",
   "background": ".",
   "palette": [

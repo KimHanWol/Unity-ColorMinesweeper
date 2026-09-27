@@ -1,6 +1,7 @@
 {
   "id": "turtle",
   "name": "거북이",
+  "names": { "en": "Turtle" },
   "logic": "basic",
   "background": ".",
   "palette": [

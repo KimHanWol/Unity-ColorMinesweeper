@@ -1,6 +1,7 @@
 {
   "id": "flamingo",
   "name": "플라밍고",
+  "names": { "en": "Flamingo" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E0FBFC" },

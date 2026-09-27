@@ -1,6 +1,7 @@
 {
   "id": "strawberry",
   "name": "잘 익은 딸기",
+  "names": { "en": "Ripe Strawberry" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF5F5" },

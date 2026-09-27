@@ -1,6 +1,7 @@
 {
   "id": "owl",
   "name": "부엉이",
+  "names": { "en": "Owl" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1B263B" },

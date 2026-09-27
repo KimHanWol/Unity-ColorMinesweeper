@@ -1,6 +1,7 @@
 {
   "id": "robot",
   "name": "로봇",
+  "names": { "en": "Robot" },
   "logic": "basic",
   "background": ".",
   "palette": [

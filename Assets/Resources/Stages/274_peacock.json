@@ -1,6 +1,7 @@
 {
   "id": "peacock",
   "name": "공작",
+  "names": { "en": "Peacock" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF9E6" },

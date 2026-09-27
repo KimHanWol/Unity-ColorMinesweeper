@@ -1,6 +1,7 @@
 {
   "id": "rainbow_fish",
   "name": "무지개 물고기",
+  "names": { "en": "Rainbow Fish" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1D3557" },

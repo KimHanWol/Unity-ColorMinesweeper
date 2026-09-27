@@ -1,6 +1,7 @@
 {
   "id": "cup",
   "name": "머그컵",
+  "names": { "en": "Mug" },
   "logic": "basic",
   "background": ".",
   "palette": [

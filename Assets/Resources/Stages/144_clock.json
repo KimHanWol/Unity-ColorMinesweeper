@@ -1,6 +1,7 @@
 {
   "id": "clock",
   "name": "시계",
+  "names": { "en": "Clock" },
   "logic": "basic",
   "background": ".",
   "palette": [

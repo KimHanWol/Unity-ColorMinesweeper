@@ -1,6 +1,7 @@
 {
   "id": "bee",
   "name": "꿀벌",
+  "names": { "en": "Bee" },
   "logic": "basic",
   "background": ".",
   "palette": [

@@ -1,6 +1,7 @@
 {
   "id": "sushi",
   "name": "초밥",
+  "names": { "en": "Sushi" },
   "logic": "basic",
   "background": ".",
   "palette": [

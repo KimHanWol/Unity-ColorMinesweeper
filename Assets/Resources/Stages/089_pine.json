@@ -1,6 +1,7 @@
 {
   "id": "pine",
   "name": "소나무",
+  "names": { "en": "Pine Tree" },
   "logic": "basic",
   "background": ".",
   "palette": [

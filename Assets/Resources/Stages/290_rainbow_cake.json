@@ -1,6 +1,7 @@
 {
   "id": "rainbow_cake",
   "name": "무지개 케이크",
+  "names": { "en": "Rainbow Cake" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#FFF5F7" },

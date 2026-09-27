@@ -1,6 +1,7 @@
 {
   "id": "bone",
   "name": "뼈다귀",
+  "names": { "en": "Bone" },
   "logic": "basic",
   "background": ".",
   "palette": [

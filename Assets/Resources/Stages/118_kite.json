@@ -1,6 +1,7 @@
 {
   "id": "kite",
   "name": "연",
+  "names": { "en": "Kite" },
   "logic": "basic",
   "background": ".",
   "palette": [

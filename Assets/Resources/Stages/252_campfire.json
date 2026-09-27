@@ -1,6 +1,7 @@
 {
   "id": "campfire",
   "name": "모닥불",
+  "names": { "en": "Campfire" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1D1E3A" },

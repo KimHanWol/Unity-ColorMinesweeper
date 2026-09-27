@@ -1,6 +1,7 @@
 {
   "id": "mushroom_red",
   "name": "광대버섯",
+  "names": { "en": "Fly Agaric" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E8F5E9" },

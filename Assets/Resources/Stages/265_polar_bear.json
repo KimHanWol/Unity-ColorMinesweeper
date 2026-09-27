@@ -1,6 +1,7 @@
 {
   "id": "polar_bear",
   "name": "북극곰",
+  "names": { "en": "Polar Bear" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#DDF1FF" },

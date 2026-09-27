@@ -1,6 +1,7 @@
 {
   "id": "plus",
   "name": "더하기",
+  "names": { "en": "Plus" },
   "logic": "basic",
   "background": ".",
   "palette": [

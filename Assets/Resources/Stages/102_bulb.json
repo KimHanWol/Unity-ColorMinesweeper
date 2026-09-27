@@ -1,6 +1,7 @@
 {
   "id": "bulb",
   "name": "전구",
+  "names": { "en": "Light Bulb" },
   "logic": "basic",
   "background": ".",
   "palette": [

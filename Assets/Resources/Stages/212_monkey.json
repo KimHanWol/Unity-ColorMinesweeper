@@ -1,6 +1,7 @@
 {
   "id": "monkey",
   "name": "원숭이",
+  "names": { "en": "Monkey" },
   "background": ".",
   "palette": [
     { "key": ".", "color": "#E9F5DB" },
