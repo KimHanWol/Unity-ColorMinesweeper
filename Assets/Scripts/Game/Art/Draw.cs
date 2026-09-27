@@ -41,6 +41,17 @@ namespace ColorMinesweeper.Game
             return renderer;
         }
 
+        /// <summary>선 두께가 일정한 둥근 테두리. size 를 바꿔도 두께가 변하지 않는다.</summary>
+        public static SpriteRenderer OutlinePanel(Transform parent, string name, Vector2 size, Color color, int order,
+            Vector2 localPosition = default, float cornerRadius = 0.25f, float thickness = 0.09f)
+        {
+            SpriteRenderer renderer = Sprite(parent, name, SpriteFactory.OutlinePanel(cornerRadius, thickness), color, order,
+                localPosition);
+            renderer.drawMode = SpriteDrawMode.Sliced;
+            renderer.size = size;
+            return renderer;
+        }
+
         public static void SetAlpha(SpriteRenderer renderer, float alpha)
         {
             Color c = renderer.color;

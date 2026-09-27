@@ -130,6 +130,18 @@ namespace ColorMinesweeper.Game
             "...#.....",
         };
 
+        /// <summary>아래를 가리키는 화살표. 튜토리얼에서 누를 곳을 짚는다.</summary>
+        public static readonly string[] Pointer =
+        {
+            "..###..",
+            "..###..",
+            "..###..",
+            "#######",
+            ".#####.",
+            "..###..",
+            "...#...",
+        };
+
         public static readonly string[] Sparkle =
         {
             "..#..",

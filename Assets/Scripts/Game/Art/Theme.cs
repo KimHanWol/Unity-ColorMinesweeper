@@ -16,6 +16,9 @@ namespace ColorMinesweeper.Game
         public static readonly Color Accent = Hex(0x6C5CE7);
         public static readonly Color Danger = Hex(0xFF5A6E);
         public static readonly Color Gold = Hex(0xFFC53D);
+
+        /// <summary>튜토리얼에서 누를 칸을 짚는 색. 밝은 배경과 대부분의 그림 색 위에서 잘 보이는 진한 분홍.</summary>
+        public static readonly Color Highlight = Hex(0xFF2E7E);
         public static readonly Color Dim = new Color(0.12f, 0.1f, 0.2f, 0.55f);
         public static readonly Color Card = Hex(0xFFFFFF);
         public static readonly Color Locked = Hex(0xCFCADD);

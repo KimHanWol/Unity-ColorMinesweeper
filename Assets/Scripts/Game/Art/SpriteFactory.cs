@@ -83,6 +83,41 @@ namespace ColorMinesweeper.Game
             });
         }
 
+        /// <summary>
+        /// 9-slice 둥근 테두리(속이 빈). 크기를 바꿔도 모서리 반지름과 선 두께가 그대로라, 숨 쉬듯 커졌다 작아져도
+        /// 선이 굵어지거나 얇아지지 않는다. SpriteRenderer.drawMode = Sliced 로 쓴다(<see cref="Draw.OutlinePanel"/>).
+        /// </summary>
+        public static Sprite OutlinePanel(float cornerRadius, float thickness)
+        {
+            return Cached("outlinePanel" + cornerRadius + "_" + thickness, () =>
+            {
+                const int size = 64;
+                const int radius = 24;
+                float ppu = radius / cornerRadius;
+                float line = thickness * ppu;
+                var tex = NewTexture(size, size, FilterMode.Bilinear);
+                var pixels = new Color32[size * size];
+                for (int py = 0; py < size; py++)
+                {
+                    for (int px = 0; px < size; px++)
+                    {
+                        float x = px + 0.5f - size / 2f;
+                        float y = py + 0.5f - size / 2f;
+                        float d = RoundedBoxDistance(x, y, size / 2f, size / 2f, radius);
+                        float outer = Mathf.Clamp01(0.5f - d);
+                        float inner = Mathf.Clamp01(0.5f - (-d - line));
+                        pixels[py * size + px] = new Color32(255, 255, 255, (byte)(outer * inner * 255f));
+                    }
+                }
+
+                tex.SetPixels32(pixels);
+                tex.Apply();
+                const float border = radius + 2;
+                return Sprite.Create(tex, new Rect(0, 0, size, size), new Vector2(0.5f, 0.5f), ppu, 0,
+                    SpriteMeshType.FullRect, new Vector4(border, border, border, border));
+            });
+        }
+
         /// <summary>둥근 사각형 테두리(속이 빈). 튜토리얼에서 칸을 짚어 줄 때 쓴다.</summary>
         public static Sprite OutlineRect()
         {
