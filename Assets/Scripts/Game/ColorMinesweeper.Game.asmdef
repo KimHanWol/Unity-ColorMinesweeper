@@ -3,7 +3,8 @@
     "rootNamespace": "ColorMinesweeper.Game",
     "references": [
         "ColorMinesweeper.Core",
-        "UnityEngine.UI"
+        "UnityEngine.UI",
+        "Unity.Purchasing"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
@@ -17,6 +18,11 @@
             "name": "com.google.ads.mobile",
             "expression": "9.0.0",
             "define": "GOOGLE_MOBILE_ADS"
+        },
+        {
+            "name": "com.unity.purchasing",
+            "expression": "5.0.0",
+            "define": "PIXEL_IAP"
         }
     ],
     "noEngineReferences": false
