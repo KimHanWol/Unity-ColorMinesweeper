@@ -96,6 +96,11 @@ static class Program
             return previous.PictureColors > current.PictureColors;
         }
 
+        if (previous.Hardest != current.Hardest)
+        {
+            return previous.Hardest > current.Hardest;
+        }
+
         if (previous.Cells != current.Cells)
         {
             return previous.Cells > current.Cells;

@@ -90,8 +90,9 @@ namespace ColorMinesweeper.Core
         }
 
         /// <summary>
-        /// 스테이지 순서: 색 수가 적은 것부터, 같은 색 수 안에서는 판이 작은 것부터, 크기도 같으면 <see cref="Total"/> 순.
-        /// 플레이 피드백("색을 빠르게 늘리지 말자", "해상도가 낮은 것부터")에 따라 색 수와 크기를 점수보다 우선한다.
+        /// 스테이지 순서: 색 수가 적은 것부터, 같은 색 수 안에서는 순서대로만 풀리는 판 먼저, 그 안에서 판이 작은 것부터,
+        /// 크기도 같으면 <see cref="Total"/> 순. 플레이 피드백("색을 빠르게 늘리지 말자", "작고 기억·비교가 필요 없는 판을
+        /// 초반에, 크지만 쉬운 판은 초반 뒷부분에")을 그대로 옮긴 것이다.
         /// </summary>
         public int CompareTo(Difficulty other)
         {
@@ -99,6 +100,13 @@ namespace ColorMinesweeper.Core
             if (byColors != 0)
             {
                 return byColors;
+            }
+
+            // 경우의 수를 머릿속으로 비교해야 하는 판(두 단서 비교)은 같은 색 수 안에서 뒤로 보낸다.
+            int byTechnique = Hardest.CompareTo(other.Hardest);
+            if (byTechnique != 0)
+            {
+                return byTechnique;
             }
 
             int byCells = Cells.CompareTo(other.Cells);
