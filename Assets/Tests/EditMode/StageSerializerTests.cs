@@ -79,60 +79,10 @@ namespace ColorMinesweeper.Tests
         }
 
         [TestCase(@"{ ""id"": ""x"", ""background"": ""."", ""palette"": [{ ""key"": ""."", ""color"": ""#000000"" }, { ""key"": ""A"", ""color"": ""#FFFFFF"" }], ""pixels"": ["".A"", ""...""] }", "2번째 줄 길이")]
-        [Test]
-        public void KeepsLocalizedNames()
-        {
-            Stage stage = StageSerializer.Parse(Heart.Replace("\"name\": \"하트\",", "\"name\": \"하트\", \"names\": { \"en\": \"Heart\" },"));
-
-            Assert.AreEqual("Heart", stage.NameIn("en"));
-            Assert.AreEqual("하트", stage.NameIn("ko"), "번역이 없으면 기본 이름");
-            Assert.AreEqual("Heart", StageSerializer.Parse(StageSerializer.ToJson(stage)).NameIn("en"));
-        }
-
         [TestCase(@"{ ""id"": ""x"", ""background"": ""."", ""palette"": [{ ""key"": ""."", ""color"": ""#000000"" }, { ""key"": ""A"", ""color"": ""#FFFFFF"" }], ""pixels"": ["".B""] }", "'B' 가 palette 에 없습니다")]
-        [Test]
-        public void KeepsLocalizedNames()
-        {
-            Stage stage = StageSerializer.Parse(Heart.Replace("\"name\": \"하트\",", "\"name\": \"하트\", \"names\": { \"en\": \"Heart\" },"));
-
-            Assert.AreEqual("Heart", stage.NameIn("en"));
-            Assert.AreEqual("하트", stage.NameIn("ko"), "번역이 없으면 기본 이름");
-            Assert.AreEqual("Heart", StageSerializer.Parse(StageSerializer.ToJson(stage)).NameIn("en"));
-        }
-
         [TestCase(@"{ ""id"": ""x"", ""background"": ""Z"", ""palette"": [{ ""key"": ""."", ""color"": ""#000000"" }, { ""key"": ""A"", ""color"": ""#FFFFFF"" }], ""pixels"": ["".A""] }", "background 'Z'")]
-        [Test]
-        public void KeepsLocalizedNames()
-        {
-            Stage stage = StageSerializer.Parse(Heart.Replace("\"name\": \"하트\",", "\"name\": \"하트\", \"names\": { \"en\": \"Heart\" },"));
-
-            Assert.AreEqual("Heart", stage.NameIn("en"));
-            Assert.AreEqual("하트", stage.NameIn("ko"), "번역이 없으면 기본 이름");
-            Assert.AreEqual("Heart", StageSerializer.Parse(StageSerializer.ToJson(stage)).NameIn("en"));
-        }
-
         [TestCase(@"{ ""id"": ""x"", ""background"": ""."", ""palette"": [{ ""key"": ""."", ""color"": ""red"" }], ""pixels"": ["".""] }", "#RRGGBB")]
-        [Test]
-        public void KeepsLocalizedNames()
-        {
-            Stage stage = StageSerializer.Parse(Heart.Replace("\"name\": \"하트\",", "\"name\": \"하트\", \"names\": { \"en\": \"Heart\" },"));
-
-            Assert.AreEqual("Heart", stage.NameIn("en"));
-            Assert.AreEqual("하트", stage.NameIn("ko"), "번역이 없으면 기본 이름");
-            Assert.AreEqual("Heart", StageSerializer.Parse(StageSerializer.ToJson(stage)).NameIn("en"));
-        }
-
         [TestCase(@"{ ""id"": ""x"", ""background"": ""."", ""palette"": [{ ""key"": ""."", ""color"": ""#000000"" }, { ""key"": ""A"", ""color"": ""#FFFFFF"" }], ""pixels"": [""..""] }", "'A' 가 그림에 쓰이지 않습니다")]
-        [Test]
-        public void KeepsLocalizedNames()
-        {
-            Stage stage = StageSerializer.Parse(Heart.Replace("\"name\": \"하트\",", "\"name\": \"하트\", \"names\": { \"en\": \"Heart\" },"));
-
-            Assert.AreEqual("Heart", stage.NameIn("en"));
-            Assert.AreEqual("하트", stage.NameIn("ko"), "번역이 없으면 기본 이름");
-            Assert.AreEqual("Heart", StageSerializer.Parse(StageSerializer.ToJson(stage)).NameIn("en"));
-        }
-
         [TestCase(@"{ ""id"": ""x"", }", "JSON 문법 오류")]
         public void ReportsReadableErrors(string json, string expected)
         {
