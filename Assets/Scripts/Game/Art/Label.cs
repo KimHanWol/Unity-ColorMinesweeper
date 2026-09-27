@@ -21,7 +21,7 @@ namespace ColorMinesweeper.Game
         const float DongleLineSpacing = 0.62f;
 
         /// <summary>가운데 정렬 라벨을 글자 높이의 이 비율만큼 내린다(눈대중 보정).</summary>
-        const float DongleOpticalDrop = 0.1f;
+        const float DongleOpticalDrop = 0.04f;
 
         static Font font;
         static bool usingDongle;
@@ -131,6 +131,7 @@ namespace ColorMinesweeper.Game
             Transform t = transform;
             t.localPosition = basePosition;
             Bounds bounds = RenderBounds;
+            // 꺼져 있는 동안에는 글자 영역을 잴 수 없다. 켜질 때(OnEnable) 다시 맞춘다.
             if (bounds.size.y <= 0f || t.parent == null)
             {
                 return;
@@ -140,6 +141,14 @@ namespace ColorMinesweeper.Game
             // 한글은 초성·모음이 위에 몰려 글자 상자 가운데에 두어도 떠 보인다. 글자 높이의 일부만큼 살짝 내려 눈으로 가운데를 맞춘다.
             float optical = usingDongle ? bounds.size.y / Mathf.Max(t.parent.lossyScale.y, 0.0001f) * DongleOpticalDrop : 0f;
             t.localPosition = basePosition + new Vector3(0f, basePosition.y - glyphCenter - optical, 0f);
+        }
+
+        void OnEnable()
+        {
+            if (mesh != null)
+            {
+                Recenter();
+            }
         }
 
         /// <summary>놓을 자리(부모 기준)를 바꾼다. 가운데 정렬 라벨은 글자 중심을 다시 맞춘다.</summary>
