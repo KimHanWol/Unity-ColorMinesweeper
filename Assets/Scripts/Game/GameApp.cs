@@ -78,6 +78,15 @@ namespace ColorMinesweeper.Game
             Open<StageSelectScreen>(null);
         }
 
+        /// <summary>목록 화면을 보고 있으면 다시 그린다(치트로 잠금·기록이 바뀌었을 때). 플레이 중이면 그대로 둔다.</summary>
+        public void RefreshStageList()
+        {
+            if (current is StageSelectScreen)
+            {
+                ShowSelect();
+            }
+        }
+
         public void ShowPlay(int index)
         {
             ShowPlay(StageCatalog.All[index], index);

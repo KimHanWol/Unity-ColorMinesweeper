@@ -18,6 +18,8 @@ namespace ColorMinesweeper.Game
         Transform content;
         float scroll;
         float maxScroll;
+        int titleTaps;
+        float lastTitleTap;
 
         protected override void Build()
         {
@@ -32,6 +34,16 @@ namespace ColorMinesweeper.Game
             UiKit.IconButton(header, "Settings", PixelGlyphs.Icon("gear", PixelGlyphs.Gear),
                 new Vector2(Ui.Safe.width / 2f - 1.05f, 1.2f), 152, () => SettingsPanel.Open(transform, Ui, 300, null));
 
+            // 개발용: 제목을 7번 연속 탭하면 모든 스테이지 잠금 해제를 켜고 끈다(에디터·Development Build 에서만).
+            UiButton.Attach(Draw.Node(header, "TitleCheat", new Vector2(0f, 0.45f)), new Vector2(7f, 1.2f), 151,
+                OnTitleTapped).Pressable = false;
+            if (Cheats.UnlockAll)
+            {
+                Draw.Panel(header, "DevBadge", new Vector2(2.6f, 0.55f), Theme.Danger, 151, new Vector2(0f, -1.25f), 0.27f);
+                Label.Create(header, "DevText", "DEV 전체 잠금 해제", Color.white, 152, new Vector2(0f, -1.25f), 0.3f,
+                    TextAnchor.MiddleCenter, true);
+            }
+
             content = Draw.Node(transform, "Content");
             for (int i = 0; i < StageCatalog.All.Count; i++)
             {
@@ -39,6 +51,27 @@ namespace ColorMinesweeper.Game
             }
 
             Layout();
+        }
+
+        void OnTitleTapped()
+        {
+            if (!Cheats.Available)
+            {
+                return;
+            }
+
+            if (Time.unscaledTime - lastTitleTap > 1.5f)
+            {
+                titleTaps = 0;
+            }
+
+            titleTaps++;
+            lastTitleTap = Time.unscaledTime;
+            if (titleTaps >= 7)
+            {
+                Cheats.UnlockAll = !Cheats.UnlockAll;
+                App.ShowSelect();
+            }
         }
 
         public override void Layout()

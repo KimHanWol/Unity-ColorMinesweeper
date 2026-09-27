@@ -17,6 +17,12 @@ namespace ColorMinesweeper.Game
             return Stars(stageId) > 0;
         }
 
+        public static void Clear(string stageId)
+        {
+            PlayerPrefs.DeleteKey(Key(stageId));
+            PlayerPrefs.Save();
+        }
+
         public static void Record(string stageId, int stars)
         {
             if (stars > Stars(stageId))

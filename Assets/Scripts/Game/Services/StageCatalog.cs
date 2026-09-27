@@ -36,10 +36,10 @@ namespace ColorMinesweeper.Game
             return -1;
         }
 
-        /// <summary>앞 스테이지를 깼거나 첫 스테이지면 열려 있다.</summary>
+        /// <summary>앞 스테이지를 깼거나 첫 스테이지면 열려 있다. 개발용 치트로 전부 열 수도 있다.</summary>
         public static bool IsUnlocked(int index)
         {
-            return index == 0 || (index > 0 && index < All.Count && Progress.IsCleared(All[index - 1].Id));
+            return index == 0 || (Cheats.UnlockAll && index < All.Count) || (index > 0 && index < All.Count && Progress.IsCleared(All[index - 1].Id));
         }
 
         /// <summary>givens 가 비어 있는 스테이지는 id 로 만든 시드로 생성한다(에디터 도구와 같은 결과).</summary>
