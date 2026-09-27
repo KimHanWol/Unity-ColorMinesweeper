@@ -173,6 +173,15 @@ namespace ColorMinesweeper.Game
             ["settings.vibration"] = new[] { "진동", "Vibration" },
             ["settings.language"] = new[] { "언어", "Language" },
             ["settings.tutorial"] = new[] { "튜토리얼 다시 보기", "Replay tutorial" },
+            ["settings.removeAds"] = new[] { "광고 제거", "Remove ads" },
+            ["settings.removeAds.desc"] = new[] { "그림 사이 광고가 사라져요", "No ads between pictures" },
+            ["settings.removeAds.owned"] = new[] { "구매함", "Purchased" },
+            ["settings.removeAds.loading"] = new[] { "준비 중", "Loading" },
+            ["settings.restore"] = new[] { "구매 복원", "Restore purchase" },
+            ["promo.title"] = new[] { "광고 없이 즐기기", "Play without ads" },
+            ["promo.body"] = new[] { "한 번 구매로 그림 사이 광고가 사라져요.\n이어 하기와 힌트 광고는 그대로 쓸 수 있어요.", "One purchase removes ads between pictures.\nOptional ads for continues and hints stay." },
+            ["promo.buy"] = new[] { "광고 제거 · {0}", "Remove ads · {0}" },
+            ["promo.later"] = new[] { "괜찮아요", "No thanks" },
 
             // 광고 자리(개발용)
             ["ad.rewarded"] = new[] { "보상형 광고 자리", "Rewarded ad slot" },

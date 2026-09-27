@@ -20,11 +20,21 @@ namespace ColorMinesweeper.Game
         {
             // 언어와 튜토리얼 다시 보기는 판 도중(플레이 화면)에는 두지 않는다. 화면을 다시 만들면 진행이 사라진다.
             // 위에서부터 차례로 쌓는다. 자리를 먼저 모두 계산해 카드 높이를 정하므로 줄이 늘어도 겹치지 않는다.
-            int rows = allowTutorial ? 4 : 3;
+            bool removeAds = RemoveAdsStore.IsSupported;
+            // iOS 는 구매 복원 버튼을 사용자가 누를 수 있게 두어야 한다(Android 는 시작할 때 저절로 되살린다).
+            bool restore = removeAds && Application.platform == RuntimePlatform.IPhonePlayer && !RemoveAdsStore.Owned;
+            int rows = (allowTutorial ? 4 : 3) + (removeAds ? 1 : 0);
             float titleY = -0.9f;
             float firstRowY = titleY - 1.35f;
             // 마지막 줄 아래 끝. 줄 한가운데에서 반 줄 내려간 곳이다.
             float bottom = firstRowY - (rows - 1) * RowHeight - RowHeight / 2f;
+            float restoreY = 0f;
+            if (restore)
+            {
+                restoreY = bottom - 0.3f - ButtonHalf;
+                bottom = restoreY - ButtonHalf;
+            }
+
             float tutorialY = 0f;
             if (allowTutorial)
             {
@@ -53,6 +63,18 @@ namespace ColorMinesweeper.Game
             {
                 y -= RowHeight;
                 LanguageRow(card, new Vector2(0f, y), o);
+            }
+
+            if (removeAds)
+            {
+                y -= RowHeight;
+                RemoveAdsRow.Create(card, new Vector2(0f, y), o);
+            }
+
+            if (restore)
+            {
+                UiKit.Button(card, "Restore", Loc.T("settings.restore"), null, Theme.HiddenTile, Theme.Ink,
+                    new Vector2(5.6f, UiKit.ModalButtonSize.y), new Vector2(0f, top + restoreY), o, () => RemoveAdsStore.Restore(null));
             }
 
             if (allowTutorial)

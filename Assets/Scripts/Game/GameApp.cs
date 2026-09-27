@@ -64,6 +64,8 @@ namespace ColorMinesweeper.Game
             // 광고 SDK 는 첫 화면을 띄우는 동안 뒤에서 준비한다. 준비되기 전에는 자리 표시 광고가 대신한다.
             AdMobAds.Initialize();
 #endif
+            // 광고 제거 상품 가격을 받아 오고, 예전에 산 기록이 있으면 되살린다.
+            RemoveAdsStore.Initialize();
             if (TryStartPlaytest())
             {
                 return;

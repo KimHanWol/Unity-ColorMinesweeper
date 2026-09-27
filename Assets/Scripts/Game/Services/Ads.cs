@@ -65,7 +65,7 @@ namespace ColorMinesweeper.Game
 
         static AdPacing Pacing => pacing ?? (pacing = new AdPacing(PlayerPrefs.GetInt(CompletionsKey, 0)));
 
-        /// <summary>광고 제거 구매 여부. 인앱 결제를 붙이면 결제 완료 시 true 로 바꾼다. 보상형 광고는 그대로 남는다.</summary>
+        /// <summary>광고 제거 구매 여부(<see cref="RemoveAdsStore"/> 가 켠다). 보상형 광고는 그대로 남는다.</summary>
         public static bool AdsRemoved
         {
             get => PlayerPrefs.GetInt(RemoveAdsKey, 0) == 1;
@@ -101,7 +101,8 @@ namespace ColorMinesweeper.Game
             Interstitial.Show(() =>
             {
                 Music.Duck(false);
-                next();
+                // 광고를 막 본 순간에 하루 한 번 광고 제거를 권한다.
+                RemoveAdsPromo.Show(next);
             });
         }
 
