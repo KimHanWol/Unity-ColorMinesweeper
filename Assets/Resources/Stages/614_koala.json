@@ -1,0 +1,23 @@
+{
+  "id": "koala",
+  "name": "코알라",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "S", "color": "#8D99AE" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "SS......SS",
+    "SWS....SWS",
+    "SSSSSSSSSS",
+    ".SSSSSSSS.",
+    ".SKSSSSKS.",
+    ".SSSKKSSS.",
+    "..SSKKSS..",
+    "...SSSS..."
+  ],
+  "givens": [4]
+}

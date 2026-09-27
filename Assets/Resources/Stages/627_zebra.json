@@ -1,0 +1,25 @@
+{
+  "id": "zebra",
+  "name": "얼룩말",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFE8D6" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "S", "color": "#8D99AE" }
+  ],
+  "pixels": [
+    ".W....W.",
+    "WKW..WKW",
+    "WWWWWWWW",
+    "WKWKKWKW",
+    "WWKWWKWW",
+    "KWWKKWWK",
+    ".WKWWKW.",
+    ".WWWWWW.",
+    ".SSSSSS.",
+    "..SKKS.."
+  ],
+  "givens": [24, 47, 56, 58]
+}

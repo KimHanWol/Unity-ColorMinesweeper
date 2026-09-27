@@ -1,0 +1,23 @@
+{
+  "id": "juice",
+  "name": "주스",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2A9D8F" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "O", "color": "#F77F00" }
+  ],
+  "pixels": [
+    "....R..",
+    "...R...",
+    "WWWRWWW",
+    "WOOOOOW",
+    "WOOOOOW",
+    "WOOOOOW",
+    "WOOOOOW",
+    ".WWWWW."
+  ],
+  "givens": [0]
+}

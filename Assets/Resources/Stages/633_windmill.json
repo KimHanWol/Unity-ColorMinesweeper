@@ -1,0 +1,26 @@
+{
+  "id": "windmill",
+  "name": "풍차",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#DDF1FF" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "R", "color": "#C8553D" },
+    { "key": "B", "color": "#6F4E37" }
+  ],
+  "pixels": [
+    "W.......W",
+    ".W.....W.",
+    "..W...W..",
+    "...RRR...",
+    "..WRRRW..",
+    ".W.RRR.W.",
+    "W..RRR..W",
+    "...RRR...",
+    "..RRRRR..",
+    "..RRBRR..",
+    "..RRBRR.."
+  ],
+  "givens": [3]
+}

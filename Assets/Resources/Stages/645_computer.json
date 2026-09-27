@@ -1,0 +1,24 @@
+{
+  "id": "computer",
+  "name": "컴퓨터",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "S", "color": "#8D99AE" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "SSSSSSSSS",
+    "SBBBBBBBS",
+    "SBKBBBBBS",
+    "SBBBBBBBS",
+    "SSSSSSSSS",
+    "...SSS...",
+    ".KKKKKKK.",
+    "KSKSKSKSK",
+    ".KKKKKKK."
+  ],
+  "givens": [64, 72]
+}

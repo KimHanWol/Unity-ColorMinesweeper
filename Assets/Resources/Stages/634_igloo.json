@@ -1,0 +1,21 @@
+{
+  "id": "igloo",
+  "name": "이글루",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#BDE0FE" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "B", "color": "#8ECAE6" },
+    { "key": "K", "color": "#1D3557" }
+  ],
+  "pixels": [
+    "...WWWWW...",
+    "..WWBWWWW..",
+    ".WBWWWWBWW.",
+    "WWWWWKWWWBW",
+    "WBWWKKKWWWW",
+    "WWWWKKKWWWW"
+  ],
+  "givens": [0]
+}

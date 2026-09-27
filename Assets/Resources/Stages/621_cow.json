@@ -1,0 +1,23 @@
+{
+  "id": "cow",
+  "name": "소",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#D8F3DC" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "P", "color": "#FFB5C2" }
+  ],
+  "pixels": [
+    ".K......K.",
+    "KKWWWWWWKK",
+    ".WKKWWWWW.",
+    ".WKKWWKWW.",
+    ".WWWWWWWW.",
+    ".PPPPPPPP.",
+    ".PKPPPPKP.",
+    ".PPPPPPPP."
+  ],
+  "givens": [40, 50, 60]
+}

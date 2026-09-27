@@ -1,0 +1,24 @@
+{
+  "id": "tiger",
+  "name": "호랑이",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "O", "color": "#F77F00" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "OO......OO",
+    "OOOOOOOOOO",
+    "OKOKOOKOKO",
+    "OOOOOOOOOO",
+    "OKWOOOOWKO",
+    "OOOOKKOOOO",
+    "OWWWKKWWWO",
+    ".OWWWWWWO.",
+    "..OOOOOO.."
+  ],
+  "givens": [4, 23]
+}

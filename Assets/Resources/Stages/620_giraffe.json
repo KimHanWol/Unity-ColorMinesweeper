@@ -1,0 +1,27 @@
+{
+  "id": "giraffe",
+  "name": "기린",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E3F2FD" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "Y", "color": "#FFC300" },
+    { "key": "B", "color": "#9C6644" }
+  ],
+  "pixels": [
+    "..K..K...",
+    "..YYYY...",
+    "..YKYY...",
+    "..YYYYY..",
+    "...YY....",
+    "...YB....",
+    "...YY....",
+    "...BY....",
+    ".YYYYYYY.",
+    ".YBYYBYY.",
+    ".YYYBYYY.",
+    ".Y.Y.Y.Y."
+  ],
+  "givens": [7, 106]
+}

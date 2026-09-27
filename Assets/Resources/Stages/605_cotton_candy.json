@@ -1,0 +1,24 @@
+{
+  "id": "cotton_candy",
+  "name": "솜사탕",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2B2D42" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "L", "color": "#C8B6FF" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "..PPLL..",
+    ".PPPLLL.",
+    "PPPPLLLL",
+    "PPPLLLLL",
+    ".PPLLLL.",
+    "..PLLL..",
+    "...WW...",
+    "...WW...",
+    "...WW..."
+  ],
+  "givens": [48]
+}

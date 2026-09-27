@@ -1,0 +1,26 @@
+{
+  "id": "flamingo",
+  "name": "플라밍고",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E0FBFC" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "D", "color": "#C9184A" }
+  ],
+  "pixels": [
+    "..PP....",
+    ".PPKD...",
+    ".PP.DD..",
+    "..P.....",
+    "...P....",
+    "..PPPP..",
+    ".PPPPPPP",
+    "PPPPPPP.",
+    "..PPP...",
+    "...D....",
+    "...D...."
+  ],
+  "givens": [6]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "cherry_blossom",
+  "name": "벚꽃",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "L", "color": "#FFE5EC" },
+    { "key": "B", "color": "#6F4E37" }
+  ],
+  "pixels": [
+    "..PP.......",
+    ".PLLP..PP..",
+    ".PLLP.PLLP.",
+    "..PP..PLLP.",
+    "BBBBBBBPP..",
+    "....BB.....",
+    ".....BB.PP.",
+    "......BPLLP"
+  ],
+  "givens": [66]
+}

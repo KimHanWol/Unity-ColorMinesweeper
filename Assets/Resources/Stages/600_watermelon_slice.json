@@ -1,0 +1,21 @@
+{
+  "id": "watermelon_slice",
+  "name": "수박 조각",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF3B0" },
+    { "key": "R", "color": "#FF4D6D" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "G", "color": "#2D6A4F" }
+  ],
+  "pixels": [
+    "RRRRRRRRR",
+    "RKRRKRRKR",
+    ".RRRRRRR.",
+    ".GRRKRRG.",
+    "..GGGGG..",
+    "...GGG..."
+  ],
+  "givens": [17, 45]
+}

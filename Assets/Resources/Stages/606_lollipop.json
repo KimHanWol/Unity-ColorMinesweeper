@@ -1,0 +1,25 @@
+{
+  "id": "lollipop",
+  "name": "막대사탕",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "S", "color": "#ADB5BD" }
+  ],
+  "pixels": [
+    "..RRR..",
+    ".RWWWR.",
+    "RWRRRWR",
+    "RWRWRWR",
+    "RWRRWWR",
+    ".RWWWR.",
+    "..RRR..",
+    "...S...",
+    "...S...",
+    "...S..."
+  ],
+  "givens": [25, 34, 49]
+}
