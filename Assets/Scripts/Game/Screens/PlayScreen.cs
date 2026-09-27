@@ -37,7 +37,7 @@ namespace ColorMinesweeper.Game
 
             top = Draw.Node(transform, "Top");
             bottom = Draw.Node(transform, "Bottom");
-            hud = Hud.Create(top, Ui, stageIndex + 1, stage.Name, () => App.ShowSelect(), OpenSettings);
+            hud = Hud.Create(top, Ui, StageTitle.For(stageIndex, stage), () => App.ShowSelect(), OpenSettings);
             palette = PaletteBar.Create(bottom, Ui, stage, OnSelectColor);
             Layout();
 
@@ -174,6 +174,7 @@ namespace ColorMinesweeper.Game
                 Progress.Record(stage.Id, session.Stars);
             }
 
+            hud.RevealTitle(StageTitle.Revealed(stageIndex, stage));
             board.SetFocus(-1);
             palette.Hide();
             App.BoardCamera.Frame(board.Bounds, Viewport(true), true);

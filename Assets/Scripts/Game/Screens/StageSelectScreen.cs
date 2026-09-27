@@ -11,7 +11,7 @@ namespace ColorMinesweeper.Game
     {
         const float HeaderHeight = 3.4f;
         const int Columns = 3;
-        static readonly Vector2 CardSize = new Vector2(2.7f, 3.3f);
+        static readonly Vector2 CardSize = new Vector2(2.7f, 3.8f);
         const float Gap = 0.35f;
 
         Transform header;
@@ -98,6 +98,13 @@ namespace ColorMinesweeper.Game
             OnDrag(new Vector2(0f, (ratio - 1f) * -600f));
         }
 
+        /// <summary>카드 아래 "번호. 이름" 줄. 긴 이름은 카드 폭을 넘지 않게 글자를 줄인다.</summary>
+        static void Caption(Transform parent, string text, Color color, Vector2 position)
+        {
+            float height = text.Length <= 7 ? 0.3f : text.Length <= 10 ? 0.25f : 0.21f;
+            Label.Create(parent, "Caption", text, color, 12, position, height, TextAnchor.MiddleCenter, true);
+        }
+
         void CreateCard(int index)
         {
             Stage stage = StageCatalog.All[index];
@@ -115,7 +122,9 @@ namespace ColorMinesweeper.Game
             Draw.Panel(visual, "Face", CardSize, Theme.Card, 11, Vector2.zero, 0.45f);
 
             var pictureSize = new Vector2(CardSize.x - 0.5f, CardSize.x - 0.5f);
-            var pictureCenter = new Vector2(0f, 0.3f);
+            var pictureCenter = new Vector2(0f, 0.5f);
+            var infoLine = new Vector2(0f, -1.0f);
+            var captionLine = new Vector2(0f, -1.47f);
             if (stars > 0)
             {
                 Draw.Panel(visual, "PictureBack", pictureSize, Theme.ToColor(stage.Colors[stage.BackgroundColor].Color), 12,
@@ -127,23 +136,25 @@ namespace ColorMinesweeper.Game
                 for (int i = 0; i < 3; i++)
                 {
                     Draw.Sprite(visual, "Star" + i, star, i < stars ? Theme.Gold : Theme.Locked, 12,
-                        new Vector2((i - 1) * 0.55f, -1.25f), new Vector2(0.42f, 0.42f));
+                        infoLine + new Vector2((i - 1) * 0.45f, 0f), new Vector2(0.34f, 0.34f));
                 }
+
+                Caption(visual, StageTitle.Revealed(index, stage), Theme.Ink, captionLine);
             }
             else if (unlocked)
             {
                 Draw.Panel(visual, "PictureBack", pictureSize, Theme.HiddenTile, 12, pictureCenter, 0.3f);
                 PixelText.Create(visual, "Number", (index + 1).ToString(), Color.white, 13, pictureCenter, 0.7f);
-                PixelText.Create(visual, "Size", stage.Width + "x" + stage.Height, Theme.SubInk, 12,
-                    new Vector2(0f, -1.25f), 0.3f);
+                PixelText.Create(visual, "Size", stage.Width + "x" + stage.Height, Theme.SubInk, 12, infoLine, 0.26f);
+                Caption(visual, StageTitle.Hidden(index), Theme.SubInk, captionLine);
             }
             else
             {
                 Draw.Panel(visual, "PictureBack", pictureSize, Theme.Locked, 12, pictureCenter, 0.3f);
                 Draw.Sprite(visual, "Lock", PixelGlyphs.Icon("lock", PixelGlyphs.Lock), Color.white, 13, pictureCenter,
                     new Vector2(0.7f, 0.7f));
+                Caption(visual, StageTitle.Hidden(index), Theme.Locked, captionLine);
             }
-
             UiButton button = UiButton.Attach(root, CardSize, 20, () =>
             {
                 if (unlocked)
@@ -160,7 +171,8 @@ namespace ColorMinesweeper.Game
             button.ReleaseOnDrag = true;
 
             visual.localScale = Vector3.zero;
-            Tween.Run(visual, 0.4f, t => visual.localScale = Vector3.one * t, Ease.OutBack, 0.05f + index * 0.04f);
+            // 처음 보이는 몇 줄만 차례로 튀어나오게 하고, 나머지는 거의 동시에 뜬다(300개면 마지막 카드가 한참 늦게 나온다).
+            Tween.Run(visual, 0.4f, t => visual.localScale = Vector3.one * t, Ease.OutBack, 0.05f + Mathf.Min(index, 15) * 0.04f);
             button.SetRestScale(Vector3.one);
         }
     }

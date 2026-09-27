@@ -11,9 +11,10 @@ namespace ColorMinesweeper.Game
         const float HeartSize = 0.46f;
 
         SpriteRenderer[] hearts;
+        Label title;
 
-        public static Hud Create(Transform parent, UiRoot ui, int stageNumber, string stageName, Action onBack,
-            Action onSettings)
+        /// <summary>title 은 <see cref="StageTitle"/> 규칙대로 만든 제목(완성 전에는 이름 대신 ???).</summary>
+        public static Hud Create(Transform parent, UiRoot ui, string title, Action onBack, Action onSettings)
         {
             Transform root = Draw.Node(parent, "Hud");
             var hud = root.gameObject.AddComponent<Hud>();
@@ -24,8 +25,8 @@ namespace ColorMinesweeper.Game
             UiKit.IconButton(root, "Settings", PixelGlyphs.Icon("gear", PixelGlyphs.Gear), new Vector2(half - 1.05f, 0f),
                 100, onSettings);
 
-            string title = stageNumber > 0 ? stageNumber + ". " + stageName : stageName;
-            Label.Create(root, "Name", title, Theme.Ink, 100, new Vector2(0f, 0.32f), 0.58f, TextAnchor.MiddleCenter, true);
+            hud.title = Label.Create(root, "Name", title, Theme.Ink, 100, new Vector2(0f, 0.32f), 0.58f,
+                TextAnchor.MiddleCenter, true);
 
             Sprite heart = PixelGlyphs.Icon("heart", PixelGlyphs.Heart);
             hud.hearts = new SpriteRenderer[PuzzleSession.MaxLives];
@@ -36,6 +37,27 @@ namespace ColorMinesweeper.Game
             }
 
             return hud;
+        }
+
+        /// <summary>완성했을 때 ??? 자리에 이름이 톡 튀어나오며 바뀐다.</summary>
+        public void RevealTitle(string text)
+        {
+            if (title.Text == text)
+            {
+                return;
+            }
+
+            Transform t = title.transform;
+            Vector3 rest = t.localScale;
+            Tween.Kill(t);
+            Tween.Run(t, 0.18f, k => t.localScale = Vector3.LerpUnclamped(rest, new Vector3(rest.x, 0f, 1f), k), Ease.InCubic,
+                0f, () =>
+                {
+                    title.Text = text;
+                    title.SetColor(Theme.Accent);
+                    Tween.Run(t, 0.45f, k => t.localScale = Vector3.LerpUnclamped(new Vector3(rest.x, 0f, 1f), rest, k),
+                        Ease.OutBack);
+                });
         }
 
         /// <summary>잃은 목숨은 회색으로 줄어들고, 남은 목숨은 빨갛게 유지된다. animate 면 바뀐 하트가 튄다.</summary>
