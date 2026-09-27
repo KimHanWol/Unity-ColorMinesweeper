@@ -25,6 +25,8 @@ namespace ColorMinesweeper.Game
         static float unitHeight;
 
         TextMesh mesh;
+        Vector3 basePosition;
+        bool centerVertically;
 
         static Font SharedFont
         {
@@ -78,6 +80,10 @@ namespace ColorMinesweeper.Game
 
             var label = t.gameObject.AddComponent<Label>();
             label.mesh = mesh;
+            label.basePosition = t.localPosition;
+            label.centerVertically = anchor == TextAnchor.MiddleCenter || anchor == TextAnchor.MiddleLeft ||
+                                     anchor == TextAnchor.MiddleRight;
+            label.Recenter();
             return label;
         }
 
@@ -95,7 +101,48 @@ namespace ColorMinesweeper.Game
         public string Text
         {
             get => mesh.text;
-            set => mesh.text = value;
+            set
+            {
+                mesh.text = value;
+                Recenter();
+            }
+        }
+
+        /// <summary>
+        /// 가운데 정렬 라벨의 실제 글자 영역 세로 중심을 놓으려던 자리에 맞춘다. 동글은 글자가 줄 높이의 위쪽에 치우쳐
+        /// 그려져서, TextMesh 기준점만 맞추면 글자가 떠 보인다. 글자 영역이 다음 프레임에 갱신될 때를 위해 한 번 더 한다.
+        /// </summary>
+        void Recenter()
+        {
+            if (!centerVertically)
+            {
+                return;
+            }
+
+            ApplyCenter();
+            Tween.Delay(this, 0.02f, ApplyCenter);
+        }
+
+        void ApplyCenter()
+        {
+            Transform t = transform;
+            t.localPosition = basePosition;
+            Bounds bounds = RenderBounds;
+            if (bounds.size.y <= 0f || t.parent == null)
+            {
+                return;
+            }
+
+            float glyphCenter = t.parent.InverseTransformPoint(bounds.center).y;
+            t.localPosition = basePosition + new Vector3(0f, basePosition.y - glyphCenter, 0f);
+        }
+
+        /// <summary>놓을 자리(부모 기준)를 바꾼다. 가운데 정렬 라벨은 글자 중심을 다시 맞춘다.</summary>
+        public void MoveTo(Vector2 position)
+        {
+            basePosition = new Vector3(position.x, position.y, 0f);
+            transform.localPosition = basePosition;
+            Recenter();
         }
 
         public void SetColor(Color color)

@@ -19,6 +19,11 @@ namespace ColorMinesweeper.Game
         float scroll;
         float maxScroll;
         int titleTaps;
+
+        /// <summary>목록을 마지막으로 봤을 때 열려 있던 스테이지 수. 그보다 뒤에 새로 열린 카드는 자물쇠가 풀리는 연출을 한다.</summary>
+        const string SeenUnlockedKey = "ui.seenUnlocked";
+        int seenUnlocked;
+        int newlyUnlockedShown;
         float lastTitleTap;
 
         protected override void Build()
@@ -47,12 +52,54 @@ namespace ColorMinesweeper.Game
             }
 
             content = Draw.Node(transform, "Content");
+            int unlockedNow = 0;
+            for (int i = 0; i < StageCatalog.All.Count; i++)
+            {
+                if (StageCatalog.IsUnlocked(i))
+                {
+                    unlockedNow++;
+                }
+            }
+
+            // 처음 보는 거라면 연출 없이 지금 상태를 기준으로 삼는다.
+            seenUnlocked = PlayerPrefs.GetInt(SeenUnlockedKey, unlockedNow);
+            if (unlockedNow - seenUnlocked > 3)
+            {
+                // 치트로 한꺼번에 열렸을 때처럼 너무 많으면 연출하지 않는다(소리가 겹쳐 시끄럽다).
+                seenUnlocked = unlockedNow;
+            }
             for (int i = 0; i < StageCatalog.All.Count; i++)
             {
                 CreateCard(i);
             }
 
+            PlayerPrefs.SetInt(SeenUnlockedKey, unlockedNow);
+            PlayerPrefs.Save();
+
             Layout();
+        }
+
+        /// <summary>
+        /// 새로 열린 카드: 잠긴 모습(자물쇠)을 덮어 두었다가 자물쇠가 튀어 오르며 사라지고 철컥 소리가 난다.
+        /// </summary>
+        void PlayUnlock(Transform visual, Vector2 pictureSize, Vector2 pictureCenter, int order)
+        {
+            Transform cover = Draw.Node(visual, "UnlockCover", pictureCenter);
+            SpriteRenderer back = Draw.Panel(cover, "Back", pictureSize, Theme.Locked, 14, Vector2.zero, 0.3f);
+            SpriteRenderer lockIcon = Draw.Sprite(cover, "Lock", Icons.Lock, Color.white, 15, Vector2.zero, new Vector2(0.8f, 0.8f));
+            float delay = 0.6f + order * 0.35f;
+            Tween.Delay(cover, delay, () =>
+            {
+                Sfx.Instance?.Unlock();
+                Transform icon = lockIcon.transform;
+                Tween.Run(cover, 0.5f, t =>
+                {
+                    icon.localPosition = new Vector3(0f, t * 0.9f, 0f);
+                    icon.localRotation = Quaternion.Euler(0f, 0f, t * 25f);
+                    Draw.SetAlpha(lockIcon, 1f - t);
+                    Draw.SetAlpha(back, 1f - t);
+                }, Ease.InCubic, 0f, () => Destroy(cover.gameObject));
+            });
         }
 
         public override void OnBack()
@@ -162,20 +209,28 @@ namespace ColorMinesweeper.Game
                     new Vector2(0.7f, 0.7f));
                 Caption(visual, StageTitle.Hidden(index), Theme.Locked, captionLine);
             }
+            if (unlocked && stars == 0 && index >= seenUnlocked)
+            {
+                PlayUnlock(visual, pictureSize, pictureCenter, newlyUnlockedShown++);
+            }
+
             UiButton button = UiButton.Attach(root, CardSize, 20, () =>
             {
                 if (unlocked)
                 {
+                    Sfx.Instance?.Tap();
                     App.ShowPlay(index);
                 }
                 else
                 {
+                    Sfx.Instance?.Locked();
                     Tween.Kill(visual);
                     Tween.Run(visual, 0.4f, t => visual.localPosition = new Vector3(Mathf.Sin(t * Mathf.PI * 5f) * 0.12f * (1f - t), 0f, 0f),
                         Ease.Linear);
                 }
             }, visual);
             button.ReleaseOnDrag = true;
+            button.Silent = true;
 
             visual.localScale = Vector3.zero;
             // 처음 보이는 몇 줄만 차례로 튀어나오게 하고, 나머지는 거의 동시에 뜬다(300개면 마지막 카드가 한참 늦게 나온다).

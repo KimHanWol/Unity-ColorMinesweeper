@@ -33,6 +33,8 @@ namespace ColorMinesweeper.Game
         AudioClip close;
         AudioClip revive;
         AudioClip nameReveal;
+        AudioClip unlock;
+        AudioClip locked;
 
         float lastReveal = -10f;
         int combo;
@@ -104,6 +106,26 @@ namespace ColorMinesweeper.Game
             revive = SoundSynth.Clip("revive", 0.7f, t =>
                 (SoundSynth.Marimba(t, 523.25f, 8f) + SoundSynth.Marimba(t - 0.09f, 659.25f, 8f)
                  + SoundSynth.Marimba(t - 0.18f, 1046.5f, 5f)) * 0.35f);
+            // 자물쇠가 풀릴 때: 금속성 "철컥"(짧은 잡음 두 번) 뒤에 위로 올라가는 종소리.
+            unlock = SoundSynth.Clip("unlock", 0.9f, t =>
+            {
+                float click = 0f;
+                foreach (float at in new[] { 0f, 0.07f })
+                {
+                    float k = t - at;
+                    if (k >= 0f && k < 0.03f)
+                    {
+                        click += SoundSynth.Noise((int)(t * 44100f)) * Mathf.Exp(-k * 160f) * 0.5f
+                                 + Mathf.Sin(SoundSynth.TwoPi * 2600f * k) * Mathf.Exp(-k * 120f) * 0.3f;
+                    }
+                }
+
+                float chime = SoundSynth.Bell(t - 0.14f, 1046.5f, 6f) + SoundSynth.Bell(t - 0.24f, 1567.98f, 4f);
+                return click + chime * 0.28f;
+            });
+            // 잠긴 칸을 눌렀을 때: 짧고 둔한 "딱".
+            locked = SoundSynth.Clip("locked", 0.12f, t =>
+                (Mathf.Sin(SoundSynth.TwoPi * 330f * t) + SoundSynth.Noise((int)(t * 44100f)) * 0.3f) * Mathf.Exp(-t * 45f) * 0.45f);
             nameReveal = SoundSynth.Clip("name", 0.7f, t =>
             {
                 float sum = 0f;
@@ -147,6 +169,8 @@ namespace ColorMinesweeper.Game
         public void Close() => Play(close, 0.5f);
         public void Revive() => Play(revive, 1f);
         public void NameReveal() => Play(nameReveal, 1f);
+        public void Unlock() => Play(unlock, 1f);
+        public void Locked() => Play(locked, 0.8f);
 
         void Play(AudioClip clip, float volume)
         {

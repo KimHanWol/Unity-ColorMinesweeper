@@ -146,9 +146,8 @@ namespace ColorMinesweeper.Game
                 new Vector2(0f, -0.55f), 70, () => App.ShowSelect());
 
             Sprite star = Icons.Star;
-            Draw.Sprite(menu, "Star", star, Theme.Gold, 70, new Vector2(-1.9f, -1.85f), new Vector2(0.4f, 0.4f));
-            Label.Create(menu, "Progress", "완성한 그림 " + cleared + " / " + StageCatalog.All.Count, Theme.SubInk, 70,
-                new Vector2(0.25f, -1.85f), 0.36f);
+            UiKit.IconLabel(menu, star, Theme.Gold, "완성한 그림 " + cleared + " / " + StageCatalog.All.Count, Theme.SubInk, 0.36f,
+                0.42f, 70, new Vector2(0f, -1.85f));
         }
 
         void PlayEntrance()

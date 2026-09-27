@@ -26,6 +26,9 @@ namespace ColorMinesweeper.Game
         bool modalClosable;
         bool busy;
         int initialRevealed;
+
+        /// <summary>이번 완성으로 다음 스테이지가 새로 열렸는지(결과 창에서 잠금 해제를 알린다).</summary>
+        bool unlockedNext;
         TutorialDirector tutorial;
         SpeechBubble bubble;
 
@@ -284,7 +287,9 @@ namespace ColorMinesweeper.Game
         {
             if (stageIndex >= 0)
             {
+                bool wasUnlocked = stageIndex + 1 >= StageCatalog.All.Count || StageCatalog.IsUnlocked(stageIndex + 1);
                 Progress.Record(stage.Id, session.Stars);
+                unlockedNext = !wasUnlocked && StageCatalog.IsUnlocked(stageIndex + 1);
                 Ads.OnStageCompleted();
             }
 
@@ -329,7 +334,21 @@ namespace ColorMinesweeper.Game
             }
 
             string mistakes = session.Mistakes == 0 ? "실수 없이 풀었어요" : "실수 " + session.Mistakes + "번";
-            Label.Create(card, "Mistakes", mistakes, Theme.SubInk, order, new Vector2(0f, -0.2f), 0.45f);
+            Label mistakeLabel = Label.Create(card, "Mistakes", mistakes, Theme.SubInk, order, new Vector2(0f, -0.2f), 0.45f);
+            if (unlockedNext)
+            {
+                // 별이 다 뜬 뒤 자물쇠가 풀리는 소리와 함께 알린다.
+                Tween.Delay(card, 0.95f, () =>
+                {
+                    Sfx.Instance?.Unlock();
+                    mistakeLabel.gameObject.SetActive(false);
+                    Label unlockedLabel = UiKit.IconLabel(card, Icons.Lock, Theme.Accent, "다음 그림이 열렸어요!", Theme.Accent, 0.45f,
+                        0.45f, order, new Vector2(0f, -0.2f), true);
+                    Transform text = unlockedLabel.transform;
+                    Vector3 rest = text.localScale;
+                    Tween.Run(text, 0.4f, k => text.localScale = rest * Mathf.LerpUnclamped(0.6f, 1f, k), Ease.OutBack);
+                });
+            }
 
             bool hasNext = stageIndex >= 0 && stageIndex + 1 < StageCatalog.All.Count;
             if (hasNext)

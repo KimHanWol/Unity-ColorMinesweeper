@@ -19,13 +19,7 @@ namespace ColorMinesweeper.Game
             float textHeight = size.y * 0.42f;
             if (icon != null && !string.IsNullOrEmpty(text))
             {
-                float iconSize = size.y * 0.42f;
-                float estimatedTextWidth = text.Length * textHeight * 0.62f;
-                float total = iconSize + 0.25f + estimatedTextWidth;
-                Draw.Sprite(visual, "Icon", icon, ink, order + 2, new Vector2(-total / 2f + iconSize / 2f, 0f),
-                    new Vector2(iconSize, iconSize));
-                Label.Create(visual, "Text", text, ink, order + 2,
-                    new Vector2(-total / 2f + iconSize + 0.25f, 0f), textHeight, TextAnchor.MiddleLeft, true);
+                IconLabel(visual, icon, ink, text, ink, textHeight, size.y * 0.46f, order + 2, Vector2.zero, true);
             }
             else if (icon != null)
             {
@@ -38,6 +32,24 @@ namespace ColorMinesweeper.Game
             }
 
             return UiButton.Attach(root, size, order, onClick, visual);
+        }
+
+        /// <summary>
+        /// 아이콘과 글자를 한 묶음으로 center 에 가운데 정렬한다. 글자 폭은 실제로 재서(글자 수로 추정하면 폰트마다 어긋난다)
+        /// 아이콘 + 간격 + 글자 전체의 가운데가 center 에 오게 한다.
+        /// </summary>
+        public static Label IconLabel(Transform parent, Sprite icon, Color iconColor, string text, Color textColor,
+            float textHeight, float iconSize, int order, Vector2 center, bool bold = false)
+        {
+            const float gap = 0.22f;
+            SpriteRenderer iconRenderer = Draw.Sprite(parent, "Icon", icon, iconColor, order, center,
+                new Vector2(iconSize, iconSize));
+            Label label = Label.Create(parent, "Text", text, textColor, order, center, textHeight, TextAnchor.MiddleLeft, bold);
+            float textWidth = label.MeasureWidth(text);
+            float left = center.x - (iconSize + gap + textWidth) / 2f;
+            iconRenderer.transform.localPosition = new Vector3(left + iconSize / 2f, center.y, 0f);
+            label.MoveTo(new Vector2(left + iconSize + gap, center.y));
+            return label;
         }
 
         public static UiButton IconButton(Transform parent, string name, Sprite icon, Vector2 position, int order,
