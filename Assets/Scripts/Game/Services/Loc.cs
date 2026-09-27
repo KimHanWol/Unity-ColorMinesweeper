@@ -120,7 +120,7 @@ namespace ColorMinesweeper.Game
             ["over.retry"] = new[] { "처음부터", "Start over" },
             ["hint.pick"] = new[] { "색을 알고 싶은 칸을 눌러요", "Tap a cell to reveal its color" },
             ["hint.empty.title"] = new[] { "힌트를 다 썼어요", "Out of hints" },
-            ["hint.empty.body"] = new[] { "광고를 보면 힌트 {0}개를 받아요", "Watch an ad to get {0} hints" },
+            ["hint.empty.body"] = new[] { "광고를 보면 힌트 {0}개를 받아요", "Watch an ad to get another hint" },
             ["hint.empty.watch"] = new[] { "광고 보고 힌트 받기", "Watch ad for hints" },
             ["tutorialClear.title"] = new[] { "튜토리얼 완료!", "Tutorial complete!" },
             ["tutorialClear.body"] = new[] { "그림을 완성하면 이름이 공개돼요.\n색을 고르고, 숫자를 보고, 칠하면 끝!", "Finish a picture to reveal its name.\nPick a color, read the numbers, paint!" },

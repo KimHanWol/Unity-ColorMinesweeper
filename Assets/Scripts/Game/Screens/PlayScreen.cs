@@ -32,7 +32,7 @@ namespace ColorMinesweeper.Game
         TutorialDirector tutorial;
 
         /// <summary>광고 한 번에 받는 힌트 수.</summary>
-        const int HintsPerAd = 3;
+        const int HintsPerAd = 1;
 
         HintButton hintButton;
 
