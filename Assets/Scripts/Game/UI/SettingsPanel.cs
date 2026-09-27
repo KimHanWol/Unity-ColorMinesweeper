@@ -12,9 +12,6 @@ namespace ColorMinesweeper.Game
         const float RowHeight = 1.3f;
         const float SliderWidth = 3.4f;
 
-        /// <summary>두 줄짜리 도움말의 반 높이. 도움말과 아래 버튼 사이를 잡는 데 쓴다.</summary>
-        const float TipHalfHeight = 0.5f;
-
         static float lastPreview;
 
         /// <param name="allowTutorial">튜토리얼 다시 보기 버튼을 둘지. 판 도중(플레이 화면)에는 진행이 사라지므로 두지 않는다.</param>
@@ -25,12 +22,12 @@ namespace ColorMinesweeper.Game
             int rows = allowTutorial ? 5 : 4;
             float titleY = -0.9f;
             float firstRowY = titleY - 1.35f;
-            float tipY = firstRowY - (rows - 1) * RowHeight - 1.25f;
-            float bottom = tipY - TipHalfHeight;
+            // 마지막 줄 아래 끝. 줄 한가운데에서 반 줄 내려간 곳이다.
+            float bottom = firstRowY - (rows - 1) * RowHeight - RowHeight / 2f;
             float tutorialY = 0f;
             if (allowTutorial)
             {
-                tutorialY = bottom - 0.35f - 0.525f;
+                tutorialY = bottom - 0.3f - 0.525f;
                 bottom = tutorialY - 0.525f;
             }
 
@@ -59,10 +56,6 @@ namespace ColorMinesweeper.Game
                 y -= RowHeight;
                 LanguageRow(card, new Vector2(0f, y), o);
             }
-
-            Label tip = Label.Create(card, "Tip", string.Empty, Theme.SubInk, o, new Vector2(0f, top + tipY), 0.34f);
-            tip.SetWrappedText(Loc.T("settings.tip"), 6.8f);
-            tip.MoveTo(new Vector2(0f, top + tipY));
 
             if (allowTutorial)
             {

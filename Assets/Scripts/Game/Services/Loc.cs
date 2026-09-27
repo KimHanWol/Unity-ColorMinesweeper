@@ -172,7 +172,6 @@ namespace ColorMinesweeper.Game
             ["settings.remaining"] = new[] { "남은 개수로 보기", "Show remaining counts" },
             ["settings.remaining.desc"] = new[] { "단서가 아직 안 열린 칸 수만 보여 줘요", "Clues count only unopened cells" },
             ["settings.language"] = new[] { "언어", "Language" },
-            ["settings.tip"] = new[] { "색을 고르면 그 색의 개수만 보여요.\n팔레트의 네모 칸(배경)도 하나의 색이에요.", "Pick a color to see only its numbers.\nThe square swatch (background) is a color too." },
             ["settings.tutorial"] = new[] { "튜토리얼 다시 보기", "Replay tutorial" },
 
             // 광고 자리(개발용)
