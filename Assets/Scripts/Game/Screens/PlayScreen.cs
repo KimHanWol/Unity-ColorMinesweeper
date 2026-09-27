@@ -107,8 +107,7 @@ namespace ColorMinesweeper.Game
         {
             if (tutorial != null && !session.IsCleared)
             {
-                // 튜토리얼은 건너뛸 수 있다. 다음 실행 때 다시 뜨지 않게 끝난 것으로 둔다.
-                TutorialDirector.IsDone = true;
+                // 튜토리얼을 나가도 완료로 치지 않는다. 끝까지 마쳐야 다음 시작하기부터 스테이지로 들어간다.
                 App.ShowTitle();
                 return;
             }

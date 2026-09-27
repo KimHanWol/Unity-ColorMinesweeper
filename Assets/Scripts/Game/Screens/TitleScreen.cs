@@ -132,8 +132,8 @@ namespace ColorMinesweeper.Game
             UiKit.Button(menu, "Play", playText, PixelGlyphs.Icon("play", PixelGlyphs.Play), Theme.Accent, Color.white,
                 new Vector2(6.4f, 1.5f), new Vector2(0f, 1.1f), 70, () =>
                 {
-                    // 처음 시작하기를 누르면 튜토리얼부터. 튜토리얼을 마치면 1번 스테이지로 이어진다.
-                    if (TutorialDirector.IsDone || cleared > 0)
+                    // 튜토리얼을 끝까지 마치기 전에는 시작하기를 누를 때마다 튜토리얼부터 한다(마치면 1번 스테이지로 이어진다).
+                    if (TutorialDirector.IsDone)
                     {
                         App.ShowPlay(next);
                     }
