@@ -108,8 +108,9 @@ namespace ColorMinesweeper.Game
                 star[i] = SoundSynth.Clip("star" + i, 0.7f, t => SoundSynth.Bell(t, f, 5f) * 0.35f);
             }
 
-            open = Whoosh("open", 0.22f, 700f, 2400f, 0.22f);
-            close = Whoosh("close", 0.16f, 1800f, 600f, 0.16f);
+            // 창이 열릴 때 "또롱"(솔 → 도, 위로), 닫힐 때 "통"(도 → 솔, 아래로). 작고 둥근 두 음이라 자주 들어도 편하다.
+            open = SoundSynth.Clip("open", 0.45f, t => (SoftNote(t, 783.99f, 14f) + 0.8f * SoftNote(t - 0.07f, 1046.5f, 12f)) * 0.22f);
+            close = SoundSynth.Clip("close", 0.4f, t => (0.8f * SoftNote(t, 1046.5f, 16f) + SoftNote(t - 0.06f, 783.99f, 14f)) * 0.18f);
             revive = SoundSynth.Clip("revive", 0.7f, t =>
                 (SoundSynth.Marimba(t, 523.25f, 8f) + SoundSynth.Marimba(t - 0.09f, 659.25f, 8f)
                  + SoundSynth.Marimba(t - 0.18f, 1046.5f, 5f)) * 0.35f);
@@ -190,20 +191,20 @@ namespace ColorMinesweeper.Game
             }
         }
 
-        /// <summary>한쪽으로 흐르는 바람 소리. 잡음을 한 극(1-pole) 저역 통과로 거르며 차단 주파수를 옮긴다.</summary>
-        static AudioClip Whoosh(string name, float seconds, float fromHz, float toHz, float gain)
+        /// <summary>
+        /// 둥글고 작은 "톡" 한 음. 사인파만 쓰고 시작을 살짝 부드럽게 해서 딸깍이나 바람 소리 없이 조용하다.
+        /// 창이 열리고 닫힐 때처럼 자주 들리는 소리에 쓴다.
+        /// </summary>
+        static float SoftNote(float t, float frequency, float decay)
         {
-            float state = 0f;
-            int index = 0;
-            return SoundSynth.Clip(name, seconds, t =>
+            if (t < 0f)
             {
-                float k = t / seconds;
-                float cutoff = Mathf.Lerp(fromHz, toHz, k);
-                float alpha = 1f - Mathf.Exp(-SoundSynth.TwoPi * cutoff / 44100f);
-                state += alpha * (SoundSynth.Noise(index++) - state);
-                float env = Mathf.Sin(Mathf.PI * Mathf.Clamp01(k));
-                return state * env * gain * 3f;
-            });
+                return 0f;
+            }
+
+            float attack = Mathf.Clamp01(t / 0.012f);
+            return attack * Mathf.Exp(-t * decay) * (Mathf.Sin(SoundSynth.TwoPi * frequency * t)
+                                                    + 0.12f * Mathf.Sin(SoundSynth.TwoPi * frequency * 2f * t) * Mathf.Exp(-t * 20f));
         }
     }
 }
