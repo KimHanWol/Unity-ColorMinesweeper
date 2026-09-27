@@ -8,12 +8,11 @@
     { "key": "R", "color": "#E63946" }
   ],
   "pixels": [
-    "..RR..",
-    ".RRRR.",
-    "R.RRRR",
-    "RRRRRR",
-    ".RRRR.",
-    "..RR.."
+    ".RRR.",
+    "R.RRR",
+    "RRRRR",
+    "RRRRR",
+    ".RRR."
   ],
-  "givens": [7, 22, 29]
+  "givens": [0, 6]
 }
