@@ -223,6 +223,7 @@ namespace ColorMinesweeper.Game
             if (stageIndex >= 0)
             {
                 Progress.Record(stage.Id, session.Stars);
+                Ads.OnStageCompleted();
             }
 
             hud.RevealTitle(StageTitle.Revealed(stageIndex, stage));
@@ -266,11 +267,11 @@ namespace ColorMinesweeper.Game
             if (hasNext)
             {
                 UiKit.Button(card, "Next", "다음 그림", PixelGlyphs.Icon("play", PixelGlyphs.Play), Theme.Accent,
-                    Color.white, new Vector2(5.6f, 1.35f), new Vector2(0f, -1.6f), order, () => App.ShowPlay(stageIndex + 1));
+                    Color.white, new Vector2(5.6f, 1.35f), new Vector2(0f, -1.6f), order, () => Ads.AfterStage(() => App.ShowPlay(stageIndex + 1)));
             }
 
             UiKit.Button(card, "List", "목록", null, Theme.HiddenTile, Theme.Ink, new Vector2(5.6f, 1.1f),
-                new Vector2(0f, hasNext ? -3.0f : -1.6f), order, () => App.ShowSelect());
+                new Vector2(0f, hasNext ? -3.0f : -1.6f), order, () => Ads.AfterStage(App.ShowSelect));
         }
 
         void ShowGameOver()
@@ -292,7 +293,7 @@ namespace ColorMinesweeper.Game
                 Theme.Accent, Color.white, new Vector2(6f, 1.35f), new Vector2(0f, -1.2f), order, () =>
                 {
                     revive.Interactable = false;
-                    Ads.Rewarded.Show(rewarded =>
+                    Ads.ShowRewarded(rewarded =>
                     {
                         if (this == null)
                         {

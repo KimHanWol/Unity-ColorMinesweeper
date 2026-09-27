@@ -17,6 +17,8 @@ namespace ColorMinesweeper.Game
         public const string PlaytestKey = "ColorMinesweeper.PlaytestJson";
 #endif
 
+        public static GameApp Instance { get; private set; }
+
         public UiRoot Ui { get; private set; }
         public BoardCamera BoardCamera { get; private set; }
 
@@ -38,6 +40,7 @@ namespace ColorMinesweeper.Game
 
         void Awake()
         {
+            Instance = this;
             DontDestroyOnLoad(gameObject);
             Application.targetFrameRate = 60;
             Input.multiTouchEnabled = true;

@@ -22,6 +22,7 @@ namespace ColorMinesweeper.Game
         AudioSource source;
         Task<float[]> composing;
         float fade;
+        bool ducked;
 
         /// <summary>배경음악 볼륨(0~1). 설정에서 바꾼다.</summary>
         public static float Volume
@@ -77,11 +78,21 @@ namespace ColorMinesweeper.Game
             }
         }
 
+        /// <summary>광고가 떠 있는 동안 배경음악을 끈다(광고 소리와 겹치지 않게).</summary>
+        public static void Duck(bool on)
+        {
+            if (instance != null)
+            {
+                instance.ducked = on;
+                instance.ApplyVolume();
+            }
+        }
+
         void ApplyVolume()
         {
             if (source != null)
             {
-                source.volume = volume * BaseGain * fade;
+                source.volume = ducked ? 0f : volume * BaseGain * fade;
             }
         }
 
