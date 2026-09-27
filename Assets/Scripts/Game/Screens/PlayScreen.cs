@@ -333,15 +333,12 @@ namespace ColorMinesweeper.Game
                 }
             }
 
-            string mistakes = session.Mistakes == 0 ? Loc.T("clear.perfect") : Loc.F("clear.mistakes", session.Mistakes);
-            Label mistakeLabel = Label.Create(card, "Mistakes", mistakes, Theme.SubInk, order, new Vector2(0f, 0.2f), 0.45f);
             if (unlockedNext)
             {
                 // 별이 다 뜬 뒤 자물쇠가 풀리는 소리와 함께 알린다.
                 Tween.Delay(card, 0.95f, () =>
                 {
                     Sfx.Instance?.Unlock();
-                    mistakeLabel.gameObject.SetActive(false);
                     Label unlockedLabel = UiKit.IconLabel(card, Icons.Lock, Theme.Accent, Loc.T("clear.unlocked"), Theme.Accent, 0.45f,
                         0.45f, order, new Vector2(0f, 0.2f), true);
                     Transform text = unlockedLabel.transform;
@@ -394,21 +391,21 @@ namespace ColorMinesweeper.Game
 
         void ShowGameOver()
         {
-            modal = UiKit.Modal.Open(transform, Ui, new Vector2(7.6f, 7f), ModalOrder);
+            modal = UiKit.Modal.Open(transform, Ui, new Vector2(7.8f, 7.6f), ModalOrder);
             modalClosable = false;
             Transform card = modal.Card;
             int order = ModalOrder + 10;
 
             Draw.Sprite(card, "Heart", Icons.Heart, Theme.Locked, order,
-                new Vector2(0f, 2.3f), new Vector2(1.1f, 1.1f));
-            Label.Create(card, "Title", Loc.T("over.title"), Theme.Ink, order, new Vector2(0f, 1.1f), 0.72f,
+                new Vector2(0f, 2.65f), new Vector2(1.1f, 1.1f));
+            Label.Create(card, "Title", Loc.T("over.title"), Theme.Ink, order, new Vector2(0f, 1.45f), 0.72f,
                 TextAnchor.MiddleCenter, true);
             Label.Create(card, "Body", Loc.F("over.body", PuzzleSession.ReviveLives),
-                Theme.SubInk, order, new Vector2(0f, 0.2f), 0.4f);
+                Theme.SubInk, order, new Vector2(0f, 0.6f), 0.38f);
 
             UiButton revive = null;
             revive = UiKit.Button(card, "Revive", Loc.T("over.revive"), Icons.Ad,
-                Theme.Accent, Color.white, new Vector2(6f, 1.35f), new Vector2(0f, -1.2f), order, () =>
+                Theme.Accent, Color.white, new Vector2(6f, 1.35f), new Vector2(0f, -0.95f), order, () =>
                 {
                     revive.Interactable = false;
                     Ads.ShowRewarded(rewarded =>
@@ -433,7 +430,7 @@ namespace ColorMinesweeper.Game
             revive.Interactable = Ads.Rewarded.IsReady;
 
             UiKit.Button(card, "Retry", Loc.T("over.retry"), Icons.Retry, Theme.HiddenTile,
-                Theme.Ink, new Vector2(6f, 1.1f), new Vector2(0f, -2.6f), order, () => App.ShowPlay(stage, stageIndex));
+                Theme.Ink, new Vector2(6f, 1.1f), new Vector2(0f, -2.5f), order, () => App.ShowPlay(stage, stageIndex));
         }
 
         void CloseModal()

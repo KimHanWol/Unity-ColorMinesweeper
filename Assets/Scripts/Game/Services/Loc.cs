@@ -109,8 +109,6 @@ namespace ColorMinesweeper.Game
             ["leave.stay"] = new[] { "계속하기", "Keep playing" },
             ["leave.leave"] = new[] { "나가기", "Leave" },
             ["clear.title"] = new[] { "{0} 완성!", "{0} complete!" },
-            ["clear.perfect"] = new[] { "실수 없이 풀었어요", "Solved without a mistake" },
-            ["clear.mistakes"] = new[] { "실수 {0}번", "Mistakes: {0}" },
             ["clear.unlocked"] = new[] { "다음 그림이 열렸어요!", "Next picture unlocked!" },
             ["clear.next"] = new[] { "다음 그림", "Next picture" },
             ["clear.list"] = new[] { "목록", "Stages" },
