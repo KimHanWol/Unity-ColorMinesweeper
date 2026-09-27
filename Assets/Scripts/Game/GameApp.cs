@@ -60,6 +60,10 @@ namespace ColorMinesweeper.Game
 
         void Start()
         {
+#if GOOGLE_MOBILE_ADS
+            // 광고 SDK 는 첫 화면을 띄우는 동안 뒤에서 준비한다. 준비되기 전에는 자리 표시 광고가 대신한다.
+            AdMobAds.Initialize();
+#endif
             if (TryStartPlaytest())
             {
                 return;
