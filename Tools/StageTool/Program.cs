@@ -91,6 +91,11 @@ static class Program
     /// <summary>앞 스테이지 점수가 눈에 띄게 높으면 순서가 뒤집힌 것(비슷한 점수끼리의 순서는 신경 쓰지 않는다).</summary>
     static bool IsOutOfOrder(Difficulty previous, Difficulty current)
     {
+        if (previous.PictureColors != current.PictureColors)
+        {
+            return previous.PictureColors > current.PictureColors;
+        }
+
         return previous.Total - current.Total > OrderTolerance;
     }
 
