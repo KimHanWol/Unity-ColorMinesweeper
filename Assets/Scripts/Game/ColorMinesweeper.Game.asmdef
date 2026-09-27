@@ -2,7 +2,8 @@
     "name": "ColorMinesweeper.Game",
     "rootNamespace": "ColorMinesweeper.Game",
     "references": [
-        "ColorMinesweeper.Core"
+        "ColorMinesweeper.Core",
+        "UnityEngine.UI"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

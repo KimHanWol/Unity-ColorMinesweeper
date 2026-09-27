@@ -21,6 +21,9 @@
   </ItemGroup>
   <ItemGroup>
     <Reference Include="$(UnityManaged)\UnityEngine\*.dll" Private="false" />
+    <!-- uGUI(패키지)는 Unity 가 컴파일해 둔 것을 쓴다. 에디터를 한 번 연 뒤에 생긴다. -->
+    <Reference Include="../../Library/ScriptAssemblies/UnityEngine.UI.dll" Private="false"
+               Condition="Exists('../../Library/ScriptAssemblies/UnityEngine.UI.dll')" />
   </ItemGroup>
   <ItemGroup Condition="'$(GmaPath)' == ''">
     <GmaDll Include="../../Library/PackageCache/com.google.ads.mobile*/GoogleMobileAds/*.dll" />

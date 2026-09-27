@@ -23,6 +23,9 @@ namespace ColorMinesweeper.Game
             }
 
             started = true;
+#if UNITY_EDITOR
+            EnsureEditorEventSystem();
+#endif
             // 광고 콜백을 Unity 메인 스레드에서 받는다(화면을 바꾸는 코드가 콜백에서 돈다).
             MobileAds.RaiseAdEventsOnUnityMainThread = true;
 
@@ -54,6 +57,26 @@ namespace ColorMinesweeper.Game
                 StartSdk();
             }
         }
+
+#if UNITY_EDITOR
+        /// <summary>
+        /// 에디터의 가짜 광고 화면은 Unity UI 버튼(닫기)으로 되어 있어 EventSystem 이 있어야 눌린다.
+        /// 게임은 UI 와 입력을 코드로 직접 처리해서 EventSystem 이 없으므로 에디터에서만 하나 만든다.
+        /// 기기에서는 광고 SDK 가 광고 화면을 직접 띄우고 닫으므로 필요 없다.
+        /// </summary>
+        static void EnsureEditorEventSystem()
+        {
+            if (UnityEngine.Object.FindFirstObjectByType<UnityEngine.EventSystems.EventSystem>() != null)
+            {
+                return;
+            }
+
+            var go = new GameObject("EventSystem (AdMob Editor)");
+            go.AddComponent<UnityEngine.EventSystems.EventSystem>();
+            go.AddComponent<UnityEngine.EventSystems.StandaloneInputModule>();
+            UnityEngine.Object.DontDestroyOnLoad(go);
+        }
+#endif
 
         static bool sdkStarted;
 
