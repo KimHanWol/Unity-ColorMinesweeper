@@ -180,10 +180,11 @@ namespace ColorMinesweeper.Core
                 if (!(logicValue is string logic) || (logic != "basic" && logic != "medium" && logic != "full"))
                 {
                     throw new StageFormatException(
-                        "logic 은 \"basic\"(순서대로), \"medium\"(제외 기억까지), \"full\"(조합까지) 중 하나여야 합니다");
+                        "logic 은 \"basic\"(순서대로만) 또는 \"full\"(같은 색 두 단서 비교까지)이어야 합니다");
                 }
 
-                stage.Logic = logic == "basic" ? Technique.Direct : logic == "medium" ? Technique.Single : Technique.Pair;
+                // medium 은 예전(여러 색을 함께 보던) 규칙의 값이다. 지금은 full 과 같게 읽는다.
+                stage.Logic = logic == "basic" ? Technique.Direct : Technique.Pair;
             }
 
             return stage;
@@ -195,9 +196,9 @@ namespace ColorMinesweeper.Core
             sb.Append("{\n");
             sb.Append("  \"id\": ").Append(MiniJson.Quote(stage.Id)).Append(",\n");
             sb.Append("  \"name\": ").Append(MiniJson.Quote(stage.Name)).Append(",\n");
-            if (stage.Logic != Technique.Pair)
+            if (stage.Logic == Technique.Direct)
             {
-                sb.Append("  \"logic\": ").Append(stage.Logic == Technique.Direct ? "\"basic\"" : "\"medium\"").Append(",\n");
+                sb.Append("  \"logic\": \"basic\",\n");
             }
 
             sb.Append("  \"background\": ")

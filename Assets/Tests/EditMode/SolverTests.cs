@@ -66,7 +66,7 @@ namespace ColorMinesweeper.Tests
                 "A.A",
                 "AAA");
 
-            SolveResult result = new Solver(stage, Technique.Single).Solve(new[] { 4 });
+            SolveResult result = new Solver(stage, Technique.Direct).Solve(new[] { 4 });
 
             Assert.IsTrue(result.Solved);
             Assert.IsFalse(result.UsedPair);
@@ -81,7 +81,7 @@ namespace ColorMinesweeper.Tests
                 "...");
 
             var givens = new[] { 3, 4 };
-            SolveResult single = new Solver(stage, Technique.Single).Solve(givens);
+            SolveResult single = new Solver(stage, Technique.Direct).Solve(givens);
             SolveResult pair = new Solver(stage, Technique.Pair).Solve(givens);
 
             Assert.IsFalse(single.Solved);
@@ -116,6 +116,24 @@ namespace ColorMinesweeper.Tests
             List<int> next = new Solver(stage).NextDeductions(revealed);
 
             Assert.AreEqual(8, next.Count);
+        }
+
+        [Test]
+        public void HintExplainsWhichClueProvesTheCells()
+        {
+            Stage stage = Make(
+                "AAA",
+                "A.A",
+                "AAA");
+            var revealed = new bool[stage.CellCount];
+            revealed[4] = true;
+
+            Deduction hint = new Solver(stage).Hint(revealed, 1);
+
+            Assert.AreEqual(Technique.Direct, hint.Technique);
+            Assert.AreEqual(4, hint.Clue);
+            Assert.AreEqual(8, hint.Cells.Count);
+            Assert.IsNull(new Solver(stage).Hint(revealed, 0), "배경은 남은 칸이 없어 힌트가 없다");
         }
 
         [Test]

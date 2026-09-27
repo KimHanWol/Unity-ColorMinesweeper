@@ -20,7 +20,7 @@ namespace ColorMinesweeper.Core
         /// 필요한 추론 단계마다 더하는 점수. 순서대로 풀리는 판이 대체로 앞에 오되, 색이 아주 많거나 큰 판까지
         /// 무조건 앞에 오지는 않도록 한 줄 점수로 합친다(초반은 색이 적고 작은 그림이 먼저 나와야 한다).
         /// </summary>
-        static readonly float[] TechniquePenalty = { 0f, 8f, 20f };
+        static readonly float[] TechniquePenalty = { 0f, 15f };
 
         public readonly Technique Hardest;
 
@@ -29,7 +29,7 @@ namespace ColorMinesweeper.Core
 
         /// <summary>
         /// 단계 하나하나의 수고를 더한 값.
-        /// - 순서대로 1, 제외 기억 2, 조합 4(경우의 수를 머릿속으로 따져야 한다).
+        /// - 순서대로 1, 같은 색 두 단서 비교 4(겹치는 칸의 경우의 수를 머릿속으로 따져야 한다).
         /// - 그 순간 확정할 수 있는 칸이 1~2개뿐이면 1.5배(어디를 봐야 할지 찾기 어렵다). 6개 이상이면 0.7배.
         /// - 판이 크면 훑어볼 칸이 많고, 색이 많으면 칩마다 읽을 숫자가 늘어서 크게 더한다.
         ///   초반은 색이 적고 작은 그림부터 나오게 하려고 이 두 항의 비중을 일부러 높였다.
@@ -62,7 +62,7 @@ namespace ColorMinesweeper.Core
             int pairSteps = 0;
             foreach (SolveStep step in result.Steps)
             {
-                float cost = step.Needed == Technique.Pair ? 4f : step.Needed == Technique.Single ? 2f : 1f;
+                float cost = step.Needed == Technique.Pair ? 4f : 1f;
                 if (step.Options <= 2)
                 {
                     cost *= 1.5f;
@@ -97,7 +97,7 @@ namespace ColorMinesweeper.Core
 
         public override string ToString()
         {
-            string technique = Hardest == Technique.Direct ? "순서대로" : Hardest == Technique.Single ? "제외 기억" : "조합 " + PairSteps + "번";
+            string technique = Hardest == Technique.Direct ? "순서대로" : "두 단서 비교 " + PairSteps + "번";
             return TierName + " " + Total.ToString("0.0") + "점(" + technique + ", " + Steps + "단계)";
         }
     }

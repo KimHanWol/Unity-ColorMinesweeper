@@ -26,7 +26,7 @@ namespace ColorMinesweeper.Tests
 
             revealed[21] = revealed[22] = revealed[23] = false;
 
-            List<int> next = new Solver(stage, Technique.Single).NextDeductions(revealed);
+            List<int> next = new Solver(stage, Technique.Direct).NextDeductions(revealed);
 
             CollectionAssert.Contains(next, 21);
             CollectionAssert.Contains(next, 23);
