@@ -12,7 +12,7 @@ namespace ColorMinesweeper.Game
     public static class AdMobConfig
     {
         // 실제 ID (AdMob → 앱 → 광고 단위). 비어 있으면 테스트 ID로 돈다.
-        public const string AndroidAppId = "";
+        public const string AndroidAppId = "ca-app-pub-7890402400874906~1143647502";
         const string AndroidRevive = "";
         const string AndroidHint = "";
         const string AndroidInterstitial = "";
