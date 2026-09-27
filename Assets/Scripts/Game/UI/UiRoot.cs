@@ -30,6 +30,9 @@ namespace ColorMinesweeper.Game
             camera.nearClipPlane = 0.1f;
             camera.farClipPlane = 100f;
 
+            // 씬에 카메라를 두지 않고 코드로 만들므로, 소리를 들을 귀도 늘 있는 UI 카메라에 단다.
+            go.AddComponent<AudioListener>();
+
             var root = go.AddComponent<UiRoot>();
             root.Camera = camera;
             root.Refresh();
