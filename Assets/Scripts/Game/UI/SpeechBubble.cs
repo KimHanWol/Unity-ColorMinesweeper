@@ -6,7 +6,7 @@ namespace ColorMinesweeper.Game
     /// <summary>
     /// 튜토리얼 말풍선. 굵은 한 줄(결론)과 옅은 설명 한두 줄로 짧게 보여 준다. 필요하면 "다음" 버튼을 둔다.
     /// 판과 팔레트 사이의 비워 둔 자리에 떠서, 꼬리로 짚는 곳(판의 3x3 또는 팔레트 색)을 가리킨다.
-    /// 판 위에 뜨면 짚는 칸을 가렸고, 화면 맨 위에 두면 위아래를 번갈아 봐야 했다. 글자는 말풍선 폭에 맞춰 단어 단위로 줄을 바꾸고,
+    /// 아래에 두면 짚는 칸을 가릴 때만 화면 위쪽으로 올린다. 팔레트는 어떤 경우에도 가리지 않는다. 글자는 말풍선 폭에 맞춰 단어 단위로 줄을 바꾸고,
     /// 실제로 그려진 글자 영역을 재서 위아래 여백을 맞춘다(동글은 폰트 줄 높이가 글자보다 훨씬 크다).
     /// </summary>
     public sealed class SpeechBubble : MonoBehaviour
@@ -135,17 +135,29 @@ namespace ColorMinesweeper.Game
         }
 
         /// <summary>
-        /// 말풍선은 판 바로 아래, 팔레트 바로 위의 고정된 자리(<see cref="DockHeight"/>)에 둔다. 판은 이 자리를 비워 두고
-        /// 그려지므로 말풍선이 짚는 칸을 가리지 않는다. 꼬리는 짚는 곳 쪽(위: 판, 아래: 팔레트)을 향한다.
-        /// 루트의 로컬 y=0 이 말풍선 윗변이다.
+        /// 기본은 판 아래: 말풍선 아랫변을 팔레트 바로 위에 고정하고 위로 늘인다(팔레트를 가리지 않는다).
+        /// 그렇게 두면 짚는 곳(판의 3x3)을 가리게 될 때만 화면 위쪽(HUD 바로 아래)으로 올린다.
+        /// 꼬리는 짚는 곳 쪽을 향한다. 루트의 로컬 y=0 이 말풍선 윗변이다.
         /// </summary>
         void Place()
         {
+            const float margin = 0.15f;
             float floor = safe.yMin + PaletteBar.BarHeight + 0.2f;
-            float top = floor + DockHeight;
+            float ceiling = safe.yMax - Hud.BarHeight - 0.1f;
             float x = safe.center.x;
-            transform.localPosition = new Vector3(x, top, 0f);
+            float top = floor + height;
 
+            if (anchored)
+            {
+                bool bottomCovers = anchor.yMin < floor + height + margin && anchor.yMax > floor;
+                bool topCovers = anchor.yMax > ceiling - height - margin;
+                if (bottomCovers && !topCovers)
+                {
+                    top = ceiling;
+                }
+            }
+
+            transform.localPosition = new Vector3(x, top, 0f);
             if (!anchored)
             {
                 tail.gameObject.SetActive(false);
