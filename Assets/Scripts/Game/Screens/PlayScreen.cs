@@ -226,7 +226,7 @@ namespace ColorMinesweeper.Game
                 return;
             }
 
-            if (tutorial != null && !tutorial.AllowPaint(cell))
+            if (tutorial != null && !tutorial.AllowPaint(cell, color))
             {
                 return;
             }

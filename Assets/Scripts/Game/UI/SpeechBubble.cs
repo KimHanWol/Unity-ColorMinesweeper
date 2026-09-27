@@ -22,6 +22,7 @@ namespace ColorMinesweeper.Game
 
         Label headline;
         Label body;
+        Label action;
         Transform nextButton;
         SpriteRenderer face;
         SpriteRenderer shadow;
@@ -48,6 +49,8 @@ namespace ColorMinesweeper.Game
                 TextAnchor.UpperLeft, true);
             bubble.body = Label.Create(root, "Body", string.Empty, Theme.SubInk, Order + 2, Vector2.zero, 0.4f,
                 TextAnchor.UpperLeft);
+            bubble.action = Label.Create(root, "Action", string.Empty, Theme.Accent, Order + 2, Vector2.zero, 0.42f,
+                TextAnchor.UpperLeft, true);
             bubble.nextButton = UiKit.Button(root, "Next", "다음", null, Theme.Accent, Color.white, new Vector2(2.2f, 0.8f),
                 Vector2.zero, Order + 3, () => bubble.onNext?.Invoke()).transform;
             root.gameObject.SetActive(false);
@@ -58,7 +61,8 @@ namespace ColorMinesweeper.Game
         /// title 은 굵은 결론 한 줄, detail 은 옅은 설명(없어도 된다). next 가 있으면 "다음" 버튼을 띄우고,
         /// 없으면 플레이어의 행동을 기다린다.
         /// </summary>
-        public void Show(string title, string detail = null, Action next = null)
+        /// <param name="todo">할 일 한 줄(보라색). 판을 눌러야 넘어가는 단계에서 무엇을 하면 되는지 따로 보여 준다.</param>
+        public void Show(string title, string detail = null, Action next = null, string todo = null)
         {
             gameObject.SetActive(true);
             onNext = next;
@@ -68,6 +72,9 @@ namespace ColorMinesweeper.Game
             headline.SetWrappedText(title, width - Padding * 2f);
             body.SetWrappedText(detail ?? string.Empty, width - Padding * 2f);
             body.gameObject.SetActive(!string.IsNullOrEmpty(detail));
+            action.transform.localPosition = Vector3.zero;
+            action.SetWrappedText(todo ?? string.Empty, width - Padding * 2f);
+            action.gameObject.SetActive(!string.IsNullOrEmpty(todo));
 
             Relayout();
             // TextMesh 가 글자 영역을 다음 프레임에 갱신하는 경우가 있어 한 번 더 잰다.
@@ -92,6 +99,11 @@ namespace ColorMinesweeper.Game
             if (body.gameObject.activeSelf)
             {
                 y = Place(body, left, y - LineGap);
+            }
+
+            if (action.gameObject.activeSelf)
+            {
+                y = Place(action, left, y - LineGap * 2f);
             }
 
             bool hasButton = nextButton.gameObject.activeSelf;
@@ -161,6 +173,32 @@ namespace ColorMinesweeper.Game
 
             label.transform.localPosition = new Vector3(left, top - glyphTop, 0f);
             return top - (glyphTop - glyphBottom);
+        }
+
+        /// <summary>할 일 줄만 바꾼다(여러 칸 중 일부를 칠했을 때 남은 수를 알려 줄 때).</summary>
+        public void SetTodo(string todo)
+        {
+            action.SetWrappedText(todo, width - Padding * 2f);
+            action.gameObject.SetActive(true);
+            Relayout();
+            Tween.Delay(this, 0.02f, Relayout);
+        }
+
+        /// <summary>엉뚱한 곳을 눌렀을 때: 말풍선이 살짝 흔들리고 할 일 줄이 톡 커진다.</summary>
+        public void Nudge()
+        {
+            Transform t = transform;
+            Vector3 rest = t.localPosition;
+            Tween.Run(t, 0.35f, k => t.localPosition = rest + new Vector3(Mathf.Sin(k * Mathf.PI * 5f) * 0.12f * (1f - k), 0f, 0f),
+                Ease.Linear, 0f, () => t.localPosition = rest);
+            if (action.gameObject.activeSelf)
+            {
+                Transform a = action.transform;
+                Vector3 scale = a.localScale;
+                Tween.Kill(a);
+                Tween.Run(a, 0.4f, k => a.localScale = scale * (1f + 0.12f * Ease.Pulse(k)), Ease.Linear, 0f,
+                    () => a.localScale = scale);
+            }
         }
 
         public void Hide()

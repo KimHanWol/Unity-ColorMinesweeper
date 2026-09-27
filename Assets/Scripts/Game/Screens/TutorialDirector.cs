@@ -60,6 +60,8 @@ namespace ColorMinesweeper.Game
         int guidedDone;
         bool backgroundTaught;
         readonly HashSet<int> allowed = new HashSet<int>();
+        Deduction current;
+        string currentColorName;
         readonly List<Transform> marks = new List<Transform>();
 
         /// <summary>칠할 칸마다의 분홍 테두리. 칠하면 그 칸 테두리만 지운다.</summary>
@@ -185,12 +187,15 @@ namespace ColorMinesweeper.Game
 
             allowed.Clear();
             allowed.UnionWith(hint.Cells);
+            current = hint;
+            currentColorName = colorName;
             phase = Phase.WaitPaint;
             AnchorArea(hint.Clue);
             if (guidedDone == 1 && !background)
             {
                 // 두 번째는 근거만 비추고, 칠할 칸은 스스로 찾게 한다.
-                bubble.Show("이번엔 직접 찾아봐요", "가운데 숫자만큼 " + colorName + "이 있어야 해요. 체크한 칸을 빼고 남은 곳을 눌러요.");
+                bubble.Show("이번엔 직접 찾아봐요", "가운데 숫자만큼 " + colorName + "이 있어야 해요. 체크한 칸을 빼면 어디가 남을까요?",
+                    null, "찾은 칸을 눌러서 " + colorName + "으로 칠해 보세요");
                 return;
             }
 
@@ -199,8 +204,7 @@ namespace ColorMinesweeper.Game
                 targetMarks[cell] = MarkTarget(cell);
             }
 
-            // 굵은 줄은 할 일, 옅은 줄은 이유. "배경으로", "이 색으로" 모두 받침이 있어 "으로".
-            // 굵은 줄은 결론, 옅은 줄은 세는 순서. 색 이름은 모두 받침이 있어 "이", "이에요" 를 쓴다.
+            // 굵은 줄은 결론, 옅은 줄은 세는 순서, 보라 줄은 할 일. 색 이름은 모두 받침이 있어 "이", "으로" 를 쓴다.
             string title = hidden == 1
                 ? "여기가 " + colorName + "이에요!"
                 : "여기 " + hidden + "칸은 모두 " + colorName + "이에요!";
@@ -208,7 +212,7 @@ namespace ColorMinesweeper.Game
             string detail = opened == 0
                 ? need + "아직 하나도 안 보이는데, 가려진 칸은 딱 " + hidden + "칸뿐이죠!"
                 : need + "체크한 " + opened + "칸은 이미 보이고, 나머지 " + (total - opened) + "칸이 들어갈 곳은 가려진 " + hidden + "칸뿐이죠!";
-            bubble.Show(title, detail);
+            bubble.Show(title, detail, null, hidden == 1 ? "반짝이는 칸을 눌러서 칠해 보세요" : "반짝이는 칸을 모두 눌러서 칠해 보세요");
         }
 
         void StartFreePlay()
@@ -261,10 +265,44 @@ namespace ColorMinesweeper.Game
             }
         }
 
-        /// <summary>짚어 주는 중에는 짚은 칸만, 혼자 하는 동안에는 어디든 칠할 수 있다.</summary>
-        public bool AllowPaint(int cell)
+        /// <summary>
+        /// 짚어 주는 중에는 짚은 칸을 짚은 색으로만, 혼자 하는 동안에는 어디든 칠할 수 있다.
+        /// 막을 때는 조용히 무시하지 않고 무엇을 하면 되는지 다시 알려 준다(다른 색이면 그 색부터 고르게 한다).
+        /// </summary>
+        public bool AllowPaint(int cell, int color)
         {
-            return phase == Phase.Free || (phase == Phase.WaitPaint && allowed.Contains(cell));
+            if (phase == Phase.Free)
+            {
+                return true;
+            }
+
+            if (phase == Phase.WaitColor)
+            {
+                // 색을 골라야 하는데 판을 눌렀다: 말풍선을 흔들어 색부터 고르라고 알려 준다.
+                bubble.Nudge();
+                return false;
+            }
+
+            if (phase != Phase.WaitPaint || current == null)
+            {
+                return false;
+            }
+
+            if (color != current.Color)
+            {
+                MarkSwatch(current.Color);
+                bubble.SetTodo("먼저 아래에서 " + currentColorName + "을 골라요");
+                bubble.Nudge();
+                return false;
+            }
+
+            if (!allowed.Contains(cell))
+            {
+                bubble.Nudge();
+                return false;
+            }
+
+            return true;
         }
 
         public void OnPainted(int cell, int color)
@@ -283,12 +321,19 @@ namespace ColorMinesweeper.Game
             targetMarks.Remove(cell);
 
             // 짚어 준 칸을 전부 칠해야 넘어간다(펼침으로 같이 열린 칸도 칠한 것으로 친다).
+            int left = 0;
             foreach (int target in allowed)
             {
                 if (!play.Session.IsRevealed(target))
                 {
-                    return;
+                    left++;
                 }
+            }
+
+            if (left > 0)
+            {
+                bubble.SetTodo("좋아요! 남은 " + left + "칸도 칠해 보세요");
+                return;
             }
 
             if (color == play.Stage.BackgroundColor)
