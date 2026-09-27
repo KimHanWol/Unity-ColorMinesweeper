@@ -4,9 +4,18 @@ using UnityEngine;
 
 namespace ColorMinesweeper.Game
 {
+    /// <summary>보상형 광고를 보여 주는 자리. 자리마다 광고 단위를 따로 써서 어디서 얼마 버는지 나눠 본다.</summary>
+    public enum RewardedPlacement
+    {
+        /// <summary>목숨을 다 잃었을 때 이어 하기.</summary>
+        Revive,
+
+        /// <summary>힌트를 다 썼을 때 힌트 받기.</summary>
+        Hint,
+    }
+
     /// <summary>
     /// 보상형 광고. 게임 코드는 이 인터페이스만 알고, 실제 SDK(AdMob 등)는 구현체를 바꿔 끼운다.
-    /// 자리: 목숨을 다 잃었을 때 광고 보고 이어 하기.
     /// </summary>
     public interface IRewardedAds
     {
@@ -31,7 +40,25 @@ namespace ColorMinesweeper.Game
         const string CompletionsKey = "ads.lifetimeCompletions";
         const string RemoveAdsKey = "iap.removeAds";
 
-        public static IRewardedAds Rewarded { get; set; } = new PlaceholderRewardedAds();
+        static readonly System.Collections.Generic.Dictionary<RewardedPlacement, IRewardedAds> rewarded =
+            new System.Collections.Generic.Dictionary<RewardedPlacement, IRewardedAds>();
+
+        /// <summary>자리의 보상형 광고. 따로 넣지 않았으면 자리 표시 광고를 쓴다.</summary>
+        public static IRewardedAds Rewarded(RewardedPlacement placement)
+        {
+            if (!rewarded.TryGetValue(placement, out IRewardedAds ads))
+            {
+                ads = new PlaceholderRewardedAds();
+                rewarded[placement] = ads;
+            }
+
+            return ads;
+        }
+
+        public static void SetRewarded(RewardedPlacement placement, IRewardedAds ads)
+        {
+            rewarded[placement] = ads;
+        }
         public static IInterstitialAds Interstitial { get; set; } = new PlaceholderInterstitialAds();
 
         static AdPacing pacing;
@@ -79,10 +106,10 @@ namespace ColorMinesweeper.Game
         }
 
         /// <summary>보상형 광고를 보여 주고, 끝까지 봤으면 빈도 기록에 남긴다.</summary>
-        public static void ShowRewarded(Action<bool> onFinished)
+        public static void ShowRewarded(RewardedPlacement placement, Action<bool> onFinished)
         {
             Music.Duck(true);
-            Rewarded.Show(rewarded =>
+            Rewarded(placement).Show(rewarded =>
             {
                 Music.Duck(false);
                 if (rewarded)

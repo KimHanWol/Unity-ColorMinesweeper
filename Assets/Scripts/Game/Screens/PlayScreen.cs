@@ -408,7 +408,7 @@ namespace ColorMinesweeper.Game
                 UiKit.ModalButtonSize, new Vector2(0f, -1.0f), order, () =>
                 {
                     watch.Interactable = false;
-                    Ads.ShowRewarded(rewarded =>
+                    Ads.ShowRewarded(RewardedPlacement.Hint, rewarded =>
                     {
                         if (this == null)
                         {
@@ -427,7 +427,7 @@ namespace ColorMinesweeper.Game
                         SetHintMode(true);
                     });
                 });
-            watch.Interactable = Ads.Rewarded.IsReady;
+            watch.Interactable = Ads.Rewarded(RewardedPlacement.Hint).IsReady;
 
             UiKit.Button(card, "Close", Loc.T("common.close"), null, Theme.HiddenTile, Theme.Ink, UiKit.ModalButtonSize,
                 new Vector2(0f, -2.55f), order, CloseModal);
@@ -569,7 +569,7 @@ namespace ColorMinesweeper.Game
                 Theme.Accent, Color.white, UiKit.ModalButtonSize, new Vector2(0f, -0.95f), order, () =>
                 {
                     revive.Interactable = false;
-                    Ads.ShowRewarded(rewarded =>
+                    Ads.ShowRewarded(RewardedPlacement.Revive, rewarded =>
                     {
                         if (this == null)
                         {
@@ -588,7 +588,7 @@ namespace ColorMinesweeper.Game
                         CloseModal();
                     });
                 });
-            revive.Interactable = Ads.Rewarded.IsReady;
+            revive.Interactable = Ads.Rewarded(RewardedPlacement.Revive).IsReady;
 
             UiKit.Button(card, "Retry", Loc.T("over.retry"), Icons.Retry, Theme.HiddenTile,
                 Theme.Ink, UiKit.ModalButtonSize, new Vector2(0f, -2.5f), order, () => App.ShowPlay(stage, stageIndex));
