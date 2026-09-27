@@ -21,7 +21,11 @@ namespace ColorMinesweeper.Game
         Transform top;
         Transform bottom;
         UiKit.Modal modal;
+
+        /// <summary>뒤로 가기로 닫아도 되는 창(설정, 나가기 확인)인지. 게임 오버 창은 뒤로 가기로 닫지 않는다.</summary>
+        bool modalClosable;
         bool busy;
+        int initialRevealed;
 
         /// <summary>index 가 -1 이면 에디터에서 띄운 시험 플레이라 진행을 저장하지 않는다.</summary>
         public void Setup(Stage stageToPlay, int index)
@@ -33,6 +37,7 @@ namespace ColorMinesweeper.Game
         protected override void Build()
         {
             session = new PuzzleSession(stage, StageCatalog.GivensFor(stage));
+            initialRevealed = session.RevealedCount;
             board = BoardView.Create(World, stage);
 
             top = Draw.Node(transform, "Top");
@@ -59,7 +64,46 @@ namespace ColorMinesweeper.Game
 
         public override void OnBack()
         {
-            App.ShowSelect();
+            if (session.IsCleared)
+            {
+                App.ShowSelect();
+                return;
+            }
+
+            if (modal != null)
+            {
+                if (modalClosable)
+                {
+                    CloseModal();
+                }
+
+                return;
+            }
+
+            bool played = session.RevealedCount > initialRevealed || session.Mistakes > 0;
+            if (!played)
+            {
+                App.ShowSelect();
+                return;
+            }
+
+            ConfirmLeave();
+        }
+
+        /// <summary>판 도중에는 저장하지 않으므로, 나가기 전에 진행 상황이 사라진다는 것을 알린다.</summary>
+        void ConfirmLeave()
+        {
+            modal = UiKit.Modal.Open(transform, Ui, new Vector2(7.6f, 6.2f), ModalOrder);
+            modalClosable = true;
+            Transform card = modal.Card;
+            int order = ModalOrder + 10;
+            Label.Create(card, "Title", "그만할까요?", Theme.Ink, order, new Vector2(0f, 2.1f), 0.72f, TextAnchor.MiddleCenter, true);
+            Label.Create(card, "Body", "지금 나가면 이 그림의 진행 상황은\n저장되지 않아요. 다음에 처음부터 풀어요.", Theme.SubInk,
+                order, new Vector2(0f, 0.85f), 0.4f);
+            UiKit.Button(card, "Stay", "계속하기", null, Theme.Accent, Color.white, new Vector2(6f, 1.3f), new Vector2(0f, -0.75f),
+                order, CloseModal);
+            UiKit.Button(card, "Leave", "나가기", null, Theme.HiddenTile, Theme.Ink, new Vector2(6f, 1.1f),
+                new Vector2(0f, -2.15f), order, () => App.ShowSelect());
         }
 
         void OnSettingsChanged()
@@ -75,6 +119,7 @@ namespace ColorMinesweeper.Game
             }
 
             modal = SettingsPanel.Open(transform, Ui, ModalOrder, () => modal = null);
+            modalClosable = true;
         }
 
         /// <summary>남은 칸이 있는 색 중 배경이 아닌 첫 색. 그림 색부터 칠하는 게 더 재미있다.</summary>
@@ -225,6 +270,7 @@ namespace ColorMinesweeper.Game
         void ShowGameOver()
         {
             modal = UiKit.Modal.Open(transform, Ui, new Vector2(7.6f, 7f), ModalOrder);
+            modalClosable = false;
             Transform card = modal.Card;
             int order = ModalOrder + 10;
 
