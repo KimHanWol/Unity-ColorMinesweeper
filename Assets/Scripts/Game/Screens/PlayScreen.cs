@@ -458,8 +458,8 @@ namespace ColorMinesweeper.Game
             {
                 bool earned = i < stars;
                 SpriteRenderer s = Draw.Sprite(card, "Star" + i, star, earned ? Theme.Gold : Theme.Locked, order,
-                    new Vector2((i - 1) * 1.35f, 1.35f + (i == 1 ? 0.2f : 0f)), Vector2.zero);
-                float size = i == 1 ? 1.2f : 1f;
+                    new Vector2((i - 1) * 1.9f, 1.2f + (i == 1 ? 0.2f : 0f)), Vector2.zero);
+                float size = i == 1 ? 1.8f : 1.5f;
                 int index = i;
                 Tween.Run(s, 0.45f, t => s.transform.localScale = new Vector3(size * t, size * t, 1f), Ease.OutBack,
                     0.25f + i * 0.15f);
@@ -476,7 +476,7 @@ namespace ColorMinesweeper.Game
                 {
                     Sfx.Instance?.Unlock();
                     Label unlockedLabel = UiKit.IconLabel(card, Icons.Lock, Theme.Accent, Loc.T("clear.unlocked"), Theme.Accent, 0.45f,
-                        0.45f, order, new Vector2(0f, 0.2f), true);
+                        0.45f, order, new Vector2(0f, 0f), true);
                     Transform text = unlockedLabel.transform;
                     Vector3 rest = text.localScale;
                     Tween.Run(text, 0.4f, k => text.localScale = rest * Mathf.LerpUnclamped(0.6f, 1f, k), Ease.OutBack);
