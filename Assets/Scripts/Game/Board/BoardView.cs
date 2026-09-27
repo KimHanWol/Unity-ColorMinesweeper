@@ -119,6 +119,13 @@ namespace ColorMinesweeper.Game
                 }
             }
 
+            // 넣어 둔 소리 파일이 있으면 빈 구역이 펼쳐질 때 그 소리를 한 번 튼다.
+            if (maxDepth > 0 && Sfx.Instance != null && Sfx.Instance.HasAreaClip)
+            {
+                Tween.Delay(this, startDelay, () => Sfx.Instance?.AreaReveal());
+                return maxDepth * RevealStepDelay + 0.45f;
+            }
+
             // 펼침 깊이마다 음이 한 칸씩 올라간다. 너무 많으면 시끄러우니 8단까지만.
             int steps = Mathf.Min(maxDepth, 8);
             for (int d = 0; d <= steps; d++)

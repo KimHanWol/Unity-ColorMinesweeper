@@ -36,6 +36,12 @@ namespace ColorMinesweeper.Game
         AudioClip unlock;
         AudioClip locked;
 
+        /// <summary>빈 구역이 한꺼번에 열릴 때의 소리 파일(Resources/Sounds/area). 없으면 마림바가 굴러가는 소리로 대신한다.</summary>
+        AudioClip area;
+
+        /// <summary>넣어 둔 소리 파일이 있으면 true. 펼침 소리를 파일 한 번으로 바꾼다.</summary>
+        public bool HasAreaClip => area != null;
+
         float lastReveal = -10f;
         int combo;
 
@@ -50,6 +56,7 @@ namespace ColorMinesweeper.Game
         {
             source = gameObject.AddComponent<AudioSource>();
             source.playOnAwake = false;
+            area = Resources.Load<AudioClip>("Sounds/area");
 
             float[] scale = SoundSynth.Pentatonic;
             reveal = new AudioClip[scale.Length];
@@ -152,6 +159,9 @@ namespace ColorMinesweeper.Game
 
             Play(reveal[Mathf.Clamp(combo + step, 0, reveal.Length - 1)], 1f);
         }
+
+        /// <summary>빈 구역이 한꺼번에 열릴 때 한 번 튼다(소리 파일이 있을 때).</summary>
+        public void AreaReveal() => Play(area, 1f);
 
         /// <summary>예전 이름. 펼침 소리.</summary>
         public void Pop(int step) => Reveal(step);
