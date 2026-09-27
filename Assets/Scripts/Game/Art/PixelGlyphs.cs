@@ -135,6 +135,17 @@ namespace ColorMinesweeper.Game
             "...#.....",
         };
 
+        /// <summary>공유(점 셋을 잇는 모양). 아이콘 파일이 없을 때 쓴다.</summary>
+        public static readonly string[] Share =
+        {
+            ".....##",
+            "...##.#",
+            "##.#.##",
+            "##.....",
+            "...#.##",
+            ".....##",
+        };
+
         /// <summary>아래를 가리키는 화살표. 튜토리얼에서 누를 곳을 짚는다.</summary>
         public static readonly string[] Pointer =
         {

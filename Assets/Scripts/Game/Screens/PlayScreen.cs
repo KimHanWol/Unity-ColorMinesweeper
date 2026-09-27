@@ -351,14 +351,29 @@ namespace ColorMinesweeper.Game
             }
 
             bool hasNext = stageIndex >= 0 && stageIndex + 1 < StageCatalog.All.Count;
+            Transform next = null;
             if (hasNext)
             {
-                UiKit.Button(card, "Next", Loc.T("clear.next"), Icons.Play, Theme.Accent,
-                    Color.white, new Vector2(5.6f, 1.35f), new Vector2(0f, -1.6f), order, () => Ads.AfterStage(() => App.ShowPlay(stageIndex + 1)));
+                next = UiKit.Button(card, "Next", Loc.T("clear.next"), Icons.Play, Theme.Accent,
+                    Color.white, new Vector2(5.6f, 1.35f), new Vector2(0f, -1.6f), order,
+                    () => Ads.AfterStage(() => App.ShowPlay(stageIndex + 1))).transform;
             }
 
-            UiKit.Button(card, "List", Loc.T("clear.list"), null, Theme.HiddenTile, Theme.Ink, new Vector2(5.6f, 1.1f),
-                new Vector2(0f, hasNext ? -3.0f : -1.6f), order, () => Ads.AfterStage(App.ShowSelect));
+            // 목록과 공유는 한 줄에 반씩 둔다.
+            float rowY = hasNext ? -3.0f : -1.6f;
+            var half = new Vector2(2.7f, 1.1f);
+            Transform list = UiKit.Button(card, "List", Loc.T("clear.list"), null, Theme.HiddenTile, Theme.Ink, half,
+                new Vector2(-1.45f, rowY), order, () => Ads.AfterStage(App.ShowSelect)).transform;
+            Transform share = null;
+            share = UiKit.Button(card, "Share", Loc.T("clear.share"), Icons.Share, Theme.HiddenTile, Theme.Ink, half,
+                new Vector2(1.45f, rowY), order, () => Share.Screen(this, new[] { next, list, share }, ShareText(stars))).transform;
+        }
+
+        /// <summary>공유할 때 이미지와 함께 보내는 문구. 번호, 이름, 별.</summary>
+        string ShareText(int stars)
+        {
+            string starText = new string('★', stars) + new string('☆', 3 - stars);
+            return Loc.F("clear.shareText", stageIndex + 1, StageTitle.Name(stage), starText);
         }
 
         /// <summary>튜토리얼을 끝내면 이름 공개를 한 번 더 짚어 주고 메인 화면으로 보낸다.</summary>

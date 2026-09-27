@@ -114,6 +114,8 @@ namespace ColorMinesweeper.Game
             ["clear.unlocked"] = new[] { "다음 그림이 열렸어요!", "Next picture unlocked!" },
             ["clear.next"] = new[] { "다음 그림", "Next picture" },
             ["clear.list"] = new[] { "목록", "Stages" },
+            ["clear.share"] = new[] { "공유", "Share" },
+            ["clear.shareText"] = new[] { "Color Minesweeper {0}번 그림 「{1}」 완성! {2}", "I finished picture #{0} \"{1}\" in Color Minesweeper! {2}" },
             ["over.title"] = new[] { "목숨을 다 썼어요", "Out of hearts" },
             ["over.body"] = new[] { "광고를 보면 목숨 {0}개로 이어서 할 수 있어요", "Watch an ad to keep going with {0} heart" },
             ["over.revive"] = new[] { "광고 보고 이어 하기", "Watch ad to continue" },
