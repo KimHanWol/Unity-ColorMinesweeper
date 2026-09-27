@@ -30,6 +30,15 @@ namespace ColorMinesweeper.Game
         /// <summary>이번 완성으로 다음 스테이지가 새로 열렸는지(결과 창에서 잠금 해제를 알린다).</summary>
         bool unlockedNext;
         TutorialDirector tutorial;
+
+        /// <summary>광고 한 번에 받는 힌트 수.</summary>
+        const int HintsPerAd = 3;
+
+        HintButton hintButton;
+        Transform hintPrompt;
+
+        /// <summary>힌트 버튼을 누르고 칸을 고르는 중인지. 이때 누른 칸은 정답 색으로 열린다.</summary>
+        bool hintMode;
         SpeechBubble bubble;
 
         public Stage Stage => stage;
@@ -84,6 +93,11 @@ namespace ColorMinesweeper.Game
                 bubble = SpeechBubble.Create(transform, Ui);
             }
             palette = PaletteBar.Create(bottom, Ui, stage, OnSelectColor);
+            if (tutorial == null)
+            {
+                BuildHint();
+            }
+
             Layout();
 
             hud.SetLives(session.Lives, false);
@@ -111,6 +125,12 @@ namespace ColorMinesweeper.Game
             if (session.IsCleared)
             {
                 App.ShowSelect();
+                return;
+            }
+
+            if (hintMode)
+            {
+                SetHintMode(false);
                 return;
             }
 
@@ -211,6 +231,17 @@ namespace ColorMinesweeper.Game
             }
 
             int cell = board.CellAt(App.BoardCamera.ScreenToWorld(screen));
+            if (hintMode)
+            {
+                // 힌트 모드에서는 가려진 칸을 누를 때까지 기다린다(열린 칸이나 판 밖은 무시).
+                if (cell >= 0 && !session.IsRevealed(cell))
+                {
+                    UseHint(cell);
+                }
+
+                return;
+            }
+
             int color = palette.Selected;
             if (cell < 0 || color < 0 || session.IsRevealed(cell))
             {
@@ -225,19 +256,7 @@ namespace ColorMinesweeper.Game
             PaintResult result = session.Paint(cell, color);
             if (result.Outcome == PaintOutcome.Correct)
             {
-                Haptics.Light();
-                float duration = board.PlayReveal(session, result.Revealed);
-                palette.Refresh(session);
-                tutorial?.OnPainted(cell, color);
-                if (result.Cleared)
-                {
-                    busy = true;
-                    Tween.Delay(this, duration, OnCleared);
-                }
-                else if (session.Remaining(color) == 0)
-                {
-                    palette.SelectNextAvailable();
-                }
+                OnCorrect(cell, color, result);
             }
             else if (result.Outcome == PaintOutcome.Wrong)
             {
@@ -259,6 +278,135 @@ namespace ColorMinesweeper.Game
                     Tween.Delay(this, 0.7f, ShowGameOver);
                 }
             }
+        }
+
+        void OnCorrect(int cell, int color, PaintResult result)
+        {
+            Haptics.Light();
+            float duration = board.PlayReveal(session, result.Revealed);
+            palette.Refresh(session);
+            tutorial?.OnPainted(cell, color);
+            if (result.Cleared)
+            {
+                SetHintMode(false);
+                busy = true;
+                Tween.Delay(this, duration, OnCleared);
+            }
+            else if (palette.Selected >= 0 && session.Remaining(palette.Selected) == 0)
+            {
+                palette.SelectNextAvailable();
+            }
+        }
+
+        /// <summary>위쪽 전구 버튼과, 힌트 모드에서 팔레트 위에 뜨는 안내 문구를 만든다.</summary>
+        void BuildHint()
+        {
+            hintButton = HintButton.Create(top, new Vector2(Ui.Safe.width / 2f - 2.5f, 0f), 100, OnHintButton);
+            hintButton.SetCount(SaveStore.Hints);
+
+            hintPrompt = Draw.Node(bottom, "HintPrompt", new Vector2(0f, PaletteBar.BarHeight / 2f + 0.55f));
+            Label prompt = UiKit.IconLabel(hintPrompt, Icons.Hint, Theme.Gold, Loc.T("hint.pick"), Theme.Ink, 0.4f, 0.46f, 99,
+                Vector2.zero, true);
+            float width = prompt.MeasureWidth(Loc.T("hint.pick")) + 1.5f;
+            Draw.Panel(hintPrompt, "Back", new Vector2(width, 0.85f), Color.white, 98, Vector2.zero, 0.42f);
+            hintPrompt.gameObject.SetActive(false);
+        }
+
+        void OnHintButton()
+        {
+            if (busy || modal != null || session.IsCleared || session.IsGameOver)
+            {
+                return;
+            }
+
+            if (hintMode)
+            {
+                SetHintMode(false);
+            }
+            else if (SaveStore.Hints <= 0)
+            {
+                ShowHintRefill();
+            }
+            else
+            {
+                SetHintMode(true);
+            }
+        }
+
+        void SetHintMode(bool on)
+        {
+            if (hintButton == null || hintMode == on)
+            {
+                return;
+            }
+
+            hintMode = on;
+            hintButton.SetActive(on);
+            hintPrompt.gameObject.SetActive(on);
+            if (on)
+            {
+                Transform t = hintPrompt;
+                Tween.Kill(t);
+                Tween.Run(t, 0.3f, k => t.localScale = Vector3.one * Mathf.LerpUnclamped(0.8f, 1f, k), Ease.OutBack);
+            }
+        }
+
+        /// <summary>고른 칸을 정답 색으로 연다. 실수가 아니므로 목숨과 별은 그대로다.</summary>
+        void UseHint(int cell)
+        {
+            int color = stage.ColorAt(cell);
+            SaveStore.Hints--;
+            hintButton.SetCount(SaveStore.Hints);
+            SetHintMode(false);
+            Sfx.Instance?.NameReveal();
+            PaintResult result = session.Paint(cell, color);
+            if (result.Outcome == PaintOutcome.Correct)
+            {
+                OnCorrect(cell, color, result);
+            }
+        }
+
+        /// <summary>힌트를 다 썼을 때: 광고를 보면 힌트를 채워 주고 바로 칸을 고르게 한다.</summary>
+        void ShowHintRefill()
+        {
+            modal = UiKit.Modal.Open(transform, Ui, new Vector2(7.8f, 7.2f), ModalOrder);
+            modalClosable = true;
+            Transform card = modal.Card;
+            int order = ModalOrder + 10;
+
+            Draw.Sprite(card, "Hint", Icons.Hint, Theme.Gold, order, new Vector2(0f, 2.45f), new Vector2(1.1f, 1.1f));
+            Label.Create(card, "Title", Loc.T("hint.empty.title"), Theme.Ink, order, new Vector2(0f, 1.3f), 0.72f,
+                TextAnchor.MiddleCenter, true);
+            Label.Create(card, "Body", Loc.F("hint.empty.body", HintsPerAd), Theme.SubInk, order, new Vector2(0f, 0.45f), 0.38f);
+
+            UiButton watch = null;
+            watch = UiKit.Button(card, "Watch", Loc.T("hint.empty.watch"), Icons.Ad, Theme.Accent, Color.white,
+                UiKit.ModalButtonSize, new Vector2(0f, -1.0f), order, () =>
+                {
+                    watch.Interactable = false;
+                    Ads.ShowRewarded(rewarded =>
+                    {
+                        if (this == null)
+                        {
+                            return;
+                        }
+
+                        if (!rewarded)
+                        {
+                            watch.Interactable = true;
+                            return;
+                        }
+
+                        SaveStore.Hints += HintsPerAd;
+                        hintButton.SetCount(SaveStore.Hints);
+                        CloseModal();
+                        SetHintMode(true);
+                    });
+                });
+            watch.Interactable = Ads.Rewarded.IsReady;
+
+            UiKit.Button(card, "Close", Loc.T("common.close"), null, Theme.HiddenTile, Theme.Ink, UiKit.ModalButtonSize,
+                new Vector2(0f, -2.55f), order, CloseModal);
         }
 
         public override void OnDrag(Vector2 screenDelta)

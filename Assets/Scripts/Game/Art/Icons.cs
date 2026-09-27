@@ -23,6 +23,9 @@ namespace ColorMinesweeper.Game
         public static Sprite Heart => Load("heart", PixelGlyphs.Heart);
         public static Sprite Star => Load("star", PixelGlyphs.Star);
 
+        /// <summary>힌트(lightbulb).</summary>
+        public static Sprite Hint => Load("hint", PixelGlyphs.Star);
+
         /// <summary>결과 공유(share).</summary>
         public static Sprite Share => Load("share", PixelGlyphs.Share);
 
