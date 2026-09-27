@@ -34,8 +34,27 @@ namespace ColorMinesweeper.Game
         public BoardView Board => board;
         public PaletteBar Palette => palette;
 
-        /// <summary>튜토리얼 말풍선 자리만큼 판을 아래로 내린다.</summary>
-        float TopInset => tutorial != null ? SpeechBubble.ReservedHeight + 0.3f : 0f;
+        /// <summary>판 좌표(보드 로컬) 영역을 UI 화면 좌표(이 화면 루트 기준)로. 튜토리얼 말풍선을 판 옆에 붙일 때 쓴다.</summary>
+        public Rect BoardAreaToUi(Vector2 center, Vector2 size)
+        {
+            Vector2 a = BoardPointToUi(center - size / 2f);
+            Vector2 b = BoardPointToUi(center + size / 2f);
+            return Rect.MinMaxRect(Mathf.Min(a.x, b.x), Mathf.Min(a.y, b.y), Mathf.Max(a.x, b.x), Mathf.Max(a.y, b.y));
+        }
+
+        Vector2 BoardPointToUi(Vector2 local)
+        {
+            Vector3 world = board.transform.TransformPoint(local);
+            Vector3 screen = App.BoardCamera.Camera.WorldToScreenPoint(world);
+            Vector3 ui = Ui.Camera.ScreenToWorldPoint(new Vector3(screen.x, screen.y, 10f));
+            return transform.InverseTransformPoint(ui);
+        }
+
+        /// <summary>UI 오브젝트의 위치를 이 화면 루트 기준 좌표로.</summary>
+        public Vector2 UiPoint(Transform target)
+        {
+            return transform.InverseTransformPoint(target.position);
+        }
 
         /// <summary>index 가 -1 이면 에디터에서 띄운 시험 플레이라 진행을 저장하지 않는다.</summary>
         public void Setup(Stage stageToPlay, int index, bool asTutorial = false)
@@ -59,8 +78,7 @@ namespace ColorMinesweeper.Game
             hud = Hud.Create(top, Ui, tutorial != null ? "튜토리얼" : StageTitle.For(stageIndex, stage), OnBack, OpenSettings);
             if (tutorial != null)
             {
-                bubble = SpeechBubble.Create(top, Ui);
-                bubble.transform.localPosition = new Vector3(0f, -Hud.BarHeight / 2f - 0.15f, 0f);
+                bubble = SpeechBubble.Create(transform, Ui);
             }
             palette = PaletteBar.Create(bottom, Ui, stage, OnSelectColor);
             Layout();
@@ -182,7 +200,7 @@ namespace ColorMinesweeper.Game
         {
             Rect safe = Ui.Safe;
             float yMin = Ui.ToPixelY(safe.yMin + (cleared ? ResultCardTop + 0.3f : PaletteBar.BarHeight));
-            float yMax = Ui.ToPixelY(safe.yMax - Hud.BarHeight - (cleared ? 0f : TopInset));
+            float yMax = Ui.ToPixelY(safe.yMax - Hud.BarHeight);
             float xMin = Ui.ToPixelX(safe.xMin);
             float xMax = Ui.ToPixelX(safe.xMax);
             return Rect.MinMaxRect(xMin, yMin, xMax, yMax);

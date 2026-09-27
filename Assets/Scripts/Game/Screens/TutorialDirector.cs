@@ -12,6 +12,7 @@ namespace ColorMinesweeper.Game
     /// → 혼자서 끝까지 → 완성하면 이름 공개 안내. 진행 기록에는 남기지 않는다.
     ///
     /// 짚는 방식: 판 전체를 어둡게 하고 근거 칸의 3x3 만 밝게 비춘다(둘레 8칸에서 센다는 것이 한눈에 보이게).
+    /// 말풍선은 비춘 3x3(또는 짚은 팔레트 색) 바로 옆에 붙어 꼬리로 가리킨다.
     /// 칠할 칸은 두께가 일정한 진한 분홍 테두리가 숨 쉬고, 그 위에 화살표가 통통 튄다.
     /// </summary>
     public sealed class TutorialDirector : MonoBehaviour
@@ -94,7 +95,9 @@ namespace ColorMinesweeper.Game
         {
             ClearMarks();
             MarkSwatch(play.Palette.Selected);
-            Talk("색을 고르면 숫자가 바뀌어요", "열린 칸의 숫자 = 둘레 8칸 중 고른 색의 수", NextGuided);
+            phase = Phase.Talking;
+            AnchorSwatch(play.Palette.Selected);
+            bubble.Show("색을 고르면 숫자가 바뀌어요", "열린 칸의 숫자 = 둘레 8칸 중 고른 색의 수", NextGuided);
         }
 
         /// <summary>다음으로 가르칠 추론을 고른다. 두 번 짚어 준 뒤 배경을 가르치고, 그다음은 혼자 하게 둔다.</summary>
@@ -167,6 +170,7 @@ namespace ColorMinesweeper.Game
             targetColor = color;
             phase = Phase.WaitColor;
             MarkSwatch(color);
+            AnchorSwatch(color);
             bubble.Show(title, detail);
         }
 
@@ -193,6 +197,7 @@ namespace ColorMinesweeper.Game
             allowed.Clear();
             allowed.UnionWith(hint.Cells);
             phase = Phase.WaitPaint;
+            AnchorArea(hint.Clue);
             if (guidedDone == 1 && !background)
             {
                 // 두 번째는 근거만 비추고, 칠할 칸은 스스로 찾게 한다.
@@ -217,13 +222,35 @@ namespace ColorMinesweeper.Game
         {
             ClearMarks();
             phase = Phase.Free;
+            bubble.AnchorBottom();
             bubble.Show("이제 혼자 완성해요!", "틀리면 하트가 하나 줄어요.", () => bubble.Hide());
         }
 
         void Talk(string title, string detail, System.Action next)
         {
             phase = Phase.Talking;
+            bubble.AnchorBottom();
             bubble.Show(title, detail, next);
+        }
+
+        /// <summary>말풍선을 근거 칸의 3x3 옆에 붙인다.</summary>
+        void AnchorArea(int clue)
+        {
+            bubble.AnchorTo(play.BoardAreaToUi(play.Board.CellCenter(clue), new Vector2(3f, 3f)));
+        }
+
+        /// <summary>말풍선을 팔레트 색 바로 위에 붙인다.</summary>
+        void AnchorSwatch(int color)
+        {
+            Transform swatch = play.Palette.SwatchTransform(color);
+            if (swatch == null)
+            {
+                bubble.AnchorBottom();
+                return;
+            }
+
+            Vector2 at = play.UiPoint(swatch);
+            bubble.AnchorTo(new Rect(at.x - 0.8f, at.y - 0.8f, 1.6f, 1.6f));
         }
 
         public void OnColorSelected(int color)
@@ -294,7 +321,7 @@ namespace ColorMinesweeper.Game
         }
 
         /// <summary>
-        /// 판 전체를 어둡게 하고 근거 칸의 3x3 만 남긴다. 가운데(근거) 칸은 보라 테두리, 3x3 은 옅은 보라 테두리로 감싼다.
+        /// 판 전체를 어둡게 하고 근거 칸의 3x3 만 밝게 남긴다. 가운데(근거) 칸만 보라 테두리로 짚는다.
         /// </summary>
         void Spotlight(int clue)
         {
@@ -309,14 +336,14 @@ namespace ColorMinesweeper.Game
                 }
 
                 SpriteRenderer shade = Draw.Sprite(board, "TutorialShade", SpriteFactory.Square(),
-                    new Color(0.13f, 0.1f, 0.24f, 0f), DimOrder, play.Board.CellCenter(cell), Vector2.one * 1.01f);
+                    new Color(0.13f, 0.1f, 0.24f, 0f), DimOrder, play.Board.CellCenter(cell), Vector2.one * 1.04f);
                 marks.Add(shade.transform);
                 Tween.Run(shade, 0.25f, t => Draw.SetAlpha(shade, 0.5f * t));
             }
 
+            // 3x3 을 감싸는 큰 테두리는 두지 않는다. 밝은 칸과 가린 칸의 경계에 걸쳐 쪽마다 굵기가 달라 보였다.
+            // 가린 조각끼리 살짝 겹쳐 밝은 창의 가장자리가 곧은 선이 되게 하는 것으로 영역을 보여 준다.
             Vector2 center = play.Board.CellCenter(clue);
-            marks.Add(Draw.OutlinePanel(board, "TutorialArea", new Vector2(3.08f, 3.08f), Theme.WithAlpha(Theme.Accent, 0.55f),
-                MarkOrder, center, 0.34f, 0.07f).transform);
             marks.Add(Draw.OutlinePanel(board, "TutorialClue", new Vector2(0.98f, 0.98f), Theme.Accent, MarkOrder + 1, center,
                 0.24f, 0.11f).transform);
         }
