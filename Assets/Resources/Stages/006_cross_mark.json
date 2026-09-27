@@ -1,6 +1,6 @@
 {
   "id": "cross_mark",
-  "name": "가위표",
+  "name": "X 표",
   "logic": "basic",
   "background": ".",
   "palette": [
