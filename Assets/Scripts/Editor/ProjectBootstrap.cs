@@ -30,6 +30,7 @@ namespace ColorMinesweeper.EditorTools
 
             EnsureMainScene();
             EnsurePlayerSettings();
+            IconImporter.ReimportIfNeeded();
         }
 
         static void EnsureMainScene()

@@ -33,7 +33,7 @@ namespace ColorMinesweeper.Game
                 0.42f);
             UiKit.IconButton(header, "Back", PixelGlyphs.Icon("back", PixelGlyphs.Back),
                 new Vector2(-Ui.Safe.width / 2f + 1.05f, 1.2f), 152, OnBack);
-            UiKit.IconButton(header, "Settings", PixelGlyphs.Icon("gear", PixelGlyphs.Gear),
+            UiKit.IconButton(header, "Settings", Icons.Settings,
                 new Vector2(Ui.Safe.width / 2f - 1.05f, 1.2f), 152, () => SettingsPanel.Open(transform, Ui, 300, null, true));
 
             // 개발용: 제목을 7번 연속 탭하면 모든 스테이지 잠금 해제를 켜고 끈다(에디터·Development Build 에서만).

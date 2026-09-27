@@ -22,7 +22,7 @@ namespace ColorMinesweeper.Game
 
             UiKit.IconButton(root, "Back", PixelGlyphs.Icon("back", PixelGlyphs.Back), new Vector2(-half + 1.05f, 0f), 100,
                 onBack);
-            UiKit.IconButton(root, "Settings", PixelGlyphs.Icon("gear", PixelGlyphs.Gear), new Vector2(half - 1.05f, 0f),
+            UiKit.IconButton(root, "Settings", Icons.Settings, new Vector2(half - 1.05f, 0f),
                 100, onSettings);
 
             hud.title = Label.Create(root, "Name", title, Theme.Ink, 100, new Vector2(0f, 0.32f), 0.58f,
