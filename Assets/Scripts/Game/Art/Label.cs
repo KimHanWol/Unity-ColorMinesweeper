@@ -60,9 +60,11 @@ namespace ColorMinesweeper.Game
             mesh.fontSize = FontPixelSize;
             mesh.characterSize = 1f;
             mesh.anchor = anchor;
-            mesh.alignment = anchor == TextAnchor.MiddleLeft ? TextAlignment.Left
-                : anchor == TextAnchor.MiddleRight ? TextAlignment.Right
-                : TextAlignment.Center;
+            mesh.alignment = anchor == TextAnchor.UpperLeft || anchor == TextAnchor.MiddleLeft || anchor == TextAnchor.LowerLeft
+                ? TextAlignment.Left
+                : anchor == TextAnchor.UpperRight || anchor == TextAnchor.MiddleRight || anchor == TextAnchor.LowerRight
+                    ? TextAlignment.Right
+                    : TextAlignment.Center;
             // 동글은 굵은 글씨 파일 하나라 가짜 굵게(FontStyle.Bold)를 쓰지 않는다. 기기 폰트일 때만 굵게 한다.
             mesh.fontStyle = bold && !usingDongle ? FontStyle.Bold : FontStyle.Normal;
             mesh.lineSpacing = usingDongle ? DongleLineSpacing : 1f;
@@ -99,6 +101,71 @@ namespace ColorMinesweeper.Game
         public void SetColor(Color color)
         {
             mesh.color = color;
+        }
+
+        /// <summary>한 줄이 차지하는 높이(부모 기준 유닛). 여러 줄 문구의 칸 높이를 잡을 때 쓴다.</summary>
+        public float LineAdvance => mesh.font.lineHeight * mesh.lineSpacing / 10f * transform.localScale.y;
+
+        /// <summary>text 를 한 줄로 그렸을 때의 폭(부모 기준 유닛). TextMesh 는 글꼴 픽셀 10 을 1 유닛으로 본다.</summary>
+        public float MeasureWidth(string text)
+        {
+            Font f = mesh.font;
+            f.RequestCharactersInTexture(text, FontPixelSize, mesh.fontStyle);
+            float pixels = 0f;
+            foreach (char c in text)
+            {
+                if (f.GetCharacterInfo(c, out CharacterInfo info, FontPixelSize, mesh.fontStyle))
+                {
+                    pixels += info.advance;
+                }
+            }
+
+            return pixels / 10f * transform.localScale.x;
+        }
+
+        /// <summary>
+        /// maxWidth 안에 들어가게 단어(띄어쓰기) 단위로 줄을 바꿔 넣는다. 한 단어가 너무 길면 글자 단위로 자른다.
+        /// 문구 안의 줄바꿈(\n)은 문단 구분으로 그대로 둔다. 줄 수를 돌려준다.
+        /// </summary>
+        public int SetWrappedText(string text, float maxWidth)
+        {
+            var lines = new System.Collections.Generic.List<string>();
+            foreach (string paragraph in text.Split('\n'))
+            {
+                string line = string.Empty;
+                foreach (string word in paragraph.Split(' '))
+                {
+                    string candidate = line.Length == 0 ? word : line + " " + word;
+                    if (MeasureWidth(candidate) <= maxWidth)
+                    {
+                        line = candidate;
+                        continue;
+                    }
+
+                    if (line.Length > 0)
+                    {
+                        lines.Add(line);
+                    }
+
+                    line = word;
+                    while (MeasureWidth(line) > maxWidth && line.Length > 1)
+                    {
+                        int cut = line.Length - 1;
+                        while (cut > 1 && MeasureWidth(line.Substring(0, cut)) > maxWidth)
+                        {
+                            cut--;
+                        }
+
+                        lines.Add(line.Substring(0, cut));
+                        line = line.Substring(cut);
+                    }
+                }
+
+                lines.Add(line);
+            }
+
+            mesh.text = string.Join("\n", lines);
+            return lines.Count;
         }
     }
 }

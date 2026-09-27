@@ -65,14 +65,7 @@ namespace ColorMinesweeper.Game
                 return;
             }
 
-            if (TutorialDirector.IsDone)
-            {
-                ShowTitle();
-            }
-            else
-            {
-                ShowTutorial();
-            }
+            ShowTitle();
         }
 
         void Update()

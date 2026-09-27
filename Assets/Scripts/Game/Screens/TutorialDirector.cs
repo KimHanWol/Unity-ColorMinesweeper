@@ -77,14 +77,14 @@ namespace ColorMinesweeper.Game
             play = screen;
             bubble = speech;
             solver = new Solver(screen.Stage, Technique.Direct);
-            Talk("숨겨진 도트 그림을 추리해서\n완성하는 퍼즐이에요.", ExplainPalette);
+            Talk("숨겨진 도트 그림을 추리해서 완성하는 퍼즐이에요.", ExplainPalette);
         }
 
         void ExplainPalette()
         {
             ClearMarks();
             MarkSwatch(play.Palette.Selected);
-            Talk("아래에서 색을 고르면, 열린 칸에\n주변 8칸 중 그 색이 몇 칸인지\n숫자로 보여요.", NextGuided);
+            Talk("아래에서 색을 고르면, 열린 칸마다 둘레의 8칸 중 그 색이 몇 칸인지 숫자로 보여요.", NextGuided);
         }
 
         /// <summary>다음으로 가르칠 추론을 고른다. 두 번 짚어 준 뒤 배경을 가르치고, 그다음은 혼자 하게 둔다.</summary>
@@ -101,7 +101,7 @@ namespace ColorMinesweeper.Game
                 {
                     if (play.Palette.Selected != stage.BackgroundColor)
                     {
-                        AskColor(stage.BackgroundColor, "배경도 하나의 색이에요.\n아래의 네모 칸(배경)을 골라 보세요.");
+                        AskColor(stage.BackgroundColor, "배경도 하나의 색이에요. 아래의 네모 칸(배경)을 골라 보세요.");
                         return;
                     }
 
@@ -178,7 +178,7 @@ namespace ColorMinesweeper.Game
             int hidden = hint.Cells.Count;
             bool background = hint.Color == stage.BackgroundColor;
             string colorName = background ? "배경" : "이 색";
-            MarkCell(hint.Clue, Theme.Accent, false);
+            MarkNeighborhood(hint.Clue);
 
             allowed.Clear();
             allowed.UnionWith(hint.Cells);
@@ -186,7 +186,7 @@ namespace ColorMinesweeper.Game
             if (guidedDone == 1 && !background)
             {
                 // 두 번째는 근거 칸만 짚고, 칠할 칸은 스스로 찾게 한다.
-                bubble.Show("이번엔 스스로 찾아볼까요?\n파란 칸의 숫자와 가려진 이웃 수를\n비교해 보세요.");
+                bubble.Show("이번엔 스스로 찾아볼까요? 파란 테두리 칸 둘레의 8칸을 보고, 숫자만큼 칠할 칸을 찾아보세요.");
                 return;
             }
 
@@ -195,18 +195,18 @@ namespace ColorMinesweeper.Game
                 MarkCell(cell, Theme.Gold, true);
             }
 
+            string meaning = "파란 테두리 칸의 숫자 " + total + "은 둘레 8칸 중 " + colorName + "이 " + total + "칸이라는 뜻이에요.";
             string reason = opened == 0
-                ? "파란 칸 주변에 " + colorName + "이 " + total + "칸 있는데,\n가려진 칸도 " + hidden + "칸뿐이에요."
-                : "파란 칸의 숫자 " + total + "에서 이미 열린 " + opened + "칸을 빼면\n" + (total - opened) +
-                  "칸이 남았고, 가려진 칸도 " + hidden + "칸뿐이에요.";
-            bubble.Show(reason + "\n그러니 노란 칸은 모두 " + colorName + "! 눌러서 칠해 보세요.");
+                ? " 그런데 가려진 칸도 딱 " + hidden + "칸뿐이에요."
+                : " 이미 열린 " + opened + "칸을 빼면 " + (total - opened) + "칸이 남았는데, 가려진 칸도 " + hidden + "칸뿐이에요.";
+            bubble.Show(meaning + reason + " 그러니 노란 칸은 모두 " + colorName + "! 눌러서 칠해 보세요.");
         }
 
         void StartFreePlay()
         {
             ClearMarks();
             phase = Phase.Free;
-            Talk("틀리면 하트가 하나 줄어요.\n이제 혼자서 끝까지 완성해 보세요!", () =>
+            Talk("틀리면 하트가 하나 줄어요. 이제 혼자서 끝까지 완성해 보세요!", () =>
             {
                 phase = Phase.Free;
                 bubble.Hide();
@@ -275,6 +275,26 @@ namespace ColorMinesweeper.Game
             SpriteRenderer ring = Draw.Sprite(board, "TutorialMark", SpriteFactory.OutlineRect(), color, 60,
                 play.Board.CellCenter(cell), new Vector2(1.08f, 1.08f));
             AddMark(ring.transform, pulse ? 1.08f : 0f);
+        }
+
+        /// <summary>
+        /// 근거 칸과 그 둘레 8칸을 한 덩어리로 감싸고, 둘레 8칸을 옅게 칠해 "이 칸을 뺀 주변 8칸에서 센다"는 것을 보여 준다.
+        /// </summary>
+        void MarkNeighborhood(int cell)
+        {
+            Transform board = play.Board.transform;
+            Vector2 center = play.Board.CellCenter(cell);
+            foreach (int n in play.Stage.Neighbors(cell))
+            {
+                SpriteRenderer tint = Draw.Sprite(board, "TutorialNeighbor", SpriteFactory.RoundedRect(0.2f),
+                    Theme.WithAlpha(Theme.Accent, 0.22f), 55, play.Board.CellCenter(n), new Vector2(CellView.TileSize, CellView.TileSize));
+                AddMark(tint.transform, 0f);
+            }
+
+            SpriteRenderer area = Draw.Sprite(board, "TutorialArea", SpriteFactory.OutlineRect(), Theme.WithAlpha(Theme.Accent, 0.7f), 58,
+                center, new Vector2(3.1f, 3.1f));
+            AddMark(area.transform, 0f);
+            MarkCell(cell, Theme.Accent, false);
         }
 
         void MarkSwatch(int color)

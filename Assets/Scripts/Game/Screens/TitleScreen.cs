@@ -130,7 +130,18 @@ namespace ColorMinesweeper.Game
             bool started = cleared > 0;
             string playText = started ? "이어하기 · " + (next + 1) : "시작하기";
             UiKit.Button(menu, "Play", playText, PixelGlyphs.Icon("play", PixelGlyphs.Play), Theme.Accent, Color.white,
-                new Vector2(6.4f, 1.5f), new Vector2(0f, 1.1f), 70, () => App.ShowPlay(next));
+                new Vector2(6.4f, 1.5f), new Vector2(0f, 1.1f), 70, () =>
+                {
+                    // 처음 시작하기를 누르면 튜토리얼부터. 튜토리얼을 마치면 1번 스테이지로 이어진다.
+                    if (TutorialDirector.IsDone || cleared > 0)
+                    {
+                        App.ShowPlay(next);
+                    }
+                    else
+                    {
+                        App.ShowTutorial();
+                    }
+                });
             UiKit.Button(menu, "Stages", "스테이지 선택", null, Color.white, Theme.Ink, new Vector2(6.4f, 1.25f),
                 new Vector2(0f, -0.55f), 70, () => App.ShowSelect());
 
