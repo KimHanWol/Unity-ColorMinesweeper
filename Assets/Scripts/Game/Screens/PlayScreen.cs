@@ -144,17 +144,17 @@ namespace ColorMinesweeper.Game
         /// <summary>판 도중에는 저장하지 않으므로, 나가기 전에 진행 상황이 사라진다는 것을 알린다.</summary>
         void ConfirmLeave()
         {
-            modal = UiKit.Modal.Open(transform, Ui, new Vector2(7.6f, 6.2f), ModalOrder);
+            modal = UiKit.Modal.Open(transform, Ui, new Vector2(8f, 6.8f), ModalOrder);
             modalClosable = true;
             Transform card = modal.Card;
             int order = ModalOrder + 10;
-            Label.Create(card, "Title", Loc.T("leave.title"), Theme.Ink, order, new Vector2(0f, 2.1f), 0.72f, TextAnchor.MiddleCenter, true);
+            Label.Create(card, "Title", Loc.T("leave.title"), Theme.Ink, order, new Vector2(0f, 2.5f), 0.72f, TextAnchor.MiddleCenter, true);
             Label.Create(card, "Body", Loc.T("leave.body"), Theme.SubInk,
-                order, new Vector2(0f, 0.85f), 0.4f);
-            UiKit.Button(card, "Stay", Loc.T("leave.stay"), null, Theme.Accent, Color.white, new Vector2(6f, 1.3f), new Vector2(0f, -0.75f),
+                order, new Vector2(0f, 1.25f), 0.4f);
+            UiKit.Button(card, "Stay", Loc.T("leave.stay"), null, Theme.Accent, Color.white, UiKit.ModalButtonSize, new Vector2(0f, -0.35f),
                 order, CloseModal);
-            UiKit.Button(card, "Leave", Loc.T("leave.leave"), null, Theme.HiddenTile, Theme.Ink, new Vector2(6f, 1.1f),
-                new Vector2(0f, -2.15f), order, () => App.ShowSelect());
+            UiKit.Button(card, "Leave", Loc.T("leave.leave"), null, Theme.HiddenTile, Theme.Ink, UiKit.ModalButtonSize,
+                new Vector2(0f, -2.0f), order, () => App.ShowSelect());
         }
 
         void OnSettingsChanged()
@@ -338,13 +338,13 @@ namespace ColorMinesweeper.Game
             if (hasNext)
             {
                 next = UiKit.Button(card, "Next", Loc.T("clear.next"), Icons.Play, Theme.Accent,
-                    Color.white, new Vector2(5.6f, 1.35f), new Vector2(0f, -1.05f), order,
+                    Color.white, new Vector2(5.6f, UiKit.ModalButtonSize.y), new Vector2(0f, -1.0f), order,
                     () => Ads.AfterStage(() => App.ShowPlay(stageIndex + 1))).transform;
             }
 
             // 목록과 공유는 한 줄에 반씩 둔다.
-            float rowY = hasNext ? -2.6f : -1.05f;
-            var half = new Vector2(2.65f, 1.1f);
+            float rowY = hasNext ? -2.5f : -1.0f;
+            var half = new Vector2(2.65f, UiKit.ModalButtonSize.y);
             Transform list = UiKit.Button(card, "List", Loc.T("clear.list"), null, Theme.HiddenTile, Theme.Ink, half,
                 new Vector2(-1.475f, rowY), order, () => Ads.AfterStage(App.ShowSelect)).transform;
             Transform share = null;
@@ -372,7 +372,7 @@ namespace ColorMinesweeper.Game
             Label.Create(card, "Body", Loc.T("tutorialClear.body"), Theme.SubInk, order,
                 new Vector2(0f, 0.6f), 0.42f);
             UiKit.Button(card, "Start", Loc.T("tutorialClear.start"), Icons.Play, Theme.Accent, Color.white,
-                new Vector2(5.6f, 1.35f), new Vector2(0f, -2.2f), order, () => App.ShowPlay(0));
+                new Vector2(5.6f, UiKit.ModalButtonSize.y), new Vector2(0f, -2.2f), order, () => App.ShowPlay(0));
         }
 
         void ShowGameOver()
@@ -391,7 +391,7 @@ namespace ColorMinesweeper.Game
 
             UiButton revive = null;
             revive = UiKit.Button(card, "Revive", Loc.T("over.revive"), Icons.Ad,
-                Theme.Accent, Color.white, new Vector2(6f, 1.35f), new Vector2(0f, -0.95f), order, () =>
+                Theme.Accent, Color.white, UiKit.ModalButtonSize, new Vector2(0f, -0.95f), order, () =>
                 {
                     revive.Interactable = false;
                     Ads.ShowRewarded(rewarded =>
@@ -416,7 +416,7 @@ namespace ColorMinesweeper.Game
             revive.Interactable = Ads.Rewarded.IsReady;
 
             UiKit.Button(card, "Retry", Loc.T("over.retry"), Icons.Retry, Theme.HiddenTile,
-                Theme.Ink, new Vector2(6f, 1.1f), new Vector2(0f, -2.5f), order, () => App.ShowPlay(stage, stageIndex));
+                Theme.Ink, UiKit.ModalButtonSize, new Vector2(0f, -2.5f), order, () => App.ShowPlay(stage, stageIndex));
         }
 
         void CloseModal()

@@ -7,6 +7,9 @@ namespace ColorMinesweeper.Game
     public static class UiKit
     {
         /// <summary>글자(와 선택적 아이콘)가 들어간 둥근 버튼.</summary>
+        /// <summary>창(모달) 안 버튼의 크기. 주 버튼과 보조 버튼은 색으로만 나누고 높이는 같게 해서 글자 크기가 들쭉날쭉하지 않게 한다.</summary>
+        public static readonly Vector2 ModalButtonSize = new Vector2(6f, 1.25f);
+
         public static UiButton Button(Transform parent, string name, string text, Sprite icon, Color fill, Color ink,
             Vector2 size, Vector2 position, int order, Action onClick)
         {

@@ -11,6 +11,7 @@ namespace ColorMinesweeper.Game
     {
         const float RowHeight = 1.3f;
         const float SliderWidth = 3.4f;
+        static float ButtonHalf => UiKit.ModalButtonSize.y / 2f;
 
         static float lastPreview;
 
@@ -27,12 +28,12 @@ namespace ColorMinesweeper.Game
             float tutorialY = 0f;
             if (allowTutorial)
             {
-                tutorialY = bottom - 0.3f - 0.525f;
-                bottom = tutorialY - 0.525f;
+                tutorialY = bottom - 0.3f - ButtonHalf;
+                bottom = tutorialY - ButtonHalf;
             }
 
-            float closeY = bottom - 0.3f - 0.6f;
-            float height = 0.6f - (closeY - 0.6f);
+            float closeY = bottom - 0.35f - ButtonHalf;
+            float height = 0.7f - (closeY - ButtonHalf);
             float top = height / 2f;
 
             UiKit.Modal modal = UiKit.Modal.Open(parent, ui, new Vector2(7.8f, height), order);
@@ -59,7 +60,7 @@ namespace ColorMinesweeper.Game
 
             if (allowTutorial)
             {
-                UiKit.Button(card, "Tutorial", Loc.T("settings.tutorial"), null, Theme.HiddenTile, Theme.Ink, new Vector2(5.6f, 1.05f),
+                UiKit.Button(card, "Tutorial", Loc.T("settings.tutorial"), null, Theme.HiddenTile, Theme.Ink, new Vector2(5.6f, UiKit.ModalButtonSize.y),
                     new Vector2(0f, top + tutorialY), o, () =>
                     {
                         Settings.Flush();
@@ -67,7 +68,7 @@ namespace ColorMinesweeper.Game
                     });
             }
 
-            UiKit.Button(card, "Close", Loc.T("common.close"), null, Theme.Accent, Color.white, new Vector2(5.6f, 1.2f),
+            UiKit.Button(card, "Close", Loc.T("common.close"), null, Theme.Accent, Color.white, new Vector2(5.6f, UiKit.ModalButtonSize.y),
                 new Vector2(0f, top + closeY), o, () =>
                 {
                     Settings.Flush();
