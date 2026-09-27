@@ -352,7 +352,7 @@ namespace ColorMinesweeper.Game
             int order = ModalOrder + 10;
             modal.Card.localPosition = new Vector3(Ui.Safe.center.x, Ui.Safe.yMin + ResultCardTop - ResultCardSize.y / 2f, 0f);
             Label.Create(card, "Title", "튜토리얼 완료!", Theme.Ink, order, new Vector2(0f, 2.5f), 0.8f, TextAnchor.MiddleCenter, true);
-            Label.Create(card, "Body", "그림을 완성하면 이름이 공개돼요.\n색을 고르고, 주변을 세고, 칠하기!", Theme.SubInk, order,
+            Label.Create(card, "Body", "그림을 완성하면 이름이 공개돼요.\n색을 고르고, 숫자를 보고, 칠하면 끝!", Theme.SubInk, order,
                 new Vector2(0f, 0.6f), 0.42f);
             UiKit.Button(card, "Start", "시작하기", PixelGlyphs.Icon("play", PixelGlyphs.Play), Theme.Accent, Color.white,
                 new Vector2(5.6f, 1.35f), new Vector2(0f, -2.2f), order, () => App.ShowPlay(0));

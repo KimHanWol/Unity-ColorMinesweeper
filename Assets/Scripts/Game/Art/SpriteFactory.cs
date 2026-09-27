@@ -130,6 +130,12 @@ namespace ColorMinesweeper.Game
             return Cached("outlineCircle", () => Shape((x, y) => Mathf.Abs(Mathf.Sqrt(x * x + y * y) - 0.46f) - 0.035f, 1f));
         }
 
+        /// <summary>가장자리가 부드럽게 번지는 원. 튜토리얼에서 팔레트 색 뒤의 후광으로 쓴다.</summary>
+        public static Sprite SoftCircle()
+        {
+            return Cached("softCircle", () => Shape((x, y) => Mathf.Sqrt(x * x + y * y) - 0.3f, 0.2f));
+        }
+
         public static Sprite Circle()
         {
             return Cached("circle", () => Shape((x, y) => Mathf.Sqrt(x * x + y * y) - 0.5f, 1f));
