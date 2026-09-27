@@ -59,6 +59,17 @@ namespace ColorMinesweeper.Game
             ring.enabled = on;
         }
 
+        /// <summary>판을 끝낸 뒤처럼 더 쓸 수 없을 때. 눌리지 않고 흐리게 보인다.</summary>
+        public void Disable()
+        {
+            SetActive(false);
+            GetComponent<UiButton>().Interactable = false;
+            foreach (SpriteRenderer r in GetComponentsInChildren<SpriteRenderer>())
+            {
+                Draw.SetAlpha(r, r.color.a * 0.35f);
+            }
+        }
+
         void Update()
         {
             if (active)

@@ -109,6 +109,8 @@ namespace ColorMinesweeper.Game
                     Vector2.zero, new Vector2(ui.Width + 2f, UiRoot.Height + 2f));
                 UiButton blocker = UiButton.Attach(modal.dim.transform, Vector2.one, order, null);
                 blocker.Pressable = false;
+                // 어둡게 가리지 않는 창(완성 결과)은 뒤쪽 위아래 막대(뒤로, 설정)를 그대로 누를 수 있게 둔다.
+                blocker.enabled = dimBackground;
 
                 modal.Card = Draw.Node(modal.Root, "Card");
                 Draw.Sprite(modal.Card, "Shadow", SpriteFactory.SoftShadow(), Theme.Shadow, order + 1,

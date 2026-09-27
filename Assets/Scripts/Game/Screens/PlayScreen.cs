@@ -35,6 +35,9 @@ namespace ColorMinesweeper.Game
         const int HintsPerAd = 3;
 
         HintButton hintButton;
+
+        /// <summary>완성 결과 창 위에 띄운 설정 창.</summary>
+        UiKit.Modal settingsOverResult;
         Transform hintPrompt;
 
         /// <summary>힌트 버튼을 누르고 칸을 고르는 중인지. 이때 누른 칸은 정답 색으로 열린다.</summary>
@@ -115,6 +118,15 @@ namespace ColorMinesweeper.Game
 
         public override void OnBack()
         {
+            if (settingsOverResult != null)
+            {
+                UiKit.Modal closing = settingsOverResult;
+                settingsOverResult = null;
+                Settings.Flush();
+                closing.Close();
+                return;
+            }
+
             if (tutorial != null && !session.IsCleared)
             {
                 // 튜토리얼을 나가도 완료로 치지 않는다. 끝까지 마쳐야 다음 시작하기부터 스테이지로 들어간다.
@@ -124,7 +136,8 @@ namespace ColorMinesweeper.Game
 
             if (session.IsCleared)
             {
-                App.ShowSelect();
+                // 결과 창의 목록 버튼과 같게 전면 광고 차례를 거친다.
+                Ads.AfterStage(App.ShowSelect);
                 return;
             }
 
@@ -172,7 +185,18 @@ namespace ColorMinesweeper.Game
 
         void OpenSettings()
         {
-            if (modal != null || session.IsCleared || session.IsGameOver)
+            if (session.IsCleared)
+            {
+                // 완성 뒤에는 결과 창 위에 설정을 따로 띄운다(결과 창은 그대로 둔다).
+                if (settingsOverResult == null)
+                {
+                    settingsOverResult = SettingsPanel.Open(transform, Ui, ModalOrder + 100, () => settingsOverResult = null);
+                }
+
+                return;
+            }
+
+            if (modal != null || session.IsGameOver)
             {
                 return;
             }
@@ -430,6 +454,7 @@ namespace ColorMinesweeper.Game
             }
 
             hud.RevealTitle(StageTitle.Revealed(stageIndex, stage));
+            hintButton?.Disable();
             board.SetFocus(-1);
             palette.Hide();
             App.BoardCamera.Frame(board.Bounds, Viewport(true), true);
