@@ -1,0 +1,20 @@
+{
+  "id": "bat",
+  "name": "박쥐",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1D3557" },
+    { "key": "D", "color": "#7B2CBF" },
+    { "key": "K", "color": "#10002B" },
+    { "key": "Y", "color": "#FFD60A" }
+  ],
+  "pixels": [
+    "D...K.K...D",
+    "DD..KKK..DD",
+    "DDDDYKYDDDD",
+    "DDDDKKKDDDD",
+    ".D.DKKKD.D.",
+    "....K.K...."
+  ],
+  "givens": [1, 2]
+}

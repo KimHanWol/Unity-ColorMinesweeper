@@ -1,0 +1,22 @@
+{
+  "id": "pig",
+  "name": "돼지",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F0FFF4" },
+    { "key": "P", "color": "#FFB5C2" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "D", "color": "#F07C99" }
+  ],
+  "pixels": [
+    ".PP....PP.",
+    "PPPPPPPPPP",
+    "PKPPPPPPKP",
+    "PPPPPPPPPP",
+    "PPPDDDDPPP",
+    "PPDKDDKDPP",
+    "PPPDDDDPPP",
+    ".PPPPPPPP."
+  ],
+  "givens": [70]
+}

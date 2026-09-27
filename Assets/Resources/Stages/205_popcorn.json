@@ -1,0 +1,23 @@
+{
+  "id": "popcorn",
+  "name": "팝콘",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2E2A47" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    ".W.YW...",
+    "WWYWWWY.",
+    "YWWWYWWW",
+    "WYWWWWYW",
+    "RWRWRWRW",
+    "RWRWRWRW",
+    ".RWRWRW.",
+    ".RWRWRW.",
+    ".RWRWRW."
+  ],
+  "givens": [40, 48, 57]
+}

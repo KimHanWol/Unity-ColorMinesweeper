@@ -1,0 +1,23 @@
+{
+  "id": "fox",
+  "name": "여우",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "O", "color": "#F77F00" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "O........O",
+    "OO......OO",
+    "OOO....OOO",
+    "OOOOOOOOOO",
+    "OKOOOOOOKO",
+    "OOOOOOOOOO",
+    ".WWOOOOWW.",
+    "..WWKKWW..",
+    "...WWWW..."
+  ],
+  "givens": [3]
+}

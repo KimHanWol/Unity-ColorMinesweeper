@@ -1,0 +1,21 @@
+{
+  "id": "ufo",
+  "name": "UFO",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1D1E3A" },
+    { "key": "B", "color": "#8ECAE6" },
+    { "key": "S", "color": "#ADB5BD" },
+    { "key": "Y", "color": "#FFD166" }
+  ],
+  "pixels": [
+    "....BBB....",
+    "...BBBBB...",
+    "..SSSSSSS..",
+    ".SSSSSSSSS.",
+    "SYSSSYSSSYS",
+    ".SSSSSSSSS.",
+    "...Y...Y..."
+  ],
+  "givens": [0]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "swallowtail",
+  "name": "호랑나비",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E3F2FD" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "O", "color": "#F77F00" }
+  ],
+  "pixels": [
+    "KK.....KK",
+    "KYK...KYK",
+    "KYYKKKYYK",
+    "KYYYKYYYK",
+    ".KYOKOYK.",
+    "..KYKYK..",
+    ".KK.K.KK.",
+    "K.......K"
+  ],
+  "givens": [4]
+}

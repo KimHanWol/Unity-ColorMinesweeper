@@ -1,0 +1,22 @@
+{
+  "id": "rainbow_fish",
+  "name": "무지개 물고기",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1D3557" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "G", "color": "#80B918" }
+  ],
+  "pixels": [
+    "...BBB.....",
+    "..BPYGB..B.",
+    ".BPYGBPB.BB",
+    "B..GBPYGBB.",
+    ".BYGBPYB.BB",
+    "..BPYGB..B.",
+    "...BBB....."
+  ],
+  "givens": [0, 13]
+}

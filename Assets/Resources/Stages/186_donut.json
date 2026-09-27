@@ -1,0 +1,23 @@
+{
+  "id": "donut",
+  "name": "도넛",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "O", "color": "#D4A373" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "..OOOOOO..",
+    ".OPPPPPPO.",
+    "OPWPPPPWPO",
+    "OPPP..PPPO",
+    "OPP....PPO",
+    "OPPP..PPPO",
+    "OPPPPPWPPO",
+    ".OPPPPPPO.",
+    "..OOOOOO.."
+  ],
+  "givens": [9, 18, 29]
+}

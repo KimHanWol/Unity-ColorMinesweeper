@@ -1,0 +1,23 @@
+{
+  "id": "elephant",
+  "name": "코끼리",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "S", "color": "#8D99AE" },
+    { "key": "P", "color": "#FFB5C2" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "SSS.....SSS",
+    "SPSSSSSSSPS",
+    "SPSSSSSSSPS",
+    "SSSKSSSKSSS",
+    ".SSSSSSSSS.",
+    "...SSSSS...",
+    "....SSS....",
+    "....SS.....",
+    ".....S....."
+  ],
+  "givens": [75]
+}

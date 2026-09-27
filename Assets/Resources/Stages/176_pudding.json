@@ -1,0 +1,21 @@
+{
+  "id": "pudding",
+  "name": "푸딩",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "B", "color": "#8B5E3C" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "...BBB...",
+    "..BBBBB..",
+    "..YYYYY..",
+    ".YYYYYYY.",
+    ".YYYYYYY.",
+    "YYYYYYYYY",
+    "WWWWWWWWW"
+  ],
+  "givens": [0]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "bear",
+  "name": "곰",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EEF6FF" },
+    { "key": "B", "color": "#8B5E3C" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "L", "color": "#E6CCB2" }
+  ],
+  "pixels": [
+    ".BB....BB.",
+    "BBBBBBBBBB",
+    "BBBBBBBBBB",
+    "BKBBBBBBKB",
+    "BBBBBBBBBB",
+    "BBBLLLLBBB",
+    "BBLLKKLLBB",
+    ".BBLLLLBB.",
+    "..BBBBBB.."
+  ],
+  "givens": [88, 89]
+}

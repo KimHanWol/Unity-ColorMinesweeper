@@ -1,0 +1,24 @@
+{
+  "id": "avocado",
+  "name": "아보카도",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "G", "color": "#386641" },
+    { "key": "L", "color": "#C5E1A5" },
+    { "key": "B", "color": "#8B5E3C" }
+  ],
+  "pixels": [
+    "..GGG..",
+    ".GLLLG.",
+    ".GLLLG.",
+    "GLLLLLG",
+    "GLLBLLG",
+    "GLBBBLG",
+    "GLBBBLG",
+    "GLLBLLG",
+    ".GLLLG.",
+    "..GGG.."
+  ],
+  "givens": [7, 14]
+}

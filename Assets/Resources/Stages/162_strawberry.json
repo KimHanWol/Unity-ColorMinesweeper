@@ -1,0 +1,24 @@
+{
+  "id": "strawberry",
+  "name": "잘 익은 딸기",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5F5" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFD166" }
+  ],
+  "pixels": [
+    "...GGG...",
+    "..GGGGG..",
+    ".RRRRRRR.",
+    "RRYRRRYRR",
+    "RRRRYRRRR",
+    "RYRRRRRYR",
+    ".RRRYRRR.",
+    "..RRRRR..",
+    "...RYR...",
+    "....R...."
+  ],
+  "givens": [72]
+}

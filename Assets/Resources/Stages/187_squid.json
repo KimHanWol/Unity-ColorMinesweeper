@@ -1,0 +1,23 @@
+{
+  "id": "squid",
+  "name": "오징어",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1D3557" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "...W...",
+    "..WWW..",
+    ".WWPWW.",
+    "WPWWWPW",
+    "WKWWWKW",
+    "WWWWWWW",
+    ".W.W.W.",
+    "W.W.W.W",
+    ".W.W.W."
+  ],
+  "givens": [0, 14]
+}

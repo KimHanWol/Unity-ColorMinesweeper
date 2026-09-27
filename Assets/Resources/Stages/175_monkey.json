@@ -1,0 +1,23 @@
+{
+  "id": "monkey",
+  "name": "원숭이",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "B", "color": "#8B5E3C" },
+    { "key": "L", "color": "#E6CCB2" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "...BBBB...",
+    "..BBBBBB..",
+    "LBBLLLLBBL",
+    "LBLKLLKLBL",
+    "LBLLLLLLBL",
+    ".BLLKKLLB.",
+    "..LLLLLL..",
+    "...LKKL...",
+    "....LL...."
+  ],
+  "givens": [70]
+}

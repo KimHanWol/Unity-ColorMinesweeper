@@ -1,0 +1,20 @@
+{
+  "id": "clownfish",
+  "name": "흰동가리",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CAF0F8" },
+    { "key": "O", "color": "#FB8500" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#1B1B2F" }
+  ],
+  "pixels": [
+    "...OOOO....",
+    ".OOWOOWO..O",
+    "OKOWOOWOOOO",
+    "OOOWOOWOOO.",
+    ".OOWOOWO..O",
+    "...OOOO...."
+  ],
+  "givens": [56, 57]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "piano",
+  "name": "피아노",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "R", "color": "#9D0208" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "RRRRRRRRRRR",
+    "WKWKWWKWKWK",
+    "WKWKWWKWKWK",
+    "WKWKWWKWKWK",
+    "WWWWWWWWWWW",
+    "R.........R"
+  ],
+  "givens": [41, 64, 65]
+}

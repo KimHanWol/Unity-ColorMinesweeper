@@ -1,0 +1,22 @@
+{
+  "id": "treasure",
+  "name": "보물상자",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E0FBFC" },
+    { "key": "B", "color": "#8B5E3C" },
+    { "key": "Y", "color": "#FFC300" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    ".BBBBBBBB.",
+    "BBBBBBBBBB",
+    "BYYYYYYYYB",
+    "BBBBYYBBBB",
+    "BBBBKYBBBB",
+    "BBBBBBBBBB",
+    "BYBBBBBBYB",
+    "BBBBBBBBBB"
+  ],
+  "givens": [9]
+}

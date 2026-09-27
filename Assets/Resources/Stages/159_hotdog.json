@@ -1,0 +1,19 @@
+{
+  "id": "hotdog",
+  "name": "핫도그",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "O", "color": "#E9A15F" },
+    { "key": "R", "color": "#C8553D" },
+    { "key": "Y", "color": "#FFD60A" }
+  ],
+  "pixels": [
+    "..OOOOOOO..",
+    ".RRYRRYRRR.",
+    "RRRRRRRRRRR",
+    ".OOOOOOOOO.",
+    "..OOOOOOO.."
+  ],
+  "givens": [52, 53]
+}

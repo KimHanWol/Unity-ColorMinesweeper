@@ -1,0 +1,19 @@
+{
+  "id": "flashlight",
+  "name": "손전등",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2E2A47" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "K", "color": "#10002B" },
+    { "key": "S", "color": "#8D99AE" }
+  ],
+  "pixels": [
+    ".......YY..",
+    "KKSSSSSYYYY",
+    "KKSSKSSYYYY",
+    "KKSSSSSYYYY",
+    ".......YY.."
+  ],
+  "givens": [2, 26]
+}

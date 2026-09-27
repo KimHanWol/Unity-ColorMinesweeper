@@ -1,0 +1,21 @@
+{
+  "id": "fish",
+  "name": "줄무늬 물고기",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E0FBFC" },
+    { "key": "B", "color": "#4EA8DE" },
+    { "key": "K", "color": "#1D3557" },
+    { "key": "S", "color": "#A9DEF9" }
+  ],
+  "pixels": [
+    "....BBBB...",
+    "..BBBBBBB.B",
+    ".BBKBSBBBBB",
+    "BBBBBSBBBB.",
+    ".BBBBSBBBBB",
+    "..BBBBBBB.B",
+    "....BBBB..."
+  ],
+  "givens": [0, 13]
+}

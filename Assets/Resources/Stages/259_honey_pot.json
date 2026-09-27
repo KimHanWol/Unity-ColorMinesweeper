@@ -1,0 +1,24 @@
+{
+  "id": "honey_pot",
+  "name": "꿀단지",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "B", "color": "#6F4E37" },
+    { "key": "Y", "color": "#FFC300" },
+    { "key": "O", "color": "#E9A15F" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "..BBBB..",
+    "YYYYYYYY",
+    "YOYOOYOY",
+    ".OOOOOO.",
+    "OOKKKKOO",
+    "OOKYYKOO",
+    "OOKKKKOO",
+    "OOOOOOOO",
+    ".OOOOOO."
+  ],
+  "givens": [0, 1, 18]
+}

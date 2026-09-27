@@ -1,0 +1,23 @@
+{
+  "id": "pirate_flag",
+  "name": "해적 깃발",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CAF0F8" },
+    { "key": "S", "color": "#8D99AE" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "SKKKKKKKKK",
+    "SKKKWWWKKK",
+    "SKKWKWKWKK",
+    "SKKWWWWWKK",
+    "SKKKWKWKKK",
+    "SKWKKKKKWK",
+    "SKKWKKKWKK",
+    "S.........",
+    "S........."
+  ],
+  "givens": [82]
+}

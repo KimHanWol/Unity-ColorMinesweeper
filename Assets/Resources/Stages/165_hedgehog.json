@@ -1,0 +1,21 @@
+{
+  "id": "hedgehog",
+  "name": "고슴도치",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "B", "color": "#7F5539" },
+    { "key": "L", "color": "#E6CCB2" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "..B.B.B...",
+    ".BBBBBBB..",
+    "BBBBBBBBL.",
+    "BBBBBBBLLL",
+    "BBBBBBBLKL",
+    ".BBBBBBLLK",
+    "..L..L...."
+  ],
+  "givens": [9, 28]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "radish",
+  "name": "무",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CDEAC0" },
+    { "key": "G", "color": "#2D6A4F" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "G..G..G",
+    ".G.G.G.",
+    "..GGG..",
+    ".PPPPP.",
+    ".WWWWW.",
+    ".WWWWW.",
+    "..WWW..",
+    "..WWW..",
+    "...W..."
+  ],
+  "givens": [49]
+}

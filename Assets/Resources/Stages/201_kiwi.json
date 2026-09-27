@@ -1,0 +1,23 @@
+{
+  "id": "kiwi",
+  "name": "키위",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "B", "color": "#8B5E3C" },
+    { "key": "G", "color": "#80B918" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "..BBBBB..",
+    ".BGGGGGB.",
+    "BGGKGKGGB",
+    "BGKGGGKGB",
+    "BGGGGGGGB",
+    "BGKGGGKGB",
+    "BGGKGKGGB",
+    ".BGGGGGB.",
+    "..BBBBB.."
+  ],
+  "givens": [6, 8, 16]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "mailbox",
+  "name": "우편함",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "S", "color": "#8D99AE" }
+  ],
+  "pixels": [
+    "..BBBBB..",
+    ".BBBBBBB.",
+    ".B.....BR",
+    ".BBBBBBBR",
+    ".BBBBBBBR",
+    ".BBBBBBB.",
+    "....S....",
+    "....S....",
+    "...SSS..."
+  ],
+  "givens": [63]
+}

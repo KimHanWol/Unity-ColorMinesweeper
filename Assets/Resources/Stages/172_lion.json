@@ -1,0 +1,24 @@
+{
+  "id": "lion",
+  "name": "사자",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E3F2FD" },
+    { "key": "O", "color": "#C8553D" },
+    { "key": "Y", "color": "#FFC300" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "..OOOOOO..",
+    ".OOOOOOOO.",
+    "OOYYYYYYOO",
+    "OOYKYYKYOO",
+    "OOYYYYYYOO",
+    "OOYYKKYYOO",
+    "OOYYYYYYOO",
+    ".OOYYYYOO.",
+    "..OOOOOO..",
+    "...OOOO..."
+  ],
+  "givens": [72, 90]
+}

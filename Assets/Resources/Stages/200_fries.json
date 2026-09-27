@@ -1,0 +1,23 @@
+{
+  "id": "fries",
+  "name": "감자튀김",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    ".Y.Y..Y.",
+    ".YY.YYY.",
+    "YYYYYYYY",
+    "RRRRRRRR",
+    "RRWWWWRR",
+    "RRWRRWRR",
+    "RRWWWWRR",
+    ".RRRRRR.",
+    ".RRRRRR."
+  ],
+  "givens": [8, 16]
+}

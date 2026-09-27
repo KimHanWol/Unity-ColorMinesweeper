@@ -1,0 +1,24 @@
+{
+  "id": "rose",
+  "name": "장미",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5F7" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "D", "color": "#9D0208" },
+    { "key": "G", "color": "#2D6A4F" }
+  ],
+  "pixels": [
+    "..RRR..",
+    ".RDRRR.",
+    "RRDDRRR",
+    "RDRRDRR",
+    ".RRDRR.",
+    "..RRR..",
+    "...G...",
+    ".GGG...",
+    "...GGG.",
+    "...G..."
+  ],
+  "givens": [48]
+}

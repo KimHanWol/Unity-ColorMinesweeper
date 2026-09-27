@@ -1,0 +1,21 @@
+{
+  "id": "radio",
+  "name": "라디오",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "S", "color": "#8D99AE" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "........S.",
+    ".......S..",
+    "RRRRRRRRRR",
+    "RKKKKRSSSR",
+    "RK.K.RSKSR",
+    "RKKKKRSSSR",
+    "RRRRRRRRRR"
+  ],
+  "givens": [0]
+}

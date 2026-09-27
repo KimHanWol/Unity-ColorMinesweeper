@@ -1,0 +1,23 @@
+{
+  "id": "alarm_clock",
+  "name": "알람시계",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "RR.....RR",
+    "R.RRRRR.R",
+    "..RWWWR..",
+    ".RWWKWWR.",
+    ".RWWKWWR.",
+    ".RWWKKWR.",
+    ".RWWWWWR.",
+    "..RRRRR..",
+    ".R.....R."
+  ],
+  "givens": [6, 14, 23]
+}

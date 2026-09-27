@@ -1,0 +1,22 @@
+{
+  "id": "wizard_hat",
+  "name": "마법 모자",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF9E6" },
+    { "key": "P", "color": "#7B2CBF" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "D", "color": "#3C096C" }
+  ],
+  "pixels": [
+    "....P....",
+    "....PP...",
+    "...PPY...",
+    "...PPPP..",
+    "..PYPPP..",
+    "..PPPPYP.",
+    ".DDDDDDD.",
+    "PPPPPPPPP"
+  ],
+  "givens": [0]
+}

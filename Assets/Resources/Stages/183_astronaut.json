@@ -1,0 +1,24 @@
+{
+  "id": "astronaut",
+  "name": "우주인",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1D1E3A" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "S", "color": "#ADB5BD" }
+  ],
+  "pixels": [
+    "..WWWWW..",
+    ".WWWWWWW.",
+    ".WBBBBBW.",
+    ".WBBBBSW.",
+    ".WBBBBBW.",
+    "..WWWWW..",
+    ".WWSSSWW.",
+    "WWWSSSWWW",
+    ".WWWWWWW.",
+    ".WW...WW."
+  ],
+  "givens": [51, 52]
+}

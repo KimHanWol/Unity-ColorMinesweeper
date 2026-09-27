@@ -1,0 +1,23 @@
+{
+  "id": "dragonfly",
+  "name": "잠자리",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF9E6" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "L", "color": "#BDE0FE" }
+  ],
+  "pixels": [
+    "...KBK...",
+    "LL..B..LL",
+    "LLLLBLLLL",
+    ".LLLBLLL.",
+    "LLLLBLLLL",
+    ".L..B..L.",
+    "....B....",
+    "....B....",
+    "....B...."
+  ],
+  "givens": [63]
+}
