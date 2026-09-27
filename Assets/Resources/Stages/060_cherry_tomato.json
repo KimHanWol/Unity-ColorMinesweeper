@@ -1,0 +1,18 @@
+{
+  "id": "cherry_tomato",
+  "name": "방울토마토",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    ".GG.",
+    "RRRR",
+    "RRRR",
+    ".RR."
+  ],
+  "givens": [3, 8, 15]
+}

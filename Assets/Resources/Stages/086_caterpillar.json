@@ -1,0 +1,19 @@
+{
+  "id": "caterpillar",
+  "name": "애벌레",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF9E6" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "G", "color": "#80B918" }
+  ],
+  "pixels": [
+    ".........K.",
+    "........GGG",
+    ".GG.GG.GGKG",
+    "GGGGGGGGGGG",
+    ".K.K.K.K.K."
+  ],
+  "givens": [14, 20, 24, 26, 46]
+}

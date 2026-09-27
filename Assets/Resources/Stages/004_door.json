@@ -1,0 +1,18 @@
+{
+  "id": "door",
+  "name": "문",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F3EEE4" },
+    { "key": "B", "color": "#8B5E3C" }
+  ],
+  "pixels": [
+    "BBBB",
+    "BBBB",
+    "BB.B",
+    "BBBB",
+    "BBBB"
+  ],
+  "givens": [10]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "little_star",
+  "name": "샛별",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2B2D42" },
+    { "key": "Y", "color": "#FFD166" }
+  ],
+  "pixels": [
+    "..Y..",
+    ".YYY.",
+    "YYYYY",
+    ".YYY.",
+    ".Y.Y."
+  ],
+  "givens": [15, 17, 20]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "question",
+  "name": "물음표",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "P", "color": "#6C5CE7" }
+  ],
+  "pixels": [
+    ".PPPP.",
+    "PP..PP",
+    "....PP",
+    "...PP.",
+    "..PP..",
+    "..PP..",
+    "......",
+    "..PP.."
+  ],
+  "givens": [22, 35]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "sword",
+  "name": "검",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EEF1F6" },
+    { "key": "S", "color": "#4A4E69" }
+  ],
+  "pixels": [
+    "........S",
+    ".......SS",
+    "......SS.",
+    ".....SS..",
+    "S..SSS...",
+    ".SSSS....",
+    "..SS.....",
+    ".S.S.....",
+    "S........"
+  ],
+  "givens": [37, 38, 47, 55]
+}

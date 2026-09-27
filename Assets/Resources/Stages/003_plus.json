@@ -1,0 +1,17 @@
+{
+  "id": "plus",
+  "name": "더하기",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    ".B..",
+    "BBB.",
+    ".B..",
+    "...."
+  ],
+  "givens": [6, 7]
+}

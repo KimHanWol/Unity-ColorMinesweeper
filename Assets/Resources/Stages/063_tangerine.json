@@ -1,0 +1,19 @@
+{
+  "id": "tangerine",
+  "name": "귤",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "O", "color": "#F77F00" }
+  ],
+  "pixels": [
+    "..G..",
+    ".OOO.",
+    "OOOOO",
+    "OOOOO",
+    ".OOO."
+  ],
+  "givens": [24]
+}

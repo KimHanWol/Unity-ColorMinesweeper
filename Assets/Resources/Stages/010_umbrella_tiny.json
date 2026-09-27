@@ -1,0 +1,18 @@
+{
+  "id": "umbrella_tiny",
+  "name": "우산",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E3F2FD" },
+    { "key": "P", "color": "#FF6B9A" }
+  ],
+  "pixels": [
+    ".PPP.",
+    "PPPPP",
+    "..P..",
+    "..P..",
+    ".PP.."
+  ],
+  "givens": [0, 23]
+}

@@ -1,0 +1,17 @@
+{
+  "id": "ball",
+  "name": "공",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    ".RR.",
+    "RRRR",
+    "RRRR",
+    ".RR."
+  ],
+  "givens": [0, 15]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "cross_mark",
+  "name": "가위표",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF1F3" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "R...R",
+    ".R.R.",
+    "..R..",
+    ".R.R.",
+    "R...R"
+  ],
+  "givens": [5, 15, 16, 18, 20]
+}

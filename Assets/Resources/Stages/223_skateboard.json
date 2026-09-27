@@ -1,0 +1,19 @@
+{
+  "id": "skateboard",
+  "name": "스케이트보드",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "S", "color": "#8D99AE" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    ".RRRRRRRRRR.",
+    "RRYYYYYYYYRR",
+    ".SS......SS.",
+    ".KK......KK."
+  ],
+  "givens": [15, 27]
+}

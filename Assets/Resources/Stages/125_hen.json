@@ -1,0 +1,23 @@
+{
+  "id": "hen",
+  "name": "닭",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#BDE0FE" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "..RR....",
+    ".RRR....",
+    ".WWW....",
+    "WW.WR...",
+    "WWWWRR..",
+    ".WWW...W",
+    ".WWWWWWW",
+    ".WWWWWWW",
+    "..WWWWW."
+  ],
+  "givens": [38, 39, 47]
+}

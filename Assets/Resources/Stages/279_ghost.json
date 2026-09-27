@@ -1,0 +1,26 @@
+{
+  "id": "ghost",
+  "name": "수줍은 유령",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2E2A47" },
+    { "key": "W", "color": "#F7F7FF" },
+    { "key": "K", "color": "#1B1B2F" },
+    { "key": "B", "color": "#6EC6FF" },
+    { "key": "P", "color": "#FF8FAB" }
+  ],
+  "pixels": [
+    "............",
+    "....WWWW....",
+    "...WWWWWW...",
+    "..WWWWWWWW..",
+    "..WKKWWKKW..",
+    "..WKBWWKBW..",
+    "..WWWWWWWW..",
+    "..WWWPPWWW..",
+    "..WWWWWWWW..",
+    "..WWWWWWWW..",
+    "..WW.WW.WW.."
+  ],
+  "givens": [73, 74]
+}

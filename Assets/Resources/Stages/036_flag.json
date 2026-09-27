@@ -1,0 +1,21 @@
+{
+  "id": "flag",
+  "name": "깃발",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF6FF" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "RRRRRRR",
+    "RRRRRR.",
+    "RRRRRRR",
+    "RRRRRR.",
+    "R......",
+    "R......",
+    "R......",
+    "R......"
+  ],
+  "givens": [24, 30, 31, 32]
+}

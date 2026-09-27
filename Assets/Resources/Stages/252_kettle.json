@@ -1,0 +1,24 @@
+{
+  "id": "kettle",
+  "name": "주전자",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "S", "color": "#8D99AE" }
+  ],
+  "pixels": [
+    "........W.",
+    ".......W..",
+    "...KK...W.",
+    "..RRRR....",
+    ".RRRRRR.S.",
+    "RRRRRRRRS.",
+    "RRWRRRRR..",
+    "RRRRRRRR..",
+    ".SSSSSS..."
+  ],
+  "givens": [79]
+}

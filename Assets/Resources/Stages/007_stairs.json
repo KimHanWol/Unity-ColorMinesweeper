@@ -1,0 +1,18 @@
+{
+  "id": "stairs",
+  "name": "계단",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EEF8EE" },
+    { "key": "G", "color": "#2A9D8F" }
+  ],
+  "pixels": [
+    "G....",
+    "GG...",
+    "GGG..",
+    "GGGG.",
+    "GGGGG"
+  ],
+  "givens": [1, 5]
+}

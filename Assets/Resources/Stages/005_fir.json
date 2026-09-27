@@ -1,0 +1,18 @@
+{
+  "id": "fir",
+  "name": "전나무",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF6FF" },
+    { "key": "G", "color": "#2D6A4F" }
+  ],
+  "pixels": [
+    "..G..",
+    ".GGG.",
+    "GGGGG",
+    "..G..",
+    "..G.."
+  ],
+  "givens": [20]
+}

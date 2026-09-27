@@ -1,0 +1,20 @@
+{
+  "id": "ice_pop",
+  "name": "아이스바",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "P", "color": "#FF6B9A" },
+    { "key": "B", "color": "#B08968" }
+  ],
+  "pixels": [
+    ".PP.",
+    "PPPP",
+    "PPPP",
+    "PPPP",
+    ".BB.",
+    ".BB."
+  ],
+  "givens": [0, 19, 21]
+}

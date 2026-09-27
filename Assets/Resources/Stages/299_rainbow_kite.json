@@ -1,0 +1,27 @@
+{
+  "id": "rainbow_kite",
+  "name": "무지개 연",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#DDF1FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "....R....",
+    "...RYR...",
+    "..RYBYR..",
+    ".RYBGBYR.",
+    "..RYBYR..",
+    "...RYR...",
+    "....R....",
+    "....K....",
+    "...K.....",
+    "....K....",
+    ".....K..."
+  ],
+  "givens": [0]
+}

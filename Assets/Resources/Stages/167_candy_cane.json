@@ -1,0 +1,24 @@
+{
+  "id": "candy_cane",
+  "name": "지팡이 사탕",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "G", "color": "#2D6A4F" }
+  ],
+  "pixels": [
+    "..WRRW.",
+    ".RW..RW",
+    ".W....R",
+    ".R....W",
+    ".W.....",
+    ".R.....",
+    ".W.....",
+    "GRG....",
+    ".W.....",
+    ".R....."
+  ],
+  "givens": [33, 34]
+}

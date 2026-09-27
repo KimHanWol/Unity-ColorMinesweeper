@@ -1,0 +1,22 @@
+{
+  "id": "airplane",
+  "name": "비행기",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CDE7FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "S", "color": "#ADB5BD" }
+  ],
+  "pixels": [
+    "...........R.",
+    "..........RR.",
+    ".WWWWWWWWWWWR",
+    "WBWBWBWBWWWW.",
+    ".WWWWWWWWWWW.",
+    "....SSSS.....",
+    "...SSSS......"
+  ],
+  "givens": [87]
+}

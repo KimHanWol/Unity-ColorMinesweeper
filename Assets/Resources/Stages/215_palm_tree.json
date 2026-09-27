@@ -1,0 +1,24 @@
+{
+  "id": "palm_tree",
+  "name": "야자수",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CAF0F8" },
+    { "key": "G", "color": "#2D6A4F" },
+    { "key": "B", "color": "#8B5E3C" },
+    { "key": "Y", "color": "#F4D58D" }
+  ],
+  "pixels": [
+    "..GG..GG..",
+    ".GGGGGGGG.",
+    "GG..GG..GG",
+    "G...BB...G",
+    "....BB....",
+    ".....B....",
+    ".....BB...",
+    ".....BB...",
+    "..YYYYYY..",
+    "YYYYYYYYYY"
+  ],
+  "givens": [47]
+}

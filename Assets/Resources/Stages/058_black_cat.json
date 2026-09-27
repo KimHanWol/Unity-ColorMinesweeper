@@ -1,0 +1,22 @@
+{
+  "id": "black_cat",
+  "name": "검은 고양이",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF1D6" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "K...K....",
+    "KK.KK....",
+    "KKKKK....",
+    "K.K.K....",
+    "KKKKK....",
+    ".KKKKK..K",
+    ".KKKKKK.K",
+    ".KKKKKKKK",
+    ".KK.KK..."
+  ],
+  "givens": [30]
+}

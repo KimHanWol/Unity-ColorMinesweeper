@@ -1,0 +1,22 @@
+{
+  "id": "eggplant",
+  "name": "가지",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF9E6" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "P", "color": "#7B2CBF" }
+  ],
+  "pixels": [
+    ".GG......",
+    "GGGG.....",
+    ".GPPP....",
+    "..PPPP...",
+    "..PPPPP..",
+    "...PPPPP.",
+    "....PPPPP",
+    ".....PPP."
+  ],
+  "givens": [19, 27]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "house_tiny",
+  "name": "집",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "R", "color": "#C8553D" }
+  ],
+  "pixels": [
+    "..R..",
+    ".RRR.",
+    "RRRRR",
+    ".R.R.",
+    ".RRR."
+  ],
+  "givens": [15, 17]
+}
