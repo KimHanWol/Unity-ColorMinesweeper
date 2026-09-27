@@ -37,7 +37,7 @@ namespace ColorMinesweeper.Game
 
             top = Draw.Node(transform, "Top");
             bottom = Draw.Node(transform, "Bottom");
-            hud = Hud.Create(top, Ui, StageTitle.For(stageIndex, stage), () => App.ShowSelect(), OpenSettings);
+            hud = Hud.Create(top, Ui, StageTitle.For(stageIndex, stage), OnBack, OpenSettings);
             palette = PaletteBar.Create(bottom, Ui, stage, OnSelectColor);
             Layout();
 
@@ -55,6 +55,11 @@ namespace ColorMinesweeper.Game
         {
             Settings.Changed -= OnSettingsChanged;
             base.OnDestroy();
+        }
+
+        public override void OnBack()
+        {
+            App.ShowSelect();
         }
 
         void OnSettingsChanged()

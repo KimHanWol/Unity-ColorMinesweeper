@@ -42,6 +42,34 @@ namespace ColorMinesweeper.Game
             return index == 0 || (Cheats.UnlockAll && index < All.Count) || (index > 0 && index < All.Count && Progress.IsCleared(All[index - 1].Id));
         }
 
+        /// <summary>이어하기로 들어갈 스테이지: 아직 못 깬 첫 스테이지. 다 깼으면 마지막 스테이지.</summary>
+        public static int NextToPlay()
+        {
+            for (int i = 0; i < All.Count; i++)
+            {
+                if (!Progress.IsCleared(All[i].Id))
+                {
+                    return i;
+                }
+            }
+
+            return Math.Max(0, All.Count - 1);
+        }
+
+        public static int ClearedCount()
+        {
+            int count = 0;
+            foreach (Stage stage in All)
+            {
+                if (Progress.IsCleared(stage.Id))
+                {
+                    count++;
+                }
+            }
+
+            return count;
+        }
+
         /// <summary>givens 가 비어 있는 스테이지는 id 로 만든 시드로 생성한다(에디터 도구와 같은 결과).</summary>
         public static int[] GivensFor(Stage stage)
         {

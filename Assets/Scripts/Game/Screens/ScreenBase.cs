@@ -27,6 +27,11 @@ namespace ColorMinesweeper.Game
         {
         }
 
+        /// <summary>뒤로 가기(화면의 뒤로 버튼, 안드로이드 뒤로 가기 키).</summary>
+        public virtual void OnBack()
+        {
+        }
+
         public virtual void OnTap(Vector2 screen)
         {
         }

@@ -57,12 +57,18 @@ namespace ColorMinesweeper.Game
         {
             if (!TryStartPlaytest())
             {
-                ShowSelect();
+                ShowTitle();
             }
         }
 
         void Update()
         {
+            // 안드로이드 뒤로 가기 버튼은 Escape 로 들어온다.
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                current?.OnBack();
+            }
+
             var size = new Vector2Int(Screen.width, Screen.height);
             if (size != lastScreenSize || Screen.safeArea != lastSafeArea)
             {
@@ -71,6 +77,11 @@ namespace ColorMinesweeper.Game
                 Ui.Refresh();
                 current?.Layout();
             }
+        }
+
+        public void ShowTitle()
+        {
+            Open<TitleScreen>(null);
         }
 
         public void ShowSelect()
