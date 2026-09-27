@@ -1,0 +1,22 @@
+{
+  "id": "lantern",
+  "name": "등불",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2E2A47" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFD166" }
+  ],
+  "pixels": [
+    "...R...",
+    "RRRRRRR",
+    ".RYYYR.",
+    "RYYYYYR",
+    "RYYYYYR",
+    ".RYYYR.",
+    "RRRRRRR",
+    "...R..."
+  ],
+  "givens": [1, 2, 15, 20, 26, 35]
+}

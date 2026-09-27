@@ -1,0 +1,18 @@
+{
+  "id": "top_hat",
+  "name": "신사 모자",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FDF0F5" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "..KKKK..",
+    "..KKKK..",
+    "..K..K..",
+    "..KKKK..",
+    "KKKKKKKK"
+  ],
+  "givens": [0]
+}

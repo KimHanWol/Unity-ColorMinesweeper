@@ -1,0 +1,25 @@
+{
+  "id": "hot_air_balloon",
+  "name": "열기구",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CDE7FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFC300" }
+  ],
+  "pixels": [
+    "..RRRRR..",
+    ".RRYRYRR.",
+    "RRRYRYRRR",
+    "RRRYRYRRR",
+    "RRRYRYRRR",
+    ".RRYRYRR.",
+    "..RRYRR..",
+    "...R.R...",
+    "...R.R...",
+    "...YYY...",
+    "...YYY..."
+  ],
+  "givens": [14, 46, 63]
+}

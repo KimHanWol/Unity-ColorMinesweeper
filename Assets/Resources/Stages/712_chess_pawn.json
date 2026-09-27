@@ -1,0 +1,21 @@
+{
+  "id": "chess_pawn",
+  "name": "체스 말",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F7F7F2" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "..KKK..",
+    "..KKK..",
+    "...K...",
+    "..KKK..",
+    "...K...",
+    "..KKK..",
+    ".KKKKK.",
+    "KKKKKKK"
+  ],
+  "givens": [0]
+}

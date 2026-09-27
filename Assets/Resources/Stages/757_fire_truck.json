@@ -1,0 +1,20 @@
+{
+  "id": "fire_truck",
+  "name": "소방차",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9ECEF" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "KKKKKKK.RR..",
+    "RRRRRRRRRRR.",
+    "RRRRRRRRKKRR",
+    "RRRRRRRRKKRR",
+    "RRRRRRRRRRRR",
+    ".KK.....KK.."
+  ],
+  "givens": [60, 61]
+}

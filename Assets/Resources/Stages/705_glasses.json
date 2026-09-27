@@ -1,0 +1,17 @@
+{
+  "id": "glasses",
+  "name": "안경",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF9E6" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "KKKK..KKKK",
+    "K..KKKK..K",
+    "K..K..K..K",
+    "KKKK..KKKK"
+  ],
+  "givens": [0, 11, 12, 18, 21, 27]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "snail",
+  "name": "달팽이",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "O", "color": "#C8553D" },
+    { "key": "Y", "color": "#F2D7A6" }
+  ],
+  "pixels": [
+    "..OOOO....",
+    ".OO..OO...",
+    ".O.OO.O...",
+    ".OO..OO.Y.",
+    "..OOOO..Y.",
+    "YYYYYYYYYY",
+    ".YYYYYYYY."
+  ],
+  "givens": [8, 38, 49]
+}

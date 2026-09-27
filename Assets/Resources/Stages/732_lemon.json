@@ -1,0 +1,20 @@
+{
+  "id": "lemon",
+  "name": "레몬",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "Y", "color": "#FFD60A" }
+  ],
+  "pixels": [
+    "......GG.",
+    "..YYYYG..",
+    ".YYYYYYY.",
+    "YYYYYYYYY",
+    ".YYYYYYY.",
+    "..YYYYY.."
+  ],
+  "givens": [0, 19]
+}

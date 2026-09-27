@@ -1,0 +1,21 @@
+{
+  "id": "phone",
+  "name": "전화기",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF1F3" },
+    { "key": "K", "color": "#3D405B" }
+  ],
+  "pixels": [
+    "KK......",
+    "KKK.....",
+    "KK......",
+    ".KK.....",
+    "..KK....",
+    "...KK.KK",
+    "....KKKK",
+    ".....KK."
+  ],
+  "givens": [4]
+}

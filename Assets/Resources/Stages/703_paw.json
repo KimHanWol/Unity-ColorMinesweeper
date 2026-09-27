@@ -1,0 +1,21 @@
+{
+  "id": "paw",
+  "name": "발자국",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF6E9" },
+    { "key": "B", "color": "#7F5539" }
+  ],
+  "pixels": [
+    "..BB.BB..",
+    "..BB.BB..",
+    "BB.....BB",
+    "BB.BBB.BB",
+    "..BBBBB..",
+    ".BBBBBBB.",
+    ".BBBBBBB.",
+    "..BB.BB.."
+  ],
+  "givens": [0]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "corn",
+  "name": "옥수수",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "Y", "color": "#FFC300" },
+    { "key": "G", "color": "#52B788" }
+  ],
+  "pixels": [
+    "...Y...",
+    "..YYY..",
+    "..Y.Y..",
+    "..YYY..",
+    "..Y.Y..",
+    "G.YYY.G",
+    "GGY.YGG",
+    ".GGYGG.",
+    "..GGG..",
+    "...G..."
+  ],
+  "givens": [0, 50]
+}

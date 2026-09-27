@@ -1,0 +1,22 @@
+{
+  "id": "octopus",
+  "name": "문어",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CAF0F8" },
+    { "key": "P", "color": "#FF6B9A" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "..PPPPP..",
+    ".PPPPPPP.",
+    ".PKPPPKP.",
+    ".PPPPPPP.",
+    "..PPPPP..",
+    ".P.P.P.P.",
+    "P.P.P.P.P",
+    ".P..P..P."
+  ],
+  "givens": [6, 7, 47, 58, 67]
+}

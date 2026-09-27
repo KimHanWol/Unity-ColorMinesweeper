@@ -1,0 +1,18 @@
+{
+  "id": "sunglasses",
+  "name": "선글라스",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF3B0" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    "KKKKKKKKKK",
+    "KBBBKKBBBK",
+    ".BBB..BBB.",
+    "..B....B.."
+  ],
+  "givens": [8, 16, 21, 23, 30]
+}

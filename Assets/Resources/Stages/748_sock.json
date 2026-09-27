@@ -1,0 +1,23 @@
+{
+  "id": "sock",
+  "name": "양말",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    ".WWWW..",
+    ".RRRR..",
+    ".WWWW..",
+    ".RRRR..",
+    ".RRRR..",
+    ".RRRRR.",
+    "RRRRRRR",
+    "RRRRRRW",
+    ".WWWWW."
+  ],
+  "givens": [4, 6]
+}

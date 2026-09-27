@@ -1,0 +1,22 @@
+{
+  "id": "acorn",
+  "name": "도토리",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F3FAEC" },
+    { "key": "B", "color": "#7F5539" },
+    { "key": "O", "color": "#D4A373" }
+  ],
+  "pixels": [
+    "...B...",
+    ".BBBBB.",
+    "BBBBBBB",
+    ".OOOOO.",
+    ".OOOOO.",
+    ".OOOOO.",
+    "..OOO..",
+    "...O..."
+  ],
+  "givens": [37, 49]
+}

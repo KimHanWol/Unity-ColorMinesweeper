@@ -1,0 +1,19 @@
+{
+  "id": "ball_cap",
+  "name": "야구 모자",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "...RRR...",
+    "..RRRRR..",
+    ".RRWRRRR.",
+    ".RRRRRRR.",
+    ".RRRRWWWW"
+  ],
+  "givens": [0, 2, 15]
+}

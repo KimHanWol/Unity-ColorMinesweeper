@@ -1,0 +1,22 @@
+{
+  "id": "orange",
+  "name": "오렌지",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F1F7FF" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "O", "color": "#F77F00" }
+  ],
+  "pixels": [
+    "....GG..",
+    "..OOOO..",
+    ".OOOOOO.",
+    "OOOOO.OO",
+    "OOOOOOOO",
+    "OOOOOOOO",
+    ".OOOOOO.",
+    "..OOOO.."
+  ],
+  "givens": [0, 18]
+}

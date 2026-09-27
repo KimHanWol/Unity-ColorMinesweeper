@@ -1,0 +1,22 @@
+{
+  "id": "peach",
+  "name": "복숭아",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4FBF6" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "P", "color": "#FF9E80" }
+  ],
+  "pixels": [
+    "....GG..",
+    "...GG...",
+    ".PPP.PP.",
+    "PPPP.PPP",
+    "PPPPPPPP",
+    "PPPPPPPP",
+    ".PPPPPP.",
+    "..PPPP.."
+  ],
+  "givens": [0, 11]
+}

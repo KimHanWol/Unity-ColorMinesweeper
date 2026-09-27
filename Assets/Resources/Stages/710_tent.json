@@ -1,0 +1,20 @@
+{
+  "id": "tent",
+  "name": "텐트",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EEF8EE" },
+    { "key": "G", "color": "#2A9D8F" }
+  ],
+  "pixels": [
+    "....G....",
+    "...GGG...",
+    "..GGGGG..",
+    "..GG.GG..",
+    ".GG...GG.",
+    ".GG...GG.",
+    "GGGGGGGGG"
+  ],
+  "givens": [0]
+}

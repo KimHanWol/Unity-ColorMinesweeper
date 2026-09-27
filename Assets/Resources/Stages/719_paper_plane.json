@@ -1,0 +1,20 @@
+{
+  "id": "paper_plane",
+  "name": "종이비행기",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5FA" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    "........B",
+    "......BBB",
+    "....BBBB.",
+    "..BBBBBB.",
+    "BBBBB.BB.",
+    "...BB.B..",
+    "....BB..."
+  ],
+  "givens": [0]
+}

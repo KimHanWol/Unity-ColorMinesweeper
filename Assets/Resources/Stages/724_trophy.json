@@ -1,0 +1,21 @@
+{
+  "id": "trophy",
+  "name": "트로피",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF0FF" },
+    { "key": "Y", "color": "#F4A300" }
+  ],
+  "pixels": [
+    "YYYYYYYY",
+    "Y.YYYY.Y",
+    "Y.YYYY.Y",
+    ".YYYYYY.",
+    "..YYYY..",
+    "...YY...",
+    "..YYYY..",
+    ".YYYYYY."
+  ],
+  "givens": [40, 57]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "milk",
+  "name": "우유",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#BDE0FE" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    "...W...",
+    "..WWW..",
+    ".WWWWW.",
+    "WWWWWWW",
+    "WBBBBBW",
+    "WBWBWBW",
+    "WBBBBBW",
+    "WWWWWWW",
+    "WWWWWWW"
+  ],
+  "givens": [0, 9, 36]
+}

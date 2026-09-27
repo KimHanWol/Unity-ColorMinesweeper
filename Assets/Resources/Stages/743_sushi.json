@@ -1,0 +1,19 @@
+{
+  "id": "sushi",
+  "name": "초밥",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#3D405B" },
+    { "key": "O", "color": "#FF8C61" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "..OOOOO..",
+    ".OOWOOWOO",
+    "OWOOWOOO.",
+    ".WWWWWWW.",
+    "WWWWWWWWW"
+  ],
+  "givens": [0, 10, 12, 18, 44]
+}

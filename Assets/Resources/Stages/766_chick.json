@@ -1,0 +1,21 @@
+{
+  "id": "chick",
+  "name": "병아리",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "O", "color": "#F77F00" }
+  ],
+  "pixels": [
+    "..YYY..",
+    ".YYYYY.",
+    ".Y.YYYO",
+    ".YYYYOO",
+    "YYYYYY.",
+    ".YYYYY.",
+    "..O.O.."
+  ],
+  "givens": [21, 36, 42, 47]
+}

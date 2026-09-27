@@ -1,0 +1,22 @@
+{
+  "id": "grapes",
+  "name": "포도",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4FBEE" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "P", "color": "#7B2CBF" }
+  ],
+  "pixels": [
+    "...GG..",
+    "..GG...",
+    ".PP.PP.",
+    "PPPPPPP",
+    ".PP.PP.",
+    "..PPP..",
+    "..P.P..",
+    "...P..."
+  ],
+  "givens": [14, 28, 42]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "necktie",
+  "name": "넥타이",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F3EEE4" },
+    { "key": "B", "color": "#1D3557" },
+    { "key": "Y", "color": "#FFC300" }
+  ],
+  "pixels": [
+    ".BBB.",
+    "..B..",
+    ".BBB.",
+    ".BYB.",
+    "BYBBB",
+    "BBYBB",
+    "BBBYB",
+    "BYBBB",
+    ".BBB.",
+    "..B.."
+  ],
+  "givens": [19, 46, 47, 48]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "scissors",
+  "name": "가위",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EEF1F6" },
+    { "key": "S", "color": "#E63946" }
+  ],
+  "pixels": [
+    "S......S",
+    ".S....S.",
+    "..S..S..",
+    "...SS...",
+    "..S..S..",
+    ".SS..SS.",
+    "S..SS..S",
+    ".SS..SS."
+  ],
+  "givens": [1, 3, 18, 43, 52, 57]
+}

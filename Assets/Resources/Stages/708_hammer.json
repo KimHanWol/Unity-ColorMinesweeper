@@ -1,0 +1,21 @@
+{
+  "id": "hammer",
+  "name": "망치",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F3EEE4" },
+    { "key": "S", "color": "#6C757D" }
+  ],
+  "pixels": [
+    "SSSSSSS.",
+    "SSSSSSSS",
+    "SSSSSSS.",
+    "..SS....",
+    "..SS....",
+    "..SS....",
+    "..SS....",
+    "..SS...."
+  ],
+  "givens": [37]
+}

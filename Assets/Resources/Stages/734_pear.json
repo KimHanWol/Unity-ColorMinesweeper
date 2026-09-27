@@ -1,0 +1,23 @@
+{
+  "id": "pear",
+  "name": "배",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "B", "color": "#7F5539" },
+    { "key": "L", "color": "#C9E265" }
+  ],
+  "pixels": [
+    "...B...",
+    "...B...",
+    "..LLL..",
+    "..LLL..",
+    ".LLLLL.",
+    "LLLLLLL",
+    "LLLLLLL",
+    "LLLLLLL",
+    ".LLLLL."
+  ],
+  "givens": [0]
+}

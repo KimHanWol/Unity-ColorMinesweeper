@@ -1,0 +1,23 @@
+{
+  "id": "robot",
+  "name": "로봇",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EEF1F6" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "S", "color": "#8D99AE" }
+  ],
+  "pixels": [
+    "....R....",
+    "....S....",
+    ".SSSSSSS.",
+    ".SRSSSRS.",
+    ".SSSSSSS.",
+    ".SSRRRSS.",
+    ".SSSSSSS.",
+    "..S...S..",
+    ".SS...SS."
+  ],
+  "givens": [0, 13]
+}

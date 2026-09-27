@@ -1,0 +1,22 @@
+{
+  "id": "bottle",
+  "name": "병",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF9E6" },
+    { "key": "G", "color": "#2A9D8F" }
+  ],
+  "pixels": [
+    ".GGG.",
+    "..G..",
+    "..G..",
+    ".GGG.",
+    "GGGGG",
+    "GG.GG",
+    "GGGGG",
+    "GGGGG",
+    ".GGG."
+  ],
+  "givens": [10, 16]
+}

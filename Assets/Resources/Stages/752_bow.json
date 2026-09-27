@@ -1,0 +1,20 @@
+{
+  "id": "bow",
+  "name": "리본",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5FA" },
+    { "key": "P", "color": "#FF6B9A" },
+    { "key": "D", "color": "#C9184A" }
+  ],
+  "pixels": [
+    "PP.....PP",
+    "PPP...PPP",
+    "PPPPDPPPP",
+    "PPPPDPPPP",
+    "PPP...PPP",
+    "PP.....PP"
+  ],
+  "givens": [4, 6]
+}

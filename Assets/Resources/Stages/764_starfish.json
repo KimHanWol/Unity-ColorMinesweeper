@@ -1,0 +1,23 @@
+{
+  "id": "starfish",
+  "name": "불가사리",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF3B0" },
+    { "key": "O", "color": "#F77F00" },
+    { "key": "Y", "color": "#FFD166" }
+  ],
+  "pixels": [
+    "....O....",
+    "....O....",
+    "...OOO...",
+    "OOOOYOOOO",
+    ".OOYOYOO.",
+    "..OOOOO..",
+    ".OOO.OOO.",
+    ".OO...OO.",
+    "O.......O"
+  ],
+  "givens": [0, 41]
+}

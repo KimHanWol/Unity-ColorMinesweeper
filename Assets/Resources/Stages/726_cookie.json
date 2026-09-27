@@ -1,0 +1,21 @@
+{
+  "id": "cookie",
+  "name": "쿠키",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "B", "color": "#C68B59" }
+  ],
+  "pixels": [
+    "..BBBB..",
+    ".BB.BBB.",
+    "BBBBBB.B",
+    "B.BBBBBB",
+    "BBBB.BBB",
+    "BBBBBBBB",
+    ".BB.BBB.",
+    "..BBBB.."
+  ],
+  "givens": [5, 6, 23]
+}

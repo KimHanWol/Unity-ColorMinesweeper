@@ -1,0 +1,23 @@
+{
+  "id": "mitten",
+  "name": "벙어리장갑",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E3F2FD" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "..RRRR.",
+    ".RRRRRR",
+    ".RRRRRR",
+    "RR.RRRR",
+    "RR.RRRR",
+    ".RRRRRR",
+    ".RRRRRR",
+    ".WWWWWW",
+    ".WWWWWW"
+  ],
+  "givens": [0, 8]
+}

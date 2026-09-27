@@ -1,0 +1,21 @@
+{
+  "id": "bunny",
+  "name": "흰 토끼",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CDEAC0" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    ".W...W.",
+    ".WW.WW.",
+    ".WW.WW.",
+    ".WWWWW.",
+    "WWWWWWW",
+    "WW.W.WW",
+    "WWWWWWW",
+    ".WWWWW."
+  ],
+  "givens": [12, 14, 39]
+}

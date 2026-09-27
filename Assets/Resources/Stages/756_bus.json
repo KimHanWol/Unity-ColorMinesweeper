@@ -1,0 +1,21 @@
+{
+  "id": "bus",
+  "name": "버스",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "Y", "color": "#FFC300" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "YYYYYYYYYYY",
+    "YKKYKKYKKYY",
+    "YKKYKKYKKYY",
+    "YYYYYYYYYYY",
+    "YYYYYYYYYYK",
+    "YYYYYYYYYYY",
+    ".KK.....KK."
+  ],
+  "givens": [54, 72]
+}

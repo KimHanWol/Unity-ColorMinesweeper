@@ -1,0 +1,21 @@
+{
+  "id": "dice",
+  "name": "주사위",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2A9D8F" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    ".WWWWW.",
+    "WKWWWKW",
+    "WWWWWWW",
+    "WWWKWWW",
+    "WWWWWWW",
+    "WKWWWKW",
+    ".WWWWW."
+  ],
+  "givens": [6, 12]
+}

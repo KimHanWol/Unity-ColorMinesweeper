@@ -1,0 +1,21 @@
+{
+  "id": "bee",
+  "name": "꿀벌",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E3F2FD" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "Y", "color": "#FFC300" }
+  ],
+  "pixels": [
+    ".K.....K.",
+    "..K...K..",
+    ".YYKYYKY.",
+    "YYYKYYKYY",
+    "YYYKYYKYY",
+    ".YYKYYKY.",
+    "...K..K.."
+  ],
+  "givens": [4, 21, 30, 42, 51]
+}

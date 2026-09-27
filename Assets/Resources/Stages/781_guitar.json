@@ -1,0 +1,24 @@
+{
+  "id": "guitar",
+  "name": "기타",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF9E6" },
+    { "key": "B", "color": "#6F4E37" },
+    { "key": "O", "color": "#E76F51" }
+  ],
+  "pixels": [
+    "...B...",
+    "...B...",
+    "...B...",
+    "...B...",
+    "..OBO..",
+    ".OOBOO.",
+    "..OOO..",
+    ".OO.OO.",
+    "OOOOOOO",
+    ".OOOOO."
+  ],
+  "givens": [0, 41, 50]
+}

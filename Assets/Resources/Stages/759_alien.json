@@ -1,0 +1,22 @@
+{
+  "id": "alien",
+  "name": "외계인",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1D1E3A" },
+    { "key": "G", "color": "#80B918" },
+    { "key": "K", "color": "#1D1E3A" }
+  ],
+  "pixels": [
+    ".G.....G.",
+    "..G...G..",
+    "..GGGGG..",
+    ".GKGGGKG.",
+    ".GKKGKKG.",
+    "GGGGGGGGG",
+    ".GGGGGGG.",
+    "..G...G.."
+  ],
+  "givens": [4, 40]
+}

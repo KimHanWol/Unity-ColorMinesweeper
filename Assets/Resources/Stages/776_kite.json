@@ -1,0 +1,24 @@
+{
+  "id": "kite",
+  "name": "연",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CDE7FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "B", "color": "#1D3557" }
+  ],
+  "pixels": [
+    "...R...",
+    "..RRR..",
+    ".RRBRR.",
+    "RRBBBRR",
+    ".RRBRR.",
+    "..RRR..",
+    "...R...",
+    "...B...",
+    "..B....",
+    "...B..."
+  ],
+  "givens": [19, 31, 48, 65]
+}

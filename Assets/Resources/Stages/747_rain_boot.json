@@ -1,0 +1,21 @@
+{
+  "id": "rain_boot",
+  "name": "장화",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#BDE0FE" },
+    { "key": "Y", "color": "#FFC300" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    ".YYYY..",
+    ".YYYY..",
+    ".YYYY..",
+    ".YYYY..",
+    ".YYYYYY",
+    "YYYYYYY",
+    "KKKKKKK"
+  ],
+  "givens": [6]
+}

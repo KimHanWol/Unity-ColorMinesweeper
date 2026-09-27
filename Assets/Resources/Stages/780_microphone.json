@@ -1,0 +1,24 @@
+{
+  "id": "microphone",
+  "name": "마이크",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "S", "color": "#ADB5BD" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    ".SSS.",
+    "SSSSS",
+    "S.S.S",
+    "SSSSS",
+    ".SSS.",
+    "..K..",
+    "..K..",
+    "..K..",
+    ".KKK.",
+    "KKKKK"
+  ],
+  "givens": [14, 30]
+}

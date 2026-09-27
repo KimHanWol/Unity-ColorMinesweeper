@@ -1,0 +1,19 @@
+{
+  "id": "mountain",
+  "name": "산",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E3F2FD" },
+    { "key": "B", "color": "#4A4E69" }
+  ],
+  "pixels": [
+    "....B.....",
+    "...BBB....",
+    "..BBBBB.B.",
+    ".BBBBBBBBB",
+    "BBBBBBBBBB",
+    "BBBBBBBBBB"
+  ],
+  "givens": [0]
+}

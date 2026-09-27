@@ -1,0 +1,23 @@
+{
+  "id": "jellyfish",
+  "name": "해파리",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1D3557" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "L", "color": "#FFD6E0" }
+  ],
+  "pixels": [
+    "..PPPP..",
+    ".PPPPPP.",
+    "PPPPPPPP",
+    "PP.PP.PP",
+    "PPPPPPPP",
+    ".L.L.L.L",
+    "L.L.L.L.",
+    ".L.L.L.L",
+    "L...L..."
+  ],
+  "givens": [26, 43, 52, 60]
+}

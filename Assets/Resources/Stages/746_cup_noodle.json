@@ -1,0 +1,22 @@
+{
+  "id": "cup_noodle",
+  "name": "컵라면",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF3B0" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "WWWWWWWW",
+    "WRRRRRRW",
+    ".RRRRRR.",
+    ".RWWWWR.",
+    ".RWWWWR.",
+    ".RRRRRR.",
+    "..RRRR..",
+    "..RRRR.."
+  ],
+  "givens": [56]
+}

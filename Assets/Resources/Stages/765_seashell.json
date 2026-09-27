@@ -1,0 +1,21 @@
+{
+  "id": "seashell",
+  "name": "조개",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E0FBFC" },
+    { "key": "P", "color": "#FFB5A7" },
+    { "key": "D", "color": "#E07A5F" }
+  ],
+  "pixels": [
+    "...PPP...",
+    "..PDPDP..",
+    ".PPDPDPP.",
+    "PPDPPPDPP",
+    "PDPPDPPDP",
+    ".PPPPPPP.",
+    "...PPP..."
+  ],
+  "givens": [0, 11, 18, 36, 60]
+}

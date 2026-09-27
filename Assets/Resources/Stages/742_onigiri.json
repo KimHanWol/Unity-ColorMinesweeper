@@ -1,0 +1,21 @@
+{
+  "id": "onigiri",
+  "name": "주먹밥",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFE8D6" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "...WW...",
+    "..WWWW..",
+    ".WWWWWW.",
+    "WWWWWWWW",
+    "WWKKKKWW",
+    "WWKKKKWW",
+    "WWKKKKWW"
+  ],
+  "givens": [0, 2]
+}

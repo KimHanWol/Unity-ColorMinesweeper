@@ -1,0 +1,21 @@
+{
+  "id": "shield",
+  "name": "방패",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F3EEE4" },
+    { "key": "S", "color": "#457B9D" }
+  ],
+  "pixels": [
+    "SSSSSSS",
+    "SSS.SSS",
+    "S.....S",
+    "SSS.SSS",
+    "SSS.SSS",
+    ".SS.SS.",
+    "..SSS..",
+    "...S..."
+  ],
+  "givens": [35, 49]
+}

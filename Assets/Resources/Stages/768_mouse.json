@@ -1,0 +1,21 @@
+{
+  "id": "mouse",
+  "name": "쥐",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "S", "color": "#8D99AE" },
+    { "key": "P", "color": "#FF8FAB" }
+  ],
+  "pixels": [
+    "SS....SS",
+    "SPS..SPS",
+    "SSSSSSSS",
+    ".S.SS.S.",
+    ".SSSSSS.",
+    "..SSPS..",
+    "...SS..."
+  ],
+  "givens": [10, 26, 45, 48]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "tshirt",
+  "name": "티셔츠",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "BBBW.WBBB",
+    "BBBBBBBBB",
+    "BBBBBBBBB",
+    "..BBBBB..",
+    "..BWBWB..",
+    "..BBBBB..",
+    "..BWBWB..",
+    "..BBBBB.."
+  ],
+  "givens": [36]
+}

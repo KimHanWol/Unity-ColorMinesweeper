@@ -1,0 +1,20 @@
+{
+  "id": "submarine",
+  "name": "잠수함",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#48CAE4" },
+    { "key": "Y", "color": "#FFC300" },
+    { "key": "K", "color": "#1D3557" }
+  ],
+  "pixels": [
+    ".....YY....",
+    ".....YY....",
+    "..YYYYYYY..",
+    ".YYKYYKYYY.",
+    "YYYYYYYYYYK",
+    ".YYYYYYYY.."
+  ],
+  "givens": [0]
+}

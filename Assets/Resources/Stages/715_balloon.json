@@ -1,0 +1,22 @@
+{
+  "id": "balloon",
+  "name": "풍선",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    ".RRRR.",
+    "RRRRRR",
+    "RR.RRR",
+    "RRRRRR",
+    ".RRRR.",
+    "..RR..",
+    "...R..",
+    "..R...",
+    "...R.."
+  ],
+  "givens": [25, 36]
+}

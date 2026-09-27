@@ -1,0 +1,23 @@
+{
+  "id": "candle",
+  "name": "촛불",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2E2A47" },
+    { "key": "Y", "color": "#FFC300" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "..Y..",
+    ".YYY.",
+    ".YYY.",
+    "..Y..",
+    ".WWW.",
+    ".WWW.",
+    ".WWW.",
+    ".WWW.",
+    "WWWWW"
+  ],
+  "givens": [15, 27]
+}

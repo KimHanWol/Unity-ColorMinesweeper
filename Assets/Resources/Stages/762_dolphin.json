@@ -1,0 +1,21 @@
+{
+  "id": "dolphin",
+  "name": "돌고래",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E0FBFC" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "......B....",
+    ".....BB....",
+    "..BBBBBBB..",
+    ".B.BBBBBBB.",
+    "BBBBBBBBBBB",
+    "..WWWWWBBB.",
+    "........BB."
+  ],
+  "givens": [0]
+}

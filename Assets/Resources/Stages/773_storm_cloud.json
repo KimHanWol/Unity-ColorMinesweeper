@@ -1,0 +1,23 @@
+{
+  "id": "storm_cloud",
+  "name": "먹구름",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E3F2FD" },
+    { "key": "S", "color": "#6C757D" },
+    { "key": "Y", "color": "#FFC300" }
+  ],
+  "pixels": [
+    "...SS....",
+    ".SSSSSS..",
+    "SSSSSSSSS",
+    "SSSSSSSSS",
+    ".SSSSSSS.",
+    "...YY....",
+    "..YY.....",
+    "..YYY....",
+    "...Y....."
+  ],
+  "givens": [60]
+}

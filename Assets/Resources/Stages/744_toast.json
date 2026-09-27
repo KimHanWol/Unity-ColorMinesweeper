@@ -1,0 +1,22 @@
+{
+  "id": "toast",
+  "name": "식빵",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "B", "color": "#C68B59" },
+    { "key": "Y", "color": "#FFE8A3" }
+  ],
+  "pixels": [
+    ".BB..BB.",
+    "BBBBBBBB",
+    "BYYYYYYB",
+    "BYYYYYYB",
+    "BYYYYYYB",
+    "BYYYYYYB",
+    "BYYYYYYB",
+    "BBBBBBBB"
+  ],
+  "givens": [0, 11]
+}

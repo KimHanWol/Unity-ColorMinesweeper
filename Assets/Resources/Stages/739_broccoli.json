@@ -1,0 +1,22 @@
+{
+  "id": "broccoli",
+  "name": "브로콜리",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "G", "color": "#2D6A4F" },
+    { "key": "L", "color": "#95D5B2" }
+  ],
+  "pixels": [
+    "..GG.GG.",
+    ".GGGGGGG",
+    "GGGGGGGG",
+    ".GGGGGG.",
+    "...LL...",
+    "...LL...",
+    "..LLLL..",
+    "..L..L.."
+  ],
+  "givens": [40]
+}

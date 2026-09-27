@@ -1,0 +1,19 @@
+{
+  "id": "gamepad",
+  "name": "게임기",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "K", "color": "#3D405B" }
+  ],
+  "pixels": [
+    ".KKKKKKKK.",
+    "KK.KKKK.KK",
+    "K...KK.K.K",
+    "KK.KKKK.KK",
+    "KKKKKKKKKK",
+    "KKK....KKK"
+  ],
+  "givens": [26, 35]
+}

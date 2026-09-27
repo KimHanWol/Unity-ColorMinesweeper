@@ -1,0 +1,20 @@
+{
+  "id": "hourglass",
+  "name": "모래시계",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "O", "color": "#C8553D" }
+  ],
+  "pixels": [
+    "OOOOOOO",
+    ".OOOOO.",
+    "..OOO..",
+    "...O...",
+    "..O.O..",
+    ".O.O.O.",
+    "OOOOOOO"
+  ],
+  "givens": [21, 23, 38]
+}

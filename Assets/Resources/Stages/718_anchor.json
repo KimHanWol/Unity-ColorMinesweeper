@@ -1,0 +1,22 @@
+{
+  "id": "anchor",
+  "name": "닻",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E0FBFC" },
+    { "key": "K", "color": "#1D3557" }
+  ],
+  "pixels": [
+    "...KKK...",
+    "...K.K...",
+    "...KKK...",
+    "..KKKKK..",
+    "....K....",
+    "K...K...K",
+    "KK..K..KK",
+    ".KK.K.KK.",
+    "..KKKKK.."
+  ],
+  "givens": [0, 66]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "popsicle",
+  "name": "막대 아이스크림",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F1F7FF" },
+    { "key": "P", "color": "#FF6B9A" }
+  ],
+  "pixels": [
+    ".PPP.",
+    "PPPPP",
+    "PPPPP",
+    "PP.PP",
+    "PPPPP",
+    "PPPPP",
+    ".PPP.",
+    "..P..",
+    "..P.."
+  ],
+  "givens": [40]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "candy",
+  "name": "사탕",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "P", "color": "#FF6B9A" }
+  ],
+  "pixels": [
+    "P.......P",
+    "PP.PPP.PP",
+    "PPPPPPPPP",
+    "PP.PPP.PP",
+    "P.......P"
+  ],
+  "givens": [5, 13, 14]
+}

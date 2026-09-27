@@ -1,0 +1,17 @@
+{
+  "id": "bone",
+  "name": "뼈다귀",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2B2D42" },
+    { "key": "W", "color": "#F8F1E5" }
+  ],
+  "pixels": [
+    "WW.....WW",
+    "WWWWWWWWW",
+    "WWWWWWWWW",
+    "WW.....WW"
+  ],
+  "givens": [3, 5, 6, 20, 22]
+}

@@ -1,0 +1,19 @@
+{
+  "id": "bird",
+  "name": "새",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E3F2FD" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    "....BB..",
+    "...B.BBB",
+    "BB.BBBB.",
+    "BBBBBBB.",
+    ".BBBBB..",
+    "..B..B.."
+  ],
+  "givens": [0]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "helicopter",
+  "name": "헬리콥터",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#DDF1FF" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "G", "color": "#52B788" }
+  ],
+  "pixels": [
+    "KKKKKKKKK..",
+    ".....K.....",
+    "...GGGGG...",
+    "..GGKKGGGGG",
+    "..GGKKGG..G",
+    "...GGGGG...",
+    "..KKKKKKK.."
+  ],
+  "givens": [4, 22, 63, 68]
+}

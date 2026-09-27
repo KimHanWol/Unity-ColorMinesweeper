@@ -1,0 +1,21 @@
+{
+  "id": "twin_cherry",
+  "name": "앵두",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5F5" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "....G....",
+    "...G.G...",
+    "..G...G..",
+    ".RR...RR.",
+    "RRRR.RRRR",
+    "RRRR.RRRR",
+    ".RR...RR."
+  ],
+  "givens": [0, 27, 32, 57]
+}

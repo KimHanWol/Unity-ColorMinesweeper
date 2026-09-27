@@ -1,0 +1,22 @@
+{
+  "id": "fried_egg",
+  "name": "계란프라이",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#3D405B" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "Y", "color": "#FFC300" }
+  ],
+  "pixels": [
+    "..WWW....",
+    ".WWWWWW..",
+    "WWWWWWWW.",
+    "WWWYYYWWW",
+    "WWYYYYYWW",
+    "WWWYYYWW.",
+    ".WWWWWW..",
+    "..WWW...."
+  ],
+  "givens": [8, 25, 52]
+}

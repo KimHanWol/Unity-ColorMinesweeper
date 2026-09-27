@@ -1,0 +1,24 @@
+{
+  "id": "pineapple",
+  "name": "파인애플",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E0FBFC" },
+    { "key": "G", "color": "#2D6A4F" },
+    { "key": "Y", "color": "#FFC300" }
+  ],
+  "pixels": [
+    "..G.G..",
+    "...G...",
+    ".G.G.G.",
+    "..GGG..",
+    ".YYYYY.",
+    "YY.Y.YY",
+    "YYYYYYY",
+    "Y.Y.Y.Y",
+    "YYYYYYY",
+    ".YYYYY."
+  ],
+  "givens": [0, 2, 14, 49]
+}

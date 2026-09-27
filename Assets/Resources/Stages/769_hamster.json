@@ -1,0 +1,21 @@
+{
+  "id": "hamster",
+  "name": "햄스터",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "O", "color": "#E9A15F" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    ".OO..OO.",
+    "OOOOOOOO",
+    "OO.OO.OO",
+    "OWWWWWWO",
+    "WWWOOWWW",
+    "WWWWWWWW",
+    ".WWWWWW."
+  ],
+  "givens": [7, 12]
+}
