@@ -316,27 +316,13 @@ namespace ColorMinesweeper.Game
             Label.Create(card, "Title", Loc.F("clear.title", StageTitle.Name(stage)), Theme.Ink, order, new Vector2(0f, 2.95f), 0.8f,
                 TextAnchor.MiddleCenter, true);
 
-            Sprite star = Icons.Star;
             int stars = session.Stars;
-            for (int i = 0; i < 3; i++)
-            {
-                bool earned = i < stars;
-                SpriteRenderer s = Draw.Sprite(card, "Star" + i, star, earned ? Theme.Gold : Theme.Locked, order,
-                    new Vector2((i - 1) * 1.35f, 1.35f + (i == 1 ? 0.2f : 0f)), Vector2.zero);
-                float size = i == 1 ? 1.2f : 1f;
-                int index = i;
-                Tween.Run(s, 0.45f, t => s.transform.localScale = new Vector3(size * t, size * t, 1f), Ease.OutBack,
-                    0.25f + i * 0.15f);
-                if (earned)
-                {
-                    Tween.Delay(s, 0.25f + i * 0.15f, () => Sfx.Instance?.Star(index));
-                }
-            }
+            float gaugeDone = StarGauge.Create(card, new Vector2(0f, 1.45f), 5.4f, order, stars, 0.25f);
 
             if (unlockedNext)
             {
-                // 별이 다 뜬 뒤 자물쇠가 풀리는 소리와 함께 알린다.
-                Tween.Delay(card, 0.95f, () =>
+                // 별 게이지 연출이 끝난 뒤 자물쇠가 풀리는 소리와 함께 알린다.
+                Tween.Delay(card, gaugeDone + 0.1f, () =>
                 {
                     Sfx.Instance?.Unlock();
                     Label unlockedLabel = UiKit.IconLabel(card, Icons.Lock, Theme.Accent, Loc.T("clear.unlocked"), Theme.Accent, 0.45f,
