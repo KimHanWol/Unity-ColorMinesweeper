@@ -5,7 +5,7 @@ using UnityEngine;
 namespace ColorMinesweeper.Game
 {
     /// <summary>
-    /// 처음 시작하기를 누르면 보여 주는 튜토리얼. 4x4 연습 판(1색 하트) 위에서 말풍선으로 규칙을 안내하고,
+    /// 처음 시작하기를 누르면 보여 주는 튜토리얼. 5x5 연습 판(1색 하트) 위에서 말풍선으로 규칙을 안내하고,
     /// 솔버의 <see cref="Solver.Hint"/> 로 "지금 칠할 수 있는 칸과 그 근거"를 실제 숫자로 짚어 준다.
     ///
     /// 흐름: 소개 → 팔레트 설명 → 짚어 주는 추론 한 번 → 근거만 비추고 스스로 찾기 → 배경도 색이라는 것
@@ -23,7 +23,7 @@ namespace ColorMinesweeper.Game
         const int DimOrder = 56;
         const int MarkOrder = 60;
 
-        /// <summary>연습 판. 4x4 하트. 한 색만 보고 순서대로 3단계에 풀리고, 첫 추론에서 빨간색 5칸이 한꺼번에 열린다.</summary>
+        /// <summary>연습 판. 5x5 하트(4칸 폭은 하트로 보이지 않았다). 한 색만 보고 5단계에 풀리고, 첫 추론에서 빨간색 6칸이 열린다.</summary>
         const string StageJson = @"{
   ""id"": ""tutorial"",
   ""name"": ""하트"",
@@ -34,10 +34,11 @@ namespace ColorMinesweeper.Game
     { ""key"": ""R"", ""color"": ""#E8505B"" }
   ],
   ""pixels"": [
-    "".R.R"",
-    ""RRRR"",
-    ""RRRR"",
-    "".RR.""
+    ""RR.RR"",
+    ""RRRRR"",
+    ""RRRRR"",
+    "".RRR."",
+    ""..R..""
   ]
 }";
 
@@ -387,7 +388,7 @@ namespace ColorMinesweeper.Game
         void MarkFound(int clue, int color)
         {
             Stage stage = play.Stage;
-            Sprite check = PixelGlyphs.Icon("check", PixelGlyphs.Check);
+            Sprite check = Icons.Check;
             foreach (int n in stage.Neighbors(clue))
             {
                 if (!play.Session.IsRevealed(n) || stage.ColorAt(n) != color)
@@ -398,7 +399,7 @@ namespace ColorMinesweeper.Game
                 Transform badge = Draw.Node(play.Board.transform, "TutorialFound", play.Board.CellCenter(n) + new Vector2(0.3f, 0.3f));
                 Draw.Sprite(badge, "Back", SpriteFactory.Circle(), Color.white, MarkOrder + 3, Vector2.zero, Vector2.one * 0.46f);
                 Draw.Sprite(badge, "Face", SpriteFactory.Circle(), Theme.Accent, MarkOrder + 4, Vector2.zero, Vector2.one * 0.38f);
-                Draw.Sprite(badge, "Check", check, Color.white, MarkOrder + 5, new Vector2(0f, -0.01f), Vector2.one * 0.18f);
+                Draw.Sprite(badge, "Check", check, Color.white, MarkOrder + 5, Vector2.zero, Vector2.one * 0.34f);
                 marks.Add(badge);
             }
         }

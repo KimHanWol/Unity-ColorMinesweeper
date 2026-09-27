@@ -129,7 +129,7 @@ namespace ColorMinesweeper.Game
             int cleared = StageCatalog.ClearedCount();
             bool started = cleared > 0;
             string playText = started ? "이어하기 · " + (next + 1) : "시작하기";
-            UiKit.Button(menu, "Play", playText, PixelGlyphs.Icon("play", PixelGlyphs.Play), Theme.Accent, Color.white,
+            UiKit.Button(menu, "Play", playText, Icons.Play, Theme.Accent, Color.white,
                 new Vector2(6.4f, 1.5f), new Vector2(0f, 1.1f), 70, () =>
                 {
                     // 튜토리얼을 끝까지 마치기 전에는 시작하기를 누를 때마다 튜토리얼부터 한다(마치면 1번 스테이지로 이어진다).
@@ -145,7 +145,7 @@ namespace ColorMinesweeper.Game
             UiKit.Button(menu, "Stages", "스테이지 선택", null, Color.white, Theme.Ink, new Vector2(6.4f, 1.25f),
                 new Vector2(0f, -0.55f), 70, () => App.ShowSelect());
 
-            Sprite star = PixelGlyphs.Icon("star", PixelGlyphs.Star);
+            Sprite star = Icons.Star;
             Draw.Sprite(menu, "Star", star, Theme.Gold, 70, new Vector2(-1.9f, -1.85f), new Vector2(0.4f, 0.4f));
             Label.Create(menu, "Progress", "완성한 그림 " + cleared + " / " + StageCatalog.All.Count, Theme.SubInk, 70,
                 new Vector2(0.25f, -1.85f), 0.36f);

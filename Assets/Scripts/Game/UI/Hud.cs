@@ -20,7 +20,7 @@ namespace ColorMinesweeper.Game
             var hud = root.gameObject.AddComponent<Hud>();
             float half = ui.Safe.width / 2f;
 
-            UiKit.IconButton(root, "Back", PixelGlyphs.Icon("back", PixelGlyphs.Back), new Vector2(-half + 1.05f, 0f), 100,
+            UiKit.IconButton(root, "Back", Icons.Back, new Vector2(-half + 1.05f, 0f), 100,
                 onBack);
             UiKit.IconButton(root, "Settings", Icons.Settings, new Vector2(half - 1.05f, 0f),
                 100, onSettings);
@@ -28,7 +28,7 @@ namespace ColorMinesweeper.Game
             hud.title = Label.Create(root, "Name", title, Theme.Ink, 100, new Vector2(0f, 0.32f), 0.58f,
                 TextAnchor.MiddleCenter, true);
 
-            Sprite heart = PixelGlyphs.Icon("heart", PixelGlyphs.Heart);
+            Sprite heart = Icons.Heart;
             hud.hearts = new SpriteRenderer[PuzzleSession.MaxLives];
             for (int i = 0; i < hud.hearts.Length; i++)
             {

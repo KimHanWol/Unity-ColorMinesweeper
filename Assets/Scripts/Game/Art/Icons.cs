@@ -8,19 +8,30 @@ namespace ColorMinesweeper.Game
     /// </summary>
     public static class Icons
     {
-        static Sprite settings;
+        static readonly System.Collections.Generic.Dictionary<string, Sprite> cache =
+            new System.Collections.Generic.Dictionary<string, Sprite>();
 
-        public static Sprite Settings
+        public static Sprite Settings => Load("settings", PixelGlyphs.Gear);
+        public static Sprite Back => Load("back", PixelGlyphs.Back);
+        public static Sprite Play => Load("play", PixelGlyphs.Play);
+        public static Sprite Retry => Load("retry", PixelGlyphs.Retry);
+
+        /// <summary>광고 보기 버튼(ondemand_video).</summary>
+        public static Sprite Ad => Load("ad", PixelGlyphs.Film);
+        public static Sprite Lock => Load("lock", PixelGlyphs.Lock);
+        public static Sprite Check => Load("check", PixelGlyphs.Check);
+        public static Sprite Heart => Load("heart", PixelGlyphs.Heart);
+        public static Sprite Star => Load("star", PixelGlyphs.Star);
+
+        static Sprite Load(string name, string[] fallback)
         {
-            get
+            if (!cache.TryGetValue(name, out Sprite sprite) || sprite == null)
             {
-                if (settings == null)
-                {
-                    settings = Resources.Load<Sprite>("Icons/settings");
-                }
-
-                return settings != null ? settings : PixelGlyphs.Icon("gear", PixelGlyphs.Gear);
+                sprite = Resources.Load<Sprite>("Icons/" + name);
+                cache[name] = sprite;
             }
+
+            return sprite != null ? sprite : PixelGlyphs.Icon(name, fallback);
         }
     }
 }

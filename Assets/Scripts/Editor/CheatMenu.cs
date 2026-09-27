@@ -39,7 +39,7 @@ namespace ColorMinesweeper.EditorTools
         [MenuItem(Root + "진행 기록 초기화", priority = 120)]
         static void ResetProgress()
         {
-            if (!EditorUtility.DisplayDialog("진행 기록 초기화", "모든 스테이지의 별점과 치트 설정을 지웁니다.", "지우기", "취소"))
+            if (!EditorUtility.DisplayDialog("진행 기록 초기화", "모든 스테이지의 별점, 튜토리얼 완료, 치트 설정을 지웁니다.", "지우기", "취소"))
             {
                 return;
             }

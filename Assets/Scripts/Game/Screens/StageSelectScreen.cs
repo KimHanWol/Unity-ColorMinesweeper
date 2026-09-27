@@ -31,7 +31,7 @@ namespace ColorMinesweeper.Game
                 TextAnchor.MiddleCenter, true);
             Label.Create(header, "Subtitle", "단서를 보고 칠하면 그림이 완성돼요", Theme.SubInk, 151, new Vector2(0f, -0.55f),
                 0.42f);
-            UiKit.IconButton(header, "Back", PixelGlyphs.Icon("back", PixelGlyphs.Back),
+            UiKit.IconButton(header, "Back", Icons.Back,
                 new Vector2(-Ui.Safe.width / 2f + 1.05f, 1.2f), 152, OnBack);
             UiKit.IconButton(header, "Settings", Icons.Settings,
                 new Vector2(Ui.Safe.width / 2f - 1.05f, 1.2f), 152, () => SettingsPanel.Open(transform, Ui, 300, null, true));
@@ -139,7 +139,7 @@ namespace ColorMinesweeper.Game
                 float size = pictureSize.x * 0.84f;
                 Draw.Sprite(visual, "Picture", SpriteFactory.StagePicture(stage), Color.white, 13, pictureCenter,
                     new Vector2(size, size));
-                Sprite star = PixelGlyphs.Icon("star", PixelGlyphs.Star);
+                Sprite star = Icons.Star;
                 for (int i = 0; i < 3; i++)
                 {
                     Draw.Sprite(visual, "Star" + i, star, i < stars ? Theme.Gold : Theme.Locked, 12,
@@ -158,7 +158,7 @@ namespace ColorMinesweeper.Game
             else
             {
                 Draw.Panel(visual, "PictureBack", pictureSize, Theme.Locked, 12, pictureCenter, 0.3f);
-                Draw.Sprite(visual, "Lock", PixelGlyphs.Icon("lock", PixelGlyphs.Lock), Color.white, 13, pictureCenter,
+                Draw.Sprite(visual, "Lock", Icons.Lock, Color.white, 13, pictureCenter,
                     new Vector2(0.7f, 0.7f));
                 Caption(visual, StageTitle.Hidden(index), Theme.Locked, captionLine);
             }

@@ -5,8 +5,8 @@ namespace ColorMinesweeper.Game
 {
     /// <summary>
     /// 튜토리얼 말풍선. 굵은 한 줄(결론)과 옅은 설명 한두 줄로 짧게 보여 준다. 필요하면 "다음" 버튼을 둔다.
-    /// 짚는 곳(판의 3x3, 팔레트 색) 바로 옆에 따라다니며 꼬리로 그곳을 가리킨다. 짚는 곳이 없으면 팔레트 바로 위에 뜬다.
-    /// 위아래를 번갈아 보지 않아도 되게 하기 위해서다. 판 입력은 막지 않는다. 글자는 말풍선 폭에 맞춰 단어 단위로 줄을 바꾸고,
+    /// 판과 팔레트 사이의 비워 둔 자리에 떠서, 꼬리로 짚는 곳(판의 3x3 또는 팔레트 색)을 가리킨다.
+    /// 판 위에 뜨면 짚는 칸을 가렸고, 화면 맨 위에 두면 위아래를 번갈아 봐야 했다. 글자는 말풍선 폭에 맞춰 단어 단위로 줄을 바꾸고,
     /// 실제로 그려진 글자 영역을 재서 위아래 여백을 맞춘다(동글은 폰트 줄 높이가 글자보다 훨씬 크다).
     /// </summary>
     public sealed class SpeechBubble : MonoBehaviour
@@ -17,7 +17,9 @@ namespace ColorMinesweeper.Game
         const float ButtonRow = 1.0f;
         const float MinHeight = 1.3f;
 
-        const float Gap = 0.4f;
+        /// <summary>판 아래에 말풍선용으로 비워 두는 높이. 튜토리얼 문구가 이 안에 들어가게 짧게 쓴다.</summary>
+        public const float DockHeight = 3.4f;
+
         const float TailSize = 0.36f;
 
         Label headline;
@@ -132,30 +134,28 @@ namespace ColorMinesweeper.Game
             Place();
         }
 
-        /// <summary>말풍선 윗변 위치와 꼬리를 정한다. 루트의 로컬 y=0 이 말풍선 윗변이다.</summary>
+        /// <summary>
+        /// 말풍선은 판 바로 아래, 팔레트 바로 위의 고정된 자리(<see cref="DockHeight"/>)에 둔다. 판은 이 자리를 비워 두고
+        /// 그려지므로 말풍선이 짚는 칸을 가리지 않는다. 꼬리는 짚는 곳 쪽(위: 판, 아래: 팔레트)을 향한다.
+        /// 루트의 로컬 y=0 이 말풍선 윗변이다.
+        /// </summary>
         void Place()
         {
-            float floor = safe.yMin + PaletteBar.BarHeight + 0.25f;
-            float ceiling = safe.yMax - Hud.BarHeight - 0.1f;
+            float floor = safe.yMin + PaletteBar.BarHeight + 0.2f;
+            float top = floor + DockHeight;
             float x = safe.center.x;
+            transform.localPosition = new Vector3(x, top, 0f);
+
             if (!anchored)
             {
-                transform.localPosition = new Vector3(x, floor + height, 0f);
                 tail.gameObject.SetActive(false);
                 return;
             }
 
-            // 아래에 둘 자리가 있으면 아래, 없으면 위. 둘 다 모자라면 들어가는 쪽에 붙인다.
-            float belowTop = anchor.yMin - Gap;
-            float aboveTop = anchor.yMax + Gap + height;
-            bool below = belowTop - height >= floor || aboveTop > ceiling;
-            float top = below ? belowTop : aboveTop;
-            top = Mathf.Clamp(top, floor + height, ceiling);
-            transform.localPosition = new Vector3(x, top, 0f);
-
+            bool up = anchor.center.y > top - height / 2f;
             tail.gameObject.SetActive(true);
             float tailX = Mathf.Clamp(anchor.center.x - x, -width / 2f + 0.7f, width / 2f - 0.7f);
-            tail.localPosition = new Vector3(tailX, below ? 0f : -height, 0f);
+            tail.localPosition = new Vector3(tailX, up ? 0f : -height, 0f);
         }
 
         /// <summary>글자 윗변이 top 에 오게 놓고, 아랫변 위치를 돌려준다.</summary>

@@ -34,7 +34,7 @@ namespace ColorMinesweeper.Game
             }
         }
 
-        /// <summary>진행 기록과 치트 플래그를 모두 지운다. 설정(효과음·진동 등)은 남긴다.</summary>
+        /// <summary>진행 기록, 튜토리얼 완료, 치트 플래그를 모두 지운다. 설정(효과음·진동 등)은 남긴다.</summary>
         public static void ResetProgress()
         {
             foreach (Core.Stage stage in StageCatalog.All)
@@ -43,6 +43,7 @@ namespace ColorMinesweeper.Game
             }
 
             UnlockAll = false;
+            TutorialDirector.IsDone = false;
         }
     }
 }
