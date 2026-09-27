@@ -23,7 +23,7 @@ namespace ColorMinesweeper.Game
         const int DimOrder = 56;
         const int MarkOrder = 60;
 
-        /// <summary>연습 판. 배경이 넓어 시작 칸이 크게 펼쳐지고, 한 색만 보고 순서대로 풀린다.</summary>
+        /// <summary>연습 판. 7x6 작은 하트. 배경이 둘러 있어 시작 칸이 펼쳐지고, 한 색만 보고 순서대로 7단계에 풀린다.</summary>
         const string StageJson = @"{
   ""id"": ""tutorial"",
   ""name"": ""하트"",
@@ -34,14 +34,12 @@ namespace ColorMinesweeper.Game
     { ""key"": ""R"", ""color"": ""#E8505B"" }
   ],
   ""pixels"": [
-    ""........."",
-    ""..RR.RR.."",
-    "".RRRRRRR."",
-    "".RRRRRRR."",
-    ""..RRRRR.."",
-    ""...RRR..."",
-    ""....R...."",
-    "".........""
+    ""......."",
+    "".RR.RR."",
+    "".RRRRR."",
+    ""..RRR.."",
+    ""...R..."",
+    "".......""
   ]
 }";
 
@@ -87,16 +85,7 @@ namespace ColorMinesweeper.Game
             play = screen;
             bubble = speech;
             solver = new Solver(screen.Stage, Technique.Direct);
-            Talk("숨은 그림을 찾아요", "숫자를 보고 칸을 칠하면 그림이 완성돼요.", ExplainPalette);
-        }
-
-        void ExplainPalette()
-        {
-            ClearMarks();
-            MarkSwatch(play.Palette.Selected);
-            phase = Phase.Talking;
-            AnchorSwatch(play.Palette.Selected);
-            bubble.Show("숫자는 주변에 있는 색의 개수예요", "한 칸을 둘러싼 8칸 중에, 아래에서 고른 색이 몇 칸인지 알려줘요.", NextGuided);
+            Talk("숨은 그림을 찾아요", "숫자를 보고 칸을 칠하면 그림이 완성돼요.", NextGuided);
         }
 
         /// <summary>다음으로 가르칠 추론을 고른다. 두 번 짚어 준 뒤 배경을 가르치고, 그다음은 혼자 하게 둔다.</summary>
@@ -190,8 +179,9 @@ namespace ColorMinesweeper.Game
 
             int hidden = hint.Cells.Count;
             bool background = hint.Color == stage.BackgroundColor;
-            string colorName = background ? "배경" : "이 색";
+            string colorName = background ? "배경" : ColorNames.Describe(stage.Colors[hint.Color].Color);
             Spotlight(hint.Clue);
+            MarkFound(hint.Clue, hint.Color);
 
             allowed.Clear();
             allowed.UnionWith(hint.Cells);
@@ -200,7 +190,7 @@ namespace ColorMinesweeper.Game
             if (guidedDone == 1 && !background)
             {
                 // 두 번째는 근거만 비추고, 칠할 칸은 스스로 찾게 한다.
-                bubble.Show("이번엔 직접 찾아봐요", "밝은 곳 가운데 숫자를 보고, 칠할 칸을 눌러요.");
+                bubble.Show("이번엔 직접 찾아봐요", "가운데 숫자만큼 " + colorName + "이 있어야 해요. 체크한 칸을 빼고 남은 곳을 눌러요.");
                 return;
             }
 
@@ -210,12 +200,14 @@ namespace ColorMinesweeper.Game
             }
 
             // 굵은 줄은 할 일, 옅은 줄은 이유. "배경으로", "이 색으로" 모두 받침이 있어 "으로".
+            // 굵은 줄은 결론, 옅은 줄은 세는 순서. 색 이름은 모두 받침이 있어 "이", "이에요" 를 쓴다.
             string title = hidden == 1
-                ? "반짝이는 칸을 " + colorName + "으로 칠해요"
-                : "반짝이는 칸 " + hidden + "개를 " + colorName + "으로 칠해요";
+                ? "여기가 " + colorName + "이에요!"
+                : "여기 " + hidden + "칸은 모두 " + colorName + "이에요!";
+            string need = "가운데 숫자가 " + total + "이니 주변 8칸에 " + colorName + "이 " + total + "칸 있어야 해요. ";
             string detail = opened == 0
-                ? "가운데 숫자가 " + total + "이고, 가려진 칸도 딱 " + hidden + "칸이라서요."
-                : "가운데 숫자 " + total + " 중 " + opened + "칸은 이미 찾았어요. 나머지 " + (total - opened) + "칸이 바로 가려진 칸이에요.";
+                ? need + "아직 하나도 안 보이는데, 가려진 칸은 딱 " + hidden + "칸뿐이죠!"
+                : need + "체크한 " + opened + "칸은 이미 보이고, 나머지 " + (total - opened) + "칸이 들어갈 곳은 가려진 " + hidden + "칸뿐이죠!";
             bubble.Show(title, detail);
         }
 
@@ -346,6 +338,26 @@ namespace ColorMinesweeper.Game
             Vector2 center = play.Board.CellCenter(clue);
             marks.Add(Draw.OutlinePanel(board, "TutorialClue", new Vector2(0.98f, 0.98f), Theme.Accent, MarkOrder + 1, center,
                 0.24f, 0.11f).transform);
+        }
+
+        /// <summary>주변 8칸 중 이미 보이는 같은 색 칸에 체크 표시를 단다("이미 찾은 칸"을 셀 수 있게).</summary>
+        void MarkFound(int clue, int color)
+        {
+            Stage stage = play.Stage;
+            Sprite check = PixelGlyphs.Icon("check", PixelGlyphs.Check);
+            foreach (int n in stage.Neighbors(clue))
+            {
+                if (!play.Session.IsRevealed(n) || stage.ColorAt(n) != color)
+                {
+                    continue;
+                }
+
+                Transform badge = Draw.Node(play.Board.transform, "TutorialFound", play.Board.CellCenter(n) + new Vector2(0.3f, 0.3f));
+                Draw.Sprite(badge, "Back", SpriteFactory.Circle(), Color.white, MarkOrder + 3, Vector2.zero, Vector2.one * 0.46f);
+                Draw.Sprite(badge, "Face", SpriteFactory.Circle(), Theme.Accent, MarkOrder + 4, Vector2.zero, Vector2.one * 0.38f);
+                Draw.Sprite(badge, "Check", check, Color.white, MarkOrder + 5, new Vector2(0f, -0.01f), Vector2.one * 0.18f);
+                marks.Add(badge);
+            }
         }
 
         /// <summary>칠할 칸: 두께가 일정한 분홍 테두리가 크기만 바뀌며 숨 쉰다(선이 굵어졌다 얇아지지 않는다).</summary>
