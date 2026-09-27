@@ -61,6 +61,7 @@ namespace ColorMinesweeper.Game
                 Transform card = Card;
                 SpriteRenderer shade = dim;
                 Transform root = Root;
+                Sfx.Instance?.Close();
                 Tween.Run(root, 0.2f, t =>
                 {
                     card.localScale = Vector3.one * Mathf.Lerp(1f, 0.85f, t);
@@ -87,6 +88,7 @@ namespace ColorMinesweeper.Game
             public static Modal Open(Transform parent, UiRoot ui, Vector2 cardSize, int order, bool dimBackground = true)
             {
                 var modal = new Modal { CardSize = cardSize, dimAlpha = dimBackground ? Theme.Dim.a : 0f };
+                Sfx.Instance?.Open();
                 modal.Root = Draw.Node(parent, "Modal");
                 modal.dim = Draw.Sprite(modal.Root, "Dim", SpriteFactory.Square(), Theme.WithAlpha(Theme.Dim, 0f), order,
                     Vector2.zero, new Vector2(ui.Width + 2f, UiRoot.Height + 2f));

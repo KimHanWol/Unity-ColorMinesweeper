@@ -199,6 +199,7 @@ namespace ColorMinesweeper.Game
                 Haptics.Heavy();
                 App.BoardCamera.Shake(0.12f);
                 hud.SetLives(session.Lives, true);
+                Tween.Delay(this, 0.18f, () => Sfx.Instance?.LoseHeart());
                 if (result.GameOver)
                 {
                     busy = true;
@@ -249,8 +250,13 @@ namespace ColorMinesweeper.Game
                 SpriteRenderer s = Draw.Sprite(card, "Star" + i, star, earned ? Theme.Gold : Theme.Locked, order,
                     new Vector2((i - 1) * 1.35f, 1.1f + (i == 1 ? 0.25f : 0f)), Vector2.zero);
                 float size = i == 1 ? 1.2f : 1f;
+                int index = i;
                 Tween.Run(s, 0.45f, t => s.transform.localScale = new Vector3(size * t, size * t, 1f), Ease.OutBack,
                     0.25f + i * 0.15f);
+                if (earned)
+                {
+                    Tween.Delay(s, 0.25f + i * 0.15f, () => Sfx.Instance?.Star(index));
+                }
             }
 
             string mistakes = session.Mistakes == 0 ? "실수 없이 풀었어요" : "실수 " + session.Mistakes + "번";
@@ -300,6 +306,7 @@ namespace ColorMinesweeper.Game
                         }
 
                         session.Revive();
+                        Sfx.Instance?.Revive();
                         hud.SetLives(session.Lives, true);
                         CloseModal();
                     });

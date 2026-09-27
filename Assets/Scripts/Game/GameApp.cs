@@ -45,6 +45,8 @@ namespace ColorMinesweeper.Game
             Settings.Apply();
 
             Sfx.Create(transform);
+            Music.Create(transform);
+            Settings.Apply();
             BoardCamera = BoardCamera.Create(transform);
             Ui = UiRoot.Create(transform);
             pointer = gameObject.AddComponent<PointerInput>();

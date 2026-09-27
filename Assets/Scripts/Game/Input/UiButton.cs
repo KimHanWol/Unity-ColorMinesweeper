@@ -21,8 +21,17 @@ namespace ColorMinesweeper.Game
         public bool Interactable = true;
         public bool Pressable = true;
 
+        /// <summary>누를 때 기본 딸깍 소리를 내지 않는다(자기 소리를 따로 내는 버튼).</summary>
+        public bool Silent;
+
         /// <summary>스크롤 목록 안의 버튼. 누른 채로 끌면 버튼을 놓고 스크롤로 넘긴다.</summary>
         public bool ReleaseOnDrag;
+
+        /// <summary>슬라이더처럼 누른 채 끄는 동안 위치(UI 월드 좌표)를 받는다. 누르는 순간에도 한 번 부른다.</summary>
+        public Action<Vector2> OnDragTo;
+
+        /// <summary>끌기를 마쳤을 때(손을 뗐을 때).</summary>
+        public Action OnDragEnd;
 
         Transform visual;
         Vector3 restScale = Vector3.one;
@@ -95,7 +104,11 @@ namespace ColorMinesweeper.Game
                 return;
             }
 
-            Sfx.Instance?.Tap();
+            if (!Silent)
+            {
+                Sfx.Instance?.Tap();
+            }
+
             Haptics.Tick();
             OnClick();
         }

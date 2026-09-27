@@ -124,7 +124,7 @@ namespace ColorMinesweeper.Game
             for (int d = 0; d <= steps; d++)
             {
                 int step = d;
-                Tween.Delay(this, startDelay + d * RevealStepDelay * Mathf.Max(1f, maxDepth / 8f), () => Sfx.Instance?.Pop(step));
+                Tween.Delay(this, startDelay + d * RevealStepDelay * Mathf.Max(1f, maxDepth / 8f), () => Sfx.Instance?.Reveal(step));
             }
 
             return maxDepth * RevealStepDelay + 0.45f;

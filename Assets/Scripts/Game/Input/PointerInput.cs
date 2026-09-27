@@ -120,6 +120,7 @@ namespace ColorMinesweeper.Game
             last = screen;
             captured = UiButton.HitTest(ToUiWorld(screen));
             captured?.SetPressed(true);
+            captured?.OnDragTo?.Invoke(ToUiWorld(screen));
         }
 
         void Move(Vector2 screen)
@@ -131,6 +132,12 @@ namespace ColorMinesweeper.Game
 
             if (captured != null)
             {
+                if (captured.OnDragTo != null)
+                {
+                    captured.OnDragTo(ToUiWorld(screen));
+                    return;
+                }
+
                 if (!captured.ReleaseOnDrag || (screen - start).magnitude <= DragThreshold)
                 {
                     return;
@@ -165,6 +172,11 @@ namespace ColorMinesweeper.Game
                 UiButton button = captured;
                 captured = null;
                 button.SetPressed(false);
+                if (button.OnDragTo != null)
+                {
+                    button.OnDragEnd?.Invoke();
+                    return;
+                }
                 if (!canceled && button.Contains(ToUiWorld(screen)))
                 {
                     button.Click();

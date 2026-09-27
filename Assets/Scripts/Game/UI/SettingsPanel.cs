@@ -3,32 +3,64 @@ using UnityEngine;
 
 namespace ColorMinesweeper.Game
 {
-    /// <summary>효과음, 진동, 단서 표시 방식을 켜고 끄는 창. 목록 화면과 플레이 화면 양쪽에서 연다.</summary>
+    /// <summary>
+    /// 설정 창. 배경음악·효과음 볼륨 슬라이더와 진동, 단서 표시 방식을 바꾼다.
+    /// 메인 화면, 스테이지 목록, 플레이 화면 모두 이 창을 연다.
+    /// </summary>
     public static class SettingsPanel
     {
-        const float RowHeight = 1.25f;
+        const float RowHeight = 1.3f;
+        const float SliderWidth = 3.4f;
+
+        static float lastPreview;
 
         public static UiKit.Modal Open(Transform parent, UiRoot ui, int order, Action onClosed)
         {
-            UiKit.Modal modal = UiKit.Modal.Open(parent, ui, new Vector2(7.6f, 8.2f), order);
+            UiKit.Modal modal = UiKit.Modal.Open(parent, ui, new Vector2(7.8f, 10.2f), order);
             Transform card = modal.Card;
             int o = order + 10;
+            float y = 4.2f;
 
-            Label.Create(card, "Title", "설정", Theme.Ink, o, new Vector2(0f, 3.3f), 0.75f, TextAnchor.MiddleCenter, true);
+            Label.Create(card, "Title", "설정", Theme.Ink, o, new Vector2(0f, y), 0.75f, TextAnchor.MiddleCenter, true);
+            y -= 1.35f;
 
-            Toggle(card, "효과음", null, new Vector2(0f, 2.0f), o, () => Settings.Sound, v => Settings.Sound = v);
-            Toggle(card, "진동", null, new Vector2(0f, 2.0f - RowHeight), o, () => Settings.Vibration,
-                v => Settings.Vibration = v);
-            Toggle(card, "남은 개수로 보기", "단서가 아직 안 열린 칸 수만 보여 줘요",
-                new Vector2(0f, 2.0f - RowHeight * 2f - 0.1f), o, () => Settings.ShowRemaining,
-                v => Settings.ShowRemaining = v);
+            Volume(card, "배경음악", new Vector2(0f, y), o, Settings.MusicVolume, v => Settings.MusicVolume = v, false);
+            y -= RowHeight;
+            Volume(card, "효과음", new Vector2(0f, y), o, Settings.SfxVolume, v => Settings.SfxVolume = v, true);
+            y -= RowHeight;
+            Toggle(card, "진동", null, new Vector2(0f, y), o, () => Settings.Vibration, v => Settings.Vibration = v);
+            y -= RowHeight;
+            Toggle(card, "남은 개수로 보기", "단서가 아직 안 열린 칸 수만 보여 줘요", new Vector2(0f, y), o,
+                () => Settings.ShowRemaining, v => Settings.ShowRemaining = v);
+            y -= 1.35f;
 
             Label.Create(card, "Tip", "배경색은 단서에 나오지 않아요.\n팔레트의 네모 칸이 이 그림의 배경색이에요.",
-                Theme.SubInk, o, new Vector2(0f, -1.55f), 0.34f);
+                Theme.SubInk, o, new Vector2(0f, y), 0.34f);
 
             UiKit.Button(card, "Close", "닫기", null, Theme.Accent, Color.white, new Vector2(5.6f, 1.2f),
-                new Vector2(0f, -3.1f), o, () => modal.Close(onClosed));
+                new Vector2(0f, -4.1f), o, () =>
+                {
+                    Settings.Flush();
+                    modal.Close(onClosed);
+                });
             return modal;
+        }
+
+        /// <summary>왼쪽에 이름, 오른쪽에 볼륨 슬라이더. 효과음은 끄는 동안 새 볼륨으로 짧게 들려준다.</summary>
+        static void Volume(Transform parent, string title, Vector2 position, int order, float value, Action<float> set,
+            bool preview)
+        {
+            Transform row = Draw.Node(parent, "Volume " + title, position);
+            Label.Create(row, "Title", title, Theme.Ink, order, new Vector2(-3.2f, 0f), 0.46f, TextAnchor.MiddleLeft);
+            UiSlider.Create(row, "Slider", new Vector2(1.35f, 0f), SliderWidth, value, order, v =>
+            {
+                set(v);
+                if (preview && Time.unscaledTime - lastPreview > 0.12f)
+                {
+                    lastPreview = Time.unscaledTime;
+                    Sfx.Instance?.Reveal(Mathf.RoundToInt(v * 6f));
+                }
+            }, Settings.Flush);
         }
 
         /// <summary>왼쪽에 이름(과 설명), 오른쪽에 켜짐/꺼짐 스위치. 줄 전체를 눌러 바꾼다.</summary>

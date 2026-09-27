@@ -3,24 +3,39 @@ using UnityEngine;
 namespace ColorMinesweeper.Game
 {
     /// <summary>
-    /// 효과음을 코드로 합성한다. 사운드 에셋이 없어도 손맛이 나게 하고, 나중에 녹음한 소리로 바꿔 끼우기 쉽게 한 곳에 모은다.
-    /// 펼침으로 여러 칸이 열리면 펜타토닉 음계를 따라 올라가서 듣기 좋은 "도르르" 소리가 난다.
+    /// 효과음. 사운드 파일 없이 <see cref="SoundSynth"/> 로 시작할 때 만들어 두고, 녹음한 소리로 바꿔 끼우기 쉽게 한 곳에 모았다.
+    ///
+    /// 칸이 열리는 소리(<see cref="Reveal"/>)가 가장 자주 들리므로 가장 공을 들였다.
+    /// - 부드러운 마림바 한 음이라 수백 번 들어도 거슬리지 않는다.
+    /// - 5음 음계만 써서 연달아 겹쳐도 화음이 된다.
+    /// - 빠르게 이어 맞히면 음이 한 칸씩 올라가고(콤보), 잠깐 쉬면 처음 음으로 돌아온다.
+    /// - 펼침으로 여러 칸이 열리면 깊이만큼 음이 올라가 "도르르" 굴러간다.
     /// </summary>
     public sealed class Sfx : MonoBehaviour
     {
-        const int SampleRate = 44100;
-
-        static readonly float[] Pentatonic = { 523.25f, 587.33f, 659.25f, 783.99f, 880f, 1046.5f, 1174.66f, 1318.51f, 1567.98f };
+        const float ComboWindow = 1.4f;
+        const int MaxCombo = 5;
 
         public static Sfx Instance { get; private set; }
-        public static bool Enabled = true;
+
+        /// <summary>효과음 볼륨(0~1). 설정에서 바꾼다.</summary>
+        public static float Volume = 0.8f;
 
         AudioSource source;
-        AudioClip[] pops;
-        AudioClip wrong;
+        AudioClip[] reveal;
+        AudioClip[] select;
         AudioClip tap;
-        AudioClip clear;
+        AudioClip wrong;
         AudioClip heart;
+        AudioClip clear;
+        AudioClip[] star;
+        AudioClip open;
+        AudioClip close;
+        AudioClip revive;
+        AudioClip nameReveal;
+
+        float lastReveal = -10f;
+        int combo;
 
         public static void Create(Transform parent)
         {
@@ -33,79 +48,128 @@ namespace ColorMinesweeper.Game
         {
             source = gameObject.AddComponent<AudioSource>();
             source.playOnAwake = false;
-            pops = new AudioClip[Pentatonic.Length];
-            for (int i = 0; i < pops.Length; i++)
+
+            float[] scale = SoundSynth.Pentatonic;
+            reveal = new AudioClip[scale.Length];
+            for (int i = 0; i < scale.Length; i++)
             {
-                pops[i] = Synth("pop" + i, 0.16f, t => Bell(t, Pentatonic[i], 26f));
+                float f = scale[i];
+                reveal[i] = SoundSynth.Clip("reveal" + i, 0.45f, t => SoundSynth.Marimba(t, f, 9f) * 0.55f);
             }
 
-            tap = Synth("tap", 0.05f, t => Mathf.Sin(2f * Mathf.PI * 1400f * t) * Mathf.Exp(-t * 90f) * 0.4f);
-            wrong = Synth("wrong", 0.28f, t =>
+            select = new AudioClip[6];
+            for (int i = 0; i < select.Length; i++)
             {
-                float f = Mathf.Lerp(220f, 140f, t / 0.28f);
-                float wave = Mathf.Sign(Mathf.Sin(2f * Mathf.PI * f * t)) * 0.35f + Mathf.Sin(2f * Mathf.PI * f * 1.01f * t) * 0.4f;
-                return wave * Mathf.Exp(-t * 9f) * 0.5f;
+                float f = scale[4 + i % (scale.Length - 4)] * 2f;
+                select[i] = SoundSynth.Clip("select" + i, 0.12f, t => SoundSynth.Marimba(t, f, 40f) * 0.35f);
+            }
+
+            tap = SoundSynth.Clip("tap", 0.06f, t =>
+                (Mathf.Sin(SoundSynth.TwoPi * 1250f * t) * 0.6f + SoundSynth.Noise((int)(t * 44100f)) * 0.15f)
+                * Mathf.Exp(-t * 90f) * 0.45f);
+
+            // 틀렸을 때: 날카로운 경고음 대신 둔탁한 "통" 소리. 음이 살짝 내려가며 아쉬운 느낌만 준다.
+            wrong = SoundSynth.Clip("wrong", 0.32f, t =>
+            {
+                float f = Mathf.Lerp(196f, 147f, Mathf.Clamp01(t / 0.25f));
+                return (Mathf.Sin(SoundSynth.TwoPi * f * t) + 0.35f * Mathf.Sin(SoundSynth.TwoPi * f * 2.01f * t))
+                       * Mathf.Exp(-t * 11f) * Mathf.Clamp01(t / 0.004f) * 0.6f;
             });
-            heart = Synth("heart", 0.3f, t => Bell(t, 392f, 12f) * 0.8f);
-            clear = Synth("clear", 1.1f, t =>
+            heart = SoundSynth.Clip("heart", 0.6f, t =>
+                (SoundSynth.Marimba(t, 329.63f, 6f) + SoundSynth.Marimba(t - 0.13f, 261.63f, 5f)) * 0.4f);
+
+            clear = SoundSynth.Clip("clear", 1.8f, t =>
             {
-                float[] notes = { 523.25f, 659.25f, 783.99f, 1046.5f };
+                float[] arp = { 523.25f, 659.25f, 783.99f, 1046.5f, 1318.51f };
                 float sum = 0f;
-                for (int n = 0; n < notes.Length; n++)
+                for (int n = 0; n < arp.Length; n++)
                 {
-                    float start = n * 0.09f;
-                    if (t >= start)
-                    {
-                        sum += Bell(t - start, notes[n], n == notes.Length - 1 ? 4f : 9f);
-                    }
+                    sum += SoundSynth.Marimba(t - n * 0.085f, arp[n], n == arp.Length - 1 ? 3f : 7f);
                 }
 
-                return sum * 0.45f;
+                float shimmer = SoundSynth.Bell(t - 0.42f, 2093f, 3.5f) * 0.25f;
+                return (sum * 0.32f + shimmer) * 0.9f;
+            });
+
+            star = new AudioClip[3];
+            float[] starNotes = { 1046.5f, 1318.51f, 1567.98f };
+            for (int i = 0; i < star.Length; i++)
+            {
+                float f = starNotes[i];
+                star[i] = SoundSynth.Clip("star" + i, 0.7f, t => SoundSynth.Bell(t, f, 5f) * 0.35f);
+            }
+
+            open = Whoosh("open", 0.22f, 700f, 2400f, 0.22f);
+            close = Whoosh("close", 0.16f, 1800f, 600f, 0.16f);
+            revive = SoundSynth.Clip("revive", 0.7f, t =>
+                (SoundSynth.Marimba(t, 523.25f, 8f) + SoundSynth.Marimba(t - 0.09f, 659.25f, 8f)
+                 + SoundSynth.Marimba(t - 0.18f, 1046.5f, 5f)) * 0.35f);
+            nameReveal = SoundSynth.Clip("name", 0.7f, t =>
+            {
+                float sum = 0f;
+                float[] sparkle = { 1567.98f, 2093f, 1760f, 2637f };
+                for (int n = 0; n < sparkle.Length; n++)
+                {
+                    sum += SoundSynth.Bell(t - n * 0.07f, sparkle[n], 9f);
+                }
+
+                return sum * 0.12f;
             });
         }
 
-        public void Pop(int step)
+        /// <summary>
+        /// 칸이 열리는 소리. step 은 펼침 깊이. 짧은 간격으로 이어 맞히면 기준음이 한 칸씩 올라간다.
+        /// </summary>
+        public void Reveal(int step)
         {
-            Play(pops[Mathf.Clamp(step, 0, pops.Length - 1)], 0.7f);
+            if (step == 0)
+            {
+                combo = Time.unscaledTime - lastReveal < ComboWindow ? Mathf.Min(combo + 1, MaxCombo) : 0;
+                lastReveal = Time.unscaledTime;
+            }
+
+            Play(reveal[Mathf.Clamp(combo + step, 0, reveal.Length - 1)], 1f);
         }
 
-        public void Tap() => Play(tap, 0.5f);
-        public void Wrong() => Play(wrong, 0.9f);
-        public void LoseHeart() => Play(heart, 0.6f);
-        public void Clear() => Play(clear, 0.9f);
+        /// <summary>예전 이름. 펼침 소리.</summary>
+        public void Pop(int step) => Reveal(step);
+
+        public void Tap() => Play(tap, 0.6f);
+
+        /// <summary>팔레트에서 색을 고를 때. 색마다 음이 조금씩 달라서 손에 익는다.</summary>
+        public void Select(int colorIndex) => Play(select[Mathf.Abs(colorIndex) % select.Length], 0.8f);
+
+        public void Wrong() => Play(wrong, 1f);
+        public void LoseHeart() => Play(heart, 0.8f);
+        public void Clear() => Play(clear, 1f);
+        public void Star(int index) => Play(star[Mathf.Clamp(index, 0, star.Length - 1)], 1f);
+        public void Open() => Play(open, 0.6f);
+        public void Close() => Play(close, 0.5f);
+        public void Revive() => Play(revive, 1f);
+        public void NameReveal() => Play(nameReveal, 1f);
 
         void Play(AudioClip clip, float volume)
         {
-            if (Enabled && clip != null)
+            if (Volume > 0.001f && clip != null)
             {
-                source.PlayOneShot(clip, volume);
+                source.PlayOneShot(clip, volume * Volume);
             }
         }
 
-        /// <summary>배음을 살짝 섞은 사인파에 빠른 어택과 지수 감쇠. 실로폰 비슷한 소리.</summary>
-        static float Bell(float t, float frequency, float decay)
+        /// <summary>한쪽으로 흐르는 바람 소리. 잡음을 한 극(1-pole) 저역 통과로 거르며 차단 주파수를 옮긴다.</summary>
+        static AudioClip Whoosh(string name, float seconds, float fromHz, float toHz, float gain)
         {
-            float attack = Mathf.Clamp01(t / 0.004f);
-            float body = Mathf.Sin(2f * Mathf.PI * frequency * t) + 0.3f * Mathf.Sin(2f * Mathf.PI * frequency * 2f * t) +
-                         0.1f * Mathf.Sin(2f * Mathf.PI * frequency * 3.01f * t);
-            return body * attack * Mathf.Exp(-t * decay) * 0.5f;
-        }
-
-        static AudioClip Synth(string name, float seconds, System.Func<float, float> wave)
-        {
-            int length = Mathf.CeilToInt(seconds * SampleRate);
-            var data = new float[length];
-            for (int i = 0; i < length; i++)
+            float state = 0f;
+            int index = 0;
+            return SoundSynth.Clip(name, seconds, t =>
             {
-                float t = (float)i / SampleRate;
-                // 끝에서 뚝 끊기는 잡음이 없도록 마지막 10ms 를 줄인다.
-                float fade = Mathf.Clamp01((seconds - t) / 0.01f);
-                data[i] = Mathf.Clamp(wave(t) * fade, -1f, 1f);
-            }
-
-            AudioClip clip = AudioClip.Create(name, length, 1, SampleRate, false);
-            clip.SetData(data, 0);
-            return clip;
+                float k = t / seconds;
+                float cutoff = Mathf.Lerp(fromHz, toHz, k);
+                float alpha = 1f - Mathf.Exp(-SoundSynth.TwoPi * cutoff / 44100f);
+                state += alpha * (SoundSynth.Noise(index++) - state);
+                float env = Mathf.Sin(Mathf.PI * Mathf.Clamp01(k));
+                return state * env * gain * 3f;
+            });
         }
     }
 }

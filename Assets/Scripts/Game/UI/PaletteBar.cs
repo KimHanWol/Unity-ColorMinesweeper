@@ -88,7 +88,12 @@ namespace ColorMinesweeper.Game
                     0.3f, TextAnchor.MiddleCenter, true);
             }
             swatch.Ring.enabled = false;
-            swatch.Button = UiButton.Attach(root, Vector2.one * 1.5f * scale, 96, () => Select(color, true), visual);
+            swatch.Button = UiButton.Attach(root, Vector2.one * 1.5f * scale, 96, () =>
+            {
+                Sfx.Instance?.Select(color);
+                Select(color, true);
+            }, visual);
+            swatch.Button.Silent = true;
             return swatch;
         }
 

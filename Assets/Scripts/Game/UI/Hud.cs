@@ -47,6 +47,7 @@ namespace ColorMinesweeper.Game
                 return;
             }
 
+            Sfx.Instance?.NameReveal();
             Transform t = title.transform;
             Vector3 rest = t.localScale;
             Tween.Kill(t);
