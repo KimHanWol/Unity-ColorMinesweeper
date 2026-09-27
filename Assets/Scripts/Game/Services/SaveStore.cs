@@ -30,9 +30,16 @@ namespace ColorMinesweeper.Game
         {
             public int version = Version;
             public List<StageRecord> stages = new List<StageRecord>();
+
+            /// <summary>가진 힌트 수. 이 필드가 없는 예전 파일은 처음 주는 개수로 시작한다.</summary>
+            public int hints = StartingHints;
         }
 
+        /// <summary>처음 설치했을 때 주는 힌트 수.</summary>
+        public const int StartingHints = 3;
+
         static Dictionary<string, StageRecord> records;
+        static int hints = StartingHints;
 
         static string FilePath => Path.Combine(Application.persistentDataPath, FileName);
 
@@ -79,6 +86,30 @@ namespace ColorMinesweeper.Game
             Write();
         }
 
+        /// <summary>가진 힌트 수. 바꾸면 바로 파일에 쓴다.</summary>
+        public static int Hints
+        {
+            get
+            {
+                if (records == null)
+                {
+                    Load();
+                }
+
+                return hints;
+            }
+            set
+            {
+                if (records == null)
+                {
+                    Load();
+                }
+
+                hints = Mathf.Max(0, value);
+                Write();
+            }
+        }
+
         public static void Remove(string stageId)
         {
             if (Records.Remove(stageId))
@@ -90,11 +121,13 @@ namespace ColorMinesweeper.Game
         static void Load()
         {
             records = new Dictionary<string, StageRecord>();
+            hints = StartingHints;
             try
             {
                 if (File.Exists(FilePath))
                 {
                     var file = JsonUtility.FromJson<SaveFile>(File.ReadAllText(FilePath));
+                    hints = Mathf.Max(0, file?.hints ?? StartingHints);
                     foreach (StageRecord record in file?.stages ?? new List<StageRecord>())
                     {
                         if (!string.IsNullOrEmpty(record.id))
@@ -145,7 +178,8 @@ namespace ColorMinesweeper.Game
         static void Write()
         {
             var file = new SaveFile();
-            file.stages.AddRange(records.Values);
+            file.stages.AddRange(Records.Values);
+            file.hints = hints;
             string json = JsonUtility.ToJson(file, true);
             string temp = FilePath + ".tmp";
             try

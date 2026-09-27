@@ -44,6 +44,7 @@ namespace ColorMinesweeper.Game
 
             UnlockAll = false;
             TutorialDirector.IsDone = false;
+            SaveStore.Hints = SaveStore.StartingHints;
         }
     }
 }
