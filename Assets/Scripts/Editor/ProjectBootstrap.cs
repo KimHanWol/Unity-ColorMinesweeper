@@ -14,7 +14,7 @@ namespace ColorMinesweeper.EditorTools
     static class ProjectBootstrap
     {
         const string ScenePath = "Assets/Scenes/Main.unity";
-        const string ApplicationId = "com.kimhanwol.colorminesweeper";
+        const string ApplicationId = "com.kimhanwol.pixelclue";
 
         static ProjectBootstrap()
         {
@@ -57,7 +57,7 @@ namespace ColorMinesweeper.EditorTools
             }
 
             PlayerSettings.companyName = "KimHanWol";
-            PlayerSettings.productName = "Color Minesweeper";
+            PlayerSettings.productName = "Pixel Clue";
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.Android, ApplicationId);
             PlayerSettings.SetApplicationIdentifier(NamedBuildTarget.iOS, ApplicationId);
             PlayerSettings.defaultInterfaceOrientation = UIOrientation.Portrait;
