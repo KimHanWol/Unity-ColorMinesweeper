@@ -1,0 +1,25 @@
+{
+  "id": "xmas_gift",
+  "name": "크리스마스 선물",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1D3557" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "G", "color": "#2D6A4F" },
+    { "key": "B", "color": "#48CAE4" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "..YY.YY..",
+    "...YYY...",
+    "RRRRGRRRR",
+    "RRRRGRRRR",
+    "GGGGGGGGG",
+    "RRRRGRRRR",
+    "RRRRGRBRR",
+    "RRRRGRRRR",
+    "WWWWWWWWW"
+  ],
+  "givens": [0]
+}

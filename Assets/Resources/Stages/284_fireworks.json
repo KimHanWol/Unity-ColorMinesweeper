@@ -1,0 +1,27 @@
+{
+  "id": "fireworks",
+  "name": "불꽃놀이",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#10002B" },
+    { "key": "R", "color": "#FF4D6D" },
+    { "key": "P", "color": "#C77DFF" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "B", "color": "#48CAE4" }
+  ],
+  "pixels": [
+    "R...R......",
+    ".R.R...P...",
+    "..W...PPP..",
+    ".R.R.PPWPP.",
+    "R...R.PPP..",
+    ".......P...",
+    "..Y........",
+    "Y.Y.Y...B.B",
+    ".YWY.....B.",
+    "Y.Y.Y...B.B",
+    "..Y........"
+  ],
+  "givens": [83]
+}

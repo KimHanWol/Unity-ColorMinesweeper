@@ -1,0 +1,24 @@
+{
+  "id": "rainbow_cake",
+  "name": "무지개 케이크",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5F7" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "O", "color": "#F77F00" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    "....R....",
+    ".RRRRRRR.",
+    ".OOOOOOO.",
+    ".YYYYYYY.",
+    ".GGGGGGG.",
+    ".BBBBBBB.",
+    ".RRRRRRR.",
+    "BBBBBBBBB"
+  ],
+  "givens": [53, 62]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "polar_bear",
+  "name": "북극곰",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#DDF1FF" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "S", "color": "#BFC8D6" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    "..WW........",
+    ".WWWW.......",
+    "WKWWWWWWWW..",
+    "WWWWWWWWWWW.",
+    ".KWWWWWWWWW.",
+    "..WWSSWWSWW.",
+    "..WW..WW.WW.",
+    "BBBBBBBBBBBB"
+  ],
+  "givens": [6]
+}

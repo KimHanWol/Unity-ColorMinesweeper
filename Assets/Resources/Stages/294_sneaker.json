@@ -1,0 +1,22 @@
+{
+  "id": "sneaker",
+  "name": "운동화",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "...RRRR....",
+    "..RYRYRR...",
+    "..RRRRRRRR.",
+    ".RRWWRRRRRR",
+    "BBBBBBBBBBB",
+    "KKKKKKKKKKK"
+  ],
+  "givens": [0]
+}

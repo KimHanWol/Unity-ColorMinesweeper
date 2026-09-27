@@ -1,0 +1,25 @@
+{
+  "id": "spinning_top",
+  "name": "팽이",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "G", "color": "#52B788" }
+  ],
+  "pixels": [
+    "....K....",
+    "....K....",
+    "..RRRRR..",
+    ".YYYYYYY.",
+    "BBBBBBBBB",
+    ".GGGGGGG.",
+    "..RRRRR..",
+    "...YYY...",
+    "....K...."
+  ],
+  "givens": [0]
+}

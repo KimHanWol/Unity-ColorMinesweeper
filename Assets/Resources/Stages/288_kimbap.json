@@ -1,0 +1,25 @@
+{
+  "id": "kimbap",
+  "name": "김밥",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "K", "color": "#1B4332" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "O", "color": "#F77F00" }
+  ],
+  "pixels": [
+    "..KKKKK..",
+    ".KWWWWWK.",
+    "KWWGGYWWK",
+    "KWOYYGOWK",
+    "KWGYOYGWK",
+    "KWOGYOWWK",
+    "KWWYGWWWK",
+    ".KWWWWWK.",
+    "..KKKKK.."
+  ],
+  "givens": [69, 79]
+}

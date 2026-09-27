@@ -1,0 +1,24 @@
+{
+  "id": "icecream_truck",
+  "name": "아이스크림 트럭",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "B", "color": "#8ECAE6" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "....PPPP.....",
+    "WWWWWWWWWW...",
+    "WBBWBBWWWWWW.",
+    "WWWWWWWWWBBWW",
+    "PPPPPPPPPPPPP",
+    "WWWWYWWWWWWWW",
+    ".KK.......KK.",
+    ".KK.......KK."
+  ],
+  "givens": [95]
+}

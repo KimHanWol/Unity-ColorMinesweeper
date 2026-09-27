@@ -1,0 +1,23 @@
+{
+  "id": "tractor",
+  "name": "트랙터",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "G", "color": "#2D6A4F" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "S", "color": "#8D99AE" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "...GGGG....",
+    "...GYYG....",
+    "...GYYG..S.",
+    "GGGGGGGGGS.",
+    "GGGGGGGGGG.",
+    ".KKK...KK..",
+    "KKSKK.KSK..",
+    ".KKK...KK.."
+  ],
+  "givens": [0]
+}

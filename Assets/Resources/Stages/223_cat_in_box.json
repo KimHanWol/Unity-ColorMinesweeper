@@ -1,0 +1,25 @@
+{
+  "id": "cat_in_box",
+  "name": "상자 속 고양이",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "O", "color": "#F4A259" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "B", "color": "#B08968" }
+  ],
+  "pixels": [
+    ".O......O.",
+    ".OO....OO.",
+    ".OOOOOOOO.",
+    ".OKOOOOKO.",
+    ".OOOPPOOO.",
+    "BBBBBBBBBB",
+    "BBBBBBBBBB",
+    "BBBBKKBBBB",
+    "BBBBBBBBBB",
+    "BBBBBBBBBB"
+  ],
+  "givens": [4]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "sandcastle",
+  "name": "모래성",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CAF0F8" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "O", "color": "#D4A373" },
+    { "key": "Y", "color": "#F4D58D" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    ".....R.....",
+    ".....RR....",
+    ".....O.....",
+    "..O.OOO.O..",
+    "..OOOOOOO..",
+    "..OYOOOYO..",
+    ".OOOOOOOOO.",
+    ".OOOYYYOOO.",
+    "YYYYYYYYYYY",
+    "BBBBBBBBBBB"
+  ],
+  "givens": [0]
+}

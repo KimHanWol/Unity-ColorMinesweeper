@@ -1,0 +1,26 @@
+{
+  "id": "carousel",
+  "name": "회전목마",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "P", "color": "#FF8FAB" }
+  ],
+  "pixels": [
+    ".....Y.....",
+    "...RWRWR...",
+    "..RWRWRWR..",
+    ".RWRWRWRWR.",
+    "YYYYYYYYYYY",
+    ".Y..Y..Y..Y",
+    ".BB.YPP.Y..",
+    "BBB.YPPPY..",
+    ".Y..Y..Y..Y",
+    "WWWWWWWWWWW"
+  ],
+  "givens": [0, 59, 89]
+}

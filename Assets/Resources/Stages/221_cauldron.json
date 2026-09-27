@@ -1,0 +1,24 @@
+{
+  "id": "cauldron",
+  "name": "가마솥",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2E2A47" },
+    { "key": "P", "color": "#C77DFF" },
+    { "key": "G", "color": "#80B918" },
+    { "key": "K", "color": "#10002B" },
+    { "key": "Y", "color": "#FFD166" }
+  ],
+  "pixels": [
+    "...P..P...",
+    "..P..PP...",
+    ".GGGGGGGG.",
+    "KKKKKKKKKK",
+    "KKKKKKKKKK",
+    ".KKKKKKKK.",
+    "..KKKKKK..",
+    ".Y.Y.Y.Y..",
+    "..YYYYYY.."
+  ],
+  "givens": [8]
+}

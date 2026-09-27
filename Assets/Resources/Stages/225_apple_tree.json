@@ -1,0 +1,26 @@
+{
+  "id": "apple_tree",
+  "name": "사과나무",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#DDF1FF" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "L", "color": "#7BC96F" },
+    { "key": "B", "color": "#8B5E3C" }
+  ],
+  "pixels": [
+    "...GGGGG...",
+    "..GGRGGGG..",
+    ".GGGGGGRGG.",
+    "GGRGGLGGGGG",
+    "GGGGGGGGRGG",
+    ".GGLGRGGGG.",
+    "..GGGGGGG..",
+    "....BBB....",
+    "....BBB....",
+    "....BBB....",
+    "LLLLLLLLLLL"
+  ],
+  "givens": [77]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "drum",
+  "name": "드럼",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "Y", "color": "#E9C46A" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "S", "color": "#ADB5BD" }
+  ],
+  "pixels": [
+    "Y.......Y",
+    ".Y.....Y.",
+    "..WWWWW..",
+    ".WWWWWWW.",
+    "RSRSRSRSR",
+    "RRSRRRSRR",
+    "RRRRRRRRR",
+    ".SSSSSSS."
+  ],
+  "givens": [3]
+}

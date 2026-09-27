@@ -1,0 +1,23 @@
+{
+  "id": "space_station",
+  "name": "우주 정거장",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#10002B" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "S", "color": "#ADB5BD" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFD60A" }
+  ],
+  "pixels": [
+    "BB.........BB",
+    "BBB...W...BBB",
+    "BBBSSSSSSSBBB",
+    "BBBSRSYSRSBBB",
+    "BBBSSSSSSSBBB",
+    "BBB...S...BBB",
+    "BB....Y....BB"
+  ],
+  "givens": [4]
+}

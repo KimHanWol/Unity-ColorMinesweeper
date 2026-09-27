@@ -1,0 +1,25 @@
+{
+  "id": "coral_reef",
+  "name": "산호초",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CAF0F8" },
+    { "key": "P", "color": "#FF6B9A" },
+    { "key": "G", "color": "#2A9D8F" },
+    { "key": "O", "color": "#F77F00" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "B", "color": "#1D3557" }
+  ],
+  "pixels": [
+    "P.P....G.G.",
+    "P.P.O..G.G.",
+    "PPP.O.O.GG.",
+    ".P..OOO..G.",
+    ".P...O...G.",
+    "YY.Y.O.YGG.",
+    "YYYY.O.YYG.",
+    "BBBBBBBBBBB",
+    "BBBBBBBBBBB"
+  ],
+  "givens": [16, 27]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "earth",
+  "name": "지구",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1D1E3A" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "L", "color": "#8ECAE6" }
+  ],
+  "pixels": [
+    "..BBBBB..",
+    ".BGGBBWB.",
+    "BGGGBBBBB",
+    "BBGGBBGGB",
+    "BWBBBGGGB",
+    "BBBBBGGBB",
+    "BLBBWBBBB",
+    ".BBBBBBL.",
+    "..BBBBB.."
+  ],
+  "givens": [1, 2]
+}

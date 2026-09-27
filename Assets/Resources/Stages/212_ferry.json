@@ -1,0 +1,23 @@
+{
+  "id": "ferry",
+  "name": "여객선",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CAF0F8" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "B", "color": "#1D3557" }
+  ],
+  "pixels": [
+    "......RR.....",
+    "......RR.....",
+    "...WWWWWWW...",
+    "...WKWKWKW...",
+    ".WWWWWWWWWWW.",
+    "WWKWKWKWKWKWW",
+    "BBBBBBBBBBBBB",
+    ".BBBBBBBBBBB."
+  ],
+  "givens": [0]
+}

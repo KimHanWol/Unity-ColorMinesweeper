@@ -1,0 +1,26 @@
+{
+  "id": "balloons",
+  "name": "풍선 다발",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "Y", "color": "#FFC300" },
+    { "key": "S", "color": "#8D99AE" }
+  ],
+  "pixels": [
+    ".RR....BB",
+    "RRRR..BBB",
+    "RRRR..BBB",
+    ".RR.YY.B.",
+    "..SYYYY..",
+    "..S.YY.S.",
+    "...S.S.S.",
+    "....SSS..",
+    "....S....",
+    "....S....",
+    "....S...."
+  ],
+  "givens": [45]
+}

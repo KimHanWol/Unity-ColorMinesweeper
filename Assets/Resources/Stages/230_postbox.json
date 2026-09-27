@@ -1,0 +1,26 @@
+{
+  "id": "postbox",
+  "name": "우체통",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "S", "color": "#8D99AE" }
+  ],
+  "pixels": [
+    ".RRRRR.",
+    "RRRRRRR",
+    "RKKKKKR",
+    "RRRRRRR",
+    "RRWWWRR",
+    "RRRRRRR",
+    "RRRRRRR",
+    ".RRRRR.",
+    "...S...",
+    "...S...",
+    "..SSS.."
+  ],
+  "givens": [63]
+}

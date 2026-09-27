@@ -1,0 +1,24 @@
+{
+  "id": "hummingbird",
+  "name": "벌새",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5FA" },
+    { "key": "G", "color": "#2A9D8F" },
+    { "key": "K", "color": "#1B1B2F" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "P", "color": "#FF6B9A" },
+    { "key": "Y", "color": "#FFD60A" }
+  ],
+  "pixels": [
+    "....GG.....",
+    "...GKGG....",
+    "KKKGGGGBB..",
+    "...PPGGBBB.",
+    "....GGGBBBB",
+    ".....GGGY..",
+    "......YY...",
+    "......Y...."
+  ],
+  "givens": [44]
+}

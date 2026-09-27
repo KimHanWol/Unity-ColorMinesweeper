@@ -1,0 +1,25 @@
+{
+  "id": "parasol",
+  "name": "파라솔",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CAF0F8" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "Y", "color": "#F4D58D" }
+  ],
+  "pixels": [
+    ".....R.....",
+    "...RRWRR...",
+    "..RWWRRWR..",
+    ".RRWRRRWRR.",
+    "RWWRRRRRWWR",
+    ".....W.....",
+    ".....W.....",
+    ".....W.....",
+    "BBBBBWBBBBB",
+    "YYYYYYYYYYY"
+  ],
+  "givens": [66]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "campfire",
+  "name": "모닥불",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1D1E3A" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "O", "color": "#F77F00" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "B", "color": "#8B5E3C" }
+  ],
+  "pixels": [
+    "....Y....",
+    "...YOY...",
+    "..YOROY..",
+    "..ORRRO..",
+    ".ORRYRRO.",
+    ".ORRRRRO.",
+    "BB.ROR.BB",
+    ".BBBBBBB.",
+    "BB.....BB"
+  ],
+  "givens": [0]
+}

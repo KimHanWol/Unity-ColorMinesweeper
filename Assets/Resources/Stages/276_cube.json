@@ -1,0 +1,24 @@
+{
+  "id": "cube",
+  "name": "큐브",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2B2D42" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "RR.YY.BB",
+    "RR.YY.BB",
+    "........",
+    "GG.WW.RR",
+    "GG.WW.RR",
+    "........",
+    "YY.BB.GG",
+    "YY.BB.GG"
+  ],
+  "givens": [61, 62]
+}

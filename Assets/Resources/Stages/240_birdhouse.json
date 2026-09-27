@@ -1,0 +1,26 @@
+{
+  "id": "birdhouse",
+  "name": "새집",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#DDF1FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "B", "color": "#B08968" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "G", "color": "#40916C" }
+  ],
+  "pixels": [
+    "....R....",
+    "...RRR...",
+    "..RRRRR..",
+    ".RRRRRRR.",
+    "..BBBBB..",
+    "..BBKBB..",
+    "..BKKKB..",
+    "..BBKBB..",
+    "..BBBBB..",
+    "GGGGBGGGG",
+    "....B...."
+  ],
+  "givens": [45]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "paint_palette",
+  "name": "물감 팔레트",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "B", "color": "#D4A373" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "..BBBBBBB..",
+    ".BRBBYBBGB.",
+    "BBBBBBBBBBB",
+    "BWBBBBBBBBB",
+    "B..BBBBBBBB",
+    "BBBBBBBBBB.",
+    ".BBBBBBBB.."
+  ],
+  "givens": [0, 13]
+}

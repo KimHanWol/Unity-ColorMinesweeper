@@ -1,0 +1,27 @@
+{
+  "id": "ferris_wheel",
+  "name": "관람차",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF3E0" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "S", "color": "#6C757D" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "Y", "color": "#FFD60A" }
+  ],
+  "pixels": [
+    "...RSSSB...",
+    "..S..S..S..",
+    ".G...S...Y.",
+    ".S.SSSSS.S.",
+    ".Y...S...G.",
+    "..S..S..S..",
+    "...BSSSR...",
+    ".....S.....",
+    "....S.S....",
+    "...S...S...",
+    "..SSSSSSS.."
+  ],
+  "givens": [66]
+}

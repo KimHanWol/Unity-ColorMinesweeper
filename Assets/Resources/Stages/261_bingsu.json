@@ -1,0 +1,23 @@
+{
+  "id": "bingsu",
+  "name": "빙수",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#BDE0FE" },
+    { "key": "P", "color": "#FF6B9A" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "Y", "color": "#FFC300" },
+    { "key": "S", "color": "#8D99AE" }
+  ],
+  "pixels": [
+    "....PP....",
+    "..WWPPWW..",
+    ".WWWWWWWW.",
+    "WWYWWWWYWW",
+    "WWWWYWWWWW",
+    "SSSSSSSSSS",
+    ".SSSSSSSS.",
+    "...SSSS..."
+  ],
+  "givens": [0, 2]
+}

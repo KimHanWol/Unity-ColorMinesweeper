@@ -1,0 +1,23 @@
+{
+  "id": "pond",
+  "name": "연못",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "Y", "color": "#FFD60A" }
+  ],
+  "pixels": [
+    "...BBBBB...",
+    ".BBBBBBBBB.",
+    "BBGGBBBBBBB",
+    "BGGGGBBPPBB",
+    "BBGGBBPYPBB",
+    "BBBBBBBPPGB",
+    ".BBBBBBBGG.",
+    "...BBBBB..."
+  ],
+  "givens": [67, 77]
+}

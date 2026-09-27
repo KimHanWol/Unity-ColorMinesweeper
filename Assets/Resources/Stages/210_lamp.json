@@ -1,0 +1,25 @@
+{
+  "id": "lamp",
+  "name": "램프",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2E2A47" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "W", "color": "#FFF3B0" },
+    { "key": "S", "color": "#8D99AE" },
+    { "key": "K", "color": "#10002B" }
+  ],
+  "pixels": [
+    "...YYY...",
+    "..YYYYY..",
+    ".YYYYYYY.",
+    "YYYYYYYYY",
+    "...WWW...",
+    "....S....",
+    "....S....",
+    "....S....",
+    "...SSS...",
+    ".KKKKKKK."
+  ],
+  "givens": [45]
+}

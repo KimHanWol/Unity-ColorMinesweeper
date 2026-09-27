@@ -1,0 +1,24 @@
+{
+  "id": "rain_cloud",
+  "name": "비구름",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "S", "color": "#8D99AE" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "Y", "color": "#FFC300" }
+  ],
+  "pixels": [
+    "...WW....",
+    ".SWWSS...",
+    "SSSSSSSS.",
+    "SSSSSSSSS",
+    ".SSSSSSS.",
+    ".B..Y..B.",
+    "..B.YY.B.",
+    ".B..Y...B",
+    "..B.....B"
+  ],
+  "givens": [7]
+}

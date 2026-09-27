@@ -1,0 +1,24 @@
+{
+  "id": "easter_egg",
+  "name": "부활절 달걀",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "G", "color": "#52B788" }
+  ],
+  "pixels": [
+    "..PPP..",
+    ".PPPPP.",
+    ".YYYYY.",
+    "PYBYBYP",
+    "PPPPPPP",
+    "GGGGGGG",
+    ".PPPPP.",
+    ".BYBYB.",
+    "..PPP.."
+  ],
+  "givens": [0, 1]
+}

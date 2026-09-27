@@ -1,0 +1,27 @@
+{
+  "id": "matryoshka",
+  "name": "마트료시카",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "Y", "color": "#FFD60A" }
+  ],
+  "pixels": [
+    "..RRR..",
+    ".RRRRR.",
+    "RRWWWRR",
+    "RWKWKWR",
+    "RWPWPWR",
+    "RRWWWRR",
+    "RRRRRRR",
+    "RRYYYRR",
+    "RYYRYYR",
+    "RRYYYRR",
+    ".RRRRR."
+  ],
+  "givens": [6, 13]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "chocolate",
+  "name": "초콜릿",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5F7" },
+    { "key": "S", "color": "#ADB5BD" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "B", "color": "#7F5539" },
+    { "key": "D", "color": "#4A2C1D" }
+  ],
+  "pixels": [
+    ".SSSSSSSS.",
+    ".SRRRRRRS.",
+    ".SRRRRRRS.",
+    ".SSSSSSSS.",
+    ".BBBDBBBD.",
+    ".BBBDBBBD.",
+    ".DDDDDDDD.",
+    ".BBBDBBBD.",
+    ".BBBDBBBD.",
+    ".DDDDDDDD.",
+    ".BBBDBBBD."
+  ],
+  "givens": [51, 52, 60]
+}

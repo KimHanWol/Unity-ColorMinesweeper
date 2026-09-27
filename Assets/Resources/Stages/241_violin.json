@@ -1,0 +1,27 @@
+{
+  "id": "violin",
+  "name": "바이올린",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "B", "color": "#6F4E37" },
+    { "key": "O", "color": "#C8553D" },
+    { "key": "Y", "color": "#E9C46A" }
+  ],
+  "pixels": [
+    "...K...",
+    "...K...",
+    "...K...",
+    "...B...",
+    "..OBO..",
+    ".OOBOO.",
+    "..OBO..",
+    ".OKBKO.",
+    "OOOBOOO",
+    "OOOBOOO",
+    ".OOYOO.",
+    "..OOO.."
+  ],
+  "givens": [0]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "ramen",
+  "name": "라면",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF3B0" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "...G.W.....",
+    "..YYYWWYY..",
+    ".YGYYWYYGY.",
+    "RRRRRRRRRRR",
+    ".RRRRRRRRR.",
+    ".RRWWWWWRR.",
+    "..RRRRRRR..",
+    "...RRRRR..."
+  ],
+  "givens": [0]
+}

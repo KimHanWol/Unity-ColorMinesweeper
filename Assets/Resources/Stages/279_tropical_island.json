@@ -1,0 +1,26 @@
+{
+  "id": "tropical_island",
+  "name": "열대 섬",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#BDE0FE" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "G", "color": "#2D6A4F" },
+    { "key": "B", "color": "#8B5E3C" },
+    { "key": "Y", "color": "#F4D58D" },
+    { "key": "L", "color": "#48CAE4" }
+  ],
+  "pixels": [
+    ".WWW........",
+    "WWWWW..GG...",
+    ".....GGGGGG.",
+    "....GG.BB.GG",
+    "........B...",
+    "........B...",
+    ".......BB...",
+    "....YYYYYYY.",
+    "LLYYYYYYYYYL",
+    "LLLLLLLLLLLL"
+  ],
+  "givens": [36]
+}

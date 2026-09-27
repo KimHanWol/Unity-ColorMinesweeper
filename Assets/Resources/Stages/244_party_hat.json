@@ -1,0 +1,24 @@
+{
+  "id": "party_hat",
+  "name": "파티 모자",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF9E6" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "P", "color": "#FF6B9A" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    "...W...",
+    "..WWW..",
+    "...P...",
+    "..PYP..",
+    "..PPP..",
+    ".BBBBB.",
+    ".PYPPY.",
+    "PPPPPPP",
+    "BBBBBBB"
+  ],
+  "givens": [0]
+}

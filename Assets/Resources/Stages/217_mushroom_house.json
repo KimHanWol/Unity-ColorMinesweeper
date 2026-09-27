@@ -1,0 +1,26 @@
+{
+  "id": "mushroom_house",
+  "name": "버섯 집",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#DDF1FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "G", "color": "#7BC96F" }
+  ],
+  "pixels": [
+    "...RRRRR...",
+    "..RRWRRRR..",
+    ".RRRRRRWRR.",
+    "RRWRRRRRRRR",
+    "RRRRRWRRRRR",
+    "..WWWWWWW..",
+    "..WBWWWBW..",
+    "..WWWBWWW..",
+    "..WWWBWWW..",
+    "GGGGGGGGGGG",
+    "GGGGGGGGGGG"
+  ],
+  "givens": [66]
+}

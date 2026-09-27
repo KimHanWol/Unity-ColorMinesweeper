@@ -1,0 +1,25 @@
+{
+  "id": "crayons",
+  "name": "크레파스",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF9E6" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "O", "color": "#F77F00" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    "R.O.Y.G.B.",
+    "RROOYYGGBB",
+    "RROOYYGGBB",
+    "RROOYYGGBB",
+    "RROOYYGGBB",
+    "RROOYYGGBB",
+    "RROOYYGGBB",
+    "RROOYYGGBB",
+    "RROOYYGGBB"
+  ],
+  "givens": [6, 7]
+}

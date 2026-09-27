@@ -1,0 +1,23 @@
+{
+  "id": "garden",
+  "name": "정원",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#DDF1FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "P", "color": "#C77DFF" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "B", "color": "#8B5E3C" }
+  ],
+  "pixels": [
+    ".R...Y...P.",
+    "RRR.YYY.PPP",
+    ".R...Y...P.",
+    ".G...G...G.",
+    "GGG.GGG.GGG",
+    "BBBBBBBBBBB",
+    "B.B.B.B.B.B"
+  ],
+  "givens": [22, 33]
+}

@@ -1,0 +1,26 @@
+{
+  "id": "traffic_light",
+  "name": "신호등",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#DDF1FF" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFC300" },
+    { "key": "G", "color": "#2DC653" }
+  ],
+  "pixels": [
+    "KKKKK",
+    "KRRRK",
+    "KRRRK",
+    "KKKKK",
+    "KYYYK",
+    "KYYYK",
+    "KKKKK",
+    "KGGGK",
+    "KGGGK",
+    "KKKKK",
+    "..K.."
+  ],
+  "givens": [50, 51]
+}

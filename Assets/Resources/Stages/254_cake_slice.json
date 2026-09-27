@@ -1,0 +1,22 @@
+{
+  "id": "cake_slice",
+  "name": "딸기 케이크",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "Y", "color": "#FFE8A3" },
+    { "key": "P", "color": "#FF8FAB" }
+  ],
+  "pixels": [
+    "....RR....",
+    "...RRRR...",
+    "WWWWWWWWW.",
+    "YYYYYYYYYW",
+    "PPPPPPPPPW",
+    "YYYYYYYYYW",
+    "WWWWWWWWWW"
+  ],
+  "givens": [0]
+}

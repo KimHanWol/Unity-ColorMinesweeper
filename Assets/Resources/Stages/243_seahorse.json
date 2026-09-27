@@ -1,0 +1,26 @@
+{
+  "id": "seahorse",
+  "name": "해마",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CAF0F8" },
+    { "key": "O", "color": "#F77F00" },
+    { "key": "K", "color": "#1B1B2F" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    "..OOO..",
+    ".OKOOO.",
+    ".OOO.OO",
+    "..OOY..",
+    "B.OOYY.",
+    "...OYY.",
+    "..OOYY.",
+    "..OOO..",
+    "...OO..",
+    ".O.O...",
+    "..O...."
+  ],
+  "givens": [62]
+}

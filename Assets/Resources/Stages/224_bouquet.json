@@ -1,0 +1,24 @@
+{
+  "id": "bouquet",
+  "name": "꽃다발",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5F7" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "P", "color": "#C77DFF" },
+    { "key": "G", "color": "#40916C" }
+  ],
+  "pixels": [
+    ".RR.YY.PP",
+    "RRRRYYPPP",
+    ".RRYYYYP.",
+    "..GGGGG..",
+    "...GGG...",
+    "...GGG...",
+    "...GGG...",
+    "...GGG...",
+    "..G.G.G.."
+  ],
+  "givens": [36]
+}

@@ -1,0 +1,23 @@
+{
+  "id": "santa_hat",
+  "name": "산타 모자",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "D", "color": "#9D0208" },
+    { "key": "Y", "color": "#FFD60A" }
+  ],
+  "pixels": [
+    "......WW.",
+    ".....RWW.",
+    "....RRD..",
+    "...RRRD..",
+    "..RRRRDD.",
+    ".RRRRRRD.",
+    "WWWWWWWWW",
+    "WWYWWWYWW"
+  ],
+  "givens": [0]
+}

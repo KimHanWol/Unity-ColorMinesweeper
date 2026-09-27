@@ -1,0 +1,23 @@
+{
+  "id": "raccoon",
+  "name": "너구리",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "S", "color": "#8D99AE" },
+    { "key": "B", "color": "#6F4E37" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "S........S",
+    "SB......BS",
+    "SSSSSSSSSS",
+    "WKKSSSSKKW",
+    "KKWKSSKWKK",
+    ".SSSSSSSS.",
+    "..WWKKWW..",
+    "...WWWW..."
+  ],
+  "givens": [3]
+}

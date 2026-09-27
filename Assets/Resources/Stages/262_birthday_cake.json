@@ -1,0 +1,25 @@
+{
+  "id": "birthday_cake",
+  "name": "생일 케이크",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "Y", "color": "#FFD60A" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "P", "color": "#FF8FAB" }
+  ],
+  "pixels": [
+    "..Y.Y.Y..",
+    "..R.R.R..",
+    "..R.R.R..",
+    ".WWWWWWW.",
+    ".PPPPPPP.",
+    ".WPWPWPW.",
+    "WWWWWWWWW",
+    "PPPPPPPPP",
+    "PPWPPPWPP",
+    "WWWWWWWWW"
+  ],
+  "givens": [0]
+}
