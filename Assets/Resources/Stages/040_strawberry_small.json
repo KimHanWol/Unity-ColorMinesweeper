@@ -1,0 +1,22 @@
+{
+  "id": "strawberry_small",
+  "name": "작은 딸기",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5F5" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "..GGG..",
+    ".GGGGG.",
+    "RRRRRRR",
+    "R.RRR.R",
+    "RRRR.RR",
+    ".RR.RR.",
+    "..RRR..",
+    "...R..."
+  ],
+  "givens": [36, 49, 53]
+}

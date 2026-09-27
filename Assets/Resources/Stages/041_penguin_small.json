@@ -1,0 +1,21 @@
+{
+  "id": "penguin_small",
+  "name": "꼬마 펭귄",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E3F2FD" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "O", "color": "#F4A261" }
+  ],
+  "pixels": [
+    ".KKKK.",
+    "K.KK.K",
+    "KKOOKK",
+    "K....K",
+    "K....K",
+    ".KKKK.",
+    ".O..O."
+  ],
+  "givens": [10, 30, 32, 36, 37, 39, 40]
+}

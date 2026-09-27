@@ -1,0 +1,21 @@
+{
+  "id": "umbrella_small",
+  "name": "작은 우산",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E8F4FF" },
+    { "key": "P", "color": "#FF6B9A" },
+    { "key": "K", "color": "#3D405B" }
+  ],
+  "pixels": [
+    "..PPP..",
+    ".PPPPP.",
+    "PPPPPPP",
+    "P.PKP.P",
+    "...K...",
+    ".K.K...",
+    "..K...."
+  ],
+  "givens": [15, 27, 40]
+}

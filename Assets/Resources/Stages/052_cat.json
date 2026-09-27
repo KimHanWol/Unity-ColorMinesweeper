@@ -1,6 +1,7 @@
 {
   "id": "cat",
   "name": "고양이",
+  "logic": "medium",
   "background": ".",
   "palette": [
     { "key": ".", "color": "#EFE9F4" },

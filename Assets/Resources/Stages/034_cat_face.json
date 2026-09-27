@@ -1,0 +1,21 @@
+{
+  "id": "cat_face",
+  "name": "고양이 얼굴",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4EEFF" },
+    { "key": "O", "color": "#F4A259" },
+    { "key": "K", "color": "#3B3B4F" }
+  ],
+  "pixels": [
+    "O......O",
+    "OO....OO",
+    "OOOOOOOO",
+    "OKOOOOKO",
+    "OOOKKOOO",
+    "OOOOOOOO",
+    ".OOOOOO."
+  ],
+  "givens": [3, 37]
+}

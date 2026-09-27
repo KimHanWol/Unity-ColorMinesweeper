@@ -1,6 +1,7 @@
 {
   "id": "heart",
   "name": "하트",
+  "logic": "basic",
   "background": ".",
   "palette": [
     { "key": ".", "color": "#F3EEE4" },

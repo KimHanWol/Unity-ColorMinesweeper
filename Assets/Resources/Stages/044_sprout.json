@@ -1,0 +1,21 @@
+{
+  "id": "sprout",
+  "name": "새싹",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F6FBF2" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "B", "color": "#9C6644" }
+  ],
+  "pixels": [
+    "GG...GG",
+    ".GG.GG.",
+    "..GGG..",
+    "...G...",
+    "...G...",
+    "BBBBBBB",
+    ".BBBBB."
+  ],
+  "givens": [13, 21, 43]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "rocket_small",
+  "name": "작은 로켓",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1D1E3A" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "W", "color": "#F1FAEE" }
+  ],
+  "pixels": [
+    "..R..",
+    ".RWR.",
+    ".WWW.",
+    ".WRW.",
+    ".WWW.",
+    "RWWWR",
+    "R.W.R",
+    "..R.."
+  ],
+  "givens": [1, 6, 17, 31]
+}

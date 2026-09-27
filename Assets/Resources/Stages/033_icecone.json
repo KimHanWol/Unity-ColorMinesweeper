@@ -1,0 +1,22 @@
+{
+  "id": "icecone",
+  "name": "콘 아이스크림",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EEF6FF" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "C", "color": "#E9C46A" }
+  ],
+  "pixels": [
+    ".PPP.",
+    "PPPPP",
+    "PPPPP",
+    "CCCCC",
+    ".CCC.",
+    ".CCC.",
+    "..C..",
+    "..C.."
+  ],
+  "givens": [35]
+}

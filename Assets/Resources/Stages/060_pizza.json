@@ -1,0 +1,23 @@
+{
+  "id": "pizza",
+  "name": "피자",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF3E0" },
+    { "key": "O", "color": "#C8553D" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "OOOOOOOOO",
+    ".YYRYYRY.",
+    ".YRRYYYY.",
+    "..YYYRY..",
+    "..YYYYY..",
+    "...YRY...",
+    "...YYY...",
+    "....Y...."
+  ],
+  "givens": [36]
+}

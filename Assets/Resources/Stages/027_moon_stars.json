@@ -1,0 +1,22 @@
+{
+  "id": "moon_stars",
+  "name": "달과 별",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#1B263B" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "......W...",
+    "..YYY.....",
+    ".YY....W..",
+    "YY........",
+    "YY...W....",
+    "YY........",
+    ".YY.......",
+    "..YYY..W.."
+  ],
+  "givens": [8]
+}

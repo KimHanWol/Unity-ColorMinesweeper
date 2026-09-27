@@ -1,0 +1,28 @@
+{
+  "id": "snowman",
+  "name": "눈사람",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CDE7FF" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "O", "color": "#F77F00" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "...KKK...",
+    "..KKKKK..",
+    "..WWWWW..",
+    "..WKWKW..",
+    "..WWOOO..",
+    "..WWWWW..",
+    "RRRRRRR..",
+    ".WWWWWWW.",
+    "WWWKWWWWW",
+    "WWWWWWWWW",
+    "WWWKWWWWW",
+    ".WWWWWWW.",
+    "..WWWWW.."
+  ],
+  "givens": [8]
+}

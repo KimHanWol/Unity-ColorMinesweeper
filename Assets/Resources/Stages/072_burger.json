@@ -1,0 +1,23 @@
+{
+  "id": "burger",
+  "name": "햄버거",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8E7" },
+    { "key": "Y", "color": "#F4A261" },
+    { "key": "G", "color": "#80B918" },
+    { "key": "B", "color": "#6F4E37" }
+  ],
+  "pixels": [
+    "...YYYY...",
+    ".YYYYYYYY.",
+    "YYYYYYYYYY",
+    "GGGGGGGGGG",
+    "BBBBBBBBBB",
+    "BBBBBBBBBB",
+    "YYYYYYYYYY",
+    ".YYYYYYYY."
+  ],
+  "givens": [19, 29]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "carrot",
+  "name": "당근",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8EE" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "O", "color": "#F77F00" }
+  ],
+  "pixels": [
+    "..G.G..",
+    "..GGG..",
+    "..OOO..",
+    ".OOOO..",
+    "..OOO..",
+    "..OO...",
+    "..OO...",
+    "..O...."
+  ],
+  "givens": [6]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "ladybug",
+  "name": "무당벌레",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F7EF" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "..KKK..",
+    ".RRKRR.",
+    "RKRKRKR",
+    "RRRKRRR",
+    "RKRKRKR",
+    ".RRKRR.",
+    "..RRR.."
+  ],
+  "givens": [7, 15, 19, 31, 40]
+}

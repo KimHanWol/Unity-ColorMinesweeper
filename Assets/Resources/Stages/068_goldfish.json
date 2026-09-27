@@ -1,0 +1,22 @@
+{
+  "id": "goldfish",
+  "name": "금붕어",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E0FBFC" },
+    { "key": "O", "color": "#FB8500" },
+    { "key": "K", "color": "#1B1B2F" },
+    { "key": "W", "color": "#FFE8D6" }
+  ],
+  "pixels": [
+    "...OOO....",
+    "..OOOOO..O",
+    ".OKOOOOOOO",
+    "OOOOWWOOO.",
+    ".OOOOOOOOO",
+    "..OOOOO..O",
+    "...OOO...."
+  ],
+  "givens": [0, 59]
+}

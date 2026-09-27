@@ -1,0 +1,20 @@
+{
+  "id": "envelope",
+  "name": "편지",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#CDE7FF" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "WWWWWWWW",
+    "W.WWWW.W",
+    "WW.WW.WW",
+    "WWWRRWWW",
+    "WWWRRWWW",
+    "WWWWWWWW"
+  ],
+  "givens": [14, 23]
+}

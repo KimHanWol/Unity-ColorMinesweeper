@@ -1,0 +1,23 @@
+{
+  "id": "bulb",
+  "name": "전구",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2E2A47" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "S", "color": "#ADB5BD" }
+  ],
+  "pixels": [
+    "..YYY..",
+    ".YYYYY.",
+    "YYYYYYY",
+    "YYYYYYY",
+    ".YYYYY.",
+    "..YYY..",
+    "..SSS..",
+    "..SSS..",
+    "...S..."
+  ],
+  "givens": [42, 58]
+}

@@ -1,0 +1,25 @@
+{
+  "id": "clock",
+  "name": "시계",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "W", "color": "#FFFFFF" }
+  ],
+  "pixels": [
+    "...KKKKK...",
+    "..KWWWWWK..",
+    ".KWWWKWWWK.",
+    "KWWWWKWWWWK",
+    "KWWWWKWWWWK",
+    "KWWWWKKKWWK",
+    "KWWWWWWWWWK",
+    "KWWWWWWWWWK",
+    ".KWWWWWWWK.",
+    "..KWWWWWK..",
+    "...KKKKK..."
+  ],
+  "givens": [0, 13, 22]
+}

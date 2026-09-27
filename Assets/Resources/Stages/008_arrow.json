@@ -1,0 +1,20 @@
+{
+  "id": "arrow",
+  "name": "화살표",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F0FAF4" },
+    { "key": "G", "color": "#2A9D8F" }
+  ],
+  "pixels": [
+    "...G...",
+    "..GGG..",
+    ".GGGGG.",
+    "GGGGGGG",
+    "..GGG..",
+    "..GGG..",
+    "..GGG.."
+  ],
+  "givens": [35]
+}

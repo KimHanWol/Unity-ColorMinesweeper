@@ -1,0 +1,23 @@
+{
+  "id": "camera",
+  "name": "카메라",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F3EEE4" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "S", "color": "#ADB5BD" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "..KKK......",
+    "KKKKKKKKKKK",
+    "KKKSSSSSKRK",
+    "KKSSBBBSSKK",
+    "KKSBBBBBSKK",
+    "KKSSBBBSSKK",
+    "KKKSSSSSKKK",
+    "KKKKKKKKKKK"
+  ],
+  "givens": [6, 7, 8]
+}

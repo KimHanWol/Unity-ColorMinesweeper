@@ -1,0 +1,25 @@
+{
+  "id": "tulip",
+  "name": "튤립",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5FA" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "B", "color": "#9C6644" }
+  ],
+  "pixels": [
+    ".R.R.R.",
+    ".RRRRR.",
+    ".RPRPR.",
+    ".RRRRR.",
+    "..RRR..",
+    "...G...",
+    "G..G..G",
+    "GG.G.GG",
+    ".GGGGG.",
+    "..BBB.."
+  ],
+  "givens": [46, 47, 48]
+}

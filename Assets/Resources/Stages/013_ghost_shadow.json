@@ -1,0 +1,20 @@
+{
+  "id": "ghost_shadow",
+  "name": "꼬마 유령",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2E2A47" },
+    { "key": "W", "color": "#F7F7FF" }
+  ],
+  "pixels": [
+    "..WWW..",
+    ".WWWWW.",
+    "WW.W.WW",
+    "WWWWWWW",
+    "WWWWWWW",
+    "WWWWWWW",
+    "W.W.W.W"
+  ],
+  "givens": [13, 20, 48]
+}

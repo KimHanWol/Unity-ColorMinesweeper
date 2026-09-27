@@ -1,0 +1,20 @@
+{
+  "id": "leaf",
+  "name": "나뭇잎",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F3FAEC" },
+    { "key": "G", "color": "#52B788" }
+  ],
+  "pixels": [
+    "....GGG",
+    "...GGGG",
+    "..GGGGG",
+    ".GGGGG.",
+    "GGGGG..",
+    "GGGG...",
+    "G......"
+  ],
+  "givens": [0]
+}

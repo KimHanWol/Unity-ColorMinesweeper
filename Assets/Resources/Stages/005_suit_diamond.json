@@ -1,0 +1,20 @@
+{
+  "id": "suit_diamond",
+  "name": "다이아몬드",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF1F1" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "...R...",
+    "..RRR..",
+    ".RRRRR.",
+    "RRRRRRR",
+    ".RRRRR.",
+    "..RRR..",
+    "...R..."
+  ],
+  "givens": [0, 16]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "lightning",
+  "name": "번개",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2B2D42" },
+    { "key": "Y", "color": "#FFD166" }
+  ],
+  "pixels": [
+    "..YYY",
+    ".YYY.",
+    ".YY..",
+    "YYYYY",
+    "..YY.",
+    ".YY..",
+    ".Y...",
+    "Y...."
+  ],
+  "givens": [21, 34]
+}

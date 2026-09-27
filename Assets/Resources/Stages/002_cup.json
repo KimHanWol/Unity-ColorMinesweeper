@@ -1,0 +1,19 @@
+{
+  "id": "cup",
+  "name": "컵",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F3EEE4" },
+    { "key": "B", "color": "#457B9D" }
+  ],
+  "pixels": [
+    "BBBBB..",
+    "BBBBBBB",
+    "BBBBB.B",
+    "BBBBBBB",
+    "BBBBB..",
+    ".BBB..."
+  ],
+  "givens": [32, 41]
+}

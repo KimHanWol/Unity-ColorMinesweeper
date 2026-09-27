@@ -1,0 +1,25 @@
+{
+  "id": "strawberry",
+  "name": "딸기",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5F5" },
+    { "key": "G", "color": "#40916C" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "Y", "color": "#FFD166" }
+  ],
+  "pixels": [
+    "...GGG...",
+    "..GGGGG..",
+    ".RRRRRRR.",
+    "RRYRRRYRR",
+    "RRRRYRRRR",
+    "RYRRRRRYR",
+    ".RRRYRRR.",
+    "..RRRRR..",
+    "...RYR...",
+    "....R...."
+  ],
+  "givens": [72, 76]
+}

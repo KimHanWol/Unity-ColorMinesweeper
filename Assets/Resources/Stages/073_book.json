@@ -1,0 +1,24 @@
+{
+  "id": "book",
+  "name": "책",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF4FF" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    ".BBBBBBBBB.",
+    ".BWWWWWWWB.",
+    ".BWYYYYYWB.",
+    ".BWWWWWWWB.",
+    ".BWYYYWWWB.",
+    ".BWWWWWWWB.",
+    ".BBBBBRBBB.",
+    "......R....",
+    "......R...."
+  ],
+  "givens": [88]
+}

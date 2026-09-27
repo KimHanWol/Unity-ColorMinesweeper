@@ -1,0 +1,21 @@
+{
+  "id": "crab",
+  "name": "게",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF3E0" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "R.........R",
+    "RR..K.K..RR",
+    ".R..R.R..R.",
+    ".RRRRRRRRR.",
+    "RRRRRRRRRRR",
+    ".RRRRRRRRR.",
+    ".R.R...R.R."
+  ],
+  "givens": [22, 71, 72]
+}

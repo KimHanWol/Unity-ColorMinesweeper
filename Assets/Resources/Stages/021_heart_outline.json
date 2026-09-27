@@ -1,0 +1,19 @@
+{
+  "id": "heart_outline",
+  "name": "하트 테두리",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF1F3" },
+    { "key": "R", "color": "#E8505B" }
+  ],
+  "pixels": [
+    ".RR.RR.",
+    "R..R..R",
+    "R.....R",
+    ".R...R.",
+    "..R.R..",
+    "...R..."
+  ],
+  "givens": [5, 7, 21, 35, 37]
+}

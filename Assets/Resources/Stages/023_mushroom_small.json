@@ -1,0 +1,20 @@
+{
+  "id": "mushroom_small",
+  "name": "작은 버섯",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EEF7EE" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "S", "color": "#F2D7A6" }
+  ],
+  "pixels": [
+    "..RRR..",
+    ".RRRRR.",
+    "RR.R.RR",
+    "RRRRRRR",
+    "..SSS..",
+    "..SSS.."
+  ],
+  "givens": [35]
+}

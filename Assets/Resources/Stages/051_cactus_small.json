@@ -1,0 +1,24 @@
+{
+  "id": "cactus_small",
+  "name": "작은 선인장",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FEFAE0" },
+    { "key": "P", "color": "#FF70A6" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "O", "color": "#BC6C25" }
+  ],
+  "pixels": [
+    "...P...",
+    "..GGG..",
+    "G.GGG.G",
+    "GGGGGGG",
+    "..GGG..",
+    "..GGG..",
+    "OOOOOOO",
+    ".OOOOO.",
+    ".OOOOO."
+  ],
+  "givens": [0, 15]
+}

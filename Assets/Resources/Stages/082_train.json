@@ -1,0 +1,22 @@
+{
+  "id": "train",
+  "name": "기차",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E9F5DB" },
+    { "key": "K", "color": "#2B2D42" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "B", "color": "#8ECAE6" },
+    { "key": "Y", "color": "#FFD166" }
+  ],
+  "pixels": [
+    ".KK..........",
+    ".KK....RRRRR.",
+    "RRRRRRRRBBBR.",
+    "RRRRRRRRBBBR.",
+    "RRRRRRRRRRRRR",
+    "YRRRRRRRRRRRR",
+    ".KK..KK...KK."
+  ],
+  "givens": [4]
+}

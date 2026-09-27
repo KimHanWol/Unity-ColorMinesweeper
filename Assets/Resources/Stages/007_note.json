@@ -1,0 +1,20 @@
+{
+  "id": "note",
+  "name": "음표",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4F1FF" },
+    { "key": "K", "color": "#3B3B4F" }
+  ],
+  "pixels": [
+    "...KK.",
+    "...KKK",
+    "...K.K",
+    "...K..",
+    ".KKK..",
+    "KKKK..",
+    ".KK..."
+  ],
+  "givens": [0]
+}

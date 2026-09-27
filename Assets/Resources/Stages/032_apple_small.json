@@ -1,0 +1,21 @@
+{
+  "id": "apple_small",
+  "name": "작은 사과",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF8E7" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "R", "color": "#E63946" }
+  ],
+  "pixels": [
+    "...G...",
+    "..GG...",
+    ".RR.RR.",
+    "RRRRRRR",
+    "RRRRRRR",
+    ".RRRRR.",
+    "..R.R.."
+  ],
+  "givens": [5, 19]
+}

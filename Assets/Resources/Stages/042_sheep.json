@@ -1,0 +1,20 @@
+{
+  "id": "sheep",
+  "name": "양",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#D8F3DC" },
+    { "key": "W", "color": "#FFFFFF" },
+    { "key": "K", "color": "#3B3B4F" }
+  ],
+  "pixels": [
+    "..WWWWW...",
+    ".WWWWWWKK.",
+    "WWWWWWKKKK",
+    "WWWWWWWKK.",
+    ".WWWWWWW..",
+    "..K.K.K.K."
+  ],
+  "givens": [19, 39, 58, 59]
+}

@@ -1,0 +1,22 @@
+{
+  "id": "round_tree",
+  "name": "동그란 나무",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF6FF" },
+    { "key": "G", "color": "#52B788" },
+    { "key": "B", "color": "#7F5539" }
+  ],
+  "pixels": [
+    "..GGG..",
+    ".GGGGG.",
+    "GGGGGGG",
+    "GGGGGGG",
+    ".GGGGG.",
+    "...B...",
+    "...B...",
+    ".BBBBB."
+  ],
+  "givens": [33, 41]
+}

@@ -1,0 +1,24 @@
+{
+  "id": "castle",
+  "name": "성",
+  "logic": "medium",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#DDF1FF" },
+    { "key": "B", "color": "#3A86FF" },
+    { "key": "S", "color": "#ADB5BD" },
+    { "key": "K", "color": "#4A4E69" }
+  ],
+  "pixels": [
+    ".....B.....",
+    ".....BB....",
+    ".....S.....",
+    "S.S.SSS.S.S",
+    "SSSSSSSSSSS",
+    "SSKSSSSSKSS",
+    "SSSSSSSSSSS",
+    "SSSSKKKSSSS",
+    "SSSSKKKSSSS"
+  ],
+  "givens": [0]
+}

@@ -1,0 +1,18 @@
+{
+  "id": "key",
+  "name": "열쇠",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EAF0FF" },
+    { "key": "Y", "color": "#E9A800" }
+  ],
+  "pixels": [
+    ".YYY.....",
+    "Y...Y....",
+    "Y...YYYYY",
+    "Y...Y.Y.Y",
+    ".YYY....."
+  ],
+  "givens": [20]
+}

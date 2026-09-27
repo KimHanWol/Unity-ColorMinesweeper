@@ -1,0 +1,22 @@
+{
+  "id": "gift",
+  "name": "선물 상자",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F1F4FF" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "R", "color": "#EF476F" }
+  ],
+  "pixels": [
+    "..Y..Y..",
+    "...YY...",
+    "RRRYYRRR",
+    "RRRYYRRR",
+    "YYYYYYYY",
+    "RRRYYRRR",
+    "RRRYYRRR",
+    "RRRYYRRR"
+  ],
+  "givens": [0]
+}

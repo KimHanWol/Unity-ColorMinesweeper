@@ -1,0 +1,21 @@
+{
+  "id": "cupcake",
+  "name": "컵케이크",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF5FA" },
+    { "key": "P", "color": "#FF8FAB" },
+    { "key": "B", "color": "#9C6644" }
+  ],
+  "pixels": [
+    "...P...",
+    "..PPP..",
+    ".PPPPP.",
+    "PPPPPPP",
+    ".BBBBB.",
+    ".B.B.B.",
+    "..BBB.."
+  ],
+  "givens": [0, 16, 39]
+}

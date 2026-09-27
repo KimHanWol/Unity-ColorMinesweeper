@@ -1,0 +1,19 @@
+{
+  "id": "turtle",
+  "name": "거북이",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E0F7FA" },
+    { "key": "G", "color": "#2D6A4F" },
+    { "key": "L", "color": "#95D5B2" }
+  ],
+  "pixels": [
+    "...GGG...",
+    "..GGGGG.L",
+    ".GGGGGGLL",
+    ".GGGGGGG.",
+    "..L...L.."
+  ],
+  "givens": [0, 11]
+}

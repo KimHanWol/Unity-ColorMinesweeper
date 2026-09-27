@@ -1,0 +1,21 @@
+{
+  "id": "dog_face",
+  "name": "강아지 얼굴",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF6E9" },
+    { "key": "B", "color": "#9C6644" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "BB....BB",
+    "BBBBBBBB",
+    ".BBBBBB.",
+    ".BKBBKB.",
+    ".BBBBBB.",
+    ".BBKKBB.",
+    "..BBBB.."
+  ],
+  "givens": [24, 26, 41]
+}

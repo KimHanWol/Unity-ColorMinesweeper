@@ -1,0 +1,18 @@
+{
+  "id": "fish_shadow",
+  "name": "물고기 실루엣",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#E0FBFC" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    "..BBB...",
+    ".BBBBB.B",
+    "BBBBBBBB",
+    ".BBBBB.B",
+    "..BBB..."
+  ],
+  "givens": [1, 2]
+}

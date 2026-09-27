@@ -1,0 +1,27 @@
+{
+  "id": "parrot",
+  "name": "앵무새",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF9E6" },
+    { "key": "R", "color": "#E63946" },
+    { "key": "K", "color": "#1B1B2F" },
+    { "key": "Y", "color": "#FFD166" },
+    { "key": "B", "color": "#3A86FF" }
+  ],
+  "pixels": [
+    "...RRR...",
+    "..RRRRR..",
+    "..RKRRYY.",
+    "..RRRRYY.",
+    "..RRRR...",
+    ".RRRRRR..",
+    ".YYRRRR..",
+    ".YYYRRR..",
+    ".BBBBRR..",
+    "..BBBB...",
+    "...BB....",
+    "...BB...."
+  ],
+  "givens": [53]
+}

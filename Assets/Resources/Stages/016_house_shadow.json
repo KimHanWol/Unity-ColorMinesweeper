@@ -1,0 +1,20 @@
+{
+  "id": "house_shadow",
+  "name": "작은 집",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#FFF4E6" },
+    { "key": "R", "color": "#C8553D" }
+  ],
+  "pixels": [
+    "...R...",
+    "..RRR..",
+    ".RRRRR.",
+    "RRRRRRR",
+    ".RRRRR.",
+    ".RR.RR.",
+    ".RR.RR."
+  ],
+  "givens": [0, 41, 48]
+}

@@ -1,0 +1,21 @@
+{
+  "id": "spade",
+  "name": "스페이드",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F7F7F2" },
+    { "key": "K", "color": "#2B2D42" }
+  ],
+  "pixels": [
+    "...K...",
+    "..KKK..",
+    ".KKKKK.",
+    "KKKKKKK",
+    "KKKKKKK",
+    ".KK.KK.",
+    "...K...",
+    "..KKK.."
+  ],
+  "givens": [0, 9, 35]
+}

@@ -1,0 +1,20 @@
+{
+  "id": "butterfly",
+  "name": "나비",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F4FBFF" },
+    { "key": "P", "color": "#C77DFF" }
+  ],
+  "pixels": [
+    "PP...PP",
+    "PPP.PPP",
+    "PPPPPPP",
+    ".PPPPP.",
+    "PPPPPPP",
+    "PPP.PPP",
+    "PP...PP"
+  ],
+  "givens": [27]
+}
