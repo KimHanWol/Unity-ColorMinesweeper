@@ -1,0 +1,23 @@
+{
+  "id": "lock",
+  "name": "자물쇠",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#2B2D42" },
+    { "key": "Y", "color": "#F4A300" }
+  ],
+  "pixels": [
+    "...YYY...",
+    "..YYYYY..",
+    ".YY...YY.",
+    ".YY...YY.",
+    ".YY...YY.",
+    "YYYYYYYYY",
+    "YYY...YYY",
+    "YYYY.YYYY",
+    "YYYY.YYYY",
+    "YYYYYYYYY"
+  ],
+  "givens": [31]
+}
