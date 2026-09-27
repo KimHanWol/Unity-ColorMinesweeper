@@ -81,8 +81,8 @@ namespace ColorMinesweeper.Game
             }
         }
 
-        /// <summary>seconds 길이의 소리를 만들어 AudioClip 으로. 끝 10ms 는 줄여서 뚝 끊기는 잡음이 없게 한다.</summary>
-        public static AudioClip Clip(string name, float seconds, Func<float, float> wave, int sampleRate = 44100)
+        /// <summary>seconds 길이로 파형을 그린다. 끝 10ms 는 줄여서 뚝 끊기는 잡음이 없게 한다.</summary>
+        public static float[] Render(float seconds, Func<float, float> wave, int sampleRate = 44100)
         {
             int length = Mathf.CeilToInt(seconds * sampleRate);
             var data = new float[length];
@@ -90,10 +90,113 @@ namespace ColorMinesweeper.Game
             {
                 float t = (float)i / sampleRate;
                 float fade = Mathf.Clamp01((seconds - t) / 0.01f);
-                data[i] = Mathf.Clamp(wave(t) * fade, -1f, 1f);
+                data[i] = wave(t) * fade;
             }
 
-            AudioClip clip = AudioClip.Create(name, length, 1, sampleRate, false);
+            return data;
+        }
+
+        /// <summary>
+        /// 귀에 들리는 크기(dB). 방송 음량 기준(ITU BS.1770)의 K-가중 필터로 사람 귀가 둔한 저음은 덜,
+        /// 예민한 고음은 더 세게 친 뒤, 100ms 구간마다 평균 세기를 재서 가장 큰 구간을 돌려준다.
+        /// 효과음은 짧아서 곡 전체 평균 대신 가장 큰 순간을 본다.
+        /// </summary>
+        public static float Loudness(float[] data, int sampleRate = 44100)
+        {
+            double[] weighted = KWeight(data, sampleRate);
+            int window = sampleRate / 10;
+            int hop = sampleRate / 100;
+            double best = 1e-12;
+            for (int start = 0; start == 0 || start + window <= weighted.Length; start += hop)
+            {
+                double sum = 0;
+                for (int i = start; i < start + window; i++)
+                {
+                    double v = i < weighted.Length ? weighted[i] : 0.0;
+                    sum += v * v;
+                }
+
+                best = Math.Max(best, sum / window);
+            }
+
+            return (float)(-0.691 + 10.0 * Math.Log10(best));
+        }
+
+        /// <summary>목표 크기(dB)에 맞춰 키우거나 줄인다. 찢어지지 않게 가장 큰 값이 0.98 을 넘지 않는 선에서 멈춘다.</summary>
+        public static float[] Normalize(float[] data, float targetLoudness, int sampleRate = 44100)
+        {
+            float gain = Mathf.Pow(10f, (targetLoudness - Loudness(data, sampleRate)) / 20f);
+            float peak = 0f;
+            foreach (float v in data)
+            {
+                peak = Mathf.Max(peak, Mathf.Abs(v));
+            }
+
+            if (peak * gain > 0.98f)
+            {
+                gain = 0.98f / peak;
+            }
+
+            for (int i = 0; i < data.Length; i++)
+            {
+                data[i] *= gain;
+            }
+
+            return data;
+        }
+
+        static double[] KWeight(float[] data, int sampleRate)
+        {
+            // 1단: 고음을 약 4dB 올리는 셸빙 필터(머리가 소리를 받는 효과). 2단: 아주 낮은 저음을 거르는 필터.
+            double w0 = 2 * Math.PI * 1681.974450955532 / sampleRate;
+            double a = Math.Pow(10, 3.99984385397 / 40);
+            double alpha = Math.Sin(w0) / (2 * 0.7071752369554193);
+            double cos = Math.Cos(w0);
+            double sqrtA = Math.Sqrt(a);
+            double[] shelf = Biquad(
+                a * ((a + 1) + (a - 1) * cos + 2 * sqrtA * alpha),
+                -2 * a * ((a - 1) + (a + 1) * cos),
+                a * ((a + 1) + (a - 1) * cos - 2 * sqrtA * alpha),
+                (a + 1) - (a - 1) * cos + 2 * sqrtA * alpha,
+                2 * ((a - 1) - (a + 1) * cos),
+                (a + 1) - (a - 1) * cos - 2 * sqrtA * alpha);
+
+            w0 = 2 * Math.PI * 38.13547087613982 / sampleRate;
+            alpha = Math.Sin(w0) / (2 * 0.5003270373253953);
+            cos = Math.Cos(w0);
+            double[] highPass = Biquad((1 + cos) / 2, -(1 + cos), (1 + cos) / 2, 1 + alpha, -2 * cos, 1 - alpha);
+
+            var output = new double[data.Length];
+            double x1 = 0, x2 = 0, y1 = 0, y2 = 0, z1 = 0, z2 = 0;
+            for (int i = 0; i < data.Length; i++)
+            {
+                double x = data[i];
+                double y = shelf[0] * x + shelf[1] * x1 + shelf[2] * x2 - shelf[3] * y1 - shelf[4] * y2;
+                x2 = x1;
+                x1 = x;
+                double z = highPass[0] * y + highPass[1] * y1 + highPass[2] * y2 - highPass[3] * z1 - highPass[4] * z2;
+                y2 = y1;
+                y1 = y;
+                z2 = z1;
+                z1 = z;
+                output[i] = z;
+            }
+
+            return output;
+        }
+
+        /// <summary>a0 로 나눈 계수(b0, b1, b2, a1, a2).</summary>
+        static double[] Biquad(double b0, double b1, double b2, double a0, double a1, double a2)
+        {
+            return new[] { b0 / a0, b1 / a0, b2 / a0, a1 / a0, a2 / a0 };
+        }
+
+        /// <summary>효과음을 역할별 목표 크기에 맞춰 AudioClip 으로 만든다.</summary>
+        public static AudioClip Clip(SfxSound sound, int sampleRate = 44100)
+        {
+            float[] data = Normalize(Render(sound.Seconds, sound.Wave, sampleRate), SfxSounds.TargetLoudness(sound.Role),
+                sampleRate);
+            AudioClip clip = AudioClip.Create(sound.Name, data.Length, 1, sampleRate, false);
             clip.SetData(data, 0);
             return clip;
         }

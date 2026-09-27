@@ -58,93 +58,31 @@ namespace ColorMinesweeper.Game
             source.playOnAwake = false;
             area = Resources.Load<AudioClip>("Sounds/area");
 
-            float[] scale = SoundSynth.Pentatonic;
-            reveal = new AudioClip[scale.Length];
-            for (int i = 0; i < scale.Length; i++)
+            // 크기는 SfxSounds 의 역할별 목표 음량으로 맞춰져 나오므로 재생할 때는 따로 줄이지 않는다.
+            reveal = Clips(SfxSounds.Reveal());
+            select = Clips(SfxSounds.Select());
+            tap = SoundSynth.Clip(SfxSounds.Tap());
+            wrong = SoundSynth.Clip(SfxSounds.Wrong());
+            heart = SoundSynth.Clip(SfxSounds.LoseHeart());
+            clear = SoundSynth.Clip(SfxSounds.Clear());
+            star = Clips(SfxSounds.Star());
+            open = SoundSynth.Clip(SfxSounds.Open());
+            close = SoundSynth.Clip(SfxSounds.Close());
+            revive = SoundSynth.Clip(SfxSounds.Revive());
+            unlock = SoundSynth.Clip(SfxSounds.Unlock());
+            locked = SoundSynth.Clip(SfxSounds.Locked());
+            nameReveal = SoundSynth.Clip(SfxSounds.NameReveal());
+        }
+
+        static AudioClip[] Clips(SfxSound[] sounds)
+        {
+            var clips = new AudioClip[sounds.Length];
+            for (int i = 0; i < sounds.Length; i++)
             {
-                float f = scale[i];
-                reveal[i] = SoundSynth.Clip("reveal" + i, 0.45f, t => SoundSynth.Marimba(t, f, 9f) * 0.55f);
+                clips[i] = SoundSynth.Clip(sounds[i]);
             }
 
-            select = new AudioClip[6];
-            for (int i = 0; i < select.Length; i++)
-            {
-                float f = scale[4 + i % (scale.Length - 4)] * 2f;
-                select[i] = SoundSynth.Clip("select" + i, 0.12f, t => SoundSynth.Marimba(t, f, 40f) * 0.35f);
-            }
-
-            tap = SoundSynth.Clip("tap", 0.06f, t =>
-                (Mathf.Sin(SoundSynth.TwoPi * 1250f * t) * 0.6f + SoundSynth.Noise((int)(t * 44100f)) * 0.15f)
-                * Mathf.Exp(-t * 90f) * 0.45f);
-
-            // 틀렸을 때: 날카로운 경고음 대신 둔탁한 "통" 소리. 음이 살짝 내려가며 아쉬운 느낌만 준다.
-            wrong = SoundSynth.Clip("wrong", 0.32f, t =>
-            {
-                float f = Mathf.Lerp(196f, 147f, Mathf.Clamp01(t / 0.25f));
-                return (Mathf.Sin(SoundSynth.TwoPi * f * t) + 0.35f * Mathf.Sin(SoundSynth.TwoPi * f * 2.01f * t))
-                       * Mathf.Exp(-t * 11f) * Mathf.Clamp01(t / 0.004f) * 0.6f;
-            });
-            heart = SoundSynth.Clip("heart", 0.6f, t =>
-                (SoundSynth.Marimba(t, 329.63f, 6f) + SoundSynth.Marimba(t - 0.13f, 261.63f, 5f)) * 0.4f);
-
-            clear = SoundSynth.Clip("clear", 1.8f, t =>
-            {
-                float[] arp = { 523.25f, 659.25f, 783.99f, 1046.5f, 1318.51f };
-                float sum = 0f;
-                for (int n = 0; n < arp.Length; n++)
-                {
-                    sum += SoundSynth.Marimba(t - n * 0.085f, arp[n], n == arp.Length - 1 ? 3f : 7f);
-                }
-
-                float shimmer = SoundSynth.Bell(t - 0.42f, 2093f, 3.5f) * 0.25f;
-                return (sum * 0.32f + shimmer) * 0.9f;
-            });
-
-            star = new AudioClip[3];
-            float[] starNotes = { 1046.5f, 1318.51f, 1567.98f };
-            for (int i = 0; i < star.Length; i++)
-            {
-                float f = starNotes[i];
-                star[i] = SoundSynth.Clip("star" + i, 0.7f, t => SoundSynth.Bell(t, f, 5f) * 0.35f);
-            }
-
-            // 창이 열릴 때 낮은 음에서 위로 "뽁", 닫힐 때 위에서 아래로 "뿅". 낮은 음역의 사인파라 귀를 찌르지 않는다.
-            open = SoundSynth.Clip("open", 0.3f, t => Bubble(t, 260f, 520f, 0.07f, 16f) * 0.3f);
-            close = SoundSynth.Clip("close", 0.3f, t => Bubble(t, 480f, 240f, 0.08f, 18f) * 0.26f);
-            revive = SoundSynth.Clip("revive", 0.7f, t =>
-                (SoundSynth.Marimba(t, 523.25f, 8f) + SoundSynth.Marimba(t - 0.09f, 659.25f, 8f)
-                 + SoundSynth.Marimba(t - 0.18f, 1046.5f, 5f)) * 0.35f);
-            // 자물쇠가 풀릴 때: 금속성 "철컥"(짧은 잡음 두 번) 뒤에 위로 올라가는 종소리.
-            unlock = SoundSynth.Clip("unlock", 0.9f, t =>
-            {
-                float click = 0f;
-                foreach (float at in new[] { 0f, 0.07f })
-                {
-                    float k = t - at;
-                    if (k >= 0f && k < 0.03f)
-                    {
-                        click += SoundSynth.Noise((int)(t * 44100f)) * Mathf.Exp(-k * 160f) * 0.5f
-                                 + Mathf.Sin(SoundSynth.TwoPi * 2600f * k) * Mathf.Exp(-k * 120f) * 0.3f;
-                    }
-                }
-
-                float chime = SoundSynth.Bell(t - 0.14f, 1046.5f, 6f) + SoundSynth.Bell(t - 0.24f, 1567.98f, 4f);
-                return click + chime * 0.28f;
-            });
-            // 잠긴 칸을 눌렀을 때: 짧고 둔한 "딱".
-            locked = SoundSynth.Clip("locked", 0.12f, t =>
-                (Mathf.Sin(SoundSynth.TwoPi * 330f * t) + SoundSynth.Noise((int)(t * 44100f)) * 0.3f) * Mathf.Exp(-t * 45f) * 0.45f);
-            nameReveal = SoundSynth.Clip("name", 0.7f, t =>
-            {
-                float sum = 0f;
-                float[] sparkle = { 1567.98f, 2093f, 1760f, 2637f };
-                for (int n = 0; n < sparkle.Length; n++)
-                {
-                    sum += SoundSynth.Bell(t - n * 0.07f, sparkle[n], 9f);
-                }
-
-                return sum * 0.12f;
-            });
+            return clips;
         }
 
         /// <summary>
@@ -167,21 +105,21 @@ namespace ColorMinesweeper.Game
         /// <summary>예전 이름. 펼침 소리.</summary>
         public void Pop(int step) => Reveal(step);
 
-        public void Tap() => Play(tap, 0.6f);
+        public void Tap() => Play(tap, 1f);
 
         /// <summary>팔레트에서 색을 고를 때. 색마다 음이 조금씩 달라서 손에 익는다.</summary>
-        public void Select(int colorIndex) => Play(select[Mathf.Abs(colorIndex) % select.Length], 0.8f);
+        public void Select(int colorIndex) => Play(select[Mathf.Abs(colorIndex) % select.Length], 1f);
 
         public void Wrong() => Play(wrong, 1f);
-        public void LoseHeart() => Play(heart, 0.8f);
+        public void LoseHeart() => Play(heart, 1f);
         public void Clear() => Play(clear, 1f);
         public void Star(int index) => Play(star[Mathf.Clamp(index, 0, star.Length - 1)], 1f);
-        public void Open() => Play(open, 0.6f);
-        public void Close() => Play(close, 0.5f);
+        public void Open() => Play(open, 1f);
+        public void Close() => Play(close, 1f);
         public void Revive() => Play(revive, 1f);
         public void NameReveal() => Play(nameReveal, 1f);
         public void Unlock() => Play(unlock, 1f);
-        public void Locked() => Play(locked, 0.8f);
+        public void Locked() => Play(locked, 1f);
 
         void Play(AudioClip clip, float volume)
         {
@@ -189,27 +127,6 @@ namespace ColorMinesweeper.Game
             {
                 source.PlayOneShot(clip, volume * Volume);
             }
-        }
-
-        /// <summary>
-        /// 음높이가 미끄러지는 둥근 "뽁" 한 음(사인파). fromHz 에서 toHz 로 glideSeconds 동안 옮겨 간다.
-        /// 위로 미끄러지면 열리는 느낌, 아래로 미끄러지면 닫히는 느낌이라 두 소리가 헷갈리지 않는다.
-        /// </summary>
-        static float Bubble(float t, float fromHz, float toHz, float glideSeconds, float decay)
-        {
-            if (t < 0f)
-            {
-                return 0f;
-            }
-
-            // 지수로 미끄러지는 주파수를 적분한 위상. 주파수만 바꾸면 파형이 튀므로 위상을 이어 준다.
-            float ratio = toHz / fromHz;
-            float logRatio = Mathf.Log(ratio);
-            float phase = t < glideSeconds
-                ? fromHz * glideSeconds / logRatio * (Mathf.Pow(ratio, t / glideSeconds) - 1f)
-                : fromHz * glideSeconds / logRatio * (ratio - 1f) + toHz * (t - glideSeconds);
-            float attack = Mathf.Clamp01(t / 0.006f);
-            return attack * Mathf.Exp(-t * decay) * Mathf.Sin(SoundSynth.TwoPi * phase);
         }
     }
 }
