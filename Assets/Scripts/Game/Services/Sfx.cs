@@ -35,6 +35,7 @@ namespace ColorMinesweeper.Game
         AudioClip nameReveal;
         AudioClip unlock;
         AudioClip locked;
+        AudioClip hint;
 
         /// <summary>빈 구역이 한꺼번에 열릴 때의 소리 파일(Resources/Sounds/area). 없으면 마림바가 굴러가는 소리로 대신한다.</summary>
         AudioClip area;
@@ -72,6 +73,7 @@ namespace ColorMinesweeper.Game
             unlock = SoundSynth.Clip(SfxSounds.Unlock());
             locked = SoundSynth.Clip(SfxSounds.Locked());
             nameReveal = SoundSynth.Clip(SfxSounds.NameReveal());
+            hint = SoundSynth.Clip(SfxSounds.Hint());
         }
 
         static AudioClip[] Clips(SfxSound[] sounds)
@@ -120,6 +122,7 @@ namespace ColorMinesweeper.Game
         public void NameReveal() => Play(nameReveal, 1f);
         public void Unlock() => Play(unlock, 1f);
         public void Locked() => Play(locked, 1f);
+        public void Hint() => Play(hint, 1f);
 
         void Play(AudioClip clip, float volume)
         {

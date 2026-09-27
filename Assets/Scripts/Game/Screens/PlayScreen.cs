@@ -358,7 +358,7 @@ namespace ColorMinesweeper.Game
             SaveStore.Hints--;
             hintButton.SetCount(SaveStore.Hints);
             SetHintMode(false);
-            Sfx.Instance?.NameReveal();
+            Sfx.Instance?.Hint();
             PaintResult result = session.Paint(cell, color);
             if (result.Outcome == PaintOutcome.Correct)
             {

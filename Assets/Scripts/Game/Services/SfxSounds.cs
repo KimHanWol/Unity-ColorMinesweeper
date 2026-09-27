@@ -162,6 +162,12 @@ namespace ColorMinesweeper.Game
         public static SfxSound Locked() => new SfxSound("locked", 0.12f, SfxRole.Soft, t =>
             (Mathf.Sin(SoundSynth.TwoPi * 330f * t) + SoundSynth.Noise((int)(t * 44100f)) * 0.3f) * Mathf.Exp(-t * 45f));
 
+        /// <summary>
+        /// 힌트로 칸이 열릴 때 살짝 반짝이는 "띠링". 칸 여는 소리와 겹쳐 나므로 작은 소리로 둔다.
+        /// </summary>
+        public static SfxSound Hint() => new SfxSound("hint", 0.6f, SfxRole.Soft, t =>
+            SoundSynth.Bell(t, 1318.51f, 7f) + 0.8f * SoundSynth.Bell(t - 0.08f, 1760f, 7f));
+
         /// <summary>완성해서 이름이 드러날 때 반짝이는 소리.</summary>
         public static SfxSound NameReveal() => new SfxSound("name", 0.7f, SfxRole.Reward, t =>
         {
