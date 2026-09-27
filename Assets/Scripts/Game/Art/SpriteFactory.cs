@@ -83,6 +83,18 @@ namespace ColorMinesweeper.Game
             });
         }
 
+        /// <summary>둥근 사각형 테두리(속이 빈). 튜토리얼에서 칸을 짚어 줄 때 쓴다.</summary>
+        public static Sprite OutlineRect()
+        {
+            return Cached("outline", () => Shape((x, y) => Mathf.Abs(RoundedBoxDistance(x, y, 0.46f, 0.46f, 0.2f)) - 0.035f, 1f));
+        }
+
+        /// <summary>동그라미 테두리(속이 빈).</summary>
+        public static Sprite OutlineCircle()
+        {
+            return Cached("outlineCircle", () => Shape((x, y) => Mathf.Abs(Mathf.Sqrt(x * x + y * y) - 0.46f) - 0.035f, 1f));
+        }
+
         public static Sprite Circle()
         {
             return Cached("circle", () => Shape((x, y) => Mathf.Sqrt(x * x + y * y) - 0.5f, 1f));

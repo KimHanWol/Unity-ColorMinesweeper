@@ -14,12 +14,14 @@ namespace ColorMinesweeper.Game
 
         static float lastPreview;
 
-        public static UiKit.Modal Open(Transform parent, UiRoot ui, int order, Action onClosed)
+        /// <param name="allowTutorial">튜토리얼 다시 보기 버튼을 둘지. 판 도중(플레이 화면)에는 진행이 사라지므로 두지 않는다.</param>
+        public static UiKit.Modal Open(Transform parent, UiRoot ui, int order, Action onClosed, bool allowTutorial = false)
         {
-            UiKit.Modal modal = UiKit.Modal.Open(parent, ui, new Vector2(7.8f, 10.2f), order);
+            float extra = allowTutorial ? 1.4f : 0f;
+            UiKit.Modal modal = UiKit.Modal.Open(parent, ui, new Vector2(7.8f, 10.2f + extra), order);
             Transform card = modal.Card;
             int o = order + 10;
-            float y = 4.2f;
+            float y = 4.2f + extra / 2f;
 
             Label.Create(card, "Title", "설정", Theme.Ink, o, new Vector2(0f, y), 0.75f, TextAnchor.MiddleCenter, true);
             y -= 1.35f;
@@ -37,8 +39,18 @@ namespace ColorMinesweeper.Game
             Label.Create(card, "Tip", "색을 고르면 그 색의 개수만 보여요.\n팔레트의 네모 칸(배경)도 하나의 색이에요.",
                 Theme.SubInk, o, new Vector2(0f, y), 0.34f);
 
+            if (allowTutorial)
+            {
+                UiKit.Button(card, "Tutorial", "튜토리얼 다시 보기", null, Theme.HiddenTile, Theme.Ink, new Vector2(5.6f, 1.05f),
+                    new Vector2(0f, -4.1f + extra / 2f), o, () =>
+                    {
+                        Settings.Flush();
+                        GameApp.Instance?.ShowTutorial();
+                    });
+            }
+
             UiKit.Button(card, "Close", "닫기", null, Theme.Accent, Color.white, new Vector2(5.6f, 1.2f),
-                new Vector2(0f, -4.1f), o, () =>
+                new Vector2(0f, -4.1f - extra / 2f), o, () =>
                 {
                     Settings.Flush();
                     modal.Close(onClosed);

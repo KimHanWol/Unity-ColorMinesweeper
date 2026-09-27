@@ -33,6 +33,20 @@ namespace ColorMinesweeper.Game
 
         public int Selected => selected;
 
+        /// <summary>색 color 의 스와치(튜토리얼이 짚어 줄 때 쓴다). 없으면 null.</summary>
+        public Transform SwatchTransform(int color)
+        {
+            foreach (Swatch swatch in swatches)
+            {
+                if (swatch.Color == color)
+                {
+                    return swatch.Visual;
+                }
+            }
+
+            return null;
+        }
+
         public static PaletteBar Create(Transform parent, UiRoot ui, Stage stage, Action<int> onSelect)
         {
             Transform root = Draw.Node(parent, "Palette");

@@ -60,9 +60,18 @@ namespace ColorMinesweeper.Game
 
         void Start()
         {
-            if (!TryStartPlaytest())
+            if (TryStartPlaytest())
+            {
+                return;
+            }
+
+            if (TutorialDirector.IsDone)
             {
                 ShowTitle();
+            }
+            else
+            {
+                ShowTutorial();
             }
         }
 
@@ -82,6 +91,11 @@ namespace ColorMinesweeper.Game
                 Ui.Refresh();
                 current?.Layout();
             }
+        }
+
+        public void ShowTutorial()
+        {
+            Open<PlayScreen>(screen => screen.Setup(TutorialDirector.CreateStage(), -1, true));
         }
 
         public void ShowTitle()

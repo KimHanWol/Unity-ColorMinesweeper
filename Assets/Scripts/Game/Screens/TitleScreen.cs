@@ -60,7 +60,7 @@ namespace ColorMinesweeper.Game
             BuildHero();
             BuildMenu();
             settingsButton = UiKit.IconButton(transform, "Settings", PixelGlyphs.Icon("gear", PixelGlyphs.Gear),
-                Vector2.zero, 80, () => SettingsPanel.Open(transform, Ui, 300, null)).transform;
+                Vector2.zero, 80, () => SettingsPanel.Open(transform, Ui, 300, null, true)).transform;
             Layout();
             PlayEntrance();
         }

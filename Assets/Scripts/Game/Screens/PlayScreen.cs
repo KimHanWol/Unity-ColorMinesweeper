@@ -26,12 +26,26 @@ namespace ColorMinesweeper.Game
         bool modalClosable;
         bool busy;
         int initialRevealed;
+        TutorialDirector tutorial;
+        SpeechBubble bubble;
+
+        public Stage Stage => stage;
+        public PuzzleSession Session => session;
+        public BoardView Board => board;
+        public PaletteBar Palette => palette;
+
+        /// <summary>튜토리얼 말풍선 자리만큼 판을 아래로 내린다.</summary>
+        float TopInset => tutorial != null ? 3.0f : 0f;
 
         /// <summary>index 가 -1 이면 에디터에서 띄운 시험 플레이라 진행을 저장하지 않는다.</summary>
-        public void Setup(Stage stageToPlay, int index)
+        public void Setup(Stage stageToPlay, int index, bool asTutorial = false)
         {
             stage = stageToPlay;
             stageIndex = index;
+            if (asTutorial)
+            {
+                tutorial = gameObject.AddComponent<TutorialDirector>();
+            }
         }
 
         protected override void Build()
@@ -42,7 +56,12 @@ namespace ColorMinesweeper.Game
 
             top = Draw.Node(transform, "Top");
             bottom = Draw.Node(transform, "Bottom");
-            hud = Hud.Create(top, Ui, StageTitle.For(stageIndex, stage), OnBack, OpenSettings);
+            hud = Hud.Create(top, Ui, tutorial != null ? "튜토리얼" : StageTitle.For(stageIndex, stage), OnBack, OpenSettings);
+            if (tutorial != null)
+            {
+                bubble = SpeechBubble.Create(top, Ui);
+                bubble.transform.localPosition = new Vector3(0f, -Hud.BarHeight / 2f - 1.55f, 0f);
+            }
             palette = PaletteBar.Create(bottom, Ui, stage, OnSelectColor);
             Layout();
 
@@ -52,7 +71,11 @@ namespace ColorMinesweeper.Game
 
             busy = true;
             float intro = board.PlayIntro(session);
-            Tween.Delay(this, intro * 0.7f, () => busy = false);
+            Tween.Delay(this, intro * 0.7f, () =>
+            {
+                busy = false;
+                tutorial?.Begin(this, bubble);
+            });
             Settings.Changed += OnSettingsChanged;
         }
 
@@ -64,6 +87,14 @@ namespace ColorMinesweeper.Game
 
         public override void OnBack()
         {
+            if (tutorial != null && !session.IsCleared)
+            {
+                // 튜토리얼은 건너뛸 수 있다. 다음 실행 때 다시 뜨지 않게 끝난 것으로 둔다.
+                TutorialDirector.IsDone = true;
+                App.ShowTitle();
+                return;
+            }
+
             if (session.IsCleared)
             {
                 App.ShowSelect();
@@ -151,7 +182,7 @@ namespace ColorMinesweeper.Game
         {
             Rect safe = Ui.Safe;
             float yMin = Ui.ToPixelY(safe.yMin + (cleared ? ResultCardTop + 0.3f : PaletteBar.BarHeight));
-            float yMax = Ui.ToPixelY(safe.yMax - Hud.BarHeight);
+            float yMax = Ui.ToPixelY(safe.yMax - Hud.BarHeight - (cleared ? 0f : TopInset));
             float xMin = Ui.ToPixelX(safe.xMin);
             float xMax = Ui.ToPixelX(safe.xMax);
             return Rect.MinMaxRect(xMin, yMin, xMax, yMax);
@@ -160,6 +191,7 @@ namespace ColorMinesweeper.Game
         void OnSelectColor(int color)
         {
             board.SetFocus(color);
+            tutorial?.OnColorSelected(color);
         }
 
         public override void OnTap(Vector2 screen)
@@ -176,12 +208,18 @@ namespace ColorMinesweeper.Game
                 return;
             }
 
+            if (tutorial != null && !tutorial.AllowPaint(cell))
+            {
+                return;
+            }
+
             PaintResult result = session.Paint(cell, color);
             if (result.Outcome == PaintOutcome.Correct)
             {
                 Haptics.Light();
                 float duration = board.PlayReveal(session, result.Revealed);
                 palette.Refresh(session);
+                tutorial?.OnPainted(cell, color);
                 if (result.Cleared)
                 {
                     busy = true;
@@ -200,7 +238,13 @@ namespace ColorMinesweeper.Game
                 App.BoardCamera.Shake(0.12f);
                 hud.SetLives(session.Lives, true);
                 Tween.Delay(this, 0.18f, () => Sfx.Instance?.LoseHeart());
-                if (result.GameOver)
+                if (result.GameOver && tutorial != null)
+                {
+                    // 튜토리얼에서는 목숨을 다 잃어도 멈추지 않는다.
+                    session.Revive();
+                    hud.SetLives(session.Lives, true);
+                }
+                else if (result.GameOver)
                 {
                     busy = true;
                     Tween.Delay(this, 0.7f, ShowGameOver);
@@ -235,6 +279,12 @@ namespace ColorMinesweeper.Game
 
         void ShowClear()
         {
+            if (tutorial != null)
+            {
+                ShowTutorialClear();
+                return;
+            }
+
             modal = UiKit.Modal.Open(transform, Ui, ResultCardSize, ModalOrder, false);
             Transform card = modal.Card;
             int order = ModalOrder + 10;
@@ -272,6 +322,22 @@ namespace ColorMinesweeper.Game
 
             UiKit.Button(card, "List", "목록", null, Theme.HiddenTile, Theme.Ink, new Vector2(5.6f, 1.1f),
                 new Vector2(0f, hasNext ? -3.0f : -1.6f), order, () => Ads.AfterStage(App.ShowSelect));
+        }
+
+        /// <summary>튜토리얼을 끝내면 이름 공개를 한 번 더 짚어 주고 메인 화면으로 보낸다.</summary>
+        void ShowTutorialClear()
+        {
+            tutorial.OnCleared();
+            modal = UiKit.Modal.Open(transform, Ui, ResultCardSize, ModalOrder, false);
+            modalClosable = false;
+            Transform card = modal.Card;
+            int order = ModalOrder + 10;
+            modal.Card.localPosition = new Vector3(Ui.Safe.center.x, Ui.Safe.yMin + ResultCardTop - ResultCardSize.y / 2f, 0f);
+            Label.Create(card, "Title", "튜토리얼 완료!", Theme.Ink, order, new Vector2(0f, 2.5f), 0.8f, TextAnchor.MiddleCenter, true);
+            Label.Create(card, "Body", "그림을 완성하면 이름이 공개돼요.\n색을 고르고, 숫자를 세고, 칠하기!\n이제 300개의 그림이 기다려요.", Theme.SubInk, order,
+                new Vector2(0f, 0.6f), 0.42f);
+            UiKit.Button(card, "Start", "시작하기", PixelGlyphs.Icon("play", PixelGlyphs.Play), Theme.Accent, Color.white,
+                new Vector2(5.6f, 1.35f), new Vector2(0f, -2.2f), order, () => App.ShowTitle());
         }
 
         void ShowGameOver()
