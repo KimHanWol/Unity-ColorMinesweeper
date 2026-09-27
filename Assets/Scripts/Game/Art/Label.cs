@@ -20,6 +20,9 @@ namespace ColorMinesweeper.Game
         /// <summary>동글은 줄 간격이 넓어서 여러 줄 문구는 좁힌다.</summary>
         const float DongleLineSpacing = 0.62f;
 
+        /// <summary>가운데 정렬 라벨을 글자 높이의 이 비율만큼 내린다(눈대중 보정).</summary>
+        const float DongleOpticalDrop = 0.1f;
+
         static Font font;
         static bool usingDongle;
         static float unitHeight;
@@ -134,7 +137,9 @@ namespace ColorMinesweeper.Game
             }
 
             float glyphCenter = t.parent.InverseTransformPoint(bounds.center).y;
-            t.localPosition = basePosition + new Vector3(0f, basePosition.y - glyphCenter, 0f);
+            // 한글은 초성·모음이 위에 몰려 글자 상자 가운데에 두어도 떠 보인다. 글자 높이의 일부만큼 살짝 내려 눈으로 가운데를 맞춘다.
+            float optical = usingDongle ? bounds.size.y / Mathf.Max(t.parent.lossyScale.y, 0.0001f) * DongleOpticalDrop : 0f;
+            t.localPosition = basePosition + new Vector3(0f, basePosition.y - glyphCenter - optical, 0f);
         }
 
         /// <summary>놓을 자리(부모 기준)를 바꾼다. 가운데 정렬 라벨은 글자 중심을 다시 맞춘다.</summary>

@@ -18,6 +18,11 @@ namespace ColorMinesweeper.Game
         Transform content;
         float scroll;
         float maxScroll;
+        float velocity;
+        float lastDragTime;
+
+        /// <summary>관성 스크롤의 감속. 클수록 빨리 멈춘다.</summary>
+        const float ScrollFriction = 3.2f;
         int titleTaps;
 
         /// <summary>목록을 마지막으로 봤을 때 열려 있던 스테이지 수. 그보다 뒤에 새로 열린 카드는 자물쇠가 풀리는 연출을 한다.</summary>
@@ -33,7 +38,8 @@ namespace ColorMinesweeper.Game
                 new Vector2(0f, 1f), new Vector2(Ui.Width + 2f, HeaderHeight + 2f));
             UiButton.Attach(strip.transform, Vector2.one, 150, null).Pressable = false;
             // 뒤로 · 제목 · 설정을 한 줄에 둔다(게임 이름과 부제는 메인 화면에만 둔다).
-            Label.Create(header, "Title", Loc.T("select.title"), Theme.Ink, 151, new Vector2(0f, 0.2f), 0.7f,
+            // 둥근 버튼은 아래 그림자까지 한 덩어리로 보여서, 제목은 버튼 면보다 그림자 절반만큼 내려 둔다.
+            Label.Create(header, "Title", Loc.T("select.title"), Theme.Ink, 151, new Vector2(0f, 0.14f), 0.7f,
                 TextAnchor.MiddleCenter, true);
             UiKit.IconButton(header, "Back", Icons.Back,
                 new Vector2(-Ui.Safe.width / 2f + 1.05f, 0.2f), 152, OnBack);
@@ -141,14 +147,55 @@ namespace ColorMinesweeper.Game
 
         public override void OnDrag(Vector2 screenDelta)
         {
-            scroll = Mathf.Clamp(scroll + screenDelta.y * UiRoot.Height / Screen.height, 0f, maxScroll);
-            Layout();
+            float delta = screenDelta.y * UiRoot.Height / Screen.height;
+            ScrollBy(delta);
+
+            // 손을 뗄 때의 속도로 계속 미끄러지게, 최근 끌기 속도를 부드럽게 따라간다.
+            float dt = Mathf.Max(Time.unscaledDeltaTime, 0.001f);
+            velocity = Mathf.Lerp(velocity, delta / dt, 0.4f);
+            lastDragTime = Time.unscaledTime;
         }
 
         public override void OnZoom(Vector2 screenCenter, float ratio)
         {
             // 마우스 휠은 스크롤로 쓴다.
-            OnDrag(new Vector2(0f, (ratio - 1f) * -600f));
+            velocity = 0f;
+            ScrollBy((ratio - 1f) * -600f * UiRoot.Height / Screen.height);
+        }
+
+        void ScrollBy(float delta)
+        {
+            scroll = Mathf.Clamp(scroll + delta, 0f, maxScroll);
+            Layout();
+        }
+
+        /// <summary>관성 스크롤. 손을 떼면 마찰로 서서히 멈추고, 누르고 있으면(멈춰 잡으면) 바로 선다.</summary>
+        void Update()
+        {
+            bool held = Input.touchCount > 0 || Input.GetMouseButton(0);
+            if (held)
+            {
+                if (Time.unscaledTime - lastDragTime > 0.06f)
+                {
+                    velocity = 0f;
+                }
+
+                return;
+            }
+
+            if (Mathf.Abs(velocity) < 0.05f)
+            {
+                velocity = 0f;
+                return;
+            }
+
+            float dt = Time.unscaledDeltaTime;
+            ScrollBy(velocity * dt);
+            velocity *= Mathf.Exp(-ScrollFriction * dt);
+            if (scroll <= 0f || scroll >= maxScroll)
+            {
+                velocity = 0f;
+            }
         }
 
         void CreateCard(int index)
@@ -177,16 +224,15 @@ namespace ColorMinesweeper.Game
                 float size = pictureSize.x * 0.84f;
                 Draw.Sprite(visual, "Picture", SpriteFactory.StagePicture(stage), Color.white, 13, pictureCenter,
                     new Vector2(size, size));
+                // 그림 위에 번호를 얹으면 그림 색에 묻혀서, 아래 줄에 번호(왼쪽)와 별(오른쪽)을 나란히 둔다.
+                PixelText.Create(visual, "Number", (index + 1).ToString(), Theme.Ink, 14,
+                    infoLine + new Vector2(-0.8f, 0f), 0.3f);
                 Sprite star = Icons.Star;
                 for (int i = 0; i < 3; i++)
                 {
                     Draw.Sprite(visual, "Star" + i, star, i < stars ? Theme.Gold : Theme.Locked, 12,
-                        infoLine + new Vector2((i - 1) * 0.45f, 0f), new Vector2(0.34f, 0.34f));
+                        infoLine + new Vector2(0.35f + (i - 1) * 0.44f, 0f), new Vector2(0.42f, 0.42f));
                 }
-
-                PixelText.Create(visual, "Number", (index + 1).ToString(), Theme.SubInk, 14,
-                    pictureCenter + new Vector2(-pictureSize.x / 2f + 0.35f, pictureSize.y / 2f - 0.3f), 0.22f);
-
             }
             else if (unlocked)
             {
