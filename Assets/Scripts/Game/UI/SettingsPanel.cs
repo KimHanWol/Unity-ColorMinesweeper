@@ -12,20 +12,39 @@ namespace ColorMinesweeper.Game
         const float RowHeight = 1.3f;
         const float SliderWidth = 3.4f;
 
+        /// <summary>두 줄짜리 도움말의 반 높이. 도움말과 아래 버튼 사이를 잡는 데 쓴다.</summary>
+        const float TipHalfHeight = 0.5f;
+
         static float lastPreview;
 
         /// <param name="allowTutorial">튜토리얼 다시 보기 버튼을 둘지. 판 도중(플레이 화면)에는 진행이 사라지므로 두지 않는다.</param>
         public static UiKit.Modal Open(Transform parent, UiRoot ui, int order, Action onClosed, bool allowTutorial = false)
         {
             // 언어와 튜토리얼 다시 보기는 판 도중(플레이 화면)에는 두지 않는다. 화면을 다시 만들면 진행이 사라진다.
-            float extra = allowTutorial ? 2.7f : 0f;
-            UiKit.Modal modal = UiKit.Modal.Open(parent, ui, new Vector2(7.8f, 10.2f + extra), order);
+            // 위에서부터 차례로 쌓는다. 자리를 먼저 모두 계산해 카드 높이를 정하므로 줄이 늘어도 겹치지 않는다.
+            int rows = allowTutorial ? 5 : 4;
+            float titleY = -0.9f;
+            float firstRowY = titleY - 1.35f;
+            float tipY = firstRowY - (rows - 1) * RowHeight - 1.25f;
+            float bottom = tipY - TipHalfHeight;
+            float tutorialY = 0f;
+            if (allowTutorial)
+            {
+                tutorialY = bottom - 0.35f - 0.525f;
+                bottom = tutorialY - 0.525f;
+            }
+
+            float closeY = bottom - 0.3f - 0.6f;
+            float height = 0.6f - (closeY - 0.6f);
+            float top = height / 2f;
+
+            UiKit.Modal modal = UiKit.Modal.Open(parent, ui, new Vector2(7.8f, height), order);
             Transform card = modal.Card;
             int o = order + 10;
-            float y = 4.2f + extra / 2f;
 
-            Label.Create(card, "Title", Loc.T("settings.title"), Theme.Ink, o, new Vector2(0f, y), 0.75f, TextAnchor.MiddleCenter, true);
-            y -= 1.35f;
+            Label.Create(card, "Title", Loc.T("settings.title"), Theme.Ink, o, new Vector2(0f, top + titleY), 0.75f,
+                TextAnchor.MiddleCenter, true);
+            float y = top + firstRowY;
 
             Volume(card, Loc.T("settings.music"), new Vector2(0f, y), o, Settings.MusicVolume, v => Settings.MusicVolume = v, false);
             y -= RowHeight;
@@ -35,21 +54,20 @@ namespace ColorMinesweeper.Game
             y -= RowHeight;
             Toggle(card, Loc.T("settings.remaining"), Loc.T("settings.remaining.desc"), new Vector2(0f, y), o,
                 () => Settings.ShowRemaining, v => Settings.ShowRemaining = v);
-            y -= RowHeight;
             if (allowTutorial)
             {
-                LanguageRow(card, new Vector2(0f, y), o);
                 y -= RowHeight;
+                LanguageRow(card, new Vector2(0f, y), o);
             }
 
-            y -= 0.05f;
-            Label.Create(card, "Tip", Loc.T("settings.tip"),
-                Theme.SubInk, o, new Vector2(0f, y), 0.34f);
+            Label tip = Label.Create(card, "Tip", string.Empty, Theme.SubInk, o, new Vector2(0f, top + tipY), 0.34f);
+            tip.SetWrappedText(Loc.T("settings.tip"), 6.8f);
+            tip.MoveTo(new Vector2(0f, top + tipY));
 
             if (allowTutorial)
             {
                 UiKit.Button(card, "Tutorial", Loc.T("settings.tutorial"), null, Theme.HiddenTile, Theme.Ink, new Vector2(5.6f, 1.05f),
-                    new Vector2(0f, -4.1f + extra / 2f), o, () =>
+                    new Vector2(0f, top + tutorialY), o, () =>
                     {
                         Settings.Flush();
                         GameApp.Instance?.ShowTutorial();
@@ -57,7 +75,7 @@ namespace ColorMinesweeper.Game
             }
 
             UiKit.Button(card, "Close", Loc.T("common.close"), null, Theme.Accent, Color.white, new Vector2(5.6f, 1.2f),
-                new Vector2(0f, -4.1f - extra / 2f), o, () =>
+                new Vector2(0f, top + closeY), o, () =>
                 {
                     Settings.Flush();
                     modal.Close(onClosed);
