@@ -57,6 +57,9 @@ namespace ColorMinesweeper.Game
         readonly HashSet<int> allowed = new HashSet<int>();
         readonly List<Transform> marks = new List<Transform>();
 
+        /// <summary>칠할 칸마다의 노란 테두리. 칠하면 그 칸 테두리만 지운다.</summary>
+        readonly Dictionary<int, Transform> targetMarks = new Dictionary<int, Transform>();
+
         public static bool IsDone
         {
             get => PlayerPrefs.GetInt(DoneKey, 0) == 1;
@@ -192,14 +195,23 @@ namespace ColorMinesweeper.Game
 
             foreach (int cell in hint.Cells)
             {
-                MarkCell(cell, Theme.Gold, true);
+                targetMarks[cell] = MarkCell(cell, Theme.Gold, true);
             }
 
-            string meaning = "파란 테두리 칸의 숫자 " + total + "은 둘레 8칸 중 " + colorName + "이 " + total + "칸이라는 뜻이에요.";
+            string meaning = "파란 테두리 칸의 숫자 " + total + TopicParticle(total) + " 둘레 8칸 중 " + colorName + "이 " + total +
+                             "칸이라는 뜻이에요.";
             string reason = opened == 0
                 ? " 그런데 가려진 칸도 딱 " + hidden + "칸뿐이에요."
                 : " 이미 열린 " + opened + "칸을 빼면 " + (total - opened) + "칸이 남았는데, 가려진 칸도 " + hidden + "칸뿐이에요.";
             bubble.Show(meaning + reason + " 그러니 노란 칸은 모두 " + colorName + "! 눌러서 칠해 보세요.");
+        }
+
+        /// <summary>숫자를 한국어로 읽었을 때 받침이 있으면 "은", 없으면 "는"(1 일은, 2 이는, 4 사는, 8 팔은).</summary>
+        static string TopicParticle(int number)
+        {
+            int last = number % 10;
+            bool hasFinalConsonant = last == 0 || last == 1 || last == 3 || last == 6 || last == 7 || last == 8;
+            return hasFinalConsonant ? "은" : "는";
         }
 
         void StartFreePlay()
@@ -248,6 +260,21 @@ namespace ColorMinesweeper.Game
                 return;
             }
 
+            if (targetMarks.TryGetValue(cell, out Transform mark) && mark != null)
+            {
+                Tween.Kill(mark);
+                Destroy(mark.gameObject);
+            }
+
+            // 짚어 준 칸을 전부 칠해야 넘어간다(펼침으로 같이 열린 칸도 칠한 것으로 친다).
+            foreach (int target in allowed)
+            {
+                if (!play.Session.IsRevealed(target))
+                {
+                    return;
+                }
+            }
+
             if (color == play.Stage.BackgroundColor)
             {
                 backgroundTaught = true;
@@ -269,12 +296,13 @@ namespace ColorMinesweeper.Game
             IsDone = true;
         }
 
-        void MarkCell(int cell, Color color, bool pulse)
+        Transform MarkCell(int cell, Color color, bool pulse)
         {
             Transform board = play.Board.transform;
             SpriteRenderer ring = Draw.Sprite(board, "TutorialMark", SpriteFactory.OutlineRect(), color, 60,
                 play.Board.CellCenter(cell), new Vector2(1.08f, 1.08f));
             AddMark(ring.transform, pulse ? 1.08f : 0f);
+            return ring.transform;
         }
 
         /// <summary>
@@ -346,6 +374,7 @@ namespace ColorMinesweeper.Game
             }
 
             marks.Clear();
+            targetMarks.Clear();
             allowed.Clear();
         }
     }

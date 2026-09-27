@@ -11,7 +11,7 @@ namespace ColorMinesweeper.Game
     {
         const int Order = 180;
         const float Padding = 0.45f;
-        const float ButtonRow = 1.0f;
+        const float ButtonRow = 1.05f;
         const float MinHeight = 1.6f;
 
         Label text;
@@ -46,24 +46,46 @@ namespace ColorMinesweeper.Game
             onNext = next;
             nextButton.gameObject.SetActive(next != null);
 
-            float textWidth = width - Padding * 2f;
-            int lines = text.SetWrappedText(message, textWidth);
-            float textHeight = lines * text.LineAdvance;
-            float height = Mathf.Max(MinHeight, Padding * 2f + textHeight + (next != null ? ButtonRow : 0f));
-
-            // 윗변(로컬 y=0)을 고정하고 아래로 늘인다.
-            face.size = new Vector2(width, height);
-            face.transform.localPosition = new Vector3(0f, -height / 2f, 0f);
-            shadow.transform.localPosition = new Vector3(0f, -height / 2f - 0.2f, 0f);
-            shadow.transform.localScale = new Vector3(width * 1.15f, height * 1.3f, 1f);
-            text.transform.localPosition = new Vector3(-width / 2f + Padding, -Padding, 0f);
-            nextButton.localPosition = new Vector3(width / 2f - 1.4f, -height + 0.65f, 0f);
+            text.transform.localPosition = Vector3.zero;
+            text.SetWrappedText(message, width - Padding * 2f);
+            Relayout();
+            // TextMesh 가 글자 영역을 다음 프레임에 갱신하는 경우가 있어 한 번 더 잰다.
+            Tween.Delay(this, 0.02f, Relayout);
 
             Transform t = transform;
             Tween.Kill(t);
             t.localScale = new Vector3(0.9f, 0.9f, 1f);
             Tween.Run(t, 0.3f, k => t.localScale = Vector3.LerpUnclamped(new Vector3(0.9f, 0.9f, 1f), Vector3.one, k),
                 Ease.OutBack);
+        }
+
+        /// <summary>
+        /// 폰트의 줄 높이는 동글처럼 글자보다 훨씬 클 수 있어서, 실제로 그려진 글자 영역을 재서 여백을 맞춘다.
+        /// 윗변(로컬 y=0)을 고정하고 아래로 늘이며, 버튼은 글자 아래 자기 줄에 둔다.
+        /// </summary>
+        void Relayout()
+        {
+            Transform t = transform;
+            Vector3 scale = t.localScale;
+            t.localScale = Vector3.one;
+            Vector3 textPosition = text.transform.localPosition;
+            text.transform.localPosition = Vector3.zero;
+            Bounds bounds = text.RenderBounds;
+            float top = t.InverseTransformPoint(bounds.max).y;
+            float bottom = t.InverseTransformPoint(bounds.min).y;
+            float textHeight = top - bottom;
+            bool hasButton = nextButton.gameObject.activeSelf;
+            float height = Mathf.Max(MinHeight, Padding * 2f + textHeight + (hasButton ? ButtonRow : 0f));
+
+            face.size = new Vector2(width, height);
+            face.transform.localPosition = new Vector3(0f, -height / 2f, 0f);
+            shadow.transform.localPosition = new Vector3(0f, -height / 2f - 0.2f, 0f);
+            shadow.transform.localScale = new Vector3(width * 1.15f, height * 1.3f, 1f);
+            text.transform.localPosition = textHeight > 0f
+                ? new Vector3(-width / 2f + Padding, -Padding - top, 0f)
+                : textPosition;
+            nextButton.localPosition = new Vector3(width / 2f - 1.4f, -height + Padding + 0.4f, 0f);
+            t.localScale = scale;
         }
 
         public void Hide()

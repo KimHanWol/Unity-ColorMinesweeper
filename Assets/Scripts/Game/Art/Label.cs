@@ -103,6 +103,9 @@ namespace ColorMinesweeper.Game
             mesh.color = color;
         }
 
+        /// <summary>실제로 그려진 글자 영역(월드 좌표). 폰트의 줄 높이가 아니라 글자 모양 기준이라 여백을 맞출 때 쓴다.</summary>
+        public Bounds RenderBounds => GetComponent<MeshRenderer>().bounds;
+
         /// <summary>한 줄이 차지하는 높이(부모 기준 유닛). 여러 줄 문구의 칸 높이를 잡을 때 쓴다.</summary>
         public float LineAdvance => mesh.font.lineHeight * mesh.lineSpacing / 10f * transform.localScale.y;
 
