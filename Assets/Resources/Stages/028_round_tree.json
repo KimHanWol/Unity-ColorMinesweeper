@@ -1,6 +1,6 @@
 {
   "id": "round_tree",
-  "name": "동그란 나무",
+  "name": "나무",
   "logic": "basic",
   "background": ".",
   "palette": [

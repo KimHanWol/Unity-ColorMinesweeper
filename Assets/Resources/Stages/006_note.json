@@ -8,13 +8,14 @@
     { "key": "K", "color": "#3B3B4F" }
   ],
   "pixels": [
-    "...KK.",
-    "...KKK",
-    "...K.K",
-    "...K..",
-    ".KKK..",
-    "KKKK..",
-    ".KK..."
+    "..KKKKKK",
+    "..KKKKKK",
+    "..K....K",
+    "..K....K",
+    "..K....K",
+    "KKK..KKK",
+    "KKK..KKK",
+    "KK...KK."
   ],
-  "givens": [0]
+  "givens": [28]
 }

@@ -8,13 +8,14 @@
     { "key": "Y", "color": "#F4A300" }
   ],
   "pixels": [
-    "...Y...",
-    "..YYY..",
-    ".YYYYY.",
-    ".YYYYY.",
-    ".YYYYY.",
-    "YYYYYYY",
-    "...Y..."
+    "...YY...",
+    "..YYYY..",
+    ".YYYYYY.",
+    ".YYYYYY.",
+    ".YYYYYY.",
+    "YYYYYYYY",
+    "YYYYYYYY",
+    "...YY..."
   ],
-  "givens": [0, 16]
+  "givens": [0, 18]
 }

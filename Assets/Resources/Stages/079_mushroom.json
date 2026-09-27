@@ -1,6 +1,6 @@
 {
   "id": "mushroom",
-  "name": "버섯",
+  "name": "버섯돌이",
   "background": ".",
   "palette": [
     { "key": ".", "color": "#CFE8D5" },

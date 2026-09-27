@@ -1,0 +1,20 @@
+{
+  "id": "lock",
+  "name": "자물쇠",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#EEF1F6" },
+    { "key": "K", "color": "#6C757D" }
+  ],
+  "pixels": [
+    "..KKK..",
+    ".K...K.",
+    ".K...K.",
+    "KKKKKKK",
+    "KKK.KKK",
+    "KKK.KKK",
+    "KKKKKKK"
+  ],
+  "givens": [7, 10, 14]
+}

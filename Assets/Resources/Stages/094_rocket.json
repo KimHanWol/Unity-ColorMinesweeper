@@ -1,6 +1,6 @@
 {
   "id": "rocket",
-  "name": "로켓",
+  "name": "우주 로켓",
   "background": ".",
   "palette": [
     { "key": ".", "color": "#1D1E3A" },

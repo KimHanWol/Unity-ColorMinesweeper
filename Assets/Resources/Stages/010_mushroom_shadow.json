@@ -1,6 +1,6 @@
 {
   "id": "mushroom_shadow",
-  "name": "버섯 실루엣",
+  "name": "버섯",
   "logic": "basic",
   "background": ".",
   "palette": [
@@ -8,12 +8,14 @@
     { "key": "R", "color": "#D1495B" }
   ],
   "pixels": [
-    "..RRR..",
-    ".RRRRR.",
-    "RRRRRRR",
-    "RRRRRRR",
-    "..RRR..",
-    "..RRR.."
+    "..RRRR..",
+    ".RR.RRR.",
+    "RRRRR.RR",
+    "R.RRRRRR",
+    "RRRRRRRR",
+    "...RR...",
+    "...RR...",
+    "..RRRR.."
   ],
-  "givens": [35]
+  "givens": [25, 45, 48]
 }

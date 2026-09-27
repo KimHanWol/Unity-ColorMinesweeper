@@ -1,0 +1,23 @@
+{
+  "id": "cup",
+  "name": "머그컵",
+  "logic": "basic",
+  "background": ".",
+  "palette": [
+    { "key": ".", "color": "#F3EEE4" },
+    { "key": "B", "color": "#457B9D" }
+  ],
+  "pixels": [
+    "..B..B..",
+    ".B..B...",
+    "..B..B..",
+    "........",
+    "BBBBBB..",
+    "BBBBBBBB",
+    "BBBBBB.B",
+    "BBBBBBBB",
+    "BBBBBB..",
+    ".BBBB..."
+  ],
+  "givens": [7, 55]
+}
