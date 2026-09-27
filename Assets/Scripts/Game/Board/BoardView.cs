@@ -101,7 +101,7 @@ namespace ColorMinesweeper.Game
             var affected = new HashSet<int>();
             foreach (RevealedCell r in opened)
             {
-                cells[r.Cell].SetFocus(focus);
+                cells[r.Cell].SetFocus(focus, false);
                 cells[r.Cell].UpdateRemaining(session, false);
                 cells[r.Cell].AnimateReveal(startDelay + r.Depth * RevealStepDelay);
                 maxDepth = Mathf.Max(maxDepth, r.Depth);
@@ -146,7 +146,7 @@ namespace ColorMinesweeper.Game
 
         public void SetFocus(int color)
         {
-            focus = color == stage.BackgroundColor ? -1 : color;
+            focus = color;
             foreach (CellView cell in cells)
             {
                 cell.SetFocus(focus);

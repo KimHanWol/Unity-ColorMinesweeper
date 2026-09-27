@@ -56,74 +56,58 @@ namespace ColorMinesweeper.Game
         }
 
         /// <summary>
-        /// 배경색을 뺀 색별 개수를 칩으로 배치한다. 1개는 가운데 크게, 2개는 좌우, 3~4개는 2x2, 그 이상은 3열.
+        /// 주변 8칸의 색별 개수를 색마다 칩 하나로 만들어 가운데에 겹쳐 둔다(배경색 포함).
+        /// 화면에는 팔레트에서 고른 색의 칩 하나만 크게 보인다. 한 칸에 여러 색 숫자가 몰리면 읽기 어렵기 때문이다.
         /// </summary>
         void BuildChips()
         {
-            var colors = new List<int>();
+            const float diameter = 0.6f;
             for (int k = 0; k < stage.ColorCount; k++)
             {
-                if (k != stage.BackgroundColor && stage.Clue(cell, k) > 0)
+                int total = stage.Clue(cell, k);
+                if (total == 0)
                 {
-                    colors.Add(k);
+                    continue;
                 }
-            }
 
-            int n = colors.Count;
-            if (n == 0)
-            {
-                return;
-            }
-
-            int columns = n == 1 ? 1 : n <= 4 ? 2 : 3;
-            int rows = (n + columns - 1) / columns;
-            float diameter = n == 1 ? 0.56f : n == 2 ? 0.4f : n <= 4 ? 0.36f : 0.27f;
-            float step = diameter * 1.08f;
-            for (int i = 0; i < n; i++)
-            {
-                int row = i / columns;
-                int inRow = Mathf.Min(columns, n - row * columns);
-                int column = i % columns;
-                var position = new Vector2(
-                    (column - (inRow - 1) / 2f) * step,
-                    ((rows - 1) / 2f - row) * step);
-
-                int color = colors[i];
+                int color = k;
                 Rgb rgb = stage.Colors[color].Color;
-                Transform root = Draw.Node(chipRoot, "Chip" + color, position);
+                Transform root = Draw.Node(chipRoot, "Chip" + color, Vector2.zero);
                 root.localScale = new Vector3(diameter, diameter, 1f);
-                int total = stage.Clue(cell, color);
                 chips.Add(new Chip
                 {
                     Color = color,
                     Total = total,
                     Remaining = total,
                     Root = root,
-                    Ring = Draw.Sprite(root, "Ring", SpriteFactory.Circle(), new Color(1f, 1f, 1f, 0.92f), 20,
+                    Ring = Draw.Sprite(root, "Ring", SpriteFactory.Circle(), new Color(1f, 1f, 1f, 0.95f), 20,
                         Vector2.zero, new Vector2(1.16f, 1.16f)),
                     Fill = Draw.Sprite(root, "Fill", SpriteFactory.Circle(), Theme.ToColor(rgb), 21),
-                    Digit = PixelText.Create(root, "Digit", total.ToString(), Theme.InkOn(rgb), 22, Vector2.zero, 0.52f),
+                    Digit = PixelText.Create(root, "Digit", total.ToString(), Theme.InkOn(rgb), 22, Vector2.zero, 0.5f),
                     RestScale = root.localScale,
                 });
             }
         }
 
-        /// <summary>선택 색·완료 여부·표시 방식을 합친 칩의 목표 크기(배율).</summary>
+        /// <summary>고른 색이 아니면 0(숨김). 고른 색이면 다 채워졌을 때 조금 작게, 남은 개수 보기면 사라진다.</summary>
         float TargetScale(Chip chip)
         {
+            if (chip.Color != focusColor)
+            {
+                return 0f;
+            }
+
             if (chip.Done && Settings.ShowRemaining)
             {
                 return 0f;
             }
 
-            float focus = focusColor < 0 ? 1f : chip.Color == focusColor ? 1.12f : 0.88f;
-            return focus * (chip.Done ? DoneScale : 1f);
+            return chip.Done ? DoneScale : 1f;
         }
 
         float TargetAlpha(Chip chip)
         {
-            float focus = focusColor < 0 || chip.Color == focusColor ? 1f : 0.3f;
-            return focus * (chip.Done ? DoneAlpha : 1f);
+            return chip.Done ? DoneAlpha : 1f;
         }
 
         /// <summary>주변 칸이 열린 만큼 칩의 남은 개수를 갱신한다. animate 면 바뀐 칩이 부드럽게 흐려진다.</summary>
@@ -274,9 +258,14 @@ namespace ColorMinesweeper.Game
             });
         }
 
-        /// <summary>선택한 색의 칩은 또렷하게 키우고, 나머지는 흐리게 줄인다. color 가 -1 이면 모두 보통.</summary>
-        public void SetFocus(int color)
+        /// <summary>고른 색의 칩만 톡 튀어나오고 나머지는 들어간다. -1 이면 모두 숨긴다.</summary>
+        public void SetFocus(int color, bool animate = true)
         {
+            if (color == focusColor)
+            {
+                return;
+            }
+
             focusColor = color;
             if (!chipsShown)
             {
@@ -285,7 +274,7 @@ namespace ColorMinesweeper.Game
 
             foreach (Chip chip in chips)
             {
-                ApplyChip(chip, false);
+                ApplyChip(chip, animate);
             }
         }
 

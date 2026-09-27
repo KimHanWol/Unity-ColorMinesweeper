@@ -34,7 +34,7 @@ namespace ColorMinesweeper.Game
                 () => Settings.ShowRemaining, v => Settings.ShowRemaining = v);
             y -= 1.35f;
 
-            Label.Create(card, "Tip", "배경색은 단서에 나오지 않아요.\n팔레트의 네모 칸이 이 그림의 배경색이에요.",
+            Label.Create(card, "Tip", "색을 고르면 그 색의 개수만 보여요.\n팔레트의 네모 칸(배경)도 하나의 색이에요.",
                 Theme.SubInk, o, new Vector2(0f, y), 0.34f);
 
             UiKit.Button(card, "Close", "닫기", null, Theme.Accent, Color.white, new Vector2(5.6f, 1.2f),
