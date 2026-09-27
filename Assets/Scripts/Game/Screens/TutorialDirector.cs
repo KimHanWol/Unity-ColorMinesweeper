@@ -179,6 +179,8 @@ namespace ColorMinesweeper.Game
             }
 
             int hidden = hint.Cells.Count;
+            int around = stage.Neighbors(hint.Clue).Length;
+            int remaining = total - opened;
             bool background = hint.Color == stage.BackgroundColor;
             string colorName = background ? "배경" : ColorNames.Describe(stage.Colors[hint.Color].Color);
             Spotlight(hint.Clue);
@@ -193,8 +195,10 @@ namespace ColorMinesweeper.Game
             if (guidedDone == 1 && !background)
             {
                 // 두 번째는 근거만 비추고, 칠할 칸은 스스로 찾게 한다.
-                bubble.Show("이번엔 직접 찾아봐요", "가운데 숫자만큼 " + colorName + "이 있어야 해요. 체크한 칸을 빼면 어디가 남을까요?",
-                    null, "찾은 칸을 눌러서 " + colorName + "으로 칠해 보세요");
+                string count = opened == 0
+                    ? "주변 " + around + "칸 중 " + colorName + "은 " + total + "칸이에요. 아직 하나도 안 보이니 " + total + "칸을 찾아야 해요."
+                    : "주변 " + around + "칸 중 " + colorName + "은 " + total + "칸이에요. 체크한 " + opened + "칸을 빼면 " + remaining + "칸이 남았죠.";
+                bubble.Show("이번엔 직접 찾아봐요", count, null, "나머지 " + remaining + "칸은 어디일까요? 눌러서 칠해 보세요");
                 return;
             }
 
@@ -207,10 +211,10 @@ namespace ColorMinesweeper.Game
             string title = hidden == 1
                 ? "여기가 " + colorName + "이에요!"
                 : "여기 " + hidden + "칸은 모두 " + colorName + "이에요!";
-            string need = "가운데 숫자가 " + total + "이니 주변 8칸에 " + colorName + "이 " + total + "칸 있어야 해요. ";
+            string need = "주변 " + around + "칸 중 " + colorName + "은 " + total + "칸이에요. ";
             string detail = opened == 0
-                ? need + "아직 하나도 안 보이는데, 가려진 칸은 딱 " + hidden + "칸뿐이죠!"
-                : need + "체크한 " + opened + "칸은 이미 보이고, 나머지 " + (total - opened) + "칸이 들어갈 곳은 가려진 " + hidden + "칸뿐이죠!";
+                ? need + "아직 하나도 안 보이는데, 가려진 칸이 딱 " + hidden + "칸이죠!"
+                : need + "체크한 " + opened + "칸을 빼면 " + remaining + "칸이 남았는데, 가려진 칸이 딱 " + hidden + "칸이죠!";
             bubble.Show(title, detail, null, hidden == 1 ? "반짝이는 칸을 눌러서 칠해 보세요" : "반짝이는 칸을 모두 눌러서 칠해 보세요");
         }
 
