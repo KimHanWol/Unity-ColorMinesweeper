@@ -108,9 +108,9 @@ namespace ColorMinesweeper.Game
                 star[i] = SoundSynth.Clip("star" + i, 0.7f, t => SoundSynth.Bell(t, f, 5f) * 0.35f);
             }
 
-            // 창이 열릴 때 "또롱"(솔 → 도, 위로), 닫힐 때 "통"(도 → 솔, 아래로). 작고 둥근 두 음이라 자주 들어도 편하다.
-            open = SoundSynth.Clip("open", 0.45f, t => (SoftNote(t, 783.99f, 14f) + 0.8f * SoftNote(t - 0.07f, 1046.5f, 12f)) * 0.22f);
-            close = SoundSynth.Clip("close", 0.4f, t => (0.8f * SoftNote(t, 1046.5f, 16f) + SoftNote(t - 0.06f, 783.99f, 14f)) * 0.18f);
+            // 창이 열릴 때 낮은 음에서 위로 "뽁", 닫힐 때 위에서 아래로 "뿅". 낮은 음역의 사인파라 귀를 찌르지 않는다.
+            open = SoundSynth.Clip("open", 0.3f, t => Bubble(t, 260f, 520f, 0.07f, 16f) * 0.3f);
+            close = SoundSynth.Clip("close", 0.3f, t => Bubble(t, 480f, 240f, 0.08f, 18f) * 0.26f);
             revive = SoundSynth.Clip("revive", 0.7f, t =>
                 (SoundSynth.Marimba(t, 523.25f, 8f) + SoundSynth.Marimba(t - 0.09f, 659.25f, 8f)
                  + SoundSynth.Marimba(t - 0.18f, 1046.5f, 5f)) * 0.35f);
@@ -192,19 +192,24 @@ namespace ColorMinesweeper.Game
         }
 
         /// <summary>
-        /// 둥글고 작은 "톡" 한 음. 사인파만 쓰고 시작을 살짝 부드럽게 해서 딸깍이나 바람 소리 없이 조용하다.
-        /// 창이 열리고 닫힐 때처럼 자주 들리는 소리에 쓴다.
+        /// 음높이가 미끄러지는 둥근 "뽁" 한 음(사인파). fromHz 에서 toHz 로 glideSeconds 동안 옮겨 간다.
+        /// 위로 미끄러지면 열리는 느낌, 아래로 미끄러지면 닫히는 느낌이라 두 소리가 헷갈리지 않는다.
         /// </summary>
-        static float SoftNote(float t, float frequency, float decay)
+        static float Bubble(float t, float fromHz, float toHz, float glideSeconds, float decay)
         {
             if (t < 0f)
             {
                 return 0f;
             }
 
-            float attack = Mathf.Clamp01(t / 0.012f);
-            return attack * Mathf.Exp(-t * decay) * (Mathf.Sin(SoundSynth.TwoPi * frequency * t)
-                                                    + 0.12f * Mathf.Sin(SoundSynth.TwoPi * frequency * 2f * t) * Mathf.Exp(-t * 20f));
+            // 지수로 미끄러지는 주파수를 적분한 위상. 주파수만 바꾸면 파형이 튀므로 위상을 이어 준다.
+            float ratio = toHz / fromHz;
+            float logRatio = Mathf.Log(ratio);
+            float phase = t < glideSeconds
+                ? fromHz * glideSeconds / logRatio * (Mathf.Pow(ratio, t / glideSeconds) - 1f)
+                : fromHz * glideSeconds / logRatio * (ratio - 1f) + toHz * (t - glideSeconds);
+            float attack = Mathf.Clamp01(t / 0.006f);
+            return attack * Mathf.Exp(-t * decay) * Mathf.Sin(SoundSynth.TwoPi * phase);
         }
     }
 }
