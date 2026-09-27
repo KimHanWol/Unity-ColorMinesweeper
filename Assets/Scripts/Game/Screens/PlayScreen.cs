@@ -7,7 +7,7 @@ namespace ColorMinesweeper.Game
     public sealed class PlayScreen : ScreenBase
     {
         const int ModalOrder = 200;
-        static readonly Vector2 ResultCardSize = new Vector2(7.6f, 7.4f);
+        static readonly Vector2 ResultCardSize = new Vector2(7.6f, 7.6f);
 
         /// <summary>완성 카드 윗변(안전 영역 아래에서 잰 높이). 완성된 그림은 이 위에 보인다.</summary>
         static float ResultCardTop => 0.5f + ResultCardSize.y;
@@ -313,7 +313,7 @@ namespace ColorMinesweeper.Game
             int order = ModalOrder + 10;
             modal.Card.localPosition = new Vector3(Ui.Safe.center.x, Ui.Safe.yMin + ResultCardTop - ResultCardSize.y / 2f, 0f);
 
-            Label.Create(card, "Title", Loc.F("clear.title", StageTitle.Name(stage)), Theme.Ink, order, new Vector2(0f, 2.6f), 0.8f,
+            Label.Create(card, "Title", Loc.F("clear.title", StageTitle.Name(stage)), Theme.Ink, order, new Vector2(0f, 2.95f), 0.8f,
                 TextAnchor.MiddleCenter, true);
 
             Sprite star = Icons.Star;
@@ -322,7 +322,7 @@ namespace ColorMinesweeper.Game
             {
                 bool earned = i < stars;
                 SpriteRenderer s = Draw.Sprite(card, "Star" + i, star, earned ? Theme.Gold : Theme.Locked, order,
-                    new Vector2((i - 1) * 1.35f, 1.1f + (i == 1 ? 0.25f : 0f)), Vector2.zero);
+                    new Vector2((i - 1) * 1.35f, 1.35f + (i == 1 ? 0.2f : 0f)), Vector2.zero);
                 float size = i == 1 ? 1.2f : 1f;
                 int index = i;
                 Tween.Run(s, 0.45f, t => s.transform.localScale = new Vector3(size * t, size * t, 1f), Ease.OutBack,
@@ -334,7 +334,7 @@ namespace ColorMinesweeper.Game
             }
 
             string mistakes = session.Mistakes == 0 ? Loc.T("clear.perfect") : Loc.F("clear.mistakes", session.Mistakes);
-            Label mistakeLabel = Label.Create(card, "Mistakes", mistakes, Theme.SubInk, order, new Vector2(0f, -0.2f), 0.45f);
+            Label mistakeLabel = Label.Create(card, "Mistakes", mistakes, Theme.SubInk, order, new Vector2(0f, 0.2f), 0.45f);
             if (unlockedNext)
             {
                 // 별이 다 뜬 뒤 자물쇠가 풀리는 소리와 함께 알린다.
@@ -343,7 +343,7 @@ namespace ColorMinesweeper.Game
                     Sfx.Instance?.Unlock();
                     mistakeLabel.gameObject.SetActive(false);
                     Label unlockedLabel = UiKit.IconLabel(card, Icons.Lock, Theme.Accent, Loc.T("clear.unlocked"), Theme.Accent, 0.45f,
-                        0.45f, order, new Vector2(0f, -0.2f), true);
+                        0.45f, order, new Vector2(0f, 0.2f), true);
                     Transform text = unlockedLabel.transform;
                     Vector3 rest = text.localScale;
                     Tween.Run(text, 0.4f, k => text.localScale = rest * Mathf.LerpUnclamped(0.6f, 1f, k), Ease.OutBack);
@@ -355,18 +355,18 @@ namespace ColorMinesweeper.Game
             if (hasNext)
             {
                 next = UiKit.Button(card, "Next", Loc.T("clear.next"), Icons.Play, Theme.Accent,
-                    Color.white, new Vector2(5.6f, 1.35f), new Vector2(0f, -1.6f), order,
+                    Color.white, new Vector2(5.6f, 1.35f), new Vector2(0f, -1.05f), order,
                     () => Ads.AfterStage(() => App.ShowPlay(stageIndex + 1))).transform;
             }
 
             // 목록과 공유는 한 줄에 반씩 둔다.
-            float rowY = hasNext ? -3.0f : -1.6f;
-            var half = new Vector2(2.7f, 1.1f);
+            float rowY = hasNext ? -2.6f : -1.05f;
+            var half = new Vector2(2.65f, 1.1f);
             Transform list = UiKit.Button(card, "List", Loc.T("clear.list"), null, Theme.HiddenTile, Theme.Ink, half,
-                new Vector2(-1.45f, rowY), order, () => Ads.AfterStage(App.ShowSelect)).transform;
+                new Vector2(-1.475f, rowY), order, () => Ads.AfterStage(App.ShowSelect)).transform;
             Transform share = null;
             share = UiKit.Button(card, "Share", Loc.T("clear.share"), Icons.Share, Theme.HiddenTile, Theme.Ink, half,
-                new Vector2(1.45f, rowY), order, () => Share.Screen(this, new[] { next, list, share }, ShareText(stars))).transform;
+                new Vector2(1.475f, rowY), order, () => Share.Screen(this, new[] { next, list, share }, ShareText(stars))).transform;
         }
 
         /// <summary>공유할 때 이미지와 함께 보내는 문구. 번호, 이름, 별.</summary>
