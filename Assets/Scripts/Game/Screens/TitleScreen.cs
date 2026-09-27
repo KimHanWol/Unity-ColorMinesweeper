@@ -51,8 +51,8 @@ namespace ColorMinesweeper.Game
         {
             BuildFloaters();
             logo = Draw.Node(transform, "Logo");
-            Label.Create(logo, "Title", "Color", Theme.Accent, 60, new Vector2(0f, 0.55f), 1.25f, TextAnchor.MiddleCenter, true);
-            Label.Create(logo, "Title2", "Minesweeper", Theme.Ink, 60, new Vector2(0f, -0.55f), 1.0f,
+            Label.Create(logo, "Title", "Pixel", Theme.Accent, 60, new Vector2(0f, 0.55f), 1.25f, TextAnchor.MiddleCenter, true);
+            Label.Create(logo, "Title2", "Clue", Theme.Ink, 60, new Vector2(0f, -0.55f), 1.25f,
                 TextAnchor.MiddleCenter, true);
             Label.Create(logo, "Tagline", Loc.T("title.tagline"), Theme.SubInk, 60, new Vector2(0f, -1.55f),
                 0.38f);

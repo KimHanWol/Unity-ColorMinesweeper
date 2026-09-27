@@ -58,7 +58,7 @@ namespace ColorMinesweeper.Game
                 }
             }
 
-            string path = Path.Combine(Application.temporaryCachePath, "colorsweeper-share.png");
+            string path = Path.Combine(Application.temporaryCachePath, "pixelclue-share.png");
             try
             {
                 File.WriteAllBytes(path, shot.EncodeToPNG());

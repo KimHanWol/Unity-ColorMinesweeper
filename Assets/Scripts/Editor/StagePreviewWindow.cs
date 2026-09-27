@@ -49,7 +49,7 @@ namespace ColorMinesweeper.EditorTools
         Vector2 jsonScroll;
         int hoverCell = -1;
 
-        [MenuItem("Tools/Color Minesweeper/Stage Preview")]
+        [MenuItem("Tools/Pixel Clue/Stage Preview")]
         static void Open()
         {
             GetWindow<StagePreviewWindow>("Stage Preview").Show();

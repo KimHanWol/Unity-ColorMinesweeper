@@ -1,6 +1,9 @@
-# Color Minesweeper
+# Pixel Clue
 
 지뢰찾기처럼 단서를 보고 추론해서 칸을 칠하다 보면 숨겨진 도트 그림이 완성되는 모바일 퍼즐.
+
+스토어 이름: **Pixel Clue: Color Logic Puzzle** / 한국어 **Pixel Clue : 색깔 추리 퍼즐**. 한국에서도 "클루"를 옮기지 않고 영어 이름을 그대로 쓴다
+("클루"는 한국어로 낯선 말이라 영어 표기가 더 자연스럽다). 같은 콘셉트의 Pixel Sweepers 가 이미 있어 이름에 Sweeper 를 쓰지 않는다.
 
 ## 규칙
 
@@ -94,7 +97,7 @@
 
 ### 개발용 도구
 
-- Unity 메뉴 **Tools > Color Minesweeper > Stage Preview**: 그림 미리보기, 형식 오류, 풀이 가능 여부,
+- Unity 메뉴 **Tools > Pixel Clue > Stage Preview**: 그림 미리보기, 형식 오류, 풀이 가능 여부,
   솔버 단계별 재생, givens 생성·저장.
 - Unity 없이: `dotnet run --project Tools/StageTool -- validate` / `-- generate` / `-- sort`
   (모든 스테이지 검증과 난이도 표시 / givens 채우기 / 난이도 순으로 번호 다시 매기기).

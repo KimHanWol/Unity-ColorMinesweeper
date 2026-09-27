@@ -10,7 +10,7 @@ namespace ColorMinesweeper.EditorTools
     /// </summary>
     static class CheatMenu
     {
-        const string Root = "Tools/Color Minesweeper/Cheats/";
+        const string Root = "Tools/Pixel Clue/Cheats/";
         const string UnlockAllPath = Root + "모든 스테이지 잠금 해제";
 
         [MenuItem(UnlockAllPath, priority = 100)]

@@ -4,7 +4,7 @@ namespace ColorMinesweeper.Game
 {
     /// <summary>
     /// 개발용 치트. 에디터와 Development Build 에서만 동작하고, 출시 빌드에서는 켜져 있어도 무시된다.
-    /// 에디터에서는 Tools > Color Minesweeper > Cheats 메뉴로, 기기에서는 목록 화면 제목을 7번 연속 탭해서 쓴다.
+    /// 에디터에서는 Tools > Pixel Clue > Cheats 메뉴로, 기기에서는 목록 화면 제목을 7번 연속 탭해서 쓴다.
     /// </summary>
     public static class Cheats
     {

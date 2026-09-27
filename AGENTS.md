@@ -1,4 +1,4 @@
-# Color Minesweeper Agent Notes
+# Pixel Clue Agent Notes
 
 - 게임 규칙, 스테이지 형식, 설계 이유는 `README.md` 에 있다. 설계를 되돌리기 전에 먼저 읽는다.
 - `Assets/Scripts/Core` 는 UnityEngine 을 참조하지 않는다(asmdef `noEngineReferences`). Unity 기능이 필요하면
