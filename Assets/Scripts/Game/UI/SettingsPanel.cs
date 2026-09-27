@@ -17,31 +17,38 @@ namespace ColorMinesweeper.Game
         /// <param name="allowTutorial">튜토리얼 다시 보기 버튼을 둘지. 판 도중(플레이 화면)에는 진행이 사라지므로 두지 않는다.</param>
         public static UiKit.Modal Open(Transform parent, UiRoot ui, int order, Action onClosed, bool allowTutorial = false)
         {
-            float extra = allowTutorial ? 1.4f : 0f;
+            // 언어와 튜토리얼 다시 보기는 판 도중(플레이 화면)에는 두지 않는다. 화면을 다시 만들면 진행이 사라진다.
+            float extra = allowTutorial ? 2.7f : 0f;
             UiKit.Modal modal = UiKit.Modal.Open(parent, ui, new Vector2(7.8f, 10.2f + extra), order);
             Transform card = modal.Card;
             int o = order + 10;
             float y = 4.2f + extra / 2f;
 
-            Label.Create(card, "Title", "설정", Theme.Ink, o, new Vector2(0f, y), 0.75f, TextAnchor.MiddleCenter, true);
+            Label.Create(card, "Title", Loc.T("settings.title"), Theme.Ink, o, new Vector2(0f, y), 0.75f, TextAnchor.MiddleCenter, true);
             y -= 1.35f;
 
-            Volume(card, "배경음악", new Vector2(0f, y), o, Settings.MusicVolume, v => Settings.MusicVolume = v, false);
+            Volume(card, Loc.T("settings.music"), new Vector2(0f, y), o, Settings.MusicVolume, v => Settings.MusicVolume = v, false);
             y -= RowHeight;
-            Volume(card, "효과음", new Vector2(0f, y), o, Settings.SfxVolume, v => Settings.SfxVolume = v, true);
+            Volume(card, Loc.T("settings.sfx"), new Vector2(0f, y), o, Settings.SfxVolume, v => Settings.SfxVolume = v, true);
             y -= RowHeight;
-            Toggle(card, "진동", null, new Vector2(0f, y), o, () => Settings.Vibration, v => Settings.Vibration = v);
+            Toggle(card, Loc.T("settings.vibration"), null, new Vector2(0f, y), o, () => Settings.Vibration, v => Settings.Vibration = v);
             y -= RowHeight;
-            Toggle(card, "남은 개수로 보기", "단서가 아직 안 열린 칸 수만 보여 줘요", new Vector2(0f, y), o,
+            Toggle(card, Loc.T("settings.remaining"), Loc.T("settings.remaining.desc"), new Vector2(0f, y), o,
                 () => Settings.ShowRemaining, v => Settings.ShowRemaining = v);
-            y -= 1.35f;
+            y -= RowHeight;
+            if (allowTutorial)
+            {
+                LanguageRow(card, new Vector2(0f, y), o);
+                y -= RowHeight;
+            }
 
-            Label.Create(card, "Tip", "색을 고르면 그 색의 개수만 보여요.\n팔레트의 네모 칸(배경)도 하나의 색이에요.",
+            y -= 0.05f;
+            Label.Create(card, "Tip", Loc.T("settings.tip"),
                 Theme.SubInk, o, new Vector2(0f, y), 0.34f);
 
             if (allowTutorial)
             {
-                UiKit.Button(card, "Tutorial", "튜토리얼 다시 보기", null, Theme.HiddenTile, Theme.Ink, new Vector2(5.6f, 1.05f),
+                UiKit.Button(card, "Tutorial", Loc.T("settings.tutorial"), null, Theme.HiddenTile, Theme.Ink, new Vector2(5.6f, 1.05f),
                     new Vector2(0f, -4.1f + extra / 2f), o, () =>
                     {
                         Settings.Flush();
@@ -49,13 +56,44 @@ namespace ColorMinesweeper.Game
                     });
             }
 
-            UiKit.Button(card, "Close", "닫기", null, Theme.Accent, Color.white, new Vector2(5.6f, 1.2f),
+            UiKit.Button(card, "Close", Loc.T("common.close"), null, Theme.Accent, Color.white, new Vector2(5.6f, 1.2f),
                 new Vector2(0f, -4.1f - extra / 2f), o, () =>
                 {
                     Settings.Flush();
                     modal.Close(onClosed);
                 });
             return modal;
+        }
+
+        /// <summary>
+        /// 언어 고르기. 언어 이름은 그 언어로 쓴다(한국어 / English). 고르면 지금 화면을 새 언어로 다시 그린다.
+        /// </summary>
+        static void LanguageRow(Transform parent, Vector2 position, int order)
+        {
+            Transform row = Draw.Node(parent, "Language", position);
+            Label.Create(row, "Title", Loc.T("settings.language"), Theme.Ink, order, new Vector2(-3.2f, 0f), 0.46f,
+                TextAnchor.MiddleLeft);
+            Language[] languages = Loc.Available;
+            const float width = 1.75f;
+            for (int i = 0; i < languages.Length; i++)
+            {
+                Language language = languages[i];
+                bool on = language == Loc.Current;
+                float x = 2.95f - (languages.Length - 1 - i) * (width + 0.12f);
+                UiKit.Button(row, Loc.NativeName(language), Loc.NativeName(language), null,
+                    on ? Theme.Accent : Theme.HiddenTile, on ? Color.white : Theme.Ink, new Vector2(width, 0.8f),
+                    new Vector2(x - width / 2f + 0.3f, 0f), order + 1, () =>
+                    {
+                        if (language == Loc.Current)
+                        {
+                            return;
+                        }
+
+                        Settings.Flush();
+                        Loc.Current = language;
+                        GameApp.Instance?.RefreshForLanguage();
+                    });
+            }
         }
 
         /// <summary>왼쪽에 이름, 오른쪽에 볼륨 슬라이더. 효과음은 끄는 동안 새 볼륨으로 짧게 들려준다.</summary>

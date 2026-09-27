@@ -9,9 +9,9 @@ namespace ColorMinesweeper.Game
     /// </summary>
     public sealed class StageSelectScreen : ScreenBase
     {
-        const float HeaderHeight = 3.4f;
+        const float HeaderHeight = 2.3f;
         const int Columns = 3;
-        static readonly Vector2 CardSize = new Vector2(2.7f, 3.8f);
+        static readonly Vector2 CardSize = new Vector2(2.7f, 3.3f);
         const float Gap = 0.35f;
 
         Transform header;
@@ -32,22 +32,21 @@ namespace ColorMinesweeper.Game
             SpriteRenderer strip = Draw.Sprite(header, "Strip", SpriteFactory.Square(), Theme.BackgroundTop, 150,
                 new Vector2(0f, 1f), new Vector2(Ui.Width + 2f, HeaderHeight + 2f));
             UiButton.Attach(strip.transform, Vector2.one, 150, null).Pressable = false;
-            Label.Create(header, "Title", "Color Minesweeper", Theme.Ink, 151, new Vector2(0f, 0.45f), 0.95f,
+            // 뒤로 · 제목 · 설정을 한 줄에 둔다(게임 이름과 부제는 메인 화면에만 둔다).
+            Label.Create(header, "Title", Loc.T("select.title"), Theme.Ink, 151, new Vector2(0f, 0.2f), 0.7f,
                 TextAnchor.MiddleCenter, true);
-            Label.Create(header, "Subtitle", "단서를 보고 칠하면 그림이 완성돼요", Theme.SubInk, 151, new Vector2(0f, -0.55f),
-                0.42f);
             UiKit.IconButton(header, "Back", Icons.Back,
-                new Vector2(-Ui.Safe.width / 2f + 1.05f, 1.2f), 152, OnBack);
+                new Vector2(-Ui.Safe.width / 2f + 1.05f, 0.2f), 152, OnBack);
             UiKit.IconButton(header, "Settings", Icons.Settings,
-                new Vector2(Ui.Safe.width / 2f - 1.05f, 1.2f), 152, () => SettingsPanel.Open(transform, Ui, 300, null, true));
+                new Vector2(Ui.Safe.width / 2f - 1.05f, 0.2f), 152, () => SettingsPanel.Open(transform, Ui, 300, null, true));
 
             // 개발용: 제목을 7번 연속 탭하면 모든 스테이지 잠금 해제를 켜고 끈다(에디터·Development Build 에서만).
-            UiButton.Attach(Draw.Node(header, "TitleCheat", new Vector2(0f, 0.45f)), new Vector2(7f, 1.2f), 151,
+            UiButton.Attach(Draw.Node(header, "TitleCheat", new Vector2(0f, 0.2f)), new Vector2(4.5f, 1.1f), 151,
                 OnTitleTapped).Pressable = false;
             if (Cheats.UnlockAll)
             {
-                Draw.Panel(header, "DevBadge", new Vector2(2.6f, 0.55f), Theme.Danger, 151, new Vector2(0f, -1.25f), 0.27f);
-                Label.Create(header, "DevText", "DEV 전체 잠금 해제", Color.white, 152, new Vector2(0f, -1.25f), 0.3f,
+                Draw.Panel(header, "DevBadge", new Vector2(2.6f, 0.5f), Theme.Danger, 151, new Vector2(0f, -0.75f), 0.25f);
+                Label.Create(header, "DevText", Loc.T("select.devUnlocked"), Color.white, 152, new Vector2(0f, -0.75f), 0.28f,
                     TextAnchor.MiddleCenter, true);
             }
 
@@ -152,13 +151,6 @@ namespace ColorMinesweeper.Game
             OnDrag(new Vector2(0f, (ratio - 1f) * -600f));
         }
 
-        /// <summary>카드 아래 "번호. 이름" 줄. 긴 이름은 카드 폭을 넘지 않게 글자를 줄인다.</summary>
-        static void Caption(Transform parent, string text, Color color, Vector2 position)
-        {
-            float height = text.Length <= 7 ? 0.3f : text.Length <= 10 ? 0.25f : 0.21f;
-            Label.Create(parent, "Caption", text, color, 12, position, height, TextAnchor.MiddleCenter, true);
-        }
-
         void CreateCard(int index)
         {
             Stage stage = StageCatalog.All[index];
@@ -176,9 +168,8 @@ namespace ColorMinesweeper.Game
             Draw.Panel(visual, "Face", CardSize, Theme.Card, 11, Vector2.zero, 0.45f);
 
             var pictureSize = new Vector2(CardSize.x - 0.5f, CardSize.x - 0.5f);
-            var pictureCenter = new Vector2(0f, 0.5f);
-            var infoLine = new Vector2(0f, -1.0f);
-            var captionLine = new Vector2(0f, -1.47f);
+            var pictureCenter = new Vector2(0f, 0.3f);
+            var infoLine = new Vector2(0f, -1.25f);
             if (stars > 0)
             {
                 Draw.Panel(visual, "PictureBack", pictureSize, Theme.ToColor(stage.Colors[stage.BackgroundColor].Color), 12,
@@ -193,21 +184,21 @@ namespace ColorMinesweeper.Game
                         infoLine + new Vector2((i - 1) * 0.45f, 0f), new Vector2(0.34f, 0.34f));
                 }
 
-                Caption(visual, StageTitle.Revealed(index, stage), Theme.Ink, captionLine);
+                PixelText.Create(visual, "Number", (index + 1).ToString(), Theme.SubInk, 14,
+                    pictureCenter + new Vector2(-pictureSize.x / 2f + 0.35f, pictureSize.y / 2f - 0.3f), 0.22f);
+
             }
             else if (unlocked)
             {
                 Draw.Panel(visual, "PictureBack", pictureSize, Theme.HiddenTile, 12, pictureCenter, 0.3f);
                 PixelText.Create(visual, "Number", (index + 1).ToString(), Color.white, 13, pictureCenter, 0.7f);
                 PixelText.Create(visual, "Size", stage.Width + "x" + stage.Height, Theme.SubInk, 12, infoLine, 0.26f);
-                Caption(visual, StageTitle.Hidden(index), Theme.SubInk, captionLine);
             }
             else
             {
                 Draw.Panel(visual, "PictureBack", pictureSize, Theme.Locked, 12, pictureCenter, 0.3f);
                 Draw.Sprite(visual, "Lock", Icons.Lock, Color.white, 13, pictureCenter,
                     new Vector2(0.7f, 0.7f));
-                Caption(visual, StageTitle.Hidden(index), Theme.Locked, captionLine);
             }
             if (unlocked && stars == 0 && index >= seenUnlocked)
             {

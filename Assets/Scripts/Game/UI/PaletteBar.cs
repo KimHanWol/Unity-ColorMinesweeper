@@ -98,7 +98,7 @@ namespace ColorMinesweeper.Game
             if (background)
             {
                 // 배경색은 단서 칩에 나오지 않는다. 모양(네모)과 이름으로 다른 색과 구분한다.
-                Label.Create(visual, "BackgroundTag", "배경", Theme.SubInk, 95, new Vector2(0f, -SwatchSize / 2f - 0.32f),
+                Label.Create(visual, "BackgroundTag", Loc.T("play.background"), Theme.SubInk, 95, new Vector2(0f, -SwatchSize / 2f - 0.32f),
                     0.3f, TextAnchor.MiddleCenter, true);
             }
             swatch.Ring.enabled = false;

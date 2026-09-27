@@ -175,6 +175,23 @@ namespace ColorMinesweeper.Core
             }
 
             var stage = new Stage(id, name, colors, backgroundIndex, width, height, pixels, givens);
+            if (obj.TryGetValue("names", out object namesValue) && namesValue != null)
+            {
+                if (!(namesValue is Dictionary<string, object> names))
+                {
+                    throw new StageFormatException("names 는 { \"en\": \"Heart\" } 처럼 언어 코드별 이름이어야 합니다");
+                }
+
+                foreach (KeyValuePair<string, object> pair in names)
+                {
+                    if (!(pair.Value is string localized))
+                    {
+                        throw new StageFormatException("names 의 " + pair.Key + " 값은 문자열이어야 합니다");
+                    }
+
+                    stage.Names[pair.Key] = localized;
+                }
+            }
             if (obj.TryGetValue("logic", out object logicValue) && logicValue != null)
             {
                 if (!(logicValue is string logic) || (logic != "basic" && logic != "medium" && logic != "full"))
@@ -196,6 +213,18 @@ namespace ColorMinesweeper.Core
             sb.Append("{\n");
             sb.Append("  \"id\": ").Append(MiniJson.Quote(stage.Id)).Append(",\n");
             sb.Append("  \"name\": ").Append(MiniJson.Quote(stage.Name)).Append(",\n");
+            if (stage.Names.Count > 0)
+            {
+                sb.Append("  \"names\": { ");
+                var codes = new List<string>(stage.Names.Keys);
+                codes.Sort(StringComparer.Ordinal);
+                for (int i = 0; i < codes.Count; i++)
+                {
+                    sb.Append(i > 0 ? ", " : "").Append(MiniJson.Quote(codes[i])).Append(": ").Append(MiniJson.Quote(stage.Names[codes[i]]));
+                }
+
+                sb.Append(" },\n");
+            }
             if (stage.Logic == Technique.Direct)
             {
                 sb.Append("  \"logic\": \"basic\",\n");

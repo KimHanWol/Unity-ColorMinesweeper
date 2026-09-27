@@ -103,7 +103,7 @@ namespace ColorMinesweeper.Game
         public void Show(Action<bool> onFinished)
         {
             Debug.Log("[Ads] 보상형 광고 자리(아직 SDK 없음) — 보상 지급");
-            PlaceholderAdScreen.Show("보상형 광고 자리", () => onFinished(true));
+            PlaceholderAdScreen.Show(Loc.T("ad.rewarded"), () => onFinished(true));
         }
     }
 
@@ -115,7 +115,7 @@ namespace ColorMinesweeper.Game
         public void Show(Action onClosed)
         {
             Debug.Log("[Ads] 전면 광고 자리(아직 SDK 없음)");
-            PlaceholderAdScreen.Show("전면 광고 자리", onClosed);
+            PlaceholderAdScreen.Show(Loc.T("ad.interstitial"), onClosed);
         }
     }
 
@@ -135,7 +135,7 @@ namespace ColorMinesweeper.Game
             root.SetParent(app.transform, false);
             UiKit.Modal modal = UiKit.Modal.Open(root, app.Ui, new Vector2(7f, 4f), 900);
             Label.Create(modal.Card, "Title", title, Theme.Ink, 910, new Vector2(0f, 0.5f), 0.6f, TextAnchor.MiddleCenter, true);
-            Label.Create(modal.Card, "Body", "SDK 를 붙이기 전 테스트 화면이에요", Theme.SubInk, 910, new Vector2(0f, -0.5f), 0.36f);
+            Label.Create(modal.Card, "Body", Loc.T("ad.body"), Theme.SubInk, 910, new Vector2(0f, -0.5f), 0.36f);
             Tween.Delay(root, 1.2f, () => modal.Close(() =>
             {
                 UnityEngine.Object.Destroy(root.gameObject);

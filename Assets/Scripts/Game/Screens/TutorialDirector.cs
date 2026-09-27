@@ -27,6 +27,7 @@ namespace ColorMinesweeper.Game
         const string StageJson = @"{
   ""id"": ""tutorial"",
   ""name"": ""하트"",
+  ""names"": { ""en"": ""Heart"" },
   ""logic"": ""basic"",
   ""background"": ""."",
   ""palette"": [
@@ -86,7 +87,7 @@ namespace ColorMinesweeper.Game
             play = screen;
             bubble = speech;
             solver = new Solver(screen.Stage, Technique.Direct);
-            Talk("숨은 그림을 찾아요", "숫자를 보고 칸을 칠하면 그림이 완성돼요.", NextGuided);
+            Talk(Loc.T("tut.intro.title"), Loc.T("tut.intro.detail"), NextGuided);
         }
 
         /// <summary>다음으로 가르칠 추론을 고른다. 두 번 짚어 준 뒤 배경을 가르치고, 그다음은 혼자 하게 둔다.</summary>
@@ -103,7 +104,7 @@ namespace ColorMinesweeper.Game
                 {
                     if (play.Palette.Selected != stage.BackgroundColor)
                     {
-                        AskColor(stage.BackgroundColor, "배경도 색이에요", "아래 네모 칸(배경)을 눌러 보세요.");
+                        AskColor(stage.BackgroundColor, Loc.T("tut.bg.title"), Loc.T("tut.bg.detail"));
                         return;
                     }
 
@@ -127,7 +128,7 @@ namespace ColorMinesweeper.Game
 
             if (hint.Color != play.Palette.Selected)
             {
-                AskColor(hint.Color, "이 색을 골라요", "아래에서 반짝이는 색을 눌러 보세요.");
+                AskColor(hint.Color, Loc.T("tut.pick.title"), Loc.T("tut.pick.detail"));
                 return;
             }
 
@@ -182,7 +183,7 @@ namespace ColorMinesweeper.Game
             int around = stage.Neighbors(hint.Clue).Length;
             int remaining = total - opened;
             bool background = hint.Color == stage.BackgroundColor;
-            string colorName = background ? "배경" : ColorNames.Describe(stage.Colors[hint.Color].Color);
+            string colorName = background ? Loc.T("color.background") : ColorNames.Describe(stage.Colors[hint.Color].Color);
             Spotlight(hint.Clue);
             MarkFound(hint.Clue, hint.Color);
 
@@ -196,9 +197,9 @@ namespace ColorMinesweeper.Game
             {
                 // 두 번째는 근거만 비추고, 칠할 칸은 스스로 찾게 한다.
                 string count = opened == 0
-                    ? "주변 " + around + "칸 중 " + colorName + "은 " + total + "칸이에요. 아직 하나도 안 보이니 " + total + "칸을 찾아야 해요."
-                    : "주변 " + around + "칸 중 " + colorName + "은 " + total + "칸이에요. 체크한 " + opened + "칸을 빼면 " + remaining + "칸이 남았죠.";
-                bubble.Show("이번엔 직접 찾아봐요", count, null, "나머지 " + remaining + "칸은 어디일까요? 눌러서 칠해 보세요");
+                    ? Loc.F("tut.self.none", around, colorName, total)
+                    : Loc.F("tut.self.some", around, colorName, total, opened, remaining);
+                bubble.Show(Loc.T("tut.self.title"), count, null, Loc.F("tut.self.todo", remaining));
                 return;
             }
 
@@ -208,14 +209,12 @@ namespace ColorMinesweeper.Game
             }
 
             // 굵은 줄은 결론, 옅은 줄은 세는 순서, 보라 줄은 할 일. 색 이름은 모두 받침이 있어 "이", "으로" 를 쓴다.
-            string title = hidden == 1
-                ? "여기가 " + colorName + "이에요!"
-                : "여기 " + hidden + "칸은 모두 " + colorName + "이에요!";
-            string need = "주변 " + around + "칸 중 " + colorName + "은 " + total + "칸이에요. ";
+            string title = hidden == 1 ? Loc.F("tut.here.one", colorName) : Loc.F("tut.here.many", hidden, colorName);
+            string need = Loc.F("tut.need", around, colorName, total);
             string detail = opened == 0
-                ? need + "아직 하나도 안 보이는데, 가려진 칸이 딱 " + hidden + "칸이죠!"
-                : need + "체크한 " + opened + "칸을 빼면 " + remaining + "칸이 남았는데, 가려진 칸이 딱 " + hidden + "칸이죠!";
-            bubble.Show(title, detail, null, hidden == 1 ? "반짝이는 칸을 눌러서 칠해 보세요" : "반짝이는 칸을 모두 눌러서 칠해 보세요");
+                ? need + Loc.F("tut.reason.none", hidden)
+                : need + Loc.F("tut.reason.some", opened, remaining, hidden);
+            bubble.Show(title, detail, null, Loc.T(hidden == 1 ? "tut.todo.one" : "tut.todo.many"));
         }
 
         void StartFreePlay()
@@ -223,7 +222,7 @@ namespace ColorMinesweeper.Game
             ClearMarks();
             phase = Phase.Free;
             bubble.AnchorBottom();
-            bubble.Show("이제 혼자 해 봐요!", "틀리면 하트가 하나 줄어요.", () => bubble.Hide());
+            bubble.Show(Loc.T("tut.free.title"), Loc.T("tut.free.detail"), () => bubble.Hide());
         }
 
         void Talk(string title, string detail, System.Action next)
@@ -294,7 +293,7 @@ namespace ColorMinesweeper.Game
             if (color != current.Color)
             {
                 MarkSwatch(current.Color);
-                bubble.SetTodo("먼저 아래에서 " + currentColorName + "을 골라요");
+                bubble.SetTodo(Loc.F("tut.pickFirst", currentColorName));
                 bubble.Nudge();
                 return false;
             }
@@ -335,7 +334,7 @@ namespace ColorMinesweeper.Game
 
             if (left > 0)
             {
-                bubble.SetTodo("좋아요! 남은 " + left + "칸도 칠해 보세요");
+                bubble.SetTodo(Loc.F("tut.left", left));
                 return;
             }
 

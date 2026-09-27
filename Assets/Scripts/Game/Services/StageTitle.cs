@@ -18,7 +18,13 @@ namespace ColorMinesweeper.Game
 
         public static string Revealed(int index, Stage stage)
         {
-            return index >= 0 ? (index + 1) + ". " + stage.Name : stage.Name;
+            return index >= 0 ? (index + 1) + ". " + Name(stage) : Name(stage);
+        }
+
+        /// <summary>현재 언어의 스테이지 이름.</summary>
+        public static string Name(Stage stage)
+        {
+            return stage.NameIn(Loc.Code(Loc.Current));
         }
 
         /// <summary>지금 보여 줄 제목. 전에 깬 스테이지면 이름이 보인다.</summary>

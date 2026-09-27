@@ -40,6 +40,17 @@ namespace ColorMinesweeper.Core
         /// </summary>
         public Technique Logic { get; set; } = Technique.Pair;
 
+        /// <summary>언어별 이름(언어 코드 → 이름, 예: "en" → "Heart"). <see cref="Name"/> 은 한국어 기본 이름이다.</summary>
+        public Dictionary<string, string> Names { get; } = new Dictionary<string, string>();
+
+        /// <summary>그 언어 이름이 없으면 기본 이름.</summary>
+        public string NameIn(string languageCode)
+        {
+            return languageCode != null && Names.TryGetValue(languageCode, out string name) && !string.IsNullOrEmpty(name)
+                ? name
+                : Name;
+        }
+
         readonly int[] pixels;
         readonly int[][] neighbors;
         readonly int[] clues;

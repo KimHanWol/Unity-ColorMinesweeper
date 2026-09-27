@@ -78,7 +78,7 @@ namespace ColorMinesweeper.Game
 
             top = Draw.Node(transform, "Top");
             bottom = Draw.Node(transform, "Bottom");
-            hud = Hud.Create(top, Ui, tutorial != null ? "튜토리얼" : StageTitle.For(stageIndex, stage), OnBack, OpenSettings);
+            hud = Hud.Create(top, Ui, tutorial != null ? Loc.T("play.tutorial") : StageTitle.For(stageIndex, stage), OnBack, OpenSettings);
             if (tutorial != null)
             {
                 bubble = SpeechBubble.Create(transform, Ui);
@@ -148,12 +148,12 @@ namespace ColorMinesweeper.Game
             modalClosable = true;
             Transform card = modal.Card;
             int order = ModalOrder + 10;
-            Label.Create(card, "Title", "그만할까요?", Theme.Ink, order, new Vector2(0f, 2.1f), 0.72f, TextAnchor.MiddleCenter, true);
-            Label.Create(card, "Body", "지금 나가면 이 그림의 진행 상황은\n저장되지 않아요. 다음에 처음부터 풀어요.", Theme.SubInk,
+            Label.Create(card, "Title", Loc.T("leave.title"), Theme.Ink, order, new Vector2(0f, 2.1f), 0.72f, TextAnchor.MiddleCenter, true);
+            Label.Create(card, "Body", Loc.T("leave.body"), Theme.SubInk,
                 order, new Vector2(0f, 0.85f), 0.4f);
-            UiKit.Button(card, "Stay", "계속하기", null, Theme.Accent, Color.white, new Vector2(6f, 1.3f), new Vector2(0f, -0.75f),
+            UiKit.Button(card, "Stay", Loc.T("leave.stay"), null, Theme.Accent, Color.white, new Vector2(6f, 1.3f), new Vector2(0f, -0.75f),
                 order, CloseModal);
-            UiKit.Button(card, "Leave", "나가기", null, Theme.HiddenTile, Theme.Ink, new Vector2(6f, 1.1f),
+            UiKit.Button(card, "Leave", Loc.T("leave.leave"), null, Theme.HiddenTile, Theme.Ink, new Vector2(6f, 1.1f),
                 new Vector2(0f, -2.15f), order, () => App.ShowSelect());
         }
 
@@ -313,7 +313,7 @@ namespace ColorMinesweeper.Game
             int order = ModalOrder + 10;
             modal.Card.localPosition = new Vector3(Ui.Safe.center.x, Ui.Safe.yMin + ResultCardTop - ResultCardSize.y / 2f, 0f);
 
-            Label.Create(card, "Title", stage.Name + " 완성!", Theme.Ink, order, new Vector2(0f, 2.6f), 0.8f,
+            Label.Create(card, "Title", Loc.F("clear.title", StageTitle.Name(stage)), Theme.Ink, order, new Vector2(0f, 2.6f), 0.8f,
                 TextAnchor.MiddleCenter, true);
 
             Sprite star = Icons.Star;
@@ -333,7 +333,7 @@ namespace ColorMinesweeper.Game
                 }
             }
 
-            string mistakes = session.Mistakes == 0 ? "실수 없이 풀었어요" : "실수 " + session.Mistakes + "번";
+            string mistakes = session.Mistakes == 0 ? Loc.T("clear.perfect") : Loc.F("clear.mistakes", session.Mistakes);
             Label mistakeLabel = Label.Create(card, "Mistakes", mistakes, Theme.SubInk, order, new Vector2(0f, -0.2f), 0.45f);
             if (unlockedNext)
             {
@@ -342,7 +342,7 @@ namespace ColorMinesweeper.Game
                 {
                     Sfx.Instance?.Unlock();
                     mistakeLabel.gameObject.SetActive(false);
-                    Label unlockedLabel = UiKit.IconLabel(card, Icons.Lock, Theme.Accent, "다음 그림이 열렸어요!", Theme.Accent, 0.45f,
+                    Label unlockedLabel = UiKit.IconLabel(card, Icons.Lock, Theme.Accent, Loc.T("clear.unlocked"), Theme.Accent, 0.45f,
                         0.45f, order, new Vector2(0f, -0.2f), true);
                     Transform text = unlockedLabel.transform;
                     Vector3 rest = text.localScale;
@@ -353,11 +353,11 @@ namespace ColorMinesweeper.Game
             bool hasNext = stageIndex >= 0 && stageIndex + 1 < StageCatalog.All.Count;
             if (hasNext)
             {
-                UiKit.Button(card, "Next", "다음 그림", Icons.Play, Theme.Accent,
+                UiKit.Button(card, "Next", Loc.T("clear.next"), Icons.Play, Theme.Accent,
                     Color.white, new Vector2(5.6f, 1.35f), new Vector2(0f, -1.6f), order, () => Ads.AfterStage(() => App.ShowPlay(stageIndex + 1)));
             }
 
-            UiKit.Button(card, "List", "목록", null, Theme.HiddenTile, Theme.Ink, new Vector2(5.6f, 1.1f),
+            UiKit.Button(card, "List", Loc.T("clear.list"), null, Theme.HiddenTile, Theme.Ink, new Vector2(5.6f, 1.1f),
                 new Vector2(0f, hasNext ? -3.0f : -1.6f), order, () => Ads.AfterStage(App.ShowSelect));
         }
 
@@ -370,10 +370,10 @@ namespace ColorMinesweeper.Game
             Transform card = modal.Card;
             int order = ModalOrder + 10;
             modal.Card.localPosition = new Vector3(Ui.Safe.center.x, Ui.Safe.yMin + ResultCardTop - ResultCardSize.y / 2f, 0f);
-            Label.Create(card, "Title", "튜토리얼 완료!", Theme.Ink, order, new Vector2(0f, 2.5f), 0.8f, TextAnchor.MiddleCenter, true);
-            Label.Create(card, "Body", "그림을 완성하면 이름이 공개돼요.\n색을 고르고, 숫자를 보고, 칠하면 끝!", Theme.SubInk, order,
+            Label.Create(card, "Title", Loc.T("tutorialClear.title"), Theme.Ink, order, new Vector2(0f, 2.5f), 0.8f, TextAnchor.MiddleCenter, true);
+            Label.Create(card, "Body", Loc.T("tutorialClear.body"), Theme.SubInk, order,
                 new Vector2(0f, 0.6f), 0.42f);
-            UiKit.Button(card, "Start", "시작하기", Icons.Play, Theme.Accent, Color.white,
+            UiKit.Button(card, "Start", Loc.T("tutorialClear.start"), Icons.Play, Theme.Accent, Color.white,
                 new Vector2(5.6f, 1.35f), new Vector2(0f, -2.2f), order, () => App.ShowPlay(0));
         }
 
@@ -386,13 +386,13 @@ namespace ColorMinesweeper.Game
 
             Draw.Sprite(card, "Heart", Icons.Heart, Theme.Locked, order,
                 new Vector2(0f, 2.3f), new Vector2(1.1f, 1.1f));
-            Label.Create(card, "Title", "목숨을 다 썼어요", Theme.Ink, order, new Vector2(0f, 1.1f), 0.72f,
+            Label.Create(card, "Title", Loc.T("over.title"), Theme.Ink, order, new Vector2(0f, 1.1f), 0.72f,
                 TextAnchor.MiddleCenter, true);
-            Label.Create(card, "Body", "광고를 보면 목숨 " + PuzzleSession.ReviveLives + "개로 이어서 할 수 있어요",
+            Label.Create(card, "Body", Loc.F("over.body", PuzzleSession.ReviveLives),
                 Theme.SubInk, order, new Vector2(0f, 0.2f), 0.4f);
 
             UiButton revive = null;
-            revive = UiKit.Button(card, "Revive", "광고 보고 이어 하기", Icons.Ad,
+            revive = UiKit.Button(card, "Revive", Loc.T("over.revive"), Icons.Ad,
                 Theme.Accent, Color.white, new Vector2(6f, 1.35f), new Vector2(0f, -1.2f), order, () =>
                 {
                     revive.Interactable = false;
@@ -417,7 +417,7 @@ namespace ColorMinesweeper.Game
                 });
             revive.Interactable = Ads.Rewarded.IsReady;
 
-            UiKit.Button(card, "Retry", "처음부터", Icons.Retry, Theme.HiddenTile,
+            UiKit.Button(card, "Retry", Loc.T("over.retry"), Icons.Retry, Theme.HiddenTile,
                 Theme.Ink, new Vector2(6f, 1.1f), new Vector2(0f, -2.6f), order, () => App.ShowPlay(stage, stageIndex));
         }
 

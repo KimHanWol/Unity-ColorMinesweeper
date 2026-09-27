@@ -53,7 +53,7 @@ namespace ColorMinesweeper.Game
                 TextAnchor.UpperLeft);
             bubble.action = Label.Create(root, "Action", string.Empty, Theme.Accent, Order + 2, Vector2.zero, 0.42f,
                 TextAnchor.UpperLeft, true);
-            bubble.nextButton = UiKit.Button(root, "Next", "다음", null, Theme.Accent, Color.white, new Vector2(2.2f, 0.8f),
+            bubble.nextButton = UiKit.Button(root, "Next", Loc.T("common.next"), null, Theme.Accent, Color.white, new Vector2(2.2f, 0.8f),
                 Vector2.zero, Order + 3, () => bubble.onNext?.Invoke()).transform;
             root.gameObject.SetActive(false);
             return bubble;

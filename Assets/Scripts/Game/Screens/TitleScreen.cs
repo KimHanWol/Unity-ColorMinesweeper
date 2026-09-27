@@ -54,7 +54,7 @@ namespace ColorMinesweeper.Game
             Label.Create(logo, "Title", "Color", Theme.Accent, 60, new Vector2(0f, 0.55f), 1.25f, TextAnchor.MiddleCenter, true);
             Label.Create(logo, "Title2", "Minesweeper", Theme.Ink, 60, new Vector2(0f, -0.55f), 1.0f,
                 TextAnchor.MiddleCenter, true);
-            Label.Create(logo, "Tagline", "단서를 읽고 칠해서 도트 그림을 완성하세요", Theme.SubInk, 60, new Vector2(0f, -1.55f),
+            Label.Create(logo, "Tagline", Loc.T("title.tagline"), Theme.SubInk, 60, new Vector2(0f, -1.55f),
                 0.38f);
 
             BuildHero();
@@ -128,7 +128,7 @@ namespace ColorMinesweeper.Game
             int next = StageCatalog.NextToPlay();
             int cleared = StageCatalog.ClearedCount();
             bool started = cleared > 0;
-            string playText = started ? "이어하기 · " + (next + 1) : "시작하기";
+            string playText = started ? Loc.F("title.continue", next + 1) : Loc.T("title.start");
             UiKit.Button(menu, "Play", playText, Icons.Play, Theme.Accent, Color.white,
                 new Vector2(6.4f, 1.5f), new Vector2(0f, 1.1f), 70, () =>
                 {
@@ -142,11 +142,11 @@ namespace ColorMinesweeper.Game
                         App.ShowTutorial();
                     }
                 });
-            UiKit.Button(menu, "Stages", "스테이지 선택", null, Color.white, Theme.Ink, new Vector2(6.4f, 1.25f),
+            UiKit.Button(menu, "Stages", Loc.T("title.stages"), null, Color.white, Theme.Ink, new Vector2(6.4f, 1.25f),
                 new Vector2(0f, -0.55f), 70, () => App.ShowSelect());
 
             Sprite star = Icons.Star;
-            UiKit.IconLabel(menu, star, Theme.Gold, "완성한 그림 " + cleared + " / " + StageCatalog.All.Count, Theme.SubInk, 0.36f,
+            UiKit.IconLabel(menu, star, Theme.Gold, Loc.F("title.progress", cleared, StageCatalog.All.Count), Theme.SubInk, 0.36f,
                 0.42f, 70, new Vector2(0f, -1.85f));
         }
 

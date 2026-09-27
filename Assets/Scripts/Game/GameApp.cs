@@ -101,6 +101,17 @@ namespace ColorMinesweeper.Game
             Open<StageSelectScreen>(null);
         }
 
+        /// <summary>언어를 바꾼 뒤: 지금 화면(메인·목록)을 새 언어로 다시 그리고 설정 창을 다시 열어 둔다.</summary>
+        public void RefreshForLanguage()
+        {
+            ScreenBase screen = current;
+            RefreshStageList();
+            if (current != screen)
+            {
+                SettingsPanel.Open(current.transform, Ui, 300, null, true);
+            }
+        }
+
         /// <summary>목록·메인 화면을 보고 있으면 다시 그린다(치트로 잠금·기록이 바뀌었을 때). 플레이 중이면 그대로 둔다.</summary>
         public void RefreshStageList()
         {
