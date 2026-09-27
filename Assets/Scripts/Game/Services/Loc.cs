@@ -167,8 +167,6 @@ namespace ColorMinesweeper.Game
             ["settings.music"] = new[] { "배경음악", "Music" },
             ["settings.sfx"] = new[] { "효과음", "Sound effects" },
             ["settings.vibration"] = new[] { "진동", "Vibration" },
-            ["settings.remaining"] = new[] { "남은 개수로 보기", "Show remaining counts" },
-            ["settings.remaining.desc"] = new[] { "단서가 아직 안 열린 칸 수만 보여 줘요", "Clues count only unopened cells" },
             ["settings.language"] = new[] { "언어", "Language" },
             ["settings.tutorial"] = new[] { "튜토리얼 다시 보기", "Replay tutorial" },
 

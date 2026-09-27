@@ -89,15 +89,10 @@ namespace ColorMinesweeper.Game
             }
         }
 
-        /// <summary>고른 색이 아니면 0(숨김). 고른 색이면 다 채워졌을 때 조금 작게, 남은 개수 보기면 사라진다.</summary>
+        /// <summary>고른 색이 아니면 0(숨김). 고른 색이면 다 채워졌을 때 조금 작게.</summary>
         float TargetScale(Chip chip)
         {
             if (chip.Color != focusColor)
-            {
-                return 0f;
-            }
-
-            if (chip.Done && Settings.ShowRemaining)
             {
                 return 0f;
             }
@@ -130,27 +125,9 @@ namespace ColorMinesweeper.Game
                 }
 
                 chip.Remaining = remaining;
-                if (Settings.ShowRemaining && remaining > 0)
-                {
-                    chip.Digit.SetText(remaining.ToString());
-                }
-
                 if (chipsShown)
                 {
                     ApplyChip(chip, animate);
-                }
-            }
-        }
-
-        /// <summary>표시 방식 설정이 바뀌었을 때 숫자를 다시 쓴다.</summary>
-        public void RefreshDigits()
-        {
-            foreach (Chip chip in chips)
-            {
-                chip.Digit.SetText((Settings.ShowRemaining ? chip.Remaining : chip.Total).ToString());
-                if (chipsShown)
-                {
-                    ApplyChip(chip, false);
                 }
             }
         }

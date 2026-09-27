@@ -10,7 +10,6 @@ namespace ColorMinesweeper.Game
         const string SfxKey = "settings.sfxVolume";
         const string LegacySoundKey = "settings.sound";
         const string HapticsKey = "settings.haptics";
-        const string RemainingKey = "settings.showRemaining";
 
         public static event Action Changed;
 
@@ -32,16 +31,6 @@ namespace ColorMinesweeper.Game
         {
             get => PlayerPrefs.GetInt(HapticsKey, 1) == 1;
             set => SetBool(HapticsKey, value);
-        }
-
-        /// <summary>
-        /// 켜면 칩이 "주변 전체 개수" 대신 "아직 안 열린 칸 중 그 색의 개수"를 보여 주고, 0 이 되면 사라진다.
-        /// 머릿속으로 빼는 수고가 없어져 쉬워지므로 기본은 꺼 둔다(대신 다 채워진 칩은 흐려진다).
-        /// </summary>
-        public static bool ShowRemaining
-        {
-            get => PlayerPrefs.GetInt(RemainingKey, 0) == 1;
-            set => SetBool(RemainingKey, value);
         }
 
         /// <summary>저장된 값을 소리·진동에 반영한다. 시작할 때와 바뀔 때 부른다.</summary>

@@ -20,7 +20,7 @@ namespace ColorMinesweeper.Game
         {
             // 언어와 튜토리얼 다시 보기는 판 도중(플레이 화면)에는 두지 않는다. 화면을 다시 만들면 진행이 사라진다.
             // 위에서부터 차례로 쌓는다. 자리를 먼저 모두 계산해 카드 높이를 정하므로 줄이 늘어도 겹치지 않는다.
-            int rows = allowTutorial ? 5 : 4;
+            int rows = allowTutorial ? 4 : 3;
             float titleY = -0.9f;
             float firstRowY = titleY - 1.35f;
             // 마지막 줄 아래 끝. 줄 한가운데에서 반 줄 내려간 곳이다.
@@ -49,9 +49,6 @@ namespace ColorMinesweeper.Game
             Volume(card, Loc.T("settings.sfx"), new Vector2(0f, y), o, Settings.SfxVolume, v => Settings.SfxVolume = v, true);
             y -= RowHeight;
             Toggle(card, Loc.T("settings.vibration"), null, new Vector2(0f, y), o, () => Settings.Vibration, v => Settings.Vibration = v);
-            y -= RowHeight;
-            Toggle(card, Loc.T("settings.remaining"), Loc.T("settings.remaining.desc"), new Vector2(0f, y), o,
-                () => Settings.ShowRemaining, v => Settings.ShowRemaining = v);
             if (allowTutorial)
             {
                 y -= RowHeight;

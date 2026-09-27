@@ -137,15 +137,6 @@ namespace ColorMinesweeper.Game
             return maxDepth * RevealStepDelay + 0.45f;
         }
 
-        /// <summary>칩 표시 방식(전체/남은 개수) 설정이 바뀌었을 때.</summary>
-        public void RefreshClueDigits()
-        {
-            foreach (CellView cell in cells)
-            {
-                cell.RefreshDigits();
-            }
-        }
-
         public void PlayWrong(int cell, Color chosen)
         {
             cells[cell].AnimateWrong(chosen);

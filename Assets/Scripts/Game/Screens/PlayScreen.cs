@@ -97,13 +97,6 @@ namespace ColorMinesweeper.Game
                 busy = false;
                 tutorial?.Begin(this, bubble);
             });
-            Settings.Changed += OnSettingsChanged;
-        }
-
-        protected override void OnDestroy()
-        {
-            Settings.Changed -= OnSettingsChanged;
-            base.OnDestroy();
         }
 
         public override void OnBack()
@@ -155,11 +148,6 @@ namespace ColorMinesweeper.Game
                 order, CloseModal);
             UiKit.Button(card, "Leave", Loc.T("leave.leave"), null, Theme.HiddenTile, Theme.Ink, UiKit.ModalButtonSize,
                 new Vector2(0f, -2.0f), order, () => App.ShowSelect());
-        }
-
-        void OnSettingsChanged()
-        {
-            board.RefreshClueDigits();
         }
 
         void OpenSettings()
