@@ -48,6 +48,16 @@ namespace ColorMinesweeper.Game
             source.loop = true;
             source.playOnAwake = false;
             source.volume = 0f;
+
+            // 넣어 둔 곡(Resources/Music/bgm)이 있으면 그 곡을 반복하고, 없으면 합성한 곡을 쓴다.
+            AudioClip recorded = Resources.Load<AudioClip>("Music/bgm");
+            if (recorded != null)
+            {
+                source.clip = recorded;
+                source.Play();
+                return;
+            }
+
             composing = Task.Run(Compose);
         }
 
