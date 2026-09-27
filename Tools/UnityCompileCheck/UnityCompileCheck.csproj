@@ -3,6 +3,8 @@
     Unity 에디터를 띄우지 않고 게임/에디터 스크립트의 컴파일 오류를 잡는다.
     Unity 가 쓰는 것과 같은 엔진 모듈 DLL 을 참조한다. 설치 경로가 다르면 -p:UnityEditorPath=... 로 넘긴다.
     dotnet build Tools/UnityCompileCheck
+    Google Mobile Ads 플러그인이 Library/PackageCache 에 있으면(또는 -p:GmaPath=... 로 넘기면) 그 DLL 을 참조하고
+    GOOGLE_MOBILE_ADS 를 켜서 광고 연동 코드까지 확인한다.
   -->
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -20,4 +22,19 @@
   <ItemGroup>
     <Reference Include="$(UnityManaged)\UnityEngine\*.dll" Private="false" />
   </ItemGroup>
+  <ItemGroup Condition="'$(GmaPath)' == ''">
+    <GmaDll Include="../../Library/PackageCache/com.google.ads.mobile*/GoogleMobileAds/*.dll" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(GmaPath)' != ''">
+    <GmaDll Include="$(GmaPath)/*.dll" />
+  </ItemGroup>
+  <ItemGroup Condition="'@(GmaDll)' != ''">
+    <Reference Include="@(GmaDll)" Private="false" />
+  </ItemGroup>
+  <Target Name="DefineGoogleMobileAds" BeforeTargets="CoreCompile" Condition="'@(GmaDll)' != ''">
+    <PropertyGroup>
+      <DefineConstants>$(DefineConstants);GOOGLE_MOBILE_ADS</DefineConstants>
+    </PropertyGroup>
+    <Message Importance="high" Text="Google Mobile Ads 플러그인 DLL 을 찾아 광고 연동 코드까지 확인합니다." />
+  </Target>
 </Project>
