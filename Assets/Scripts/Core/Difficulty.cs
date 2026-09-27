@@ -27,6 +27,9 @@ namespace ColorMinesweeper.Core
         /// <summary>배경을 뺀 색 수. 스테이지 순서의 첫 기준이다(색이 한꺼번에 늘지 않게).</summary>
         public readonly int PictureColors;
 
+        /// <summary>판 칸 수. 같은 색 수 안에서 작은 판이 먼저 나오게 하는 두 번째 기준.</summary>
+        public readonly int Cells;
+
         /// <summary>
         /// 단계 하나하나의 수고를 더한 값.
         /// - 순서대로 1, 같은 색 두 단서 비교 4(겹치는 칸의 경우의 수를 머릿속으로 따져야 한다).
@@ -39,10 +42,11 @@ namespace ColorMinesweeper.Core
         public readonly int PairSteps;
         public readonly int Steps;
 
-        public Difficulty(Technique hardest, int pictureColors, float score, int pairSteps, int steps)
+        public Difficulty(Technique hardest, int pictureColors, int cells, float score, int pairSteps, int steps)
         {
             Hardest = hardest;
             PictureColors = pictureColors;
+            Cells = cells;
             Score = score;
             PairSteps = pairSteps;
             Steps = steps;
@@ -82,17 +86,23 @@ namespace ColorMinesweeper.Core
 
             score += stage.CellCount / SizeWeight;
             score += (stage.ColorCount - 2) * ColorWeight;
-            return new Difficulty(result.Hardest, stage.ColorCount - 1, score, pairSteps, result.Steps.Count);
+            return new Difficulty(result.Hardest, stage.ColorCount - 1, stage.CellCount, score, pairSteps, result.Steps.Count);
         }
 
         /// <summary>
-        /// 스테이지 순서: 색 수가 적은 것부터, 같은 색 수 안에서는 <see cref="Total"/> 순.
-        /// 플레이 피드백("색을 빠르게 늘리지 말자")에 따라 색 수를 점수보다 우선한다.
+        /// 스테이지 순서: 색 수가 적은 것부터, 같은 색 수 안에서는 판이 작은 것부터, 크기도 같으면 <see cref="Total"/> 순.
+        /// 플레이 피드백("색을 빠르게 늘리지 말자", "해상도가 낮은 것부터")에 따라 색 수와 크기를 점수보다 우선한다.
         /// </summary>
         public int CompareTo(Difficulty other)
         {
             int byColors = PictureColors.CompareTo(other.PictureColors);
-            return byColors != 0 ? byColors : Total.CompareTo(other.Total);
+            if (byColors != 0)
+            {
+                return byColors;
+            }
+
+            int byCells = Cells.CompareTo(other.Cells);
+            return byCells != 0 ? byCells : Total.CompareTo(other.Total);
         }
 
         public override string ToString()

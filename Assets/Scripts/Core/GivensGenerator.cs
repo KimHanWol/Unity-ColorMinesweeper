@@ -4,7 +4,7 @@ namespace ColorMinesweeper.Core
 {
     /// <summary>
     /// 추론만으로 끝까지 풀리도록 처음부터 열어 둘 칸(givens)을 고른다.
-    /// 가장 넓게 펼쳐지는 빈 칸 하나로 시작하고, 솔버가 막힐 때마다 가장 많이 풀어 주는 칸을 더한 뒤,
+    /// 판의 20% 이하로 펼쳐지는 시작 칸 하나로 시작하고, 솔버가 막힐 때마다 가장 많이 풀어 주는 칸을 더한 뒤,
     /// 빼도 풀리는 칸은 다시 뺀다(시작 칸은 남긴다).
     /// </summary>
     public static class GivensGenerator
@@ -33,6 +33,13 @@ namespace ColorMinesweeper.Core
                 }
 
                 List<int> pool = StuckCells(stage, result.Revealed);
+
+                // 빈 칸은 열리면 주변이 펼쳐져 시작부터 넓게 열린다. 한 칸만 열리는 칸이 있으면 그것만 고른다.
+                List<int> single = pool.FindAll(cell => !stage.IsBlank(cell));
+                if (single.Count > 0)
+                {
+                    pool = single;
+                }
                 int best = -1;
                 int bestCount = -1;
                 for (int i = 0; i < SamplesPerStep && pool.Count > 0; i++)
@@ -71,11 +78,16 @@ namespace ColorMinesweeper.Core
             return givens.ToArray();
         }
 
+        /// <summary>처음부터 열려 있는 칸이 판에서 차지하는 최대 비율. 배경이 넓은 그림이 시작부터 반쯤 열리지 않게 한다.</summary>
+        public const double MaxOpeningFraction = 0.2;
+
         /// <summary>
-        /// 가장 넓게 펼쳐지는 빈 칸. 빈 칸이 없는 그림이면 배경색 칸 아무거나, 그것도 없으면 아무 칸.
+        /// 시작 칸. 펼쳐지는 넓이가 판의 <see cref="MaxOpeningFraction"/> 이하인 빈 칸 중 가장 넓게 펼쳐지는 칸을 고른다.
+        /// 그런 칸이 없으면 한 칸만 열리는 배경색 칸(빈 칸이 아닌 것)에서 시작하고, 그것도 없으면 아무 칸.
         /// </summary>
         static int PickOpening(Stage stage, XorShiftRandom rng)
         {
+            int cap = System.Math.Max(1, (int)(stage.CellCount * MaxOpeningFraction));
             var seen = new bool[stage.CellCount];
             int best = -1;
             int bestSize = 0;
@@ -98,7 +110,7 @@ namespace ColorMinesweeper.Core
                     }
                 }
 
-                if (region.Count > bestSize)
+                if (region.Count <= cap && region.Count > bestSize)
                 {
                     bestSize = region.Count;
                     best = cell;
@@ -111,15 +123,27 @@ namespace ColorMinesweeper.Core
             }
 
             var backgrounds = new List<int>();
+            var anyBackground = new List<int>();
             for (int cell = 0; cell < stage.CellCount; cell++)
             {
-                if (stage.ColorAt(cell) == stage.BackgroundColor)
+                if (stage.ColorAt(cell) != stage.BackgroundColor)
+                {
+                    continue;
+                }
+
+                anyBackground.Add(cell);
+                if (!stage.IsBlank(cell))
                 {
                     backgrounds.Add(cell);
                 }
             }
 
-            return backgrounds.Count > 0 ? backgrounds[rng.Next(backgrounds.Count)] : rng.Next(stage.CellCount);
+            if (backgrounds.Count > 0)
+            {
+                return backgrounds[rng.Next(backgrounds.Count)];
+            }
+
+            return anyBackground.Count > 0 ? anyBackground[rng.Next(anyBackground.Count)] : rng.Next(stage.CellCount);
         }
 
         /// <summary>막힌 뒤 아직 닫힌 칸. 열린 영역과 붙은 칸이 있으면 그것만 고른다(풀이 흐름이 이어지게).</summary>

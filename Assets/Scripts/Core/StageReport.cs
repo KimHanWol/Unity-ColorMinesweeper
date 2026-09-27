@@ -52,9 +52,9 @@ namespace ColorMinesweeper.Core
                              "). 비슷한 색이 대칭으로 붙은 곳을 고치면 줄어듭니다.");
             }
 
-            if (Result.InitialRevealed * 2 > stage.CellCount)
+            if (Result.InitialRevealed > stage.CellCount * 0.3)
             {
-                Warnings.Add("시작부터 절반 넘게 열려 있습니다. 배경이 넓은 그림은 판을 줄여 보세요.");
+                Warnings.Add("시작부터 30% 넘게 열려 있습니다. givens 를 다시 생성하세요.");
             }
         }
 
