@@ -30,6 +30,7 @@ namespace ColorMinesweeper.EditorTools
 
             EnsureMainScene();
             EnsurePlayerSettings();
+            EnsureStoreBuild();
             IconImporter.ReimportIfNeeded();
         }
 
@@ -47,6 +48,23 @@ namespace ColorMinesweeper.EditorTools
             {
                 EditorBuildSettings.scenes = new[] { new EditorBuildSettingsScene(ScenePath, true) };
             }
+        }
+
+        /// <summary>
+        /// Google Play 는 64비트(ARM64) 빌드를 요구하고, ARM64 는 IL2CPP 로만 만들 수 있다. 기본값에 맡기지 않고 못박아 둔다.
+        /// </summary>
+        static void EnsureStoreBuild()
+        {
+            if (PlayerSettings.GetScriptingBackend(NamedBuildTarget.Android) == ScriptingImplementation.IL2CPP
+                && (PlayerSettings.Android.targetArchitectures & AndroidArchitecture.ARM64) != 0)
+            {
+                return;
+            }
+
+            PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android, ScriptingImplementation.IL2CPP);
+            PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
+            AssetDatabase.SaveAssets();
+            Debug.Log("[Bootstrap] Android 빌드를 IL2CPP + ARM64 로 맞췄습니다(Google Play 64비트 요구).");
         }
 
         static void EnsurePlayerSettings()
