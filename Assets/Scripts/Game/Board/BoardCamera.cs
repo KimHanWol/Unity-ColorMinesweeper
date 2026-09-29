@@ -18,6 +18,7 @@ namespace ColorMinesweeper.Game
         float minSize;
         Vector2 fitPosition;
         Transform background;
+        Vector2 backgroundSize;
         Vector2 basePosition;
         float shake;
 
@@ -41,6 +42,7 @@ namespace ColorMinesweeper.Game
                 SpriteFactory.VerticalGradient(Theme.BackgroundTop, Theme.BackgroundBottom), Color.white, -1000,
                 Vector2.zero).transform;
             boardCamera.background.localPosition = new Vector3(0f, 0f, 50f);
+            boardCamera.backgroundSize = boardCamera.background.GetComponent<SpriteRenderer>().sprite.bounds.size;
             return boardCamera;
         }
 
@@ -49,19 +51,20 @@ namespace ColorMinesweeper.Game
         {
             board = boardRect;
             viewport = viewportPixels;
+            ScreenInfo.ApplyAspect(Camera);
 
             float margin = 0.6f;
-            float heightFraction = viewport.height / Screen.height;
-            float widthFraction = viewport.width / Screen.width;
-            float aspect = (float)Screen.width / Screen.height;
+            float heightFraction = viewport.height / ScreenInfo.Height;
+            float widthFraction = viewport.width / ScreenInfo.Width;
+            float aspect = (float)ScreenInfo.Width / ScreenInfo.Height;
             fitSize = Mathf.Max(
                 (board.height + margin) / (2f * heightFraction),
                 (board.width + margin) / (2f * aspect * widthFraction));
             minSize = Mathf.Min(fitSize, MaxZoomCellsAcross / (2f * aspect * widthFraction));
 
             // 영역 가운데가 화면 가운데가 아니므로, 판 가운데가 영역 가운데에 오도록 카메라를 옮긴다.
-            float offsetY = (viewport.center.y / Screen.height - 0.5f) * 2f * fitSize;
-            float offsetX = (viewport.center.x / Screen.width - 0.5f) * 2f * fitSize * aspect;
+            float offsetY = (viewport.center.y / ScreenInfo.Height - 0.5f) * 2f * fitSize;
+            float offsetX = (viewport.center.x / ScreenInfo.Width - 0.5f) * 2f * fitSize * aspect;
             fitPosition = board.center - new Vector2(offsetX, offsetY);
 
             if (!animate)
@@ -88,7 +91,7 @@ namespace ColorMinesweeper.Game
 
         public void Pan(Vector2 screenDelta)
         {
-            float unitsPerPixel = 2f * Camera.orthographicSize / Screen.height;
+            float unitsPerPixel = 2f * Camera.orthographicSize / ScreenInfo.Height;
             SetPosition(basePosition - screenDelta * unitsPerPixel);
         }
 
@@ -120,7 +123,8 @@ namespace ColorMinesweeper.Game
         void LateUpdate()
         {
             float height = Camera.orthographicSize * 2f;
-            background.localScale = new Vector3(height * Camera.aspect * 1.2f, height * 1.2f, 1f);
+            // 그라데이션 그림은 1x64 픽셀이라 폭이 높이의 1/64 이다. 그림 크기로 나눠야 화면 전체를 덮는다.
+            background.localScale = new Vector3(height * Camera.aspect * 1.2f / backgroundSize.x, height * 1.2f / backgroundSize.y, 1f);
 
             // 흔들림은 기준 위치에 매 프레임 새 오프셋을 더하는 식이라 쌓이지 않는다. 배경은 반대로 밀어 흔들리지 않게 한다.
             Vector2 offset = shake > 0.001f ? Random.insideUnitCircle * shake : Vector2.zero;
