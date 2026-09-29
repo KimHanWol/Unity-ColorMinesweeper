@@ -433,6 +433,56 @@ namespace ColorMinesweeper.Game
                 new Vector2(0f, -2.55f), order, CloseModal);
         }
 
+
+#if UNITY_EDITOR
+        /// <summary>스토어 스크린샷용: 풀이 순서대로 칸을 열어 판의 fraction 만큼 채운다(1 이면 끝까지 풀어 완성 화면까지 간다).</summary>
+        public void DebugSolve(float fraction)
+        {
+            int target = Mathf.CeilToInt(stage.CellCount * Mathf.Clamp01(fraction));
+            var solver = new Solver(stage);
+            while (session.RevealedCount < target && !session.IsCleared)
+            {
+                System.Collections.Generic.List<int> cells = solver.NextDeductions(session.SnapshotRevealed());
+                if (cells.Count == 0)
+                {
+                    break;
+                }
+
+                foreach (int cell in cells)
+                {
+                    if (session.IsRevealed(cell) || session.IsCleared || session.RevealedCount >= target)
+                    {
+                        continue;
+                    }
+
+                    int color = stage.ColorAt(cell);
+                    PaintResult result = session.Paint(cell, color);
+                    if (result.Outcome == PaintOutcome.Correct)
+                    {
+                        OnCorrect(cell, color, result);
+                    }
+                }
+            }
+        }
+
+        /// <summary>스토어 스크린샷용: 팔레트에서 색을 고른다.</summary>
+        public void DebugSelectColor(int color)
+        {
+            palette.Select(color, true);
+        }
+
+        /// <summary>스토어 스크린샷용: 저장된 힌트 수 대신 보여 줄 수(저장 파일은 그대로).</summary>
+        public void DebugShowHints(int count)
+        {
+            hintButton?.SetCount(count);
+        }
+
+        /// <summary>스토어 스크린샷용: 힌트 버튼을 누른 상태로 둔다.</summary>
+        public void DebugHintMode()
+        {
+            SetHintMode(true);
+        }
+#endif
         public override void OnDrag(Vector2 screenDelta)
         {
             App.BoardCamera.Pan(screenDelta);

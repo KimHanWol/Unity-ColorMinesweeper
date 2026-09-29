@@ -109,3 +109,6 @@ InitTestScene*.unity*
 !/Tools/**/*.csproj
 /Tools/**/bin/
 /Tools/**/obj/
+
+# 스토어 스크린샷 도구가 만드는 그림(Tools > Pixel Clue > Store Screenshots)
+/Screenshots/
