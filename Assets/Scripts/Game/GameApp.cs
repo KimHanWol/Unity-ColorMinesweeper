@@ -24,6 +24,9 @@ namespace ColorMinesweeper.Game
 
         PointerInput pointer;
         ScreenBase current;
+
+        /// <summary>지금 떠 있는 화면(스토어 스크린샷 도구가 쓴다).</summary>
+        public ScreenBase Current => current;
         Vector2Int lastScreenSize;
         Rect lastSafeArea;
 
@@ -54,8 +57,8 @@ namespace ColorMinesweeper.Game
             Ui = UiRoot.Create(transform);
             pointer = gameObject.AddComponent<PointerInput>();
             pointer.UiCamera = Ui.Camera;
-            lastScreenSize = new Vector2Int(Screen.width, Screen.height);
-            lastSafeArea = Screen.safeArea;
+            lastScreenSize = new Vector2Int(ScreenInfo.Width, ScreenInfo.Height);
+            lastSafeArea = ScreenInfo.SafeArea;
         }
 
         void Start()
@@ -82,11 +85,11 @@ namespace ColorMinesweeper.Game
                 current?.OnBack();
             }
 
-            var size = new Vector2Int(Screen.width, Screen.height);
-            if (size != lastScreenSize || Screen.safeArea != lastSafeArea)
+            var size = new Vector2Int(ScreenInfo.Width, ScreenInfo.Height);
+            if (size != lastScreenSize || ScreenInfo.SafeArea != lastSafeArea)
             {
                 lastScreenSize = size;
-                lastSafeArea = Screen.safeArea;
+                lastSafeArea = ScreenInfo.SafeArea;
                 Ui.Refresh();
                 current?.Layout();
             }

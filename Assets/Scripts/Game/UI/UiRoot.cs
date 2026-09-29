@@ -41,11 +41,12 @@ namespace ColorMinesweeper.Game
 
         public void Refresh()
         {
-            Rect area = Screen.safeArea;
-            float unitsPerPixel = Height / Screen.height;
+            ScreenInfo.ApplyAspect(Camera);
+            Rect area = ScreenInfo.SafeArea;
+            float unitsPerPixel = Height / ScreenInfo.Height;
             Safe = new Rect(
-                (area.x - Screen.width / 2f) * unitsPerPixel,
-                (area.y - Screen.height / 2f) * unitsPerPixel,
+                (area.x - ScreenInfo.Width / 2f) * unitsPerPixel,
+                (area.y - ScreenInfo.Height / 2f) * unitsPerPixel,
                 area.width * unitsPerPixel,
                 area.height * unitsPerPixel);
         }
@@ -53,12 +54,12 @@ namespace ColorMinesweeper.Game
         /// <summary>UI 월드 y 를 화면 픽셀 y 로. 판을 보여 줄 영역을 BoardCamera 에 넘길 때 쓴다.</summary>
         public float ToPixelY(float worldY)
         {
-            return (worldY / Height + 0.5f) * Screen.height;
+            return (worldY / Height + 0.5f) * ScreenInfo.Height;
         }
 
         public float ToPixelX(float worldX)
         {
-            return (worldX / Width + 0.5f) * Screen.width;
+            return (worldX / Width + 0.5f) * ScreenInfo.Width;
         }
 
         /// <summary>UI 레이어에 속한 빈 노드. 화면마다 여기 아래에 UI 를 만든다.</summary>

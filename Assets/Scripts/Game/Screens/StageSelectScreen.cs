@@ -147,7 +147,7 @@ namespace ColorMinesweeper.Game
 
         public override void OnDrag(Vector2 screenDelta)
         {
-            float delta = screenDelta.y * UiRoot.Height / Screen.height;
+            float delta = screenDelta.y * UiRoot.Height / ScreenInfo.Height;
             ScrollBy(delta);
 
             // 손을 뗄 때의 속도로 계속 미끄러지게, 최근 끌기 속도를 부드럽게 따라간다.
@@ -160,7 +160,7 @@ namespace ColorMinesweeper.Game
         {
             // 마우스 휠은 스크롤로 쓴다.
             velocity = 0f;
-            ScrollBy((ratio - 1f) * -600f * UiRoot.Height / Screen.height);
+            ScrollBy((ratio - 1f) * -600f * UiRoot.Height / ScreenInfo.Height);
         }
 
         void ScrollBy(float delta)
