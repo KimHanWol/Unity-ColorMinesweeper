@@ -14,7 +14,7 @@ namespace ColorMinesweeper.EditorTools
     /// - 에디터: Tools > Pixel Clue > Build Android Release
     /// - 배치 모드: Unity.exe -batchmode -quit -projectPath . -buildTarget Android -executeMethod ColorMinesweeper.EditorTools.AndroidBuild.BuildRelease
     ///
-    /// 업로드 키(keystore)와 비밀번호는 저장소에 두지 않는다. 사용자 폴더의 .pixelclue/signing.json 에서 읽는다.
+    /// 업로드 키(keystore)와 비밀번호는 저장소에 두지 않는다. 서명 설정 파일(signing.json)에서 읽는다(위치는 <see cref="SigningPath"/>).
     /// { "keystore": "D:/Keys/pixelclue-upload.keystore", "storePass": "...", "alias": "pixelclue", "keyPass": "..." }
     /// 빌드할 때마다 버전 코드(versionCode)를 1 올린다. Play Console 은 같은 버전 코드를 두 번 받지 않는다.
     /// 결과는 Builds/PixelClue-{버전}-{버전코드}.aab.
@@ -30,8 +30,27 @@ namespace ColorMinesweeper.EditorTools
             public string keyPass;
         }
 
-        static string SigningPath => Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".pixelclue",
-            "signing.json");
+        /// <summary>
+        /// 서명 설정 파일 위치. 이 기기에서만 쓰는 UserSettings/PixelClueSigningPath.txt(저장소에 올라가지 않음)에 적힌 경로를 쓰고,
+        /// 없으면 사용자 폴더의 .pixelclue/signing.json 을 본다.
+        /// </summary>
+        static string SigningPath
+        {
+            get
+            {
+                string pointer = Path.GetFullPath(Path.Combine(Application.dataPath, "..", "UserSettings", "PixelClueSigningPath.txt"));
+                if (File.Exists(pointer))
+                {
+                    string path = File.ReadAllText(pointer).Trim();
+                    if (path.Length > 0)
+                    {
+                        return path;
+                    }
+                }
+
+                return Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), ".pixelclue", "signing.json");
+            }
+        }
 
         [MenuItem("Tools/Pixel Clue/Build Android Release")]
         public static void BuildRelease()
