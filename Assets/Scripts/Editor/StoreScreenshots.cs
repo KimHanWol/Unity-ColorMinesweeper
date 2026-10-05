@@ -24,9 +24,34 @@ namespace ColorMinesweeper.EditorTools
         const string RunningKey = "PixelClue.StoreShots.Running";
         const string QuitKey = "PixelClue.StoreShots.Quit";
         const string LanguageKey = "PixelClue.StoreShots.Language";
-        static readonly Vector2Int Size = new Vector2Int(1080, 1920);
+        static readonly Vector2Int StoreSize = new Vector2Int(1080, 1920);
 
-        static string OutputRoot => Path.GetFullPath(Path.Combine(Application.dataPath, "..", "Screenshots", "Store"));
+        /// <summary>
+        /// 찍을 화면 크기. 기본은 스토어 규격(1080x1920). 배치 모드에서 -shotSize 1080x2400 처럼 넘기면 그 크기로 찍어
+        /// 길쭉한 폰에서 화면이 잘리지 않는지 확인할 수 있다(결과는 Screenshots/1080x2400/ 에).
+        /// </summary>
+        static Vector2Int Size
+        {
+            get
+            {
+                string[] args = Environment.GetCommandLineArgs();
+                int at = Array.IndexOf(args, "-shotSize");
+                if (at >= 0 && at + 1 < args.Length)
+                {
+                    string[] parts = args[at + 1].Split('x');
+                    if (parts.Length == 2 && int.TryParse(parts[0], out int w) && int.TryParse(parts[1], out int h))
+                    {
+                        return new Vector2Int(w, h);
+                    }
+                }
+
+                return StoreSize;
+            }
+        }
+
+        static string OutputRoot => Size == StoreSize
+            ? Path.GetFullPath(Path.Combine(Application.dataPath, "..", "Screenshots", "Store"))
+            : Path.GetFullPath(Path.Combine(Application.dataPath, "..", "Screenshots", Size.x + "x" + Size.y));
 
         sealed class Step
         {
