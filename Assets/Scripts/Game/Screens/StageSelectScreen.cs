@@ -16,6 +16,21 @@ namespace ColorMinesweeper.Game
 
         Transform header;
         Transform content;
+
+        /// <summary>
+        /// 만든 카드(아직 안 만든 칸은 null). 300장을 한꺼번에 만들면 화면을 열 때 버벅여서, 보이는 줄 근처만 그때그때 만들고
+        /// 멀어진 카드는 꺼 둔다(그리기와 버튼 검사에서도 빠진다).
+        /// </summary>
+        Transform[] cards;
+
+        /// <summary>카드를 만들 때 튀어나오는 등장 연출을 할지. 화면을 처음 열 때 보이는 카드만 한다.</summary>
+        bool animateEntrance;
+
+        /// <summary>폭이 좁은 화면(20:9 등)에서 3열이 잘리지 않게 목록 전체를 줄이는 비율.</summary>
+        float gridScale = 1f;
+
+        /// <summary>보이는 줄 위아래로 미리 만들어 두는 줄 수.</summary>
+        const int SpareRows = 2;
         float scroll;
         float maxScroll;
         float velocity;
@@ -73,15 +88,13 @@ namespace ColorMinesweeper.Game
                 // 치트로 한꺼번에 열렸을 때처럼 너무 많으면 연출하지 않는다(소리가 겹쳐 시끄럽다).
                 seenUnlocked = unlockedNow;
             }
-            for (int i = 0; i < StageCatalog.All.Count; i++)
-            {
-                CreateCard(i);
-            }
-
+            cards = new Transform[StageCatalog.All.Count];
             PlayerPrefs.SetInt(SeenUnlockedKey, unlockedNow);
             PlayerPrefs.Save();
 
+            animateEntrance = true;
             Layout();
+            animateEntrance = false;
         }
 
         /// <summary>
@@ -138,11 +151,42 @@ namespace ColorMinesweeper.Game
             Rect safe = Ui.Safe;
             header.localPosition = new Vector3(safe.center.x, safe.yMax - HeaderHeight / 2f, 0f);
             int rows = (StageCatalog.All.Count + Columns - 1) / Columns;
-            float contentHeight = rows * (CardSize.y + Gap);
+            float gridWidth = Columns * CardSize.x + (Columns - 1) * Gap;
+            gridScale = Mathf.Min(1f, (safe.width - 0.6f) / gridWidth);
+            content.localScale = new Vector3(gridScale, gridScale, 1f);
+            float contentHeight = rows * (CardSize.y + Gap) * gridScale;
             float visible = safe.height - HeaderHeight;
             maxScroll = Mathf.Max(0f, contentHeight - visible + 0.8f);
             scroll = Mathf.Clamp(scroll, 0f, maxScroll);
             content.localPosition = new Vector3(safe.center.x, safe.yMax - HeaderHeight - 0.3f + scroll, 0f);
+            ShowCardsNear(visible);
+        }
+
+        /// <summary>지금 보이는 줄과 그 위아래 몇 줄의 카드를 만들어 켜고, 멀리 있는 카드는 끈다.</summary>
+        void ShowCardsNear(float visibleHeight)
+        {
+            if (cards == null)
+            {
+                return;
+            }
+
+            float rowPitch = (CardSize.y + Gap) * gridScale;
+            int firstRow = Mathf.FloorToInt(scroll / rowPitch) - SpareRows;
+            int lastRow = Mathf.CeilToInt((scroll + visibleHeight) / rowPitch) + SpareRows;
+            for (int i = 0; i < cards.Length; i++)
+            {
+                int row = i / Columns;
+                bool near = row >= firstRow && row <= lastRow;
+                if (near && cards[i] == null)
+                {
+                    cards[i] = CreateCard(i);
+                }
+
+                if (cards[i] != null && cards[i].gameObject.activeSelf != near)
+                {
+                    cards[i].gameObject.SetActive(near);
+                }
+            }
         }
 
         public override void OnDrag(Vector2 screenDelta)
@@ -198,7 +242,7 @@ namespace ColorMinesweeper.Game
             }
         }
 
-        void CreateCard(int index)
+        Transform CreateCard(int index)
         {
             Stage stage = StageCatalog.All[index];
             bool unlocked = StageCatalog.IsUnlocked(index);
@@ -269,10 +313,15 @@ namespace ColorMinesweeper.Game
             button.ReleaseOnDrag = true;
             button.Silent = true;
 
-            visual.localScale = Vector3.zero;
-            // 처음 보이는 몇 줄만 차례로 튀어나오게 하고, 나머지는 거의 동시에 뜬다(300개면 마지막 카드가 한참 늦게 나온다).
-            Tween.Run(visual, 0.4f, t => visual.localScale = Vector3.one * t, Ease.OutBack, 0.05f + Mathf.Min(index, 15) * 0.04f);
+            // 화면을 처음 열 때 보이는 카드만 차례로 튀어나온다. 스크롤하며 새로 만드는 카드는 바로 보인다.
+            if (animateEntrance)
+            {
+                visual.localScale = Vector3.zero;
+                Tween.Run(visual, 0.4f, t => visual.localScale = Vector3.one * t, Ease.OutBack, 0.05f + Mathf.Min(index, 15) * 0.04f);
+            }
+
             button.SetRestScale(Vector3.one);
+            return root;
         }
     }
 }
