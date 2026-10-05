@@ -173,6 +173,17 @@ namespace ColorMinesweeper.EditorTools
                 // 4. 메인 화면, 5. 스테이지 선택.
                 list.Add(new Step { Wait = 2.5f, Run = () => GameApp.Instance.ShowTitle() });
                 list.Add(Shot(folder, "04_title"));
+                if (Size != StoreSize)
+                {
+                    // 확인용 크기로 찍을 때는 설정 창도 찍어 번역 문구가 잘리지 않는지 본다(스토어에는 올리지 않는다).
+                    list.Add(new Step
+                    {
+                        Wait = 1f,
+                        Run = () => SettingsPanel.Open(GameApp.Instance.Current.transform, GameApp.Instance.Ui, 300, null, true),
+                    });
+                    list.Add(Shot(folder, "07_settings"));
+                }
+
                 list.Add(new Step { Wait = 2.5f, Run = () => GameApp.Instance.ShowSelect() });
                 list.Add(Shot(folder, "05_select"));
 
