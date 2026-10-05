@@ -12,7 +12,7 @@ namespace ColorMinesweeper.EditorTools
     /// Google Play 에 올릴 Android 앱 번들(.aab)을 만든다.
     ///
     /// - 에디터: Tools > Pixel Clue > Build Android Release
-    /// - 배치 모드: Unity.exe -batchmode -quit -projectPath . -executeMethod ColorMinesweeper.EditorTools.AndroidBuild.BuildRelease
+    /// - 배치 모드: Unity.exe -batchmode -quit -projectPath . -buildTarget Android -executeMethod ColorMinesweeper.EditorTools.AndroidBuild.BuildRelease
     ///
     /// 업로드 키(keystore)와 비밀번호는 저장소에 두지 않는다. 사용자 폴더의 .pixelclue/signing.json 에서 읽는다.
     /// { "keystore": "D:/Keys/pixelclue-upload.keystore", "storePass": "...", "alias": "pixelclue", "keyPass": "..." }
@@ -60,9 +60,13 @@ namespace ColorMinesweeper.EditorTools
                 return false;
             }
 
+            // 플러그인의 Android 전용 빌드 처리(AdMob 앱 ID 를 매니페스트에 넣는 일 등)는 #if UNITY_ANDROID 로 감싸여 있어
+            // 에디터가 처음부터 Android 대상으로 켜져 있어야 컴파일된다. 빌드 도중에 대상을 바꾸면 그 처리가 빠진다.
             if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.Android)
             {
                 EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
+                Debug.LogError("[Build] 빌드 대상을 Android 로 바꿨습니다. 다시 실행해 주세요(배치 모드는 -buildTarget Android 를 붙인다).");
+                return false;
             }
 
             // Google Play 요구: 64비트(ARM64), 그래서 IL2CPP. 개발 빌드가 아니어야 실제 광고 ID 를 쓴다.
