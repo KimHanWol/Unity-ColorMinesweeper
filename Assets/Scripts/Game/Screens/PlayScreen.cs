@@ -174,9 +174,11 @@ namespace ColorMinesweeper.Game
             modalClosable = true;
             Transform card = modal.Card;
             int order = ModalOrder + 10;
-            Label.Create(card, "Title", Loc.T("leave.title"), Theme.Ink, order, new Vector2(0f, 2.5f), 0.72f, TextAnchor.MiddleCenter, true);
+            Label.Create(card, "Title", Loc.T("leave.title"), Theme.Ink, order, new Vector2(0f, 2.5f), 0.72f, TextAnchor.MiddleCenter, true)
+                .FitWidth(7.2f);
             Label.Create(card, "Body", Loc.T("leave.body"), Theme.SubInk,
-                order, new Vector2(0f, 1.25f), 0.4f);
+                order, new Vector2(0f, 1.25f), 0.4f)
+                .FitWidth(7.2f);
             UiKit.Button(card, "Stay", Loc.T("leave.stay"), null, Theme.Accent, Color.white, UiKit.ModalButtonSize, new Vector2(0f, -0.35f),
                 order, CloseModal);
             UiKit.Button(card, "Leave", Loc.T("leave.leave"), null, Theme.HiddenTile, Theme.Ink, UiKit.ModalButtonSize,
@@ -330,7 +332,7 @@ namespace ColorMinesweeper.Game
 
             hintPrompt = Draw.Node(bottom, "HintPrompt", new Vector2(0f, PaletteBar.BarHeight / 2f + 0.55f));
             Label prompt = UiKit.IconLabel(hintPrompt, Icons.Hint, Theme.Gold, Loc.T("hint.pick"), Theme.Ink, 0.4f, 0.46f, 99,
-                Vector2.zero, true);
+                Vector2.zero, true, Ui.Safe.width - 1.6f);
             float width = prompt.MeasureWidth(Loc.T("hint.pick")) + 1.5f;
             Draw.Panel(hintPrompt, "Back", new Vector2(width, 0.85f), Color.white, 98, Vector2.zero, 0.42f);
             hintPrompt.gameObject.SetActive(false);
@@ -400,8 +402,10 @@ namespace ColorMinesweeper.Game
 
             Draw.Sprite(card, "Hint", Icons.Hint, Theme.Gold, order, new Vector2(0f, 2.45f), new Vector2(1.1f, 1.1f));
             Label.Create(card, "Title", Loc.T("hint.empty.title"), Theme.Ink, order, new Vector2(0f, 1.3f), 0.72f,
-                TextAnchor.MiddleCenter, true);
-            Label.Create(card, "Body", Loc.F("hint.empty.body", HintsPerAd), Theme.SubInk, order, new Vector2(0f, 0.45f), 0.38f);
+                TextAnchor.MiddleCenter, true)
+                .FitWidth(7f);
+            Label.Create(card, "Body", Loc.F("hint.empty.body", HintsPerAd), Theme.SubInk, order, new Vector2(0f, 0.45f), 0.38f)
+                .FitWidth(7f);
 
             UiButton watch = null;
             watch = UiKit.Button(card, "Watch", Loc.T("hint.empty.watch"), Icons.Ad, Theme.Accent, Color.white,
@@ -525,7 +529,8 @@ namespace ColorMinesweeper.Game
             modal.Card.localPosition = new Vector3(Ui.Safe.center.x, Ui.Safe.yMin + ResultCardTop - ResultCardSize.y / 2f, 0f);
 
             Label.Create(card, "Title", Loc.F("clear.title", StageTitle.Name(stage)), Theme.Ink, order, new Vector2(0f, 2.95f), 0.8f,
-                TextAnchor.MiddleCenter, true);
+                TextAnchor.MiddleCenter, true)
+                .FitWidth(ResultCardSize.x - 0.8f);
 
             Sprite star = Icons.Star;
             int stars = session.Stars;
@@ -551,7 +556,7 @@ namespace ColorMinesweeper.Game
                 {
                     Sfx.Instance?.Unlock();
                     Label unlockedLabel = UiKit.IconLabel(card, Icons.Lock, Theme.Accent, Loc.T("clear.unlocked"), Theme.Accent, 0.45f,
-                        0.45f, order, new Vector2(0f, 0f), true);
+                        0.45f, order, new Vector2(0f, 0f), true, ResultCardSize.x - 0.8f);
                     Transform text = unlockedLabel.transform;
                     Vector3 rest = text.localScale;
                     Tween.Run(text, 0.4f, k => text.localScale = rest * Mathf.LerpUnclamped(0.6f, 1f, k), Ease.OutBack);
@@ -593,9 +598,11 @@ namespace ColorMinesweeper.Game
             Transform card = modal.Card;
             int order = ModalOrder + 10;
             modal.Card.localPosition = new Vector3(Ui.Safe.center.x, Ui.Safe.yMin + ResultCardTop - ResultCardSize.y / 2f, 0f);
-            Label.Create(card, "Title", Loc.T("tutorialClear.title"), Theme.Ink, order, new Vector2(0f, 2.5f), 0.8f, TextAnchor.MiddleCenter, true);
+            Label.Create(card, "Title", Loc.T("tutorialClear.title"), Theme.Ink, order, new Vector2(0f, 2.5f), 0.8f, TextAnchor.MiddleCenter, true)
+                .FitWidth(ResultCardSize.x - 0.8f);
             Label.Create(card, "Body", Loc.T("tutorialClear.body"), Theme.SubInk, order,
-                new Vector2(0f, 0.6f), 0.42f);
+                new Vector2(0f, 0.6f), 0.42f)
+                .FitWidth(ResultCardSize.x - 0.8f);
             UiKit.Button(card, "Start", Loc.T("tutorialClear.start"), Icons.Play, Theme.Accent, Color.white,
                 new Vector2(5.6f, UiKit.ModalButtonSize.y), new Vector2(0f, -2.2f), order, () => App.ShowPlay(0));
         }
@@ -610,9 +617,11 @@ namespace ColorMinesweeper.Game
             Draw.Sprite(card, "Heart", Icons.Heart, Theme.Locked, order,
                 new Vector2(0f, 2.65f), new Vector2(1.1f, 1.1f));
             Label.Create(card, "Title", Loc.T("over.title"), Theme.Ink, order, new Vector2(0f, 1.45f), 0.72f,
-                TextAnchor.MiddleCenter, true);
+                TextAnchor.MiddleCenter, true)
+                .FitWidth(7f);
             Label.Create(card, "Body", Loc.F("over.body", PuzzleSession.ReviveLives),
-                Theme.SubInk, order, new Vector2(0f, 0.6f), 0.38f);
+                Theme.SubInk, order, new Vector2(0f, 0.6f), 0.38f)
+                .FitWidth(7f);
 
             UiButton revive = null;
             revive = UiKit.Button(card, "Revive", Loc.T("over.revive"), Icons.Ad,

@@ -51,7 +51,8 @@ namespace ColorMinesweeper.Game
             int o = order + 10;
 
             Label.Create(card, "Title", Loc.T("settings.title"), Theme.Ink, o, new Vector2(0f, top + titleY), 0.75f,
-                TextAnchor.MiddleCenter, true);
+                TextAnchor.MiddleCenter, true)
+                .FitWidth(7f);
             float y = top + firstRowY;
 
             Volume(card, Loc.T("settings.music"), new Vector2(0f, y), o, Settings.MusicVolume, v => Settings.MusicVolume = v, false);
@@ -103,7 +104,8 @@ namespace ColorMinesweeper.Game
         {
             Transform row = Draw.Node(parent, "Language", position);
             Label.Create(row, "Title", Loc.T("settings.language"), Theme.Ink, order, new Vector2(-3.2f, 0f), 0.46f,
-                TextAnchor.MiddleLeft);
+                TextAnchor.MiddleLeft)
+                .FitWidth(2.6f);
             Language[] languages = Loc.Available;
             const float width = 1.75f;
             for (int i = 0; i < languages.Length; i++)
@@ -132,7 +134,8 @@ namespace ColorMinesweeper.Game
             bool preview)
         {
             Transform row = Draw.Node(parent, "Volume " + title, position);
-            Label.Create(row, "Title", title, Theme.Ink, order, new Vector2(-3.2f, 0f), 0.46f, TextAnchor.MiddleLeft);
+            Label.Create(row, "Title", title, Theme.Ink, order, new Vector2(-3.2f, 0f), 0.46f, TextAnchor.MiddleLeft)
+                .FitWidth(2.4f);
             UiSlider.Create(row, "Slider", new Vector2(1.35f, 0f), SliderWidth, value, order, v =>
             {
                 set(v);
@@ -152,13 +155,16 @@ namespace ColorMinesweeper.Game
             float left = -3.2f;
             if (description == null)
             {
-                Label.Create(row, "Title", title, Theme.Ink, order, new Vector2(left, 0f), 0.46f, TextAnchor.MiddleLeft);
+                Label.Create(row, "Title", title, Theme.Ink, order, new Vector2(left, 0f), 0.46f, TextAnchor.MiddleLeft)
+                .FitWidth(4.6f);
             }
             else
             {
-                Label.Create(row, "Title", title, Theme.Ink, order, new Vector2(left, 0.2f), 0.46f, TextAnchor.MiddleLeft);
+                Label.Create(row, "Title", title, Theme.Ink, order, new Vector2(left, 0.2f), 0.46f, TextAnchor.MiddleLeft)
+                .FitWidth(4.6f);
                 Label.Create(row, "Description", description, Theme.SubInk, order, new Vector2(left, -0.3f), 0.3f,
-                    TextAnchor.MiddleLeft);
+                    TextAnchor.MiddleLeft)
+                .FitWidth(4.6f);
             }
 
             var trackSize = new Vector2(1.4f, 0.76f);

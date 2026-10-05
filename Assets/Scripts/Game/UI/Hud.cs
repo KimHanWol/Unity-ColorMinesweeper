@@ -26,7 +26,8 @@ namespace ColorMinesweeper.Game
                 100, onSettings);
 
             hud.title = Label.Create(root, "Name", title, Theme.Ink, 100, new Vector2(0f, 0.32f), 0.58f,
-                TextAnchor.MiddleCenter, true);
+                TextAnchor.MiddleCenter, true)
+                .FitWidth(Mathf.Max(2f, ui.Safe.width - 6.6f));
 
             Sprite heart = Icons.Heart;
             hud.hearts = new SpriteRenderer[PuzzleSession.MaxLives];
@@ -56,7 +57,9 @@ namespace ColorMinesweeper.Game
                 {
                     title.Text = text;
                     title.SetColor(Theme.Accent);
-                    Tween.Run(t, 0.45f, k => t.localScale = Vector3.LerpUnclamped(new Vector3(rest.x, 0f, 1f), rest, k),
+                    // 새 이름 길이에 맞춰 줄어든 크기로 펼친다(이름이 길면 위쪽 버튼과 겹치지 않게).
+                    Vector3 fitted = t.localScale;
+                    Tween.Run(t, 0.45f, k => t.localScale = Vector3.LerpUnclamped(new Vector3(fitted.x, 0f, 1f), fitted, k),
                         Ease.OutBack);
                 });
         }

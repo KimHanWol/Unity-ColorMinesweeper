@@ -55,7 +55,8 @@ namespace ColorMinesweeper.Game
             Label.Create(logo, "Title2", "Clue", Theme.Ink, 60, new Vector2(0f, -0.55f), 1.25f,
                 TextAnchor.MiddleCenter, true);
             Label.Create(logo, "Tagline", Loc.T("title.tagline"), Theme.SubInk, 60, new Vector2(0f, -1.55f),
-                0.38f);
+                0.38f)
+                .FitWidth(Ui.Safe.width - 0.8f);
 
             BuildHero();
             BuildMenu();
@@ -154,7 +155,7 @@ namespace ColorMinesweeper.Game
 
             Sprite star = Icons.Star;
             UiKit.IconLabel(menu, star, Theme.Gold, Loc.F("title.progress", cleared, StageCatalog.All.Count), Theme.SubInk, 0.36f,
-                0.42f, 70, new Vector2(0f, -1.85f));
+                0.42f, 70, new Vector2(0f, -1.85f), false, Ui.Safe.width - 0.8f);
         }
 
         void PlayEntrance()

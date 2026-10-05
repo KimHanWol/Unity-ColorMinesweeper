@@ -29,6 +29,12 @@ namespace ColorMinesweeper.Game
 
         TextMesh mesh;
         Vector3 basePosition;
+
+        /// <summary>만들 때 정한 글자 크기. 폭에 맞춰 줄였다가 글이 짧아지면 여기로 되돌린다.</summary>
+        Vector3 baseScale;
+
+        /// <summary>0 보다 크면 글이 이 폭(부모 기준 유닛)을 넘을 때 글자를 줄여 맞춘다.</summary>
+        float fitWidth;
         bool centerVertically;
 
         static Font SharedFont
@@ -84,6 +90,7 @@ namespace ColorMinesweeper.Game
             var label = t.gameObject.AddComponent<Label>();
             label.mesh = mesh;
             label.basePosition = t.localPosition;
+            label.baseScale = t.localScale;
             label.centerVertically = anchor == TextAnchor.MiddleCenter || anchor == TextAnchor.MiddleLeft ||
                                      anchor == TextAnchor.MiddleRight;
             label.Recenter();
@@ -107,6 +114,7 @@ namespace ColorMinesweeper.Game
             set
             {
                 mesh.text = value;
+                ApplyFit();
                 Recenter();
             }
         }
@@ -169,6 +177,38 @@ namespace ColorMinesweeper.Game
 
         /// <summary>한 줄이 차지하는 높이(부모 기준 유닛). 여러 줄 문구의 칸 높이를 잡을 때 쓴다.</summary>
         public float LineAdvance => mesh.font.lineHeight * mesh.lineSpacing / 10f * transform.localScale.y;
+
+        /// <summary>
+        /// 글이 maxWidth(부모 기준 유닛)보다 넓으면 글자를 그만큼 줄인다. 번역에 따라 길이가 크게 달라지는 문구
+        /// (버튼, 제목, 부제)가 화면이나 카드 밖으로 잘리지 않게 한다. 글을 바꿔도(Text) 다시 맞춘다.
+        /// </summary>
+        public Label FitWidth(float maxWidth)
+        {
+            fitWidth = maxWidth;
+            ApplyFit();
+            Recenter();
+            return this;
+        }
+
+        void ApplyFit()
+        {
+            if (fitWidth <= 0f)
+            {
+                return;
+            }
+
+            transform.localScale = baseScale;
+            float widest = 0f;
+            foreach (string line in mesh.text.Split('\n'))
+            {
+                widest = Mathf.Max(widest, MeasureWidth(line));
+            }
+
+            if (widest > fitWidth)
+            {
+                transform.localScale = baseScale * (fitWidth / widest);
+            }
+        }
 
         /// <summary>text 를 한 줄로 그렸을 때의 폭(부모 기준 유닛). TextMesh 는 글꼴 픽셀 10 을 1 유닛으로 본다.</summary>
         public float MeasureWidth(string text)

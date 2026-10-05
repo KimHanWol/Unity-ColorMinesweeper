@@ -20,9 +20,11 @@ namespace ColorMinesweeper.Game
             Draw.Panel(visual, "Face", size, fill, order + 1, Vector2.zero, radius);
 
             float textHeight = size.y * 0.42f;
+            // 번역에 따라 글이 길어져도 버튼 밖으로 나가지 않게 좌우 여백을 두고 맞춘다.
+            float textRoom = size.x - Mathf.Min(size.y, 0.5f);
             if (icon != null && !string.IsNullOrEmpty(text))
             {
-                IconLabel(visual, icon, ink, text, ink, textHeight, size.y * 0.46f, order + 2, Vector2.zero, true);
+                IconLabel(visual, icon, ink, text, ink, textHeight, size.y * 0.46f, order + 2, Vector2.zero, true, textRoom);
             }
             else if (icon != null)
             {
@@ -31,7 +33,8 @@ namespace ColorMinesweeper.Game
             }
             else
             {
-                Label.Create(visual, "Text", text, ink, order + 2, Vector2.zero, textHeight, TextAnchor.MiddleCenter, true);
+                Label.Create(visual, "Text", text, ink, order + 2, Vector2.zero, textHeight, TextAnchor.MiddleCenter, true)
+                    .FitWidth(textRoom);
             }
 
             return UiButton.Attach(root, size, order, onClick, visual);
@@ -39,15 +42,20 @@ namespace ColorMinesweeper.Game
 
         /// <summary>
         /// 아이콘과 글자를 한 묶음으로 center 에 가운데 정렬한다. 글자 폭은 실제로 재서(글자 수로 추정하면 폰트마다 어긋난다)
-        /// 아이콘 + 간격 + 글자 전체의 가운데가 center 에 오게 한다.
+        /// 아이콘 + 간격 + 글자 전체의 가운데가 center 에 오게 한다. maxWidth 를 주면 묶음 전체가 그 폭을 넘지 않게 글자를 줄인다.
         /// </summary>
         public static Label IconLabel(Transform parent, Sprite icon, Color iconColor, string text, Color textColor,
-            float textHeight, float iconSize, int order, Vector2 center, bool bold = false)
+            float textHeight, float iconSize, int order, Vector2 center, bool bold = false, float maxWidth = 0f)
         {
             const float gap = 0.22f;
             SpriteRenderer iconRenderer = Draw.Sprite(parent, "Icon", icon, iconColor, order, center,
                 new Vector2(iconSize, iconSize));
             Label label = Label.Create(parent, "Text", text, textColor, order, center, textHeight, TextAnchor.MiddleLeft, bold);
+            if (maxWidth > 0f)
+            {
+                label.FitWidth(maxWidth - iconSize - gap);
+            }
+
             float textWidth = label.MeasureWidth(text);
             float left = center.x - (iconSize + gap + textWidth) / 2f;
             iconRenderer.transform.localPosition = new Vector3(left + iconSize / 2f, center.y, 0f);

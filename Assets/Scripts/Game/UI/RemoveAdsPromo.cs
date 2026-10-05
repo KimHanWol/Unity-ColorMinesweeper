@@ -45,7 +45,8 @@ namespace ColorMinesweeper.Game
 
             Draw.Sprite(card, "Icon", Icons.Star, Theme.Gold, order, new Vector2(0f, 2.55f), new Vector2(1.1f, 1.1f));
             Label.Create(card, "Title", Loc.T("promo.title"), Theme.Ink, order, new Vector2(0f, 1.45f), 0.72f,
-                TextAnchor.MiddleCenter, true);
+                TextAnchor.MiddleCenter, true)
+                .FitWidth(7f);
             Label body = Label.Create(card, "Body", string.Empty, Theme.SubInk, order, new Vector2(0f, 0.45f), 0.36f);
             body.SetWrappedText(Loc.T("promo.body"), 6.8f);
             body.MoveTo(new Vector2(0f, 0.45f));

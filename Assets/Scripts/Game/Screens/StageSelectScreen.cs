@@ -55,7 +55,8 @@ namespace ColorMinesweeper.Game
             // 뒤로 · 제목 · 설정을 한 줄에 둔다(게임 이름과 부제는 메인 화면에만 둔다).
             // 둥근 버튼은 아래 그림자까지 한 덩어리로 보여서, 제목은 버튼 면보다 그림자 절반만큼 내려 둔다.
             Label.Create(header, "Title", Loc.T("select.title"), Theme.Ink, 151, new Vector2(0f, 0.14f), 0.7f,
-                TextAnchor.MiddleCenter, true);
+                TextAnchor.MiddleCenter, true)
+                .FitWidth(Ui.Safe.width - 3.8f);
             UiKit.IconButton(header, "Back", Icons.Back,
                 new Vector2(-Ui.Safe.width / 2f + 1.05f, 0.2f), 152, OnBack);
             UiKit.IconButton(header, "Settings", Icons.Settings,

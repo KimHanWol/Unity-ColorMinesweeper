@@ -162,8 +162,10 @@ namespace ColorMinesweeper.Game
             Transform root = UiRoot.NewLayerRoot("PlaceholderAd");
             root.SetParent(app.transform, false);
             UiKit.Modal modal = UiKit.Modal.Open(root, app.Ui, new Vector2(7f, 4f), 900);
-            Label.Create(modal.Card, "Title", title, Theme.Ink, 910, new Vector2(0f, 0.5f), 0.6f, TextAnchor.MiddleCenter, true);
-            Label.Create(modal.Card, "Body", Loc.T("ad.body"), Theme.SubInk, 910, new Vector2(0f, -0.5f), 0.36f);
+            Label.Create(modal.Card, "Title", title, Theme.Ink, 910, new Vector2(0f, 0.5f), 0.6f, TextAnchor.MiddleCenter, true)
+                .FitWidth(6.4f);
+            Label.Create(modal.Card, "Body", Loc.T("ad.body"), Theme.SubInk, 910, new Vector2(0f, -0.5f), 0.36f)
+                .FitWidth(6.4f);
             Tween.Delay(root, 1.2f, () => modal.Close(() =>
             {
                 UnityEngine.Object.Destroy(root.gameObject);
