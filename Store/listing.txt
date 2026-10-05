@@ -1,0 +1,67 @@
+Google Play store listing for the app com.kimhanwol.pixelclue
+
+==================================================
+Language: English (United States) - en-US
+==================================================
+
+App name:
+Pixel Clue: Color Logic Puzzle
+
+Short description:
+Read the number clues, paint each cell, and reveal hidden pixel art.
+
+Full description:
+Pixel Clue is a relaxing color logic puzzle. Every number tells you how many nearby cells share a color. Read the clues, pick a color, and paint the board one cell at a time until a hidden pixel art picture appears.
+
+HOW TO PLAY
+• Pick a color from the palette.
+• Read the numbers: each one counts the cells of that color around it.
+• Tap the cells you are sure about. A wrong tap costs one heart.
+• Finish the picture to reveal its name.
+
+FEATURES
+• 300+ hand-drawn pixel art puzzles, from tiny 4x4 boards to large detailed pictures
+• Pure logic: every puzzle can be solved without guessing
+• A step-by-step tutorial that teaches the rules in a minute
+• Hints for when you get stuck
+• Earn up to three stars on every picture
+• Share your finished pictures with friends
+• Play offline, with no account or sign-up
+• English and Korean
+
+If you enjoy minesweeper, nonograms, picross or paint-by-number logic games, Pixel Clue gives you a fresh twist with colors.
+
+The game is free to play with ads. A one-time purchase removes the ads between pictures.
+
+==================================================
+Language: Korean (South Korea) - ko-KR
+==================================================
+
+앱 이름:
+Pixel Clue : 색깔 추리 퍼즐
+
+간단한 설명:
+숫자 단서를 읽고 칸을 칠해 숨은 도트 그림을 완성하는 색깔 추리 퍼즐
+
+자세한 설명:
+Pixel Clue는 느긋하게 즐기는 색깔 추리 퍼즐입니다. 숫자는 주변에 그 색 칸이 몇 개 있는지 알려 줍니다. 단서를 읽고, 색을 고르고, 한 칸씩 칠하다 보면 숨어 있던 도트 그림이 나타납니다.
+
+플레이 방법
+• 팔레트에서 색을 고릅니다.
+• 숫자를 읽습니다. 숫자는 주변에 있는 그 색 칸의 수입니다.
+• 확실한 칸을 눌러 칠합니다. 틀리면 하트가 하나 줄어듭니다.
+• 그림을 완성하면 이름이 공개됩니다.
+
+특징
+• 직접 그린 도트 그림 퍼즐 300개 이상. 작은 4x4부터 크고 세밀한 그림까지
+• 찍지 않아도 논리만으로 풀리는 퍼즐
+• 1분이면 규칙을 익히는 단계별 튜토리얼
+• 막힐 때 쓰는 힌트
+• 그림마다 별 3개까지 도전
+• 완성한 그림을 친구에게 공유
+• 가입 없이 오프라인으로 플레이
+• 한국어, 영어 지원
+
+지뢰찾기, 노노그램, 네모로직 같은 논리 퍼즐을 좋아하신다면, 색깔로 푸는 새로운 재미를 느껴 보세요.
+
+광고가 포함된 무료 게임이며, 한 번 구매하면 그림 사이 광고를 없앨 수 있습니다.
