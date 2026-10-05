@@ -15,8 +15,11 @@ namespace ColorMinesweeper.Game
         /// <summary>틀림, 목숨 잃음처럼 알아채야 하는 소리.</summary>
         Feedback,
 
-        /// <summary>완성, 별, 잠금 해제처럼 가끔 나오는 보상 소리.</summary>
+        /// <summary>완성, 이어 하기처럼 가끔 나오는 보상 소리(마림바).</summary>
         Reward,
+
+        /// <summary>별, 이름 공개, 잠금 해제의 종소리. 맑은 높은 음은 같은 크기여도 훨씬 크게 들려서 따로 작게 둔다.</summary>
+        Chime,
     }
 
     /// <summary>효과음 하나의 정의. 파형만 담은 순수 계산이라 Unity 밖(도구, 테스트)에서도 그려 볼 수 있다.</summary>
@@ -44,7 +47,7 @@ namespace ColorMinesweeper.Game
     {
         /// <summary>
         /// 역할별 목표 음량(dB, 100ms 구간 K-가중 음량의 최댓값). 칸 여는 소리를 기준으로
-        /// 계속 들리는 소리는 7dB 작게, 알림은 1dB 크게, 보상은 3dB 크게 둔다.
+        /// 계속 들리는 소리는 7dB 작게, 알림은 같게, 보상은 1dB 작게, 종소리는 5dB 작게 둔다.
         /// 배경음악(기본 볼륨에서 약 -24)보다 칸 여는 소리가 몇 dB 위에 오도록 전체를 잡았다. 여러 소리가 겹치는 순간
         /// (빈 구역 펼침, 완성)에도 찢어지지 않게 여유를 둔다.
         /// </summary>
@@ -57,9 +60,11 @@ namespace ColorMinesweeper.Game
                 case SfxRole.Reveal:
                     return -17f;
                 case SfxRole.Feedback:
-                    return -16f;
+                    return -17f;
+                case SfxRole.Chime:
+                    return -22f;
                 default:
-                    return -14f;
+                    return -18f;
             }
         }
 
@@ -115,18 +120,18 @@ namespace ColorMinesweeper.Game
                 sum += SoundSynth.Marimba(t - n * 0.085f, arp[n], n == arp.Length - 1 ? 3f : 7f);
             }
 
-            return sum * 0.32f + SoundSynth.Bell(t - 0.42f, 2093f, 3.5f) * 0.25f;
+            return sum * 0.32f + SoundSynth.Bell(t - 0.42f, 1046.5f, 3.5f) * 0.12f;
         });
 
-        /// <summary>별이 하나씩 켜질 때. 도 → 미 → 솔로 올라간다.</summary>
+        /// <summary>별이 하나씩 켜질 때. 도 → 미 → 솔로 올라간다. 귀를 찌르지 않게 가운데 음역에 둔다.</summary>
         public static SfxSound[] Star()
         {
-            float[] notes = { 1046.5f, 1318.51f, 1567.98f };
+            float[] notes = { 523.25f, 659.25f, 783.99f };
             var sounds = new SfxSound[notes.Length];
             for (int i = 0; i < notes.Length; i++)
             {
                 float f = notes[i];
-                sounds[i] = new SfxSound("star" + i, 0.7f, SfxRole.Reward, t => SoundSynth.Bell(t, f, 5f));
+                sounds[i] = new SfxSound("star" + i, 0.7f, SfxRole.Chime, t => SoundSynth.Bell(t, f, 5f));
             }
 
             return sounds;
@@ -143,7 +148,7 @@ namespace ColorMinesweeper.Game
                                                 + SoundSynth.Marimba(t - 0.18f, 1046.5f, 5f));
 
         /// <summary>자물쇠가 풀릴 때: 금속성 "철컥"(짧은 잡음 두 번) 뒤에 위로 올라가는 종소리.</summary>
-        public static SfxSound Unlock() => new SfxSound("unlock", 0.9f, SfxRole.Reward, t =>
+        public static SfxSound Unlock() => new SfxSound("unlock", 0.9f, SfxRole.Chime, t =>
         {
             float click = 0f;
             foreach (float at in new[] { 0f, 0.07f })
@@ -156,7 +161,7 @@ namespace ColorMinesweeper.Game
                 }
             }
 
-            float chime = SoundSynth.Bell(t - 0.14f, 1046.5f, 6f) + SoundSynth.Bell(t - 0.24f, 1567.98f, 4f);
+            float chime = SoundSynth.Bell(t - 0.14f, 523.25f, 6f) + SoundSynth.Bell(t - 0.24f, 783.99f, 4f);
             return click + chime * 0.28f;
         });
 
@@ -168,13 +173,13 @@ namespace ColorMinesweeper.Game
         /// 힌트로 칸이 열릴 때 살짝 반짝이는 "띠링". 칸 여는 소리와 겹쳐 나므로 작은 소리로 둔다.
         /// </summary>
         public static SfxSound Hint() => new SfxSound("hint", 0.6f, SfxRole.Soft, t =>
-            SoundSynth.Bell(t, 1318.51f, 7f) + 0.8f * SoundSynth.Bell(t - 0.08f, 1760f, 7f));
+            SoundSynth.Bell(t, 659.25f, 7f) + 0.8f * SoundSynth.Bell(t - 0.08f, 880f, 7f));
 
         /// <summary>완성해서 이름이 드러날 때 반짝이는 소리.</summary>
-        public static SfxSound NameReveal() => new SfxSound("name", 0.7f, SfxRole.Feedback, t =>
+        public static SfxSound NameReveal() => new SfxSound("name", 0.7f, SfxRole.Chime, t =>
         {
             float sum = 0f;
-            float[] sparkle = { 1567.98f, 2093f, 1760f, 2637f };
+            float[] sparkle = { 783.99f, 1046.5f, 880f, 1318.51f };
             for (int n = 0; n < sparkle.Length; n++)
             {
                 sum += SoundSynth.Bell(t - n * 0.07f, sparkle[n], 9f);
