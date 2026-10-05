@@ -44,20 +44,22 @@ namespace ColorMinesweeper.Game
     {
         /// <summary>
         /// 역할별 목표 음량(dB, 100ms 구간 K-가중 음량의 최댓값). 칸 여는 소리를 기준으로
-        /// 계속 들리는 소리는 8dB 작게, 알림은 1dB 크게, 보상은 3dB 크게 둔다.
+        /// 계속 들리는 소리는 7dB 작게, 알림은 1dB 크게, 보상은 3dB 크게 둔다.
+        /// 배경음악(기본 볼륨에서 약 -24)보다 칸 여는 소리가 몇 dB 위에 오도록 전체를 잡았다. 여러 소리가 겹치는 순간
+        /// (빈 구역 펼침, 완성)에도 찢어지지 않게 여유를 둔다.
         /// </summary>
         public static float TargetLoudness(SfxRole role)
         {
             switch (role)
             {
                 case SfxRole.Soft:
-                    return -21f;
+                    return -24f;
                 case SfxRole.Reveal:
-                    return -13f;
+                    return -17f;
                 case SfxRole.Feedback:
-                    return -12f;
+                    return -16f;
                 default:
-                    return -10f;
+                    return -14f;
             }
         }
 
@@ -169,7 +171,7 @@ namespace ColorMinesweeper.Game
             SoundSynth.Bell(t, 1318.51f, 7f) + 0.8f * SoundSynth.Bell(t - 0.08f, 1760f, 7f));
 
         /// <summary>완성해서 이름이 드러날 때 반짝이는 소리.</summary>
-        public static SfxSound NameReveal() => new SfxSound("name", 0.7f, SfxRole.Reward, t =>
+        public static SfxSound NameReveal() => new SfxSound("name", 0.7f, SfxRole.Feedback, t =>
         {
             float sum = 0f;
             float[] sparkle = { 1567.98f, 2093f, 1760f, 2637f };

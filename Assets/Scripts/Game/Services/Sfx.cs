@@ -16,6 +16,9 @@ namespace ColorMinesweeper.Game
         const float ComboWindow = 1.4f;
         const int MaxCombo = 5;
 
+        /// <summary>펼침에서 첫 음 뒤로 이어지는 음의 크기(약 -7dB).</summary>
+        const float FloodStepVolume = 0.45f;
+
         public static Sfx Instance { get; private set; }
 
         /// <summary>효과음 볼륨(0~1). 설정에서 바꾼다.</summary>
@@ -98,7 +101,8 @@ namespace ColorMinesweeper.Game
                 lastReveal = Time.unscaledTime;
             }
 
-            Play(reveal[Mathf.Clamp(combo + step, 0, reveal.Length - 1)], 1f);
+            // 빈 구역이 펼쳐질 때는 음이 연달아 겹치므로 첫 음만 제 크기로, 뒤따르는 음은 작게 굴린다.
+            Play(reveal[Mathf.Clamp(combo + step, 0, reveal.Length - 1)], step == 0 ? 1f : FloodStepVolume);
         }
 
         /// <summary>빈 구역이 한꺼번에 열릴 때 한 번 튼다(소리 파일이 있을 때).</summary>
