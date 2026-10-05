@@ -117,6 +117,9 @@ namespace ColorMinesweeper.EditorTools
                 return;
             }
 
+            // 찍는 동안에는 소리를 끈다. 화면을 한꺼번에 푸는 동작이 효과음을 겹쳐 내고, 배치 모드는 창이 없어도 스피커로 소리가 난다.
+            AudioListener.volume = 0f;
+
             if (steps == null)
             {
                 steps = BuildSteps();
@@ -273,6 +276,7 @@ namespace ColorMinesweeper.EditorTools
             Loc.Current = (Language)SessionState.GetInt(LanguageKey, (int)Loc.Current);
             SessionState.EraseBool(RunningKey);
             Game.Progress.DebugStars = null;
+            AudioListener.volume = 1f;
             ScreenInfo.Override = null;
             bool quit = SessionState.GetBool(QuitKey, false);
             SessionState.EraseBool(QuitKey);
