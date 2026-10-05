@@ -102,6 +102,8 @@ namespace ColorMinesweeper.EditorTools
             PlayerSettings.Android.keyaliasName = signing.alias;
             PlayerSettings.Android.keyaliasPass = signing.keyPass;
 
+            ApplyIcons();
+
             PlayerSettings.Android.bundleVersionCode++;
             AssetDatabase.SaveAssets();
 
@@ -133,6 +135,38 @@ namespace ColorMinesweeper.EditorTools
             Debug.Log("[Build] 완료: " + output + " (" + report.summary.totalSize / (1024 * 1024) + " MB, 버전 " + version +
                       ", 버전 코드 " + code + ")");
             return true;
+        }
+
+        /// <summary>
+        /// 앱 아이콘을 Assets/AppIcon 의 그림으로 맞춘다. 적응형 아이콘은 배경과 전경을 따로 넣고(런처가 모양을 잘라 낸다),
+        /// 오래된 기기용(legacy, round)은 한 장으로 합친 그림을 쓴다. 스토어용 512 아이콘은 Store/icon-512.png.
+        /// </summary>
+        static void ApplyIcons()
+        {
+            const string folder = "Assets/AppIcon/";
+            var background = AssetDatabase.LoadAssetAtPath<Texture2D>(folder + "background.png");
+            var foreground = AssetDatabase.LoadAssetAtPath<Texture2D>(folder + "foreground.png");
+            var legacy = AssetDatabase.LoadAssetAtPath<Texture2D>(folder + "legacy.png");
+            if (background == null || foreground == null || legacy == null)
+            {
+                Debug.LogWarning("[Build] Assets/AppIcon 에 아이콘 그림이 없어 기본 아이콘으로 빌드합니다.");
+                return;
+            }
+
+            SetIcons(UnityEditor.Android.AndroidPlatformIconKind.Adaptive, background, foreground);
+            SetIcons(UnityEditor.Android.AndroidPlatformIconKind.Legacy, legacy);
+            SetIcons(UnityEditor.Android.AndroidPlatformIconKind.Round, legacy);
+        }
+
+        static void SetIcons(PlatformIconKind kind, params Texture2D[] layers)
+        {
+            PlatformIcon[] icons = PlayerSettings.GetPlatformIcons(NamedBuildTarget.Android, kind);
+            foreach (PlatformIcon icon in icons)
+            {
+                icon.SetTextures(layers);
+            }
+
+            PlayerSettings.SetPlatformIcons(NamedBuildTarget.Android, kind, icons);
         }
 
         static Signing LoadSigning()
