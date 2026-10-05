@@ -129,8 +129,10 @@ namespace ColorMinesweeper.Game
             int cleared = StageCatalog.ClearedCount();
             bool started = cleared > 0;
             string playText = started ? Loc.F("title.continue", next + 1) : Loc.T("title.start");
+            // 튜토리얼을 마치기 전에는 시작하기만 둔다. 목록에서 바로 스테이지에 들어가면 튜토리얼을 건너뛰게 된다.
+            bool tutorialDone = TutorialDirector.IsDone;
             UiKit.Button(menu, "Play", playText, Icons.Play, Theme.Accent, Color.white,
-                new Vector2(6.4f, 1.5f), new Vector2(0f, 1.1f), 70, () =>
+                new Vector2(6.4f, 1.5f), new Vector2(0f, tutorialDone ? 1.1f : 0.3f), 70, () =>
                 {
                     // 튜토리얼을 끝까지 마치기 전에는 시작하기를 누를 때마다 튜토리얼부터 한다(마치면 1번 스테이지로 이어진다).
                     if (TutorialDirector.IsDone)
@@ -142,6 +144,11 @@ namespace ColorMinesweeper.Game
                         App.ShowTutorial();
                     }
                 });
+            if (!tutorialDone)
+            {
+                return;
+            }
+
             UiKit.Button(menu, "Stages", Loc.T("title.stages"), null, Color.white, Theme.Ink, new Vector2(6.4f, 1.25f),
                 new Vector2(0f, -0.55f), 70, () => App.ShowSelect());
 
