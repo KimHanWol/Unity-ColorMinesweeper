@@ -16,6 +16,14 @@ namespace ColorMinesweeper.Game
         const int Bars = 8;
         const float BaseGain = 0.55f;
 
+        /// <summary>
+        /// 넣어 둔 곡의 음량. 곡은 -16 LUFS 로 맞춰 두었고, 기본 볼륨(0.5)에서 약 -24 LUFS 가 되게 한다.
+        /// 칸 여는 효과음(약 -15)보다 9dB 쯤 낮아 소리가 묻히지 않고 바탕에 깔린다.
+        /// </summary>
+        const float RecordedGain = 0.78f;
+
+        float gain = BaseGain;
+
         static Music instance;
         static float volume = 0.5f;
 
@@ -54,6 +62,7 @@ namespace ColorMinesweeper.Game
             if (recorded != null)
             {
                 source.clip = recorded;
+                gain = RecordedGain;
                 source.Play();
                 return;
             }
@@ -102,7 +111,7 @@ namespace ColorMinesweeper.Game
         {
             if (source != null)
             {
-                source.volume = ducked ? 0f : volume * BaseGain * fade;
+                source.volume = ducked ? 0f : volume * gain * fade;
             }
         }
 
