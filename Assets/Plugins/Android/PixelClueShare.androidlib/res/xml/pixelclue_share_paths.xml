@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Application.temporaryCachePath 는 기기에 따라 내부 또는 외부 캐시 폴더다. 두 곳 다 연다. -->
+<paths>
+  <cache-path name="share" path="." />
+  <external-cache-path name="share_external" path="." />
+</paths>

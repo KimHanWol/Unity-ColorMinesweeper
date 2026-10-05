@@ -20,7 +20,12 @@ namespace ColorMinesweeper.Game
     /// </summary>
     public static class Share
     {
-        public static IShareSheet Sheet { get; set; } = new FileShareSheet();
+        public static IShareSheet Sheet { get; set; } =
+#if UNITY_ANDROID && !UNITY_EDITOR
+            new AndroidShareSheet();
+#else
+            new FileShareSheet();
+#endif
 
         static bool busy;
 
@@ -90,4 +95,45 @@ namespace ColorMinesweeper.Game
             }
         }
     }
+
+#if UNITY_ANDROID && !UNITY_EDITOR
+    /// <summary>
+    /// Android 기본 공유 창. 찍은 이미지를 FileProvider(Plugins/Android/PixelClueShare.androidlib)로 내보내
+    /// 받는 앱이 읽을 수 있게 하고, 문구와 함께 ACTION_SEND 로 보낸다.
+    /// </summary>
+    public sealed class AndroidShareSheet : IShareSheet
+    {
+        const int FlagGrantReadUriPermission = 1;
+
+        public void Share(string imagePath, string text)
+        {
+            try
+            {
+                using (var player = new AndroidJavaClass("com.unity3d.player.UnityPlayer"))
+                using (AndroidJavaObject activity = player.GetStatic<AndroidJavaObject>("currentActivity"))
+                using (var file = new AndroidJavaObject("java.io.File", imagePath))
+                using (var provider = new AndroidJavaClass("androidx.core.content.FileProvider"))
+                using (var intentClass = new AndroidJavaClass("android.content.Intent"))
+                using (var clipData = new AndroidJavaClass("android.content.ClipData"))
+                {
+                    string authority = activity.Call<string>("getPackageName") + ".share";
+                    AndroidJavaObject uri = provider.CallStatic<AndroidJavaObject>("getUriForFile", activity, authority, file);
+                    var intent = new AndroidJavaObject("android.content.Intent", "android.intent.action.SEND");
+                    intent.Call<AndroidJavaObject>("setType", "image/png");
+                    intent.Call<AndroidJavaObject>("putExtra", "android.intent.extra.STREAM", uri);
+                    intent.Call<AndroidJavaObject>("putExtra", "android.intent.extra.TEXT", text);
+                    // 공유 창을 거쳐 고른 앱에도 읽기 권한이 넘어가도록 ClipData 에도 싣는다.
+                    intent.Call("setClipData", clipData.CallStatic<AndroidJavaObject>("newRawUri", string.Empty, uri));
+                    intent.Call<AndroidJavaObject>("addFlags", FlagGrantReadUriPermission);
+                    AndroidJavaObject chooser = intentClass.CallStatic<AndroidJavaObject>("createChooser", intent, Loc.T("clear.share"));
+                    activity.Call("startActivity", chooser);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.LogWarning("[Share] 공유 창을 열지 못했습니다: " + e.Message);
+            }
+        }
+    }
+#endif
 }
