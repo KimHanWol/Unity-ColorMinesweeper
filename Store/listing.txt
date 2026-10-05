@@ -31,7 +31,7 @@ FEATURES
 
 If you enjoy minesweeper, nonograms, picross or paint-by-number logic games, Pixel Clue gives you a fresh twist with colors.
 
-The game is free to play with ads. A one-time purchase removes the ads between pictures.
+The game is free to play and contains ads.
 
 ==================================================
 Language: Korean (South Korea) - ko-KR
@@ -64,4 +64,4 @@ Pixel Clue는 느긋하게 즐기는 색깔 추리 퍼즐입니다. 숫자는 �
 
 지뢰찾기, 노노그램, 네모로직 같은 논리 퍼즐을 좋아하신다면, 색깔로 푸는 새로운 재미를 느껴 보세요.
 
-광고가 포함된 무료 게임이며, 한 번 구매하면 그림 사이 광고를 없앨 수 있습니다.
+광고가 포함된 무료 게임입니다.
