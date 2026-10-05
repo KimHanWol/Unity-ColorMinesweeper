@@ -17,7 +17,7 @@ namespace ColorMinesweeper.EditorTools
     /// 업로드 키(keystore)와 비밀번호는 저장소에 두지 않는다. 서명 설정 파일(signing.json)에서 읽는다(위치는 <see cref="SigningPath"/>).
     /// { "keystore": "D:/Keys/pixelclue-upload.keystore", "storePass": "...", "alias": "pixelclue", "keyPass": "..." }
     /// 빌드할 때마다 버전 코드(versionCode)를 1 올린다. Play Console 은 같은 버전 코드를 두 번 받지 않는다.
-    /// 결과는 Builds/PixelClue-{버전}-{버전코드}.aab.
+    /// 결과는 Builds/PixelClue-{버전}-{버전코드}.aab 와, Play Console 에 함께 올릴 디버그 기호 파일(…symbols.zip).
     /// </summary>
     public static class AndroidBuild
     {
@@ -93,6 +93,8 @@ namespace ColorMinesweeper.EditorTools
             PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64;
             EditorUserBuildSettings.buildAppBundle = true;
             EditorUserBuildSettings.development = false;
+            // 출시 후 꺼짐(크래시) 원인을 Play Console 에서 읽을 수 있게 네이티브 디버그 기호(symbols.zip)를 함께 만든다.
+            EditorUserBuildSettings.androidCreateSymbols = AndroidCreateSymbols.Public;
 
             PlayerSettings.Android.useCustomKeystore = true;
             PlayerSettings.Android.keystoreName = signing.keystore;
