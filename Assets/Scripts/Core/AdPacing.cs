@@ -1,7 +1,7 @@
 namespace ColorMinesweeper.Core
 {
     /// <summary>
-    /// 전면 광고를 언제 보여도 되는지 정하는 규칙. 근거는 docs/광고-수익화.md.
+    /// 전면 광고를 언제 보여도 되는지 정하는 규칙. 근거는 notes/광고-수익화.md.
     ///
     /// - 처음 <see cref="GraceCompletions"/> 판은 광고 없이 게임을 익히게 둔다.
     /// - 완성 <see cref="EveryNthCompletion"/> 판마다 한 번까지만.

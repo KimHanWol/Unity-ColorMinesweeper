@@ -34,7 +34,7 @@ namespace ColorMinesweeper.Game
         void Show(Action onClosed);
     }
 
-    /// <summary>광고 정책과 기록. 광고 배치와 빈도의 근거는 docs/광고-수익화.md.</summary>
+    /// <summary>광고 정책과 기록. 광고 배치와 빈도의 근거는 notes/광고-수익화.md.</summary>
     public static class Ads
     {
         const string CompletionsKey = "ads.lifetimeCompletions";
