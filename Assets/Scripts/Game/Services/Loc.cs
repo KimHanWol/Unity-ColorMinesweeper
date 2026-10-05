@@ -174,7 +174,6 @@ namespace ColorMinesweeper.Game
             ["settings.language"] = new[] { "언어", "Language" },
             ["settings.tutorial"] = new[] { "튜토리얼 다시 보기", "Replay tutorial" },
             ["settings.removeAds"] = new[] { "광고 제거", "Remove ads" },
-            ["settings.removeAds.desc"] = new[] { "그림 사이 광고가 사라져요", "No ads between pictures" },
             ["settings.removeAds.owned"] = new[] { "구매함", "Purchased" },
             ["settings.removeAds.loading"] = new[] { "준비 중", "Loading" },
             ["settings.restore"] = new[] { "구매 복원", "Restore purchase" },
