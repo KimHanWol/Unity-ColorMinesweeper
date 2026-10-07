@@ -36,10 +36,9 @@ namespace ColorMinesweeper.Game
         protected override void Build()
         {
             logo = Draw.Node(transform, "Logo");
-            Label.Create(logo, "Title", "Pixel", Theme.Accent, 60, new Vector2(0f, 0.55f), 1.25f, TextAnchor.MiddleCenter, true);
-            Label.Create(logo, "Title2", "Clue", Theme.Ink, 60, new Vector2(0f, -0.55f), 1.25f,
-                TextAnchor.MiddleCenter, true);
-            Label.Create(logo, "Tagline", Loc.T("title.tagline"), Theme.SubInk, 60, new Vector2(0f, -1.55f),
+            // 로고는 글자가 아니라 판의 칸과 같은 타일로 쌓은 그림이다(언어를 바꿔도 그대로).
+            PixelLogo.Create(logo, new Vector2(0f, 0.15f), Ui.Safe.width - 1.6f, 60);
+            Label.Create(logo, "Tagline", Loc.T("title.tagline"), Theme.SubInk, 60, new Vector2(0f, 0.15f - PixelLogo.Height / 2f - 0.75f),
                 0.38f)
                 .FitWidth(Ui.Safe.width - 0.8f);
 
@@ -76,7 +75,7 @@ namespace ColorMinesweeper.Game
                 for (int x = 0; x < w; x++)
                 {
                     char key = HeroPicture[y][x];
-                    Color color = key == 'R' ? Theme.Hex(0xE8505B) : key == 'P' ? Theme.Hex(0xFFB3C1) : background;
+                    Color color = key == 'R' ? Theme.Danger : key == 'P' ? Theme.Pastels[0] : background;
                     var position = new Vector2((x - center.x) * HeroTile, (center.y - y) * HeroTile);
                     SpriteRenderer tile = Draw.Sprite(hero, "Tile", SpriteFactory.RaisedTile(), Theme.HiddenTile, 22, position,
                         Vector2.one * HeroTile * 0.9f);

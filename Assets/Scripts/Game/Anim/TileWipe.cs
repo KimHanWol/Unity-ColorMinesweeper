@@ -20,11 +20,6 @@ namespace ColorMinesweeper.Game
         const float CoverSeconds = 0.1f;
         const float OpenSeconds = 0.13f;
 
-        static readonly Color[] Accents =
-        {
-            Theme.Hex(0xFF8FAB), Theme.Hex(0xFFD166), Theme.Hex(0x8ECAE6), Theme.Hex(0x95D5B2), Theme.Hex(0xC77DFF),
-        };
-
         readonly List<Transform> tiles = new List<Transform>();
         readonly List<float> delays = new List<float>();
         UiRoot ui;
@@ -152,7 +147,7 @@ namespace ColorMinesweeper.Game
                     color = Color.Lerp(color, Color.white, UnityEngine.Random.Range(0f, 0.35f));
                     if (UnityEngine.Random.value < 0.14f)
                     {
-                        color = Color.Lerp(color, Accents[UnityEngine.Random.Range(0, Accents.Length)], 0.4f);
+                        color = Color.Lerp(color, Theme.Pastels[UnityEngine.Random.Range(0, Theme.Pastels.Length)], 0.4f);
                     }
 
                     SpriteRenderer tile = Draw.Sprite(transform, "Dot", SpriteFactory.Square(), color, Order, position,

@@ -11,12 +11,6 @@ namespace ColorMinesweeper.Game
     /// </summary>
     public static class Fx
     {
-        static readonly Color[] ConfettiColors =
-        {
-            Theme.Hex(0xFF8FAB), Theme.Hex(0xFFD166), Theme.Hex(0x8ECAE6), Theme.Hex(0x95D5B2), Theme.Hex(0xC77DFF),
-            Theme.Hex(0xFF9F68),
-        };
-
         /// <summary>색 조각이 사방으로 튀었다가 떨어지며 작아진다. 칸을 맞혔을 때 쓴다.</summary>
         public static void Burst(Transform parent, Vector2 position, Color color, int order, int count = 7,
             float reach = 0.85f, float size = 0.2f)
@@ -126,7 +120,7 @@ namespace ColorMinesweeper.Game
                 float spin = Random.Range(-420f, 420f);
                 float flip = Random.Range(4f, 9f);
                 SpriteRenderer piece = Draw.Sprite(parent, "Confetti", SpriteFactory.RoundedRect(0.2f),
-                    ConfettiColors[i % ConfettiColors.Length], order, new Vector2(x, startY), new Vector2(width, height));
+                    Theme.Pastels[i % Theme.Pastels.Length], order, new Vector2(x, startY), new Vector2(width, height));
                 Transform t = piece.transform;
                 Tween.Run(piece, Random.Range(1.7f, 2.9f), k =>
                 {

@@ -23,6 +23,15 @@ namespace ColorMinesweeper.Game
         public static readonly Color Card = Hex(0xFFFFFF);
         public static readonly Color Locked = Hex(0xCFCADD);
 
+        /// <summary>
+        /// 장식에 쓰는 파스텔 다섯 색(분홍, 노랑, 하늘, 연두, 보라). 배경에 떠다니는 타일, 색종이, 화면 전환 도트가 모두
+        /// 이 색만 써서 화면마다 색감이 달라지지 않게 한다. 장식을 새로 넣을 때도 여기서 고른다.
+        /// </summary>
+        public static readonly Color[] Pastels =
+        {
+            Hex(0xFF8FAB), Hex(0xFFD166), Hex(0x8ECAE6), Hex(0x95D5B2), Hex(0xC77DFF),
+        };
+
         public static Color ToColor(Rgb rgb)
         {
             return new Color32(rgb.R, rgb.G, rgb.B, 255);
