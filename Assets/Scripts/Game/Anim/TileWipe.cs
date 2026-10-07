@@ -5,21 +5,29 @@ using UnityEngine;
 namespace ColorMinesweeper.Game
 {
     /// <summary>
-    /// 화면 전환. 아직 안 열린 칸과 같은 타일이 대각선으로 화면을 덮었다가, 다음 화면 위에서 다시 열리듯 걷힌다.
-    /// 게임의 핵심 동작(타일이 열리며 그림이 드러난다)을 화면을 넘길 때도 그대로 쓴다.
+    /// 화면 전환. 화면이 배경색 도트로 잘게 덮이며 사라졌다가(도트 그림이 뭉개지듯), 같은 순서로 도트가 걷히며 다음 화면이
+    /// 나타난다. 도트는 배경과 같은 색이라 벽이 서는 느낌 없이 화면이 배경으로 녹아드는 것처럼 보이고,
+    /// 군데군데 섞인 파스텔 도트가 배경에 떠다니는 타일과 이어진다.
     /// </summary>
     public sealed class TileWipe : MonoBehaviour
     {
-        const float Cell = 2.2f;
+        const float Cell = 1.25f;
         const int Order = 2000;
-        const float StepDelay = 0.008f;
-        const float CoverSeconds = 0.14f;
-        const float OpenSeconds = 0.2f;
+
+        /// <summary>대각선으로 번지는 데 걸리는 시간과, 줄마다 조금씩 어긋나게 하는 흔들림.</summary>
+        const float SweepSeconds = 0.16f;
+        const float Jitter = 0.05f;
+        const float CoverSeconds = 0.1f;
+        const float OpenSeconds = 0.13f;
+
+        static readonly Color[] Accents =
+        {
+            Theme.Hex(0xFF8FAB), Theme.Hex(0xFFD166), Theme.Hex(0x8ECAE6), Theme.Hex(0x95D5B2), Theme.Hex(0xC77DFF),
+        };
 
         readonly List<Transform> tiles = new List<Transform>();
         readonly List<float> delays = new List<float>();
         UiRoot ui;
-        SpriteRenderer backing;
         UiButton blocker;
         float longestDelay;
         int builtColumns;
@@ -35,16 +43,14 @@ namespace ColorMinesweeper.Game
             root.SetParent(parent, false);
             var wipe = root.gameObject.AddComponent<TileWipe>();
             wipe.ui = ui;
-            // 둥근 타일 사이로 뒤 화면이 비치지 않게 타일 밑에 깔아 두는 바탕.
-            wipe.backing = Draw.Sprite(root, "Backing", SpriteFactory.Square(), Color.clear, Order - 1);
-            wipe.blocker = UiButton.Attach(wipe.backing.transform, Vector2.one, Order, null);
+            wipe.blocker = UiButton.Attach(Draw.Node(root, "Blocker"), Vector2.one, Order, null);
             wipe.blocker.Pressable = false;
             wipe.blocker.enabled = false;
             return wipe;
         }
 
         /// <summary>
-        /// 타일로 화면을 덮은 뒤 swap(화면 바꾸기)을 부르고, 이어서 타일을 걷는다.
+        /// 도트로 화면을 덮은 뒤 swap(화면 바꾸기)을 부르고, 이어서 도트를 걷는다.
         /// 덮는 도중에 다시 부르면 마지막에 요청한 화면으로 간다.
         /// </summary>
         public void Run(Action swap)
@@ -60,73 +66,68 @@ namespace ColorMinesweeper.Game
             covering = true;
             blocker.enabled = true;
             Tween.Kill(this);
-            Tween.Kill(backing);
-            foreach (Transform tile in tiles)
-            {
-                Tween.Kill(tile);
-            }
-
+            float full = Cell * 1.04f;
             for (int i = 0; i < tiles.Count; i++)
             {
                 Transform tile = tiles[i];
+                Tween.Kill(tile);
                 Vector3 from = tile.localScale;
-                Tween.Run(tile, CoverSeconds, t => tile.localScale = Vector3.LerpUnclamped(from, Vector3.one * Cell, t),
-                    Ease.OutBack, delays[i]);
+                Tween.Run(tile, CoverSeconds, t => tile.localScale = Vector3.Lerp(from, new Vector3(full, full, 1f), t),
+                    Ease.OutCubic, delays[i]);
             }
 
-            float coverTime = longestDelay + CoverSeconds;
-            Color solid = Color.Lerp(Theme.HiddenTile, Color.black, 0.1f);
-            float fromAlpha = backing.color.a;
-            Tween.Run(this, coverTime, t => backing.color = Theme.WithAlpha(solid, Mathf.Lerp(fromAlpha, 1f, t * t)), Ease.Linear,
-                0f, () =>
-                {
-                    covering = false;
-                    Action action = pending;
-                    pending = null;
-                    action?.Invoke();
-                    Open(solid);
-                });
+            Tween.Delay(this, longestDelay + CoverSeconds + 0.02f, () =>
+            {
+                covering = false;
+                Action action = pending;
+                pending = null;
+                action?.Invoke();
+                Open();
+            });
         }
 
-        /// <summary>앱을 켰을 때: 덮인 상태에서 시작해 첫 화면이 타일이 열리듯 나타난다.</summary>
+        /// <summary>앱을 켰을 때: 덮인 상태에서 시작해 첫 화면이 도트가 걷히며 나타난다.</summary>
         public void OpenFromCovered()
         {
             Rebuild();
+            float full = Cell * 1.04f;
             foreach (Transform tile in tiles)
             {
-                tile.localScale = Vector3.one * Cell;
+                tile.localScale = new Vector3(full, full, 1f);
             }
 
             Busy = true;
             blocker.enabled = true;
-            Open(Color.Lerp(Theme.HiddenTile, Color.black, 0.1f));
+            Open();
         }
 
-        void Open(Color solid)
+        /// <summary>덮인 순서 그대로 걷는다. 먼저 덮인 쪽부터 열려서 한 방향으로 쓸고 지나가는 것처럼 보인다.</summary>
+        void Open()
         {
-            // 바탕은 타일이 줄어들기 시작할 때 같이 옅어진다(바로 끄면 타일 틈으로 새 화면이 번쩍 비친다).
-            Tween.Run(backing, 0.16f, t => backing.color = Theme.WithAlpha(solid, 1f - t), Ease.Linear, 0.05f);
+            float full = Cell * 1.04f;
             for (int i = 0; i < tiles.Count; i++)
             {
                 Transform tile = tiles[i];
-                Tween.Run(tile, OpenSeconds, t => tile.localScale = Vector3.one * (Cell * (1f - t)), Ease.InBack,
-                    0.05f + delays[i]);
+                Tween.Run(tile, OpenSeconds, t =>
+                {
+                    float s = full * (1f - t);
+                    tile.localScale = new Vector3(s, s, 1f);
+                }, Ease.InCubic, 0.04f + delays[i]);
             }
 
-            Tween.Delay(this, 0.05f + longestDelay + OpenSeconds, () =>
+            Tween.Delay(this, 0.04f + longestDelay + OpenSeconds, () =>
             {
                 Busy = false;
                 blocker.enabled = false;
             });
         }
 
-        /// <summary>화면 비율이 바뀌었으면(회전, 창 크기) 타일 수를 다시 맞춘다.</summary>
+        /// <summary>처음 쓸 때와 화면 비율이 바뀌었을 때(회전, 창 크기) 도트를 화면에 맞춰 다시 깐다.</summary>
         void Rebuild()
         {
             int columns = Mathf.CeilToInt(ui.Width / Cell) + 1;
             int rows = Mathf.CeilToInt(UiRoot.Height / Cell) + 1;
-            backing.transform.localScale = new Vector3(ui.Width + 2f, UiRoot.Height + 2f, 1f);
-            blocker.Size = Vector2.one;
+            blocker.Size = new Vector2(ui.Width + 2f, UiRoot.Height + 2f);
             if (columns == builtColumns)
             {
                 return;
@@ -146,9 +147,19 @@ namespace ColorMinesweeper.Game
                 for (int x = 0; x < columns; x++)
                 {
                     var position = new Vector2((x - (columns - 1) / 2f) * Cell, ((rows - 1) / 2f - y) * Cell);
-                    SpriteRenderer tile = Draw.Sprite(transform, "Tile", SpriteFactory.RaisedTile(), Theme.HiddenTile, Order,
-                        position, Vector2.zero);
-                    float delay = (x + y) * StepDelay;
+                    // 배경 그라데이션과 같은 색이라 덮였을 때 빈 배경처럼 보인다. 일부만 파스텔로 물들인다.
+                    Color color = Color.Lerp(Theme.BackgroundTop, Theme.BackgroundBottom, (float)y / (rows - 1));
+                    color = Color.Lerp(color, Color.white, UnityEngine.Random.Range(0f, 0.35f));
+                    if (UnityEngine.Random.value < 0.14f)
+                    {
+                        color = Color.Lerp(color, Accents[UnityEngine.Random.Range(0, Accents.Length)], 0.4f);
+                    }
+
+                    SpriteRenderer tile = Draw.Sprite(transform, "Dot", SpriteFactory.Square(), color, Order, position,
+                        Vector2.zero);
+                    // 왼쪽 아래에서 오른쪽 위로 번진다.
+                    float along = (x + (rows - 1 - y)) / (float)(columns + rows - 2);
+                    float delay = along * SweepSeconds + UnityEngine.Random.Range(0f, Jitter);
                     longestDelay = Mathf.Max(longestDelay, delay);
                     tiles.Add(tile.transform);
                     delays.Add(delay);
