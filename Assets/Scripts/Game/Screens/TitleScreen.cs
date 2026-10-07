@@ -4,8 +4,9 @@ using UnityEngine;
 namespace ColorMinesweeper.Game
 {
     /// <summary>
-    /// 메인 화면. 가운데 작은 판이 하트를 파도처럼 계속 열어 보이며 게임이 무엇인지 보여 주고,
-    /// 뒤로는 파스텔 도트가 천천히 떠오른다. 이어하기(다음 안 깬 스테이지)와 스테이지 선택으로 들어간다.
+    /// 메인 화면. 가운데 작은 판이 하트를 파도처럼 계속 열어 보이며 게임이 무엇인지 보여 준다.
+    /// 이어하기(다음 안 깬 스테이지)와 스테이지 선택으로 들어간다. 뒤에 떠오르는 파스텔 타일은 모든 화면이 같이 쓰는
+    /// <see cref="Backdrop"/> 이다.
     /// </summary>
     public sealed class TitleScreen : ScreenBase
     {
@@ -23,21 +24,6 @@ namespace ColorMinesweeper.Game
             "...R...",
         };
 
-        static readonly Color[] FloatColors =
-        {
-            Theme.Hex(0xFF8FAB), Theme.Hex(0xFFD166), Theme.Hex(0x8ECAE6), Theme.Hex(0x95D5B2), Theme.Hex(0xC77DFF),
-        };
-
-        sealed class Floater
-        {
-            public Transform Transform;
-            public float Speed;
-            public float Spin;
-            public float Sway;
-            public float Phase;
-        }
-
-        readonly List<Floater> floaters = new List<Floater>();
         readonly List<SpriteRenderer> heroTiles = new List<SpriteRenderer>();
         readonly List<Color> heroColors = new List<Color>();
         readonly List<float> heroDelays = new List<float>();
@@ -45,15 +31,10 @@ namespace ColorMinesweeper.Game
         Transform menu;
         Transform logo;
         Transform settingsButton;
-        Mascot mascot;
         float loopTime;
-
-        /// <summary>판이 다 열리는 때(한 바퀴 안의 초). 이때 마스코트가 기뻐한다.</summary>
-        const float HeroDoneAt = 1.5f;
 
         protected override void Build()
         {
-            BuildFloaters();
             logo = Draw.Node(transform, "Logo");
             Label.Create(logo, "Title", "Pixel", Theme.Accent, 60, new Vector2(0f, 0.55f), 1.25f, TextAnchor.MiddleCenter, true);
             Label.Create(logo, "Title2", "Clue", Theme.Ink, 60, new Vector2(0f, -0.55f), 1.25f,
@@ -79,27 +60,6 @@ namespace ColorMinesweeper.Game
             settingsButton.localPosition = new Vector3(safe.xMax - 1.05f, safe.yMax - 1.05f, 0f);
         }
 
-        void BuildFloaters()
-        {
-            Transform layer = Draw.Node(transform, "Floaters");
-            for (int i = 0; i < 22; i++)
-            {
-                float size = Random.Range(0.25f, 0.7f);
-                SpriteRenderer r = Draw.Sprite(layer, "Pixel", SpriteFactory.RoundedRect(0.25f),
-                    Theme.WithAlpha(FloatColors[i % FloatColors.Length], Random.Range(0.25f, 0.5f)), 1,
-                    new Vector2(Random.Range(-Ui.Width / 2f, Ui.Width / 2f), Random.Range(-UiRoot.Height / 2f, UiRoot.Height / 2f)),
-                    new Vector2(size, size));
-                floaters.Add(new Floater
-                {
-                    Transform = r.transform,
-                    Speed = Random.Range(0.25f, 0.7f),
-                    Spin = Random.Range(-40f, 40f),
-                    Sway = Random.Range(0.1f, 0.4f),
-                    Phase = Random.Range(0f, 10f),
-                });
-            }
-        }
-
         void BuildHero()
         {
             hero = Draw.Node(transform, "Hero");
@@ -108,9 +68,6 @@ namespace ColorMinesweeper.Game
             var plateSize = new Vector2(w * HeroTile + 0.6f, h * HeroTile + 0.6f);
             Draw.Sprite(hero, "Shadow", SpriteFactory.SoftShadow(), Theme.Shadow, 20, new Vector2(0f, -0.25f), plateSize * 1.3f);
             Draw.Panel(hero, "Plate", plateSize, Theme.Plate, 21, Vector2.zero, 0.4f);
-            // 마스코트가 판 뒤에서 고개를 내밀고 그림이 열리는 것을 구경한다.
-            mascot = Mascot.Create(hero, "Mascot", new Vector2(plateSize.x / 2f - 1.2f, plateSize.y / 2f + 0.5f), 1.3f, 20);
-            mascot.PopIn(0.5f);
 
             var center = new Vector2((w - 1) / 2f, (h - 1) / 2f);
             Color background = Theme.Hex(0xFFF1F3);
@@ -180,22 +137,6 @@ namespace ColorMinesweeper.Game
         void Update()
         {
             float dt = Time.unscaledDeltaTime;
-            float top = UiRoot.Height / 2f + 1f;
-            foreach (Floater f in floaters)
-            {
-                Vector3 p = f.Transform.localPosition;
-                p.y += f.Speed * dt;
-                p.x += Mathf.Sin((Time.unscaledTime + f.Phase) * 0.8f) * f.Sway * dt;
-                if (p.y > top)
-                {
-                    p.y = -top;
-                    p.x = Random.Range(-Ui.Width / 2f, Ui.Width / 2f);
-                }
-
-                f.Transform.localPosition = p;
-                f.Transform.Rotate(0f, 0f, f.Spin * dt);
-            }
-
             AnimateHero(dt);
         }
 
@@ -204,13 +145,7 @@ namespace ColorMinesweeper.Game
         /// </summary>
         void AnimateHero(float dt)
         {
-            float before = loopTime;
             loopTime = (loopTime + dt) % LoopSeconds;
-            if (before < HeroDoneAt && loopTime >= HeroDoneAt)
-            {
-                mascot.Cheer(false);
-            }
-
             float closeAt = LoopSeconds - 0.6f;
             for (int i = 0; i < heroTiles.Count; i++)
             {

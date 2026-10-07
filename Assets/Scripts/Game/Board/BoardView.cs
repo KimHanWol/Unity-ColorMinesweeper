@@ -11,6 +11,9 @@ namespace ColorMinesweeper.Game
         const float RevealStepDelay = 0.045f;
         const float PlatePadding = 0.35f;
 
+        /// <summary>한 번에 이만큼 넘게 열리면 연 칸 수를 띄운다.</summary>
+        const int CountFrom = 5;
+
         Stage stage;
         CellView[] cells;
         Transform plate;
@@ -108,9 +111,13 @@ namespace ColorMinesweeper.Game
                 // 직접 누른 칸에서는 그 색 조각이 튀고 테두리가 퍼진다(처음 판이 열릴 때는 조용히 둔다).
                 if (r.Depth == 0 && startDelay <= 0f)
                 {
-                    Color color = Theme.ToColor(stage.Colors[stage.ColorAt(r.Cell)].Color);
-                    Fx.Burst(transform, CellCenter(r.Cell), color, 30);
-                    Fx.Ring(transform, CellCenter(r.Cell), Color.Lerp(color, Color.white, 0.4f), 30);
+                    Rgb rgb = stage.Colors[stage.ColorAt(r.Cell)].Color;
+                    Fx.Pop(transform, CellCenter(r.Cell), Theme.ToColor(rgb), 30);
+                    if (opened.Count >= CountFrom)
+                    {
+                        Fx.Count(transform, CellCenter(r.Cell) + Vector2.up * 0.55f, opened.Count, Theme.ToColor(rgb),
+                            Theme.InkOn(rgb), 40);
+                    }
                 }
                 foreach (int n in stage.Neighbors(r.Cell))
                 {
@@ -142,6 +149,12 @@ namespace ColorMinesweeper.Game
             }
 
             return maxDepth * RevealStepDelay + 0.45f;
+        }
+
+        /// <summary>힌트로 연 칸을 금색 테두리로 한 번 짚어 준다.</summary>
+        public void PlayHint(int cell)
+        {
+            Fx.Ring(transform, CellCenter(cell), Theme.Gold, 31, 2.4f);
         }
 
         public void PlayWrong(int cell, Color chosen)

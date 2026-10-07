@@ -132,6 +132,8 @@ namespace ColorMinesweeper.Game
                     swatch.Button.Interactable = false;
                     Swatch s = swatch;
                     Vector3 from = s.Visual.localScale;
+                    // 한 색을 다 칠하면 그 색 조각이 튀며 마무리된다.
+                    Fx.Pop(transform, s.Root.localPosition, s.Fill.color, 97);
                     Tween.Run(s.Visual, 0.35f, t =>
                     {
                         s.Visual.localScale = Vector3.LerpUnclamped(from, from * 0.72f, t);

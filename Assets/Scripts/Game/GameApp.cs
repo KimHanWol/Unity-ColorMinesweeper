@@ -24,6 +24,7 @@ namespace ColorMinesweeper.Game
 
         PointerInput pointer;
         ScreenBase current;
+        TileWipe wipe;
 
         /// <summary>지금 떠 있는 화면(스토어 스크린샷 도구가 쓴다).</summary>
         public ScreenBase Current => current;
@@ -54,7 +55,9 @@ namespace ColorMinesweeper.Game
             Music.Create(transform);
             Settings.Apply();
             BoardCamera = BoardCamera.Create(transform);
+            Backdrop.Create(BoardCamera.Camera);
             Ui = UiRoot.Create(transform);
+            wipe = TileWipe.Create(transform, Ui);
             pointer = gameObject.AddComponent<PointerInput>();
             pointer.UiCamera = Ui.Camera;
             lastScreenSize = new Vector2Int(ScreenInfo.Width, ScreenInfo.Height);
@@ -74,13 +77,15 @@ namespace ColorMinesweeper.Game
                 return;
             }
 
-            ShowTitle();
+            // 첫 화면은 덮여 있던 타일이 열리며 나타난다.
+            Open<TitleScreen>(null, true);
+            wipe.OpenFromCovered();
         }
 
         void Update()
         {
             // 안드로이드 뒤로 가기 버튼은 Escape 로 들어온다.
-            if (Input.GetKeyDown(KeyCode.Escape))
+            if (Input.GetKeyDown(KeyCode.Escape) && !wipe.Busy)
             {
                 current?.OnBack();
             }
@@ -124,13 +129,14 @@ namespace ColorMinesweeper.Game
         /// <summary>목록·메인 화면을 보고 있으면 다시 그린다(치트로 잠금·기록이 바뀌었을 때). 플레이 중이면 그대로 둔다.</summary>
         public void RefreshStageList()
         {
+            // 같은 화면을 다시 그리는 것이라 전환 연출 없이 바로 바꾼다.
             if (current is StageSelectScreen)
             {
-                ShowSelect();
+                Open<StageSelectScreen>(null, true);
             }
             else if (current is TitleScreen)
             {
-                ShowTitle();
+                Open<TitleScreen>(null, true);
             }
         }
 
@@ -144,8 +150,18 @@ namespace ColorMinesweeper.Game
             Open<PlayScreen>(screen => screen.Setup(stage, index));
         }
 
-        void Open<T>(Action<T> setup) where T : ScreenBase
+        /// <summary>
+        /// 화면을 바꾼다. 보통은 타일이 화면을 덮었다가 걷히는 전환(<see cref="TileWipe"/>)을 거치고,
+        /// instant 면 바로 바꾼다(첫 화면, 같은 화면 새로 그리기).
+        /// </summary>
+        void Open<T>(Action<T> setup, bool instant = false) where T : ScreenBase
         {
+            if (!instant && current != null)
+            {
+                wipe.Run(() => Open(setup, true));
+                return;
+            }
+
             if (current != null)
             {
                 Destroy(current.gameObject);

@@ -69,42 +69,6 @@ namespace ColorMinesweeper.Game
             return env * (0.7f * Mathf.Sin(TwoPi * frequency * vibrato * t) + 0.3f * triangle);
         }
 
-        /// <summary>
-        /// 동물 울음소리 같은 한 마디. 음높이가 startHz → peakHz(peakAt 초) → endHz 로 미끄러지고, 처음에는 밝게(배음이 많게)
-        /// 시작해 끝으로 갈수록 둥글어진다. 올라갔다 내려오면 "야옹", 올라가기만 하면 "먕?" 처럼 들린다.
-        /// trill 을 주면 소리가 잘게 떨려 "므르릉" 하는 느낌이 난다.
-        /// </summary>
-        public static float Voice(float t, float seconds, float startHz, float peakHz, float endHz, float peakAt,
-            float brightStart, float brightEnd, float trill = 0f)
-        {
-            if (t < 0f || t > seconds)
-            {
-                return 0f;
-            }
-
-            // 구간마다 주파수가 직선으로 변하므로 위상은 그 적분(2차식)이다. 주파수만 바꿔 곱하면 파형이 튄다.
-            float phase;
-            if (t < peakAt)
-            {
-                phase = startHz * t + (peakHz - startHz) * t * t / (2f * peakAt);
-            }
-            else
-            {
-                float u = t - peakAt;
-                phase = (startHz + peakHz) * peakAt / 2f + peakHz * u + (endHz - peakHz) * u * u / (2f * (seconds - peakAt));
-            }
-
-            float k = t / seconds;
-            float bright = Mathf.Lerp(brightStart, brightEnd, k);
-            float angle = TwoPi * phase;
-            float tone = Mathf.Sin(angle) + bright * (0.6f * Mathf.Sin(2f * angle) + 0.35f * Mathf.Sin(3f * angle)
-                                                       + 0.15f * Mathf.Sin(4f * angle));
-            float attack = Mathf.Clamp01(t / 0.04f);
-            float release = k > 0.6f ? 0.5f + 0.5f * Mathf.Cos((k - 0.6f) / 0.4f * Mathf.PI) : 1f;
-            float flutter = 1f - trill * (0.5f + 0.5f * Mathf.Sin(TwoPi * 28f * t));
-            return tone * attack * release * flutter;
-        }
-
         /// <summary>결정적인 난수 잡음(-1~1). 같은 소리가 매번 같게 나오도록 System.Random 대신 해시를 쓴다.</summary>
         public static float Noise(int i)
         {

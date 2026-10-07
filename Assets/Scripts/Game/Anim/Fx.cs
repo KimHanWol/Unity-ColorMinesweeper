@@ -5,6 +5,9 @@ namespace ColorMinesweeper.Game
     /// <summary>
     /// 한 번 터지고 사라지는 작은 이펙트들. 파티클 시스템 없이 스프라이트 몇 장을 <see cref="Tween"/> 으로 움직인다.
     /// 부모가 사라지면 같이 사라지므로 화면을 넘길 때 따로 치울 필요가 없다.
+    ///
+    /// 게임의 모든 연출은 같은 재료를 쓴다: 조각은 칸과 같은 둥근 네모, 색은 그 자리의 색(칸 색, 하트의 빨강, 별의 금색),
+    /// 움직임은 톡 튀었다가 가라앉는 곡선. 새 연출을 넣을 때도 여기 있는 것을 조합해 쓴다.
     /// </summary>
     public static class Fx
     {
@@ -53,6 +56,41 @@ namespace ColorMinesweeper.Game
                 ring.transform.localScale = new Vector3(s, s, 1f);
                 Draw.SetAlpha(ring, (1f - k) * 0.8f);
             }, Ease.OutCubic, 0f, () => Object.Destroy(ring.gameObject));
+        }
+
+        /// <summary>조각이 튀고 테두리가 퍼지는 한 묶음. 무언가 맞아떨어진 순간(칸, 별, 다 칠한 색)에 쓴다.</summary>
+        public static void Pop(Transform parent, Vector2 position, Color color, int order, float scale = 1f)
+        {
+            Burst(parent, position, color, order, 7, 0.85f * scale, 0.2f * scale);
+            Ring(parent, position, Color.Lerp(color, Color.white, 0.4f), order, 1.7f * scale);
+        }
+
+        /// <summary>
+        /// 한 번에 여러 칸이 열렸을 때 "+12" 처럼 연 칸 수를 띄운다. 단서 칩과 같은 모양(흰 테두리 알약에 도트 숫자)이라
+        /// 판 위의 다른 숫자와 한 식구로 보인다.
+        /// </summary>
+        public static void Count(Transform parent, Vector2 position, int count, Color color, Color ink, int order)
+        {
+            Transform root = Draw.Node(parent, "Count", position);
+            string text = "+" + count;
+            const float height = 0.42f;
+            float width = text.Length * height * 6f / 7f + 0.4f;
+            SpriteRenderer rim = Draw.Panel(root, "Rim", new Vector2(width + 0.12f, height + 0.42f), Color.white, order,
+                Vector2.zero, (height + 0.42f) / 2f);
+            SpriteRenderer fill = Draw.Panel(root, "Fill", new Vector2(width, height + 0.3f), color, order + 1, Vector2.zero,
+                (height + 0.3f) / 2f);
+            PixelText digits = PixelText.Create(root, "Digits", text, ink, order + 2, Vector2.zero, height);
+            root.localScale = Vector3.zero;
+            Tween.Run(root, 1.05f, k =>
+            {
+                float pop = Ease.OutBack(Mathf.Min(1f, k * 4.5f));
+                root.localScale = Vector3.one * pop;
+                root.localPosition = position + Vector2.up * (0.9f * Ease.OutCubic(k));
+                float alpha = k < 0.65f ? 1f : 1f - (k - 0.65f) / 0.35f;
+                Draw.SetAlpha(rim, alpha);
+                Draw.SetAlpha(fill, alpha);
+                digits.SetAlpha(alpha);
+            }, Ease.Linear, 0f, () => Object.Destroy(root.gameObject));
         }
 
         /// <summary>작은 그림(하트, 반짝이)이 흔들리며 떠올라 사라진다.</summary>

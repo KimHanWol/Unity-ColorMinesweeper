@@ -27,7 +27,7 @@ namespace ColorMinesweeper.Game
 
             hud.title = Label.Create(root, "Name", title, Theme.Ink, 100, new Vector2(0f, 0.32f), 0.58f,
                 TextAnchor.MiddleCenter, true)
-                .FitWidth(Mathf.Max(2f, ui.Safe.width - 7.0f));
+                .FitWidth(Mathf.Max(2f, ui.Safe.width - 6.6f));
 
             Sprite heart = Icons.Heart;
             hud.hearts = new SpriteRenderer[PuzzleSession.MaxLives];
@@ -77,6 +77,16 @@ namespace ColorMinesweeper.Game
                 if (!animate || !changed)
                 {
                     continue;
+                }
+
+                // 잃은 하트에서는 빨간 조각이 떨어져 나가고, 되찾은 하트에서는 조각이 튀며 테두리가 퍼진다.
+                if (alive)
+                {
+                    Fx.Pop(transform, heart.transform.localPosition, Theme.Danger, 101, 0.6f);
+                }
+                else
+                {
+                    Fx.Burst(transform, heart.transform.localPosition, Theme.Danger, 101, 6, 0.6f, 0.13f);
                 }
 
                 Tween.Kill(heart.transform);

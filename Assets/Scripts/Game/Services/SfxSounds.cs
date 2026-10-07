@@ -20,9 +20,6 @@ namespace ColorMinesweeper.Game
 
         /// <summary>별, 이름 공개, 잠금 해제의 종소리. 맑은 높은 음은 같은 크기여도 훨씬 크게 들려서 따로 작게 둔다.</summary>
         Chime,
-
-        /// <summary>마스코트 울음소리. 가끔 나오는 추임새라 칸 여는 소리보다 작게 둔다.</summary>
-        Voice,
     }
 
     /// <summary>효과음 하나의 정의. 파형만 담은 순수 계산이라 Unity 밖(도구, 테스트)에서도 그려 볼 수 있다.</summary>
@@ -66,8 +63,6 @@ namespace ColorMinesweeper.Game
                     return -17f;
                 case SfxRole.Chime:
                     return -22f;
-                case SfxRole.Voice:
-                    return -21f;
                 default:
                     return -18f;
             }
@@ -192,18 +187,6 @@ namespace ColorMinesweeper.Game
 
             return sum;
         });
-
-        /// <summary>마스코트가 기뻐할 때: 올라갔다 내려오는 밝은 "야옹".</summary>
-        public static SfxSound MeowHappy() => new SfxSound("meowHappy", 0.42f, SfxRole.Voice, t =>
-            SoundSynth.Voice(t, 0.42f, 520f, 900f, 700f, 0.14f, 0.9f, 0.3f));
-
-        /// <summary>마스코트가 속상할 때: 낮게 처지는 "먀아".</summary>
-        public static SfxSound MeowSad() => new SfxSound("meowSad", 0.5f, SfxRole.Voice, t =>
-            SoundSynth.Voice(t, 0.5f, 620f, 660f, 400f, 0.1f, 0.5f, 0.15f));
-
-        /// <summary>연달아 잘 맞힐 때의 짧은 추임새 "먕!". 끝이 올라가고 살짝 떨린다.</summary>
-        public static SfxSound Chirp() => new SfxSound("chirp", 0.22f, SfxRole.Voice, t =>
-            SoundSynth.Voice(t, 0.22f, 480f, 980f, 1000f, 0.18f, 0.7f, 0.4f, 0.45f));
 
         /// <summary>
         /// 음높이가 미끄러지는 둥근 한 음(사인파). fromHz 에서 toHz 로 glideSeconds 동안 옮겨 간다.

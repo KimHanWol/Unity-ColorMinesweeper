@@ -110,6 +110,7 @@ namespace ColorMinesweeper.Game
             Tween.Delay(cover, delay, () =>
             {
                 Sfx.Instance?.Unlock();
+                Fx.Pop(visual, pictureCenter, Theme.Accent, 16);
                 Transform icon = lockIcon.transform;
                 Tween.Run(cover, 0.5f, t =>
                 {

@@ -39,9 +39,6 @@ namespace ColorMinesweeper.Game
         AudioClip unlock;
         AudioClip locked;
         AudioClip hint;
-        AudioClip meowHappy;
-        AudioClip meowSad;
-        AudioClip chirp;
 
         /// <summary>빈 구역이 한꺼번에 열릴 때의 소리 파일(Resources/Sounds/area). 없으면 마림바가 굴러가는 소리로 대신한다.</summary>
         AudioClip area;
@@ -80,9 +77,6 @@ namespace ColorMinesweeper.Game
             locked = SoundSynth.Clip(SfxSounds.Locked());
             nameReveal = SoundSynth.Clip(SfxSounds.NameReveal());
             hint = SoundSynth.Clip(SfxSounds.Hint());
-            meowHappy = SoundSynth.Clip(SfxSounds.MeowHappy());
-            meowSad = SoundSynth.Clip(SfxSounds.MeowSad());
-            chirp = SoundSynth.Clip(SfxSounds.Chirp());
         }
 
         static AudioClip[] Clips(SfxSound[] sounds)
@@ -133,11 +127,6 @@ namespace ColorMinesweeper.Game
         public void Unlock() => Play(unlock, 1f);
         public void Locked() => Play(locked, 1f);
         public void Hint() => Play(hint, 1f);
-
-        /// <summary>마스코트 울음소리.</summary>
-        public void MeowHappy() => Play(meowHappy, 1f);
-        public void MeowSad() => Play(meowSad, 1f);
-        public void Chirp() => Play(chirp, 1f);
 
         void Play(AudioClip clip, float volume)
         {
