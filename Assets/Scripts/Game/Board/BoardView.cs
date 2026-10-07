@@ -105,6 +105,13 @@ namespace ColorMinesweeper.Game
                 cells[r.Cell].UpdateRemaining(session, false);
                 cells[r.Cell].AnimateReveal(startDelay + r.Depth * RevealStepDelay);
                 maxDepth = Mathf.Max(maxDepth, r.Depth);
+                // 직접 누른 칸에서는 그 색 조각이 튀고 테두리가 퍼진다(처음 판이 열릴 때는 조용히 둔다).
+                if (r.Depth == 0 && startDelay <= 0f)
+                {
+                    Color color = Theme.ToColor(stage.Colors[stage.ColorAt(r.Cell)].Color);
+                    Fx.Burst(transform, CellCenter(r.Cell), color, 30);
+                    Fx.Ring(transform, CellCenter(r.Cell), Color.Lerp(color, Color.white, 0.4f), 30);
+                }
                 foreach (int n in stage.Neighbors(r.Cell))
                 {
                     affected.Add(n);
@@ -181,6 +188,11 @@ namespace ColorMinesweeper.Game
                 Tween.Run(this, 0.5f, t => transform.localScale = Vector3.one * (1f + Ease.Pulse(t) * 0.05f),
                     Ease.Linear);
                 SpawnSparkles();
+                // 완성된 그림 위로 빛이 대각선으로 한 번 훑고 지나간다.
+                for (int i = 0; i < cells.Length; i++)
+                {
+                    cells[i].Shine((i % stage.Width + i / stage.Width) * 0.03f);
+                }
             });
             Tween.Delay(this, pulse + 0.9f, () => done?.Invoke());
         }

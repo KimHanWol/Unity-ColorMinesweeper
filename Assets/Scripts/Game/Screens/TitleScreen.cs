@@ -45,7 +45,11 @@ namespace ColorMinesweeper.Game
         Transform menu;
         Transform logo;
         Transform settingsButton;
+        Mascot mascot;
         float loopTime;
+
+        /// <summary>판이 다 열리는 때(한 바퀴 안의 초). 이때 마스코트가 기뻐한다.</summary>
+        const float HeroDoneAt = 1.5f;
 
         protected override void Build()
         {
@@ -104,6 +108,9 @@ namespace ColorMinesweeper.Game
             var plateSize = new Vector2(w * HeroTile + 0.6f, h * HeroTile + 0.6f);
             Draw.Sprite(hero, "Shadow", SpriteFactory.SoftShadow(), Theme.Shadow, 20, new Vector2(0f, -0.25f), plateSize * 1.3f);
             Draw.Panel(hero, "Plate", plateSize, Theme.Plate, 21, Vector2.zero, 0.4f);
+            // 마스코트가 판 뒤에서 고개를 내밀고 그림이 열리는 것을 구경한다.
+            mascot = Mascot.Create(hero, "Mascot", new Vector2(plateSize.x / 2f - 1.2f, plateSize.y / 2f + 0.5f), 1.3f, 20);
+            mascot.PopIn(0.5f);
 
             var center = new Vector2((w - 1) / 2f, (h - 1) / 2f);
             Color background = Theme.Hex(0xFFF1F3);
@@ -197,7 +204,13 @@ namespace ColorMinesweeper.Game
         /// </summary>
         void AnimateHero(float dt)
         {
+            float before = loopTime;
             loopTime = (loopTime + dt) % LoopSeconds;
+            if (before < HeroDoneAt && loopTime >= HeroDoneAt)
+            {
+                mascot.Cheer(false);
+            }
+
             float closeAt = LoopSeconds - 0.6f;
             for (int i = 0; i < heroTiles.Count; i++)
             {

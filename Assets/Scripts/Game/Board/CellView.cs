@@ -269,6 +269,15 @@ namespace ColorMinesweeper.Game
             }
         }
 
+        /// <summary>완성 연출 3단계: 칸이 잠깐 하얗게 빛난다. 칸마다 시간차를 주면 빛이 그림을 훑고 지나간다.</summary>
+        public void Shine(float delay)
+        {
+            SpriteRenderer glow = Draw.Sprite(transform, "Shine", SpriteFactory.Square(), new Color(1f, 1f, 1f, 0f), 12,
+                Vector2.zero, new Vector2(1.005f, 1.005f));
+            Tween.Run(glow, 0.32f, t => Draw.SetAlpha(glow, Ease.Pulse(t) * 0.55f), Ease.Linear, delay,
+                () => Destroy(glow.gameObject));
+        }
+
         /// <summary>완성 연출 2단계: 틈이 메워지며 한 장의 도트 그림이 된다.</summary>
         public void BecomePixel(float delay)
         {

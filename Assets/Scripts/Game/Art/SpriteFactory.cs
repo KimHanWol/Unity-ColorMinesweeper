@@ -214,6 +214,35 @@ namespace ColorMinesweeper.Game
             });
         }
 
+        /// <summary>
+        /// 글자마다 색이 다른 도트 그림(캐릭터 등). colors 에 없는 글자는 비운다. <see cref="Bitmap"/> 처럼 높이가 1 유닛이다.
+        /// </summary>
+        public static Sprite ColorBitmap(string key, string[] rows, Dictionary<char, Color32> colors)
+        {
+            return Cached("cbmp" + key, () =>
+            {
+                int h = rows.Length;
+                int w = rows[0].Length;
+                var tex = NewTexture(w + 2, h + 2, FilterMode.Point);
+                var pixels = new Color32[(w + 2) * (h + 2)];
+                for (int y = 0; y < h; y++)
+                {
+                    for (int x = 0; x < w; x++)
+                    {
+                        if (colors.TryGetValue(rows[y][x], out Color32 color))
+                        {
+                            pixels[(h - y) * (w + 2) + x + 1] = color;
+                        }
+                    }
+                }
+
+                tex.SetPixels32(pixels);
+                tex.Apply();
+                return Sprite.Create(tex, new Rect(0, 0, w + 2, h + 2), new Vector2(0.5f, 0.5f), h, 0,
+                    SpriteMeshType.FullRect);
+            });
+        }
+
         /// <summary>스테이지 그림을 그대로 한 픽셀씩 옮긴 미리보기. 높이 1 유닛.</summary>
         public static Sprite StagePicture(Core.Stage stage)
         {

@@ -27,7 +27,7 @@ namespace ColorMinesweeper.Game
 
             hud.title = Label.Create(root, "Name", title, Theme.Ink, 100, new Vector2(0f, 0.32f), 0.58f,
                 TextAnchor.MiddleCenter, true)
-                .FitWidth(Mathf.Max(2f, ui.Safe.width - 6.6f));
+                .FitWidth(Mathf.Max(2f, ui.Safe.width - 7.0f));
 
             Sprite heart = Icons.Heart;
             hud.hearts = new SpriteRenderer[PuzzleSession.MaxLives];

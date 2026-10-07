@@ -12,6 +12,9 @@ namespace ColorMinesweeper.Game
         /// <summary>완성 카드 윗변(안전 영역 아래에서 잰 높이). 완성된 그림은 이 위에 보인다.</summary>
         static float ResultCardTop => 0.5f + ResultCardSize.y;
 
+        /// <summary>완성 카드와 그림 사이에 비워 두는 높이. 카드 뒤에서 올라오는 마스코트가 그림을 가리지 않게 한다.</summary>
+        const float PeekRoom = 1.3f;
+
         Stage stage;
         int stageIndex;
         PuzzleSession session;
@@ -43,6 +46,18 @@ namespace ColorMinesweeper.Game
         /// <summary>힌트 버튼을 누르고 칸을 고르는 중인지. 이때 누른 칸은 정답 색으로 열린다.</summary>
         bool hintMode;
         SpeechBubble bubble;
+        Mascot mascot;
+
+        /// <summary>쉬지 않고 이어 맞힌 횟수. 몇 번마다 마스코트가 크게 기뻐한다.</summary>
+        int streak;
+        float lastCorrectAt = -10f;
+
+        /// <summary>이 시간(초) 안에 다시 맞히면 연속으로 친다.</summary>
+        const float StreakWindow = 2.5f;
+
+        /// <summary>연속으로 이만큼 맞힐 때마다, 또는 한 번에 이만큼 넓게 열릴 때 마스코트가 크게 기뻐한다.</summary>
+        const int BigCheerStreak = 4;
+        const int BigCheerCells = 6;
 
         public Stage Stage => stage;
         public PuzzleSession Session => session;
@@ -100,6 +115,10 @@ namespace ColorMinesweeper.Game
             {
                 BuildHint();
             }
+
+            // 위쪽 막대 왼편(오른쪽 힌트 버튼과 맞은편)에 마스코트를 둔다.
+            mascot = Mascot.Create(top, "Mascot", new Vector2(-Ui.Safe.width / 2f + 2.45f, 0f), 1.05f, 100);
+            mascot.PopIn(0.3f);
 
             Layout();
 
@@ -236,7 +255,8 @@ namespace ColorMinesweeper.Game
         {
             Rect safe = Ui.Safe;
             float bottomInset = tutorial != null ? SpeechBubble.DockHeight + 0.3f : 0f;
-            float yMin = Ui.ToPixelY(safe.yMin + (cleared ? ResultCardTop + 0.3f : PaletteBar.BarHeight + bottomInset));
+            // 완성 뒤에는 카드 윗변 너머로 고개를 내미는 마스코트 자리(PeekRoom)만큼 더 띄운다.
+            float yMin = Ui.ToPixelY(safe.yMin + (cleared ? ResultCardTop + PeekRoom : PaletteBar.BarHeight + bottomInset));
             float yMax = Ui.ToPixelY(safe.yMax - Hud.BarHeight);
             float xMin = Ui.ToPixelX(safe.xMin);
             float xMax = Ui.ToPixelX(safe.xMax);
@@ -292,6 +312,9 @@ namespace ColorMinesweeper.Game
                 App.BoardCamera.Shake(0.12f);
                 hud.SetLives(session.Lives, true);
                 Tween.Delay(this, 0.18f, () => Sfx.Instance?.LoseHeart());
+                streak = 0;
+                mascot.Ouch();
+                Tween.Delay(this, 0.42f, () => Sfx.Instance?.MeowSad());
                 if (result.GameOver && tutorial != null)
                 {
                     // 튜토리얼에서는 목숨을 다 잃어도 멈추지 않는다.
@@ -310,6 +333,16 @@ namespace ColorMinesweeper.Game
         {
             Haptics.Light();
             float duration = board.PlayReveal(session, result.Revealed);
+            float now = Time.unscaledTime;
+            streak = now - lastCorrectAt < StreakWindow ? streak + 1 : 1;
+            lastCorrectAt = now;
+            bool big = !result.Cleared && (streak % BigCheerStreak == 0 || result.Revealed.Count >= BigCheerCells);
+            mascot.Cheer(big);
+            if (big)
+            {
+                Sfx.Instance?.Chirp();
+            }
+
             palette.Refresh(session);
             tutorial?.OnPainted(cell, color);
             if (result.Cleared)
@@ -508,6 +541,7 @@ namespace ColorMinesweeper.Game
             }
 
             hud.RevealTitle(StageTitle.Revealed(stageIndex, stage));
+            mascot.Celebrate();
             hintButton?.Disable();
             board.SetFocus(-1);
             palette.Hide();
@@ -527,6 +561,7 @@ namespace ColorMinesweeper.Game
             Transform card = modal.Card;
             int order = ModalOrder + 10;
             modal.Card.localPosition = new Vector3(Ui.Safe.center.x, Ui.Safe.yMin + ResultCardTop - ResultCardSize.y / 2f, 0f);
+            Celebrate(card);
 
             Label.Create(card, "Title", Loc.F("clear.title", StageTitle.Name(stage)), Theme.Ink, order, new Vector2(0f, 2.95f), 0.8f,
                 TextAnchor.MiddleCenter, true)
@@ -582,6 +617,19 @@ namespace ColorMinesweeper.Game
                 new Vector2(1.475f, rowY), order, () => Share.Screen(this, new[] { next, list, share }, ShareText(stars))).transform;
         }
 
+        /// <summary>완성 축하: 색종이가 쏟아지고, 결과 카드 뒤에서 마스코트가 고개를 내밀며 운다.</summary>
+        void Celebrate(Transform card)
+        {
+            Rect screen = Rect.MinMaxRect(-Ui.Width / 2f, -UiRoot.Height / 2f, Ui.Width / 2f, UiRoot.Height / 2f);
+            Fx.Confetti(transform, screen, ModalOrder - 10);
+            // 카드보다 뒤(order 가 작게)에 두어 카드 윗변 너머로 얼굴만 보이게 한다.
+            Mascot peek = Mascot.Create(card, "Mascot", new Vector2(-2.6f, ResultCardSize.y / 2f + 0.4f), 1.35f, ModalOrder);
+            peek.SetRest(MascotMood.Happy);
+            peek.PopIn(0.35f);
+            Tween.Delay(peek, 0.8f, () => peek.Cheer(true));
+            Tween.Delay(peek, 0.45f, () => Sfx.Instance?.MeowHappy());
+        }
+
         /// <summary>공유할 때 이미지와 함께 보내는 문구. 번호, 이름, 별.</summary>
         string ShareText(int stars)
         {
@@ -598,6 +646,7 @@ namespace ColorMinesweeper.Game
             Transform card = modal.Card;
             int order = ModalOrder + 10;
             modal.Card.localPosition = new Vector3(Ui.Safe.center.x, Ui.Safe.yMin + ResultCardTop - ResultCardSize.y / 2f, 0f);
+            Celebrate(card);
             Label.Create(card, "Title", Loc.T("tutorialClear.title"), Theme.Ink, order, new Vector2(0f, 2.5f), 0.8f, TextAnchor.MiddleCenter, true)
                 .FitWidth(ResultCardSize.x - 0.8f);
             Label.Create(card, "Body", Loc.T("tutorialClear.body"), Theme.SubInk, order,
@@ -614,8 +663,10 @@ namespace ColorMinesweeper.Game
             Transform card = modal.Card;
             int order = ModalOrder + 10;
 
-            Draw.Sprite(card, "Heart", Icons.Heart, Theme.Locked, order,
-                new Vector2(0f, 2.65f), new Vector2(1.1f, 1.1f));
+            Mascot sad = Mascot.Create(card, "Mascot", new Vector2(0f, 2.6f), 1.45f, order);
+            sad.SetRest(MascotMood.Sad);
+            sad.PopIn(0.15f);
+            mascot.SetRest(MascotMood.Sad);
             Label.Create(card, "Title", Loc.T("over.title"), Theme.Ink, order, new Vector2(0f, 1.45f), 0.72f,
                 TextAnchor.MiddleCenter, true)
                 .FitWidth(7f);
@@ -644,6 +695,8 @@ namespace ColorMinesweeper.Game
                         session.Revive();
                         Sfx.Instance?.Revive();
                         hud.SetLives(session.Lives, true);
+                        mascot.SetRest(MascotMood.Idle);
+                        mascot.Cheer(true);
                         CloseModal();
                     });
                 });
