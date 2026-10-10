@@ -13,7 +13,7 @@ namespace ColorMinesweeper.Game
         public static readonly Color HiddenTile = Hex(0xD8D3E6);
         public static readonly Color Ink = Hex(0x2E2A40);
         public static readonly Color SubInk = Hex(0x8A84A3);
-        public static readonly Color Accent = Hex(0x6C5CE7);
+        public static readonly Color Accent = Hex(0x9488F2);
         public static readonly Color Danger = Hex(0xFF5A6E);
         public static readonly Color Gold = Hex(0xFFC53D);
 
