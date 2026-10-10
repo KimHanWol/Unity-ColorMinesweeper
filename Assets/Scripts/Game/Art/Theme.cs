@@ -32,9 +32,18 @@ namespace ColorMinesweeper.Game
             Hex(0xFF8FAB), Hex(0xFFD166), Hex(0x8ECAE6), Hex(0x95D5B2), Hex(0xC77DFF),
         };
 
+        /// <summary>그림 색을 얼마나 부드럽게 할지: 채도를 이만큼 덜고, 밝기를 이만큼 흰색 쪽으로 올린다.</summary>
+        const float SoftenSaturation = 0.14f;
+        const float SoftenValue = 0.14f;
+
+        /// <summary>
+        /// 스테이지 그림 색을 화면에 쓸 색으로 바꾼다. 스테이지 파일의 색은 진하고 선명해서 파스텔인 로고·버튼과 따로 놀기 때문에,
+        /// 모든 그림 색을 여기서 한 번에 살짝 부드럽게 한다(색 사이 구분은 남을 만큼만).
+        /// </summary>
         public static Color ToColor(Rgb rgb)
         {
-            return new Color32(rgb.R, rgb.G, rgb.B, 255);
+            Color.RGBToHSV(new Color32(rgb.R, rgb.G, rgb.B, 255), out float h, out float s, out float v);
+            return Color.HSVToRGB(h, s * (1f - SoftenSaturation), Mathf.Lerp(v, 1f, SoftenValue));
         }
 
         /// <summary>그 색 위에 올릴 글자색. 밝은 색 위엔 진한 잉크, 어두운 색 위엔 흰색.</summary>
