@@ -585,9 +585,25 @@ namespace ColorMinesweeper.Game
             var half = new Vector2(2.65f, UiKit.ModalButtonSize.y);
             Transform list = UiKit.Button(card, "List", Loc.T("clear.list"), null, Theme.HiddenTile, Theme.Ink, half,
                 new Vector2(-1.475f, rowY), order, () => Ads.AfterStage(App.ShowSelect)).transform;
+            // 공유할 때는 버튼을 숨기는데, 그 자리가 비면 카드 아래가 휑해서 로고와 소개 한 줄을 대신 보여 준다
+            // (받은 사람이 어떤 게임인지도 알 수 있다). 평소에는 꺼 둔다.
+            Transform brand = Draw.Node(card, "ShareBrand");
+            if (hasNext)
+            {
+                PixelLogo.Create(brand, new Vector2(0f, -1.45f), 3.5f, order);
+                Label.Create(brand, "Tagline", Loc.T("title.tagline"), Theme.SubInk, order, new Vector2(0f, -2.75f), 0.32f)
+                    .FitWidth(ResultCardSize.x - 0.8f);
+            }
+            else
+            {
+                PixelLogo.Create(brand, new Vector2(0f, -1.0f), 2.6f, order);
+            }
+
+            brand.gameObject.SetActive(false);
             Transform share = null;
             share = UiKit.Button(card, "Share", Loc.T("clear.share"), Icons.Share, Theme.HiddenTile, Theme.Ink, half,
-                new Vector2(1.475f, rowY), order, () => Share.Screen(this, new[] { next, list, share }, ShareText(stars))).transform;
+                new Vector2(1.475f, rowY), order,
+                () => Share.Screen(this, new[] { next, list, share }, new[] { brand }, ShareText(stars))).transform;
         }
 
         /// <summary>완성 축하: 배경에 떠다니는 것과 같은 파스텔 타일이 색종이처럼 쏟아진다(결과 카드보다 뒤).</summary>

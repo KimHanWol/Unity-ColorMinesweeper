@@ -31,37 +31,27 @@ namespace ColorMinesweeper.Game
 
         /// <param name="host">코루틴을 돌릴 화면.</param>
         /// <param name="hide">찍을 때 숨길 것(버튼 등).</param>
-        public static void Screen(MonoBehaviour host, Transform[] hide, string text)
+        /// <param name="show">찍을 때만 보일 것(버튼 자리를 채우는 로고 등).</param>
+        public static void Screen(MonoBehaviour host, Transform[] hide, Transform[] show, string text)
         {
             if (busy || host == null)
             {
                 return;
             }
 
-            host.StartCoroutine(Capture(hide, text));
+            host.StartCoroutine(Capture(hide, show, text));
         }
 
-        static IEnumerator Capture(Transform[] hide, string text)
+        static IEnumerator Capture(Transform[] hide, Transform[] show, string text)
         {
             busy = true;
-            foreach (Transform t in hide)
-            {
-                if (t != null)
-                {
-                    t.gameObject.SetActive(false);
-                }
-            }
+            SetActive(hide, false);
+            SetActive(show, true);
 
             yield return new WaitForEndOfFrame();
             Texture2D shot = ScreenCapture.CaptureScreenshotAsTexture();
-
-            foreach (Transform t in hide)
-            {
-                if (t != null)
-                {
-                    t.gameObject.SetActive(true);
-                }
-            }
+            SetActive(show, false);
+            SetActive(hide, true);
 
             string path = Path.Combine(Application.temporaryCachePath, "pixelclue-share.png");
             try
@@ -77,6 +67,17 @@ namespace ColorMinesweeper.Game
             {
                 UnityEngine.Object.Destroy(shot);
                 busy = false;
+            }
+        }
+
+        static void SetActive(Transform[] targets, bool active)
+        {
+            foreach (Transform t in targets)
+            {
+                if (t != null)
+                {
+                    t.gameObject.SetActive(active);
+                }
             }
         }
     }
