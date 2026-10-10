@@ -224,8 +224,8 @@ namespace ColorMinesweeper.Game
             // 굵은 줄은 가운데 숫자에서 출발하는 근거, 옅은 줄은 거기서 나오는 결론, 보라 줄은 할 일.
             // 색 이름은 모두 받침이 있어 "이" 를 쓴다.
             string title = opened == 0
-                ? Loc.F("tut.guide.title.none", total, hidden)
-                : Loc.F("tut.guide.title.some", total, opened);
+                ? Loc.F("tut.guide.title.none", colorName, total, hidden)
+                : Loc.F("tut.guide.title.some", colorName, total, opened);
             string detail = opened == 0
                 ? Loc.F("tut.guide.detail.none", colorName, total, hidden)
                 : Loc.F("tut.guide.detail.some", colorName, remaining, hidden);
@@ -375,7 +375,7 @@ namespace ColorMinesweeper.Game
         }
 
         /// <summary>
-        /// 판 전체를 어둡게 하고 근거 칸의 3x3 만 밝게 남긴다. 가운데(근거) 칸만 보라 테두리로 짚는다.
+        /// 판 전체를 어둡게 하고 근거 칸의 3x3 만 밝게 남긴다. 가운데(근거) 칸만 흰색·진한 색 겹 테두리로 짚는다.
         /// </summary>
         /// <param name="pulse">가운데 테두리가 숨 쉬게 한다(숫자를 보라고 할 때).</param>
         void Spotlight(int clue, bool pulse)
@@ -399,12 +399,18 @@ namespace ColorMinesweeper.Game
             // 3x3 을 감싸는 큰 테두리는 두지 않는다. 밝은 칸과 가린 칸의 경계에 걸쳐 쪽마다 굵기가 달라 보였다.
             // 가린 조각끼리 살짝 겹쳐 밝은 창의 가장자리가 곧은 선이 되게 하는 것으로 영역을 보여 준다.
             Vector2 center = play.Board.CellCenter(clue);
-            SpriteRenderer ring = Draw.OutlinePanel(board, "TutorialClue", new Vector2(0.98f, 0.98f), Theme.Accent, MarkOrder + 1,
-                center, 0.24f, 0.11f);
+            // 가운데 칸은 흰 테두리 안에 진한 테두리를 겹쳐 짚는다. 연한 보라 한 줄은 빨간 칸 위에서도 배경 칸 위에서도
+            // 눈에 띄지 않았다. 흰색과 진한 색을 겹치면 칸이 어떤 색이든 테두리가 또렷하다.
+            SpriteRenderer rim = Draw.OutlinePanel(board, "TutorialClueRim", new Vector2(1.1f, 1.1f), Color.white, MarkOrder + 1,
+                center, 0.28f, 0.2f);
+            SpriteRenderer ring = Draw.OutlinePanel(board, "TutorialClue", new Vector2(1.02f, 1.02f), Theme.Ink, MarkOrder + 2,
+                center, 0.24f, 0.13f);
+            marks.Add(rim.transform);
             marks.Add(ring.transform);
             if (pulse)
             {
-                Breathe(ring, 0.98f, 1.16f);
+                Breathe(rim, 1.1f, 1.28f);
+                Breathe(ring, 1.02f, 1.2f);
             }
         }
 
@@ -421,9 +427,9 @@ namespace ColorMinesweeper.Game
                 }
 
                 Transform badge = Draw.Node(play.Board.transform, "TutorialFound", play.Board.CellCenter(n) + new Vector2(0.3f, 0.3f));
-                Draw.Sprite(badge, "Back", SpriteFactory.Circle(), Color.white, MarkOrder + 3, Vector2.zero, Vector2.one * 0.46f);
-                Draw.Sprite(badge, "Face", SpriteFactory.Circle(), Theme.Accent, MarkOrder + 4, Vector2.zero, Vector2.one * 0.38f);
-                Draw.Sprite(badge, "Check", check, Color.white, MarkOrder + 5, Vector2.zero, Vector2.one * 0.34f);
+                Draw.Sprite(badge, "Back", SpriteFactory.Circle(), Color.white, MarkOrder + 4, Vector2.zero, Vector2.one * 0.46f);
+                Draw.Sprite(badge, "Face", SpriteFactory.Circle(), Theme.Accent, MarkOrder + 5, Vector2.zero, Vector2.one * 0.38f);
+                Draw.Sprite(badge, "Check", check, Color.white, MarkOrder + 6, Vector2.zero, Vector2.one * 0.34f);
                 marks.Add(badge);
             }
         }
@@ -432,7 +438,7 @@ namespace ColorMinesweeper.Game
         Transform MarkTarget(int cell)
         {
             SpriteRenderer ring = Draw.OutlinePanel(play.Board.transform, "TutorialTarget", Vector2.one, Theme.Highlight,
-                MarkOrder + 2, play.Board.CellCenter(cell), 0.24f, 0.12f);
+                MarkOrder + 3, play.Board.CellCenter(cell), 0.24f, 0.12f);
             marks.Add(ring.transform);
             Breathe(ring, 0.98f, 1.14f);
             return ring.transform;
