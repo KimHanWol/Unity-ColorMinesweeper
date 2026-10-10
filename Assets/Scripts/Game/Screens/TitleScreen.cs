@@ -36,7 +36,7 @@ namespace ColorMinesweeper.Game
         protected override void Build()
         {
             logo = Draw.Node(transform, "Logo");
-            // 로고는 글자가 아니라 판의 칸과 같은 타일로 쌓은 그림이다(언어를 바꿔도 그대로).
+            // 로고는 글자 하나를 칸 하나에 담은 타일 두 줄이다(언어를 바꿔도 그대로).
             PixelLogo.Create(logo, new Vector2(0f, 0.15f), Ui.Safe.width - 1.6f, 60);
             Label.Create(logo, "Tagline", Loc.T("title.tagline"), Theme.SubInk, 60, new Vector2(0f, 0.15f - PixelLogo.Height / 2f - 0.75f),
                 0.38f)
