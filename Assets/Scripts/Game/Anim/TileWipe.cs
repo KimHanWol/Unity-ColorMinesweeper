@@ -14,7 +14,7 @@ namespace ColorMinesweeper.Game
         const float Cell = 1.25f;
         const int Order = 2000;
 
-        /// <summary>대각선으로 번지는 데 걸리는 시간과, 줄마다 조금씩 어긋나게 하는 흔들림.</summary>
+        /// <summary>한쪽 끝에서 반대쪽 끝까지 번지는 데 걸리는 시간과, 도트마다 조금씩 어긋나게 하는 흔들림.</summary>
         const float SweepSeconds = 0.16f;
         const float Jitter = 0.05f;
         const float CoverSeconds = 0.1f;
@@ -22,6 +22,9 @@ namespace ColorMinesweeper.Game
 
         readonly List<Transform> tiles = new List<Transform>();
         readonly List<float> delays = new List<float>();
+
+        /// <summary>도트마다 화면 안에서의 자리(왼쪽 아래 0,0 → 오른쪽 위 1,1). 번지는 모양을 고를 때 쓴다.</summary>
+        readonly List<Vector2> spots = new List<Vector2>();
         UiRoot ui;
         UiButton blocker;
         float longestDelay;
@@ -57,6 +60,7 @@ namespace ColorMinesweeper.Game
             }
 
             Rebuild();
+            PickPattern();
             Busy = true;
             covering = true;
             blocker.enabled = true;
@@ -85,6 +89,7 @@ namespace ColorMinesweeper.Game
         public void OpenFromCovered()
         {
             Rebuild();
+            PickPattern();
             float full = Cell * 1.04f;
             foreach (Transform tile in tiles)
             {
@@ -136,6 +141,7 @@ namespace ColorMinesweeper.Game
 
             tiles.Clear();
             delays.Clear();
+            spots.Clear();
             longestDelay = 0f;
             for (int y = 0; y < rows; y++)
             {
@@ -152,13 +158,50 @@ namespace ColorMinesweeper.Game
 
                     SpriteRenderer tile = Draw.Sprite(transform, "Dot", SpriteFactory.Square(), color, Order, position,
                         Vector2.zero);
-                    // 왼쪽 아래에서 오른쪽 위로 번진다.
-                    float along = (x + (rows - 1 - y)) / (float)(columns + rows - 2);
-                    float delay = along * SweepSeconds + UnityEngine.Random.Range(0f, Jitter);
-                    longestDelay = Mathf.Max(longestDelay, delay);
                     tiles.Add(tile.transform);
-                    delays.Add(delay);
+                    delays.Add(0f);
+                    spots.Add(new Vector2(x / (float)(columns - 1), (rows - 1 - y) / (float)(rows - 1)));
                 }
+            }
+        }
+
+        /// <summary>
+        /// 이번에 번질 모양을 무작위로 고른다: 대각선, 가로, 세로, 가운데에서 바깥으로(또는 반대로), 아무 데서나 흩어져서.
+        /// 방향도 매번 뒤집어서 같은 전환이 연달아 나오는 일이 드물게 한다. 걸리는 시간은 어느 모양이든 같다.
+        /// </summary>
+        void PickPattern()
+        {
+            int pattern = UnityEngine.Random.Range(0, 5);
+            bool flipX = UnityEngine.Random.value < 0.5f;
+            bool flipY = UnityEngine.Random.value < 0.5f;
+            longestDelay = 0f;
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                float x = flipX ? 1f - spots[i].x : spots[i].x;
+                float y = flipY ? 1f - spots[i].y : spots[i].y;
+                float along;
+                switch (pattern)
+                {
+                    case 0:
+                        along = (x + y) / 2f;
+                        break;
+                    case 1:
+                        along = x;
+                        break;
+                    case 2:
+                        along = y;
+                        break;
+                    case 3:
+                        along = Mathf.Clamp01(Vector2.Distance(spots[i], new Vector2(0.5f, 0.5f)) / 0.7071f);
+                        along = flipX ? 1f - along : along;
+                        break;
+                    default:
+                        along = UnityEngine.Random.value;
+                        break;
+                }
+
+                delays[i] = along * SweepSeconds + UnityEngine.Random.Range(0f, Jitter);
+                longestDelay = Mathf.Max(longestDelay, delays[i]);
             }
         }
     }
