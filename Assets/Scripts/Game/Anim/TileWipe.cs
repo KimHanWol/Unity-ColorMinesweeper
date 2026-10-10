@@ -6,8 +6,8 @@ namespace ColorMinesweeper.Game
 {
     /// <summary>
     /// 화면 전환. 화면이 배경색 도트로 잘게 덮이며 사라졌다가(도트 그림이 뭉개지듯), 같은 순서로 도트가 걷히며 다음 화면이
-    /// 나타난다. 도트는 배경과 같은 색이라 벽이 서는 느낌 없이 화면이 배경으로 녹아드는 것처럼 보이고,
-    /// 군데군데 섞인 파스텔 도트가 배경에 떠다니는 타일과 이어진다.
+    /// 나타난다. 번지는 모양(방향)과 덮였을 때 보이는 도트 무늬는 전환할 때마다 무작위로 고른다.
+    /// 무늬는 모두 옅은 파스텔이라 배경에 떠다니는 타일, 로고와 같은 색감으로 이어진다.
     /// </summary>
     public sealed class TileWipe : MonoBehaviour
     {
@@ -20,6 +20,9 @@ namespace ColorMinesweeper.Game
         const float CoverSeconds = 0.1f;
         const float OpenSeconds = 0.13f;
 
+        /// <summary>다 덮인 채로 잠깐 머무는 시간. 무늬가 한눈에 들어올 만큼만 둔다.</summary>
+        const float HoldSeconds = 0.14f;
+
         readonly List<Transform> tiles = new List<Transform>();
         readonly List<float> delays = new List<float>();
 
@@ -29,6 +32,7 @@ namespace ColorMinesweeper.Game
         UiButton blocker;
         float longestDelay;
         int builtColumns;
+        int builtRows;
         Action pending;
         bool covering;
 
@@ -112,10 +116,10 @@ namespace ColorMinesweeper.Game
                 {
                     float s = full * (1f - t);
                     tile.localScale = new Vector3(s, s, 1f);
-                }, Ease.InCubic, 0.04f + delays[i]);
+                }, Ease.InCubic, HoldSeconds + delays[i]);
             }
 
-            Tween.Delay(this, 0.04f + longestDelay + OpenSeconds, () =>
+            Tween.Delay(this, HoldSeconds + longestDelay + OpenSeconds, () =>
             {
                 Busy = false;
                 blocker.enabled = false;
@@ -134,6 +138,7 @@ namespace ColorMinesweeper.Game
             }
 
             builtColumns = columns;
+            builtRows = rows;
             foreach (Transform tile in tiles)
             {
                 Destroy(tile.gameObject);
@@ -202,6 +207,53 @@ namespace ColorMinesweeper.Game
 
                 delays[i] = along * SweepSeconds + UnityEngine.Random.Range(0f, Jitter);
                 longestDelay = Mathf.Max(longestDelay, delays[i]);
+            }
+
+            Repaint();
+        }
+
+        /// <summary>
+        /// 덮였을 때 보이는 화면도 매번 무작위로 칠한다: 배경색 도트, 파스텔 한 색의 농담, 다섯 색 모자이크,
+        /// 대각선 줄무늬, 두 색 체크. 색은 모두 <see cref="Theme.Pastels"/> 를 흰색 쪽으로 옅게 해서 쓴다.
+        /// </summary>
+        void Repaint()
+        {
+            Color[] pastels = Theme.Pastels;
+            int look = UnityEngine.Random.Range(0, 5);
+            int first = UnityEngine.Random.Range(0, pastels.Length);
+            int second = (first + UnityEngine.Random.Range(1, pastels.Length)) % pastels.Length;
+            for (int i = 0; i < tiles.Count; i++)
+            {
+                int gx = Mathf.RoundToInt(spots[i].x * (builtColumns - 1));
+                int gy = Mathf.RoundToInt(spots[i].y * (builtRows - 1));
+                Color color;
+                switch (look)
+                {
+                    case 0:
+                        color = Color.Lerp(Theme.BackgroundBottom, Theme.BackgroundTop, spots[i].y);
+                        color = Color.Lerp(color, Color.white, UnityEngine.Random.Range(0f, 0.35f));
+                        if (UnityEngine.Random.value < 0.14f)
+                        {
+                            color = Color.Lerp(color, pastels[UnityEngine.Random.Range(0, pastels.Length)], 0.4f);
+                        }
+
+                        break;
+                    case 1:
+                        color = Color.Lerp(pastels[first], Color.white, UnityEngine.Random.Range(0.25f, 0.65f));
+                        break;
+                    case 2:
+                        color = Color.Lerp(pastels[UnityEngine.Random.Range(0, pastels.Length)], Color.white,
+                            UnityEngine.Random.Range(0.3f, 0.5f));
+                        break;
+                    case 3:
+                        color = Color.Lerp(pastels[(first + (gx + gy) / 2) % pastels.Length], Color.white, 0.4f);
+                        break;
+                    default:
+                        color = Color.Lerp(pastels[(gx + gy) % 2 == 0 ? first : second], Color.white, 0.45f);
+                        break;
+                }
+
+                tiles[i].GetComponent<SpriteRenderer>().color = color;
             }
         }
     }
