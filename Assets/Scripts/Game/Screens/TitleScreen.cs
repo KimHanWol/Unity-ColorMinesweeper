@@ -10,7 +10,10 @@ namespace ColorMinesweeper.Game
     /// </summary>
     public sealed class TitleScreen : ScreenBase
     {
-        const float HeroTile = 0.78f;
+        const float HeroTile = 0.9f;
+
+        /// <summary>하트 판의 가운데(화면 가운데 기준). 로고 아래 문구와 버튼 사이의 한가운데에 오게 한다.</summary>
+        const float HeroOffsetY = -0.1f;
         const float LoopSeconds = 5.5f;
 
         /// <summary>메인 화면 하트. '.' 은 배경, R 빨강, P 분홍(반짝임).</summary>
@@ -54,7 +57,7 @@ namespace ColorMinesweeper.Game
         {
             Rect safe = Ui.Safe;
             logo.localPosition = new Vector3(safe.center.x, safe.yMax - 3.4f, 0f);
-            hero.localPosition = new Vector3(safe.center.x, safe.center.y + 0.9f, 0f);
+            hero.localPosition = new Vector3(safe.center.x, safe.center.y + HeroOffsetY, 0f);
             menu.localPosition = new Vector3(safe.center.x, safe.yMin + 3.6f, 0f);
             settingsButton.localPosition = new Vector3(safe.xMax - 1.05f, safe.yMax - 1.05f, 0f);
         }
@@ -175,7 +178,7 @@ namespace ColorMinesweeper.Game
 
             float bob = Mathf.Sin(Time.unscaledTime * 1.6f) * 0.08f;
             Vector3 hp = hero.localPosition;
-            hero.localPosition = new Vector3(hp.x, Ui.Safe.center.y + 0.9f + bob, 0f);
+            hero.localPosition = new Vector3(hp.x, Ui.Safe.center.y + HeroOffsetY + bob, 0f);
         }
     }
 }
