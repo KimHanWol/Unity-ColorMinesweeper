@@ -603,7 +603,12 @@ namespace ColorMinesweeper.Game
             Transform share = null;
             share = UiKit.Button(card, "Share", Loc.T("clear.share"), Icons.Share, Theme.HiddenTile, Theme.Ink, half,
                 new Vector2(1.475f, rowY), order,
-                () => Share.Screen(this, new[] { next, list, share }, new[] { brand }, ShareText(stars))).transform;
+                () => Share.Screen(this, new[]
+                {
+                    // 위쪽 막대의 버튼도 같이 숨겨서 그림과 결과만 남긴다(제목과 하트는 둔다).
+                    next, list, share, hud.transform.Find("Back"), hud.transform.Find("Settings"),
+                    hintButton != null ? hintButton.transform : null,
+                }, new[] { brand }, ShareText(stars))).transform;
         }
 
         /// <summary>완성 축하: 배경에 떠다니는 것과 같은 파스텔 타일이 색종이처럼 쏟아진다(결과 카드보다 뒤).</summary>
