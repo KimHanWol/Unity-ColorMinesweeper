@@ -135,15 +135,18 @@ namespace ColorMinesweeper.Game
             ["tut.pick.detail"] = new[] { "아래에서 반짝이는 색을 눌러 보세요.", "Tap the glowing color below." },
             ["tut.self.title"] = new[] { "이번엔 직접 찾아봐요", "Now find it yourself" },
             // {0}=주변 칸 수, {1}=색, {2}=숫자, {3}=체크한 칸, {4}=남은 칸
-            ["tut.self.none"] = new[] { "주변 {0}칸 중 {1}은 {2}칸이에요. 아직 하나도 안 보이니 {2}칸을 찾아야 해요.", "{2} of the {0} cells around it are {1}. None are showing yet, so find all {2}." },
-            ["tut.self.some"] = new[] { "주변 {0}칸 중 {1}은 {2}칸이에요. 체크한 {3}칸을 빼면 {4}칸이 남았죠.", "{2} of the {0} cells around it are {1}. Minus the {3} checked, {4} are left." },
+            ["tut.self.none"] = new[] { "숫자 {2}! 주변 {0}칸 중 {1}이 {2}칸이라는 뜻이에요. 아직 하나도 안 보이니 {2}칸을 찾아야 해요.", "The number is {2}, so {2} of the {0} cells around it are {1}. None are showing yet, so find all {2}." },
+            ["tut.self.some"] = new[] { "숫자 {2}! 주변 {0}칸 중 {1}이 {2}칸이라는 뜻이에요. 체크한 {3}칸을 빼면 {4}칸이 남았죠.", "The number is {2}, so {2} of the {0} cells around it are {1}. Minus the {3} checked, {4} are left." },
             ["tut.self.todo"] = new[] { "나머지 {0}칸은 어디일까요? 눌러서 칠해 보세요", "Where are the other {0}? Tap to paint them" },
-            ["tut.here.one"] = new[] { "여기가 {0}이에요!", "This one is {0}!" },
-            ["tut.here.many"] = new[] { "여기 {0}칸은 모두 {1}이에요!", "These {0} are all {1}!" },
-            // {0}=주변 칸 수, {1}=색, {2}=숫자
-            ["tut.need"] = new[] { "주변 {0}칸 중 {1}은 {2}칸이에요. ", "{2} of the {0} cells around it are {1}. " },
-            ["tut.reason.none"] = new[] { "아직 하나도 안 보이는데, 가려진 칸이 딱 {0}칸이죠!", "None are showing yet, and exactly {0} are still hidden!" },
-            ["tut.reason.some"] = new[] { "체크한 {0}칸을 빼면 {1}칸이 남았는데, 가려진 칸이 딱 {2}칸이죠!", "Minus the {0} checked, {1} are left, and exactly {2} are hidden!" },
+            // 숫자의 뜻부터 알려 준다. {0}=숫자, {1}=주변 칸 수, {2}=색
+            ["tut.number.title"] = new[] { "가운데 숫자 {0}, 보이나요?", "See the {0} in the middle?" },
+            ["tut.number.detail"] = new[] { "숫자는 그 칸을 둘러싼 {1}칸 중 {2}이 몇 칸인지 알려 줘요. 여기는 {0}칸이죠.", "A number tells how many of the {1} cells around it are {2}. Here it's {0}." },
+            // 숫자에서 결론까지. {0}=숫자, {1}=가려진 칸 또는 체크한 칸
+            ["tut.guide.title.none"] = new[] { "숫자는 {0}, 가려진 칸도 딱 {1}칸!", "Number {0}, exactly {1} hidden!" },
+            ["tut.guide.title.some"] = new[] { "숫자는 {0}, 체크한 칸은 {1}칸!", "Number {0}, {1} checked!" },
+            // {0}=색, {1}=숫자(none) 또는 남은 칸(some), {2}=가려진 칸
+            ["tut.guide.detail.none"] = new[] { "{0}이 {1}칸 있어야 하는데 가려진 칸이 딱 {2}칸이니, 가려진 칸은 전부 {0}이에요.", "{1} must be {0} and exactly {2} are hidden, so every hidden one is {0}." },
+            ["tut.guide.detail.some"] = new[] { "{0}이 {1}칸 더 있어야 하는데 가려진 칸이 딱 {2}칸이니, 가려진 칸은 전부 {0}이에요.", "{1} more must be {0} and exactly {2} are hidden, so every hidden one is {0}." },
             ["tut.todo.one"] = new[] { "반짝이는 칸을 눌러서 칠해 보세요", "Tap the glowing cell to paint it" },
             ["tut.todo.many"] = new[] { "반짝이는 칸을 모두 눌러서 칠해 보세요", "Tap every glowing cell to paint them" },
             ["tut.free.title"] = new[] { "이제 혼자 해 봐요!", "Now try it on your own!" },

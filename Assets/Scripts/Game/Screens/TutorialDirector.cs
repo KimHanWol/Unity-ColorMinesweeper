@@ -8,7 +8,7 @@ namespace ColorMinesweeper.Game
     /// 처음 시작하기를 누르면 보여 주는 튜토리얼. 5x5 연습 판(1색 하트) 위에서 말풍선으로 규칙을 안내하고,
     /// 솔버의 <see cref="Solver.Hint"/> 로 "지금 칠할 수 있는 칸과 그 근거"를 실제 숫자로 짚어 준다.
     ///
-    /// 흐름: 소개 → 팔레트 설명 → 짚어 주는 추론 한 번 → 근거만 비추고 스스로 찾기 → 배경도 색이라는 것
+    /// 흐름: 소개 → 팔레트 설명 → 숫자의 뜻 → 짚어 주는 추론 한 번 → 근거만 비추고 스스로 찾기 → 배경도 색이라는 것
     /// → 혼자서 끝까지 → 완성하면 이름 공개 안내. 진행 기록에는 남기지 않는다.
     ///
     /// 짚는 방식: 판 전체를 어둡게 하고 근거 칸의 3x3 만 밝게 비춘다(둘레 8칸에서 센다는 것이 한눈에 보이게).
@@ -59,6 +59,7 @@ namespace ColorMinesweeper.Game
         int targetColor = -1;
         int guidedDone;
         bool backgroundTaught;
+        bool numberExplained;
         readonly HashSet<int> allowed = new HashSet<int>();
         Deduction current;
         string currentColorName;
@@ -184,7 +185,19 @@ namespace ColorMinesweeper.Game
             int remaining = total - opened;
             bool background = hint.Color == stage.BackgroundColor;
             string colorName = background ? Loc.T("color.background") : ColorNames.Describe(stage.Colors[hint.Color].Color);
-            Spotlight(hint.Clue);
+            if (guidedDone == 0 && !background && !numberExplained)
+            {
+                // 맨 처음에는 결론보다 먼저 숫자가 무슨 뜻인지부터 알려 준다(가운데 숫자가 숨 쉬고, 칠할 칸은 아직 짚지 않는다).
+                numberExplained = true;
+                phase = Phase.Talking;
+                Spotlight(hint.Clue, true);
+                AnchorArea(hint.Clue);
+                bubble.Show(Loc.F("tut.number.title", total), Loc.F("tut.number.detail", total, around, colorName),
+                    () => Guide(hint));
+                return;
+            }
+
+            Spotlight(hint.Clue, false);
             MarkFound(hint.Clue, hint.Color);
 
             allowed.Clear();
@@ -208,12 +221,14 @@ namespace ColorMinesweeper.Game
                 targetMarks[cell] = MarkTarget(cell);
             }
 
-            // 굵은 줄은 결론, 옅은 줄은 세는 순서, 보라 줄은 할 일. 색 이름은 모두 받침이 있어 "이", "으로" 를 쓴다.
-            string title = hidden == 1 ? Loc.F("tut.here.one", colorName) : Loc.F("tut.here.many", hidden, colorName);
-            string need = Loc.F("tut.need", around, colorName, total);
+            // 굵은 줄은 가운데 숫자에서 출발하는 근거, 옅은 줄은 거기서 나오는 결론, 보라 줄은 할 일.
+            // 색 이름은 모두 받침이 있어 "이" 를 쓴다.
+            string title = opened == 0
+                ? Loc.F("tut.guide.title.none", total, hidden)
+                : Loc.F("tut.guide.title.some", total, opened);
             string detail = opened == 0
-                ? need + Loc.F("tut.reason.none", hidden)
-                : need + Loc.F("tut.reason.some", opened, remaining, hidden);
+                ? Loc.F("tut.guide.detail.none", colorName, total, hidden)
+                : Loc.F("tut.guide.detail.some", colorName, remaining, hidden);
             bubble.Show(title, detail, null, Loc.T(hidden == 1 ? "tut.todo.one" : "tut.todo.many"));
         }
 
@@ -362,7 +377,8 @@ namespace ColorMinesweeper.Game
         /// <summary>
         /// 판 전체를 어둡게 하고 근거 칸의 3x3 만 밝게 남긴다. 가운데(근거) 칸만 보라 테두리로 짚는다.
         /// </summary>
-        void Spotlight(int clue)
+        /// <param name="pulse">가운데 테두리가 숨 쉬게 한다(숫자를 보라고 할 때).</param>
+        void Spotlight(int clue, bool pulse)
         {
             Stage stage = play.Stage;
             Transform board = play.Board.transform;
@@ -383,8 +399,13 @@ namespace ColorMinesweeper.Game
             // 3x3 을 감싸는 큰 테두리는 두지 않는다. 밝은 칸과 가린 칸의 경계에 걸쳐 쪽마다 굵기가 달라 보였다.
             // 가린 조각끼리 살짝 겹쳐 밝은 창의 가장자리가 곧은 선이 되게 하는 것으로 영역을 보여 준다.
             Vector2 center = play.Board.CellCenter(clue);
-            marks.Add(Draw.OutlinePanel(board, "TutorialClue", new Vector2(0.98f, 0.98f), Theme.Accent, MarkOrder + 1, center,
-                0.24f, 0.11f).transform);
+            SpriteRenderer ring = Draw.OutlinePanel(board, "TutorialClue", new Vector2(0.98f, 0.98f), Theme.Accent, MarkOrder + 1,
+                center, 0.24f, 0.11f);
+            marks.Add(ring.transform);
+            if (pulse)
+            {
+                Breathe(ring, 0.98f, 1.16f);
+            }
         }
 
         /// <summary>주변 8칸 중 이미 보이는 같은 색 칸에 체크 표시를 단다("이미 찾은 칸"을 셀 수 있게).</summary>
