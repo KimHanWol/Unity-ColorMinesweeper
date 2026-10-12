@@ -79,15 +79,19 @@ namespace ColorMinesweeper.Game
             SpriteRenderer dim;
             float dimAlpha;
 
+            /// <summary>카드가 화면 폭보다 넓으면 이 비율로 줄여서 띄운다(폭이 아주 좁은 화면).</summary>
+            float fit = 1f;
+
             public void Close(Action done = null)
             {
                 Transform card = Card;
                 SpriteRenderer shade = dim;
                 Transform root = Root;
                 Sfx.Instance?.Close();
+                float scale = fit;
                 Tween.Run(root, 0.2f, t =>
                 {
-                    card.localScale = Vector3.one * Mathf.Lerp(1f, 0.85f, t);
+                    card.localScale = Vector3.one * (scale * Mathf.Lerp(1f, 0.85f, t));
                     Draw.SetAlpha(shade, Mathf.Lerp(dimAlpha, 0f, t));
                     foreach (SpriteRenderer r in card.GetComponentsInChildren<SpriteRenderer>())
                     {
@@ -111,6 +115,7 @@ namespace ColorMinesweeper.Game
             public static Modal Open(Transform parent, UiRoot ui, Vector2 cardSize, int order, bool dimBackground = true)
             {
                 var modal = new Modal { CardSize = cardSize, dimAlpha = dimBackground ? Theme.Dim.a : 0f };
+                modal.fit = Mathf.Min(1f, (ui.Safe.width - 0.3f) / cardSize.x);
                 Sfx.Instance?.Open();
                 modal.Root = Draw.Node(parent, "Modal");
                 modal.dim = Draw.Sprite(modal.Root, "Dim", SpriteFactory.Square(), Theme.WithAlpha(Theme.Dim, 0f), order,
@@ -127,10 +132,11 @@ namespace ColorMinesweeper.Game
 
                 SpriteRenderer shade = modal.dim;
                 Transform card = modal.Card;
-                card.localScale = Vector3.one * 0.8f;
+                float fit = modal.fit;
+                card.localScale = Vector3.one * (0.8f * fit);
                 float targetAlpha = modal.dimAlpha;
                 Tween.Run(shade, 0.25f, t => Draw.SetAlpha(shade, targetAlpha * t));
-                Tween.Run(card, 0.4f, t => card.localScale = Vector3.one * Mathf.LerpUnclamped(0.8f, 1f, t), Ease.OutBack);
+                Tween.Run(card, 0.4f, t => card.localScale = Vector3.one * (fit * Mathf.LerpUnclamped(0.8f, 1f, t)), Ease.OutBack);
                 return modal;
             }
         }

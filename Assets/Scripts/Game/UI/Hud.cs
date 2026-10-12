@@ -25,16 +25,26 @@ namespace ColorMinesweeper.Game
             UiKit.IconButton(root, "Settings", Icons.Settings, new Vector2(half - 1.05f, 0f),
                 100, onSettings);
 
-            hud.title = Label.Create(root, "Name", title, Theme.Ink, 100, new Vector2(0f, 0.32f), 0.58f,
+            // 제목과 하트는 가운데에 둔다. 다만 폭이 아주 좁은 화면(접는 폰의 바깥 화면 등)에서는 가운데에 두면
+            // 오른쪽의 힌트 버튼과 겹치므로, 뒤로 버튼과 힌트 버튼 사이의 가운데로 옮긴다.
+            float room = ui.Safe.width - 6.6f;
+            float centerX = 0f;
+            if (room < 3f)
+            {
+                centerX = -0.72f;
+                room = ui.Safe.width - 5.3f;
+            }
+
+            hud.title = Label.Create(root, "Name", title, Theme.Ink, 100, new Vector2(centerX, 0.32f), 0.58f,
                 TextAnchor.MiddleCenter, true)
-                .FitWidth(Mathf.Max(2f, ui.Safe.width - 6.6f));
+                .FitWidth(Mathf.Max(2f, room));
 
             Sprite heart = Icons.Heart;
             hud.hearts = new SpriteRenderer[PuzzleSession.MaxLives];
             for (int i = 0; i < hud.hearts.Length; i++)
             {
                 hud.hearts[i] = Draw.Sprite(root, "Heart" + i, heart, Theme.Danger, 100,
-                    new Vector2((i - (hud.hearts.Length - 1) / 2f) * 0.62f, -0.45f), new Vector2(HeartSize, HeartSize));
+                    new Vector2(centerX + (i - (hud.hearts.Length - 1) / 2f) * 0.62f, -0.45f), new Vector2(HeartSize, HeartSize));
             }
 
             return hud;
