@@ -33,7 +33,6 @@ namespace ColorMinesweeper.Game
         Transform hero;
         Transform menu;
         Transform logo;
-        Transform settingsButton;
         float loopTime;
 
         protected override void Build()
@@ -47,8 +46,6 @@ namespace ColorMinesweeper.Game
 
             BuildHero();
             BuildMenu();
-            settingsButton = UiKit.IconButton(transform, "Settings", Icons.Settings,
-                Vector2.zero, 80, () => SettingsPanel.Open(transform, Ui, 300, null, true)).transform;
             Layout();
             PlayEntrance();
         }
@@ -59,7 +56,6 @@ namespace ColorMinesweeper.Game
             logo.localPosition = new Vector3(safe.center.x, safe.yMax - 3.4f, 0f);
             hero.localPosition = new Vector3(safe.center.x, safe.center.y + HeroOffsetY, 0f);
             menu.localPosition = new Vector3(safe.center.x, safe.yMin + 3.6f, 0f);
-            settingsButton.localPosition = new Vector3(safe.xMax - 1.05f, safe.yMax - 1.05f, 0f);
         }
 
         void BuildHero()
