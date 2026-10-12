@@ -209,7 +209,9 @@ namespace ColorMinesweeper.Game
             trackTop = safe.yMax - HeaderHeight - 0.35f;
             trackHeight = trackTop - (safe.yMin + 0.4f);
             bar.gameObject.SetActive(maxScroll > 0f);
-            bar.localPosition = new Vector3(safe.xMax - 0.38f, trackTop - trackHeight / 2f, 0f);
+            // 막대는 목록 바로 오른쪽에 붙인다. 화면이 넓어도(태블릿) 가장자리로 멀리 떨어지지 않게.
+            float gridRight = content.localPosition.x + (Columns * CardSize.x + (Columns - 1) * Gap) * gridScale / 2f;
+            bar.localPosition = new Vector3(Mathf.Min(safe.xMax - 0.38f, gridRight + 0.42f), trackTop - trackHeight / 2f, 0f);
             track.size = new Vector2(0.16f, trackHeight);
             barButton.Size = new Vector2(1f, trackHeight);
             float fraction = maxScroll > 0f ? scroll / maxScroll : 0f;
