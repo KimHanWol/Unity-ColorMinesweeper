@@ -18,6 +18,21 @@ namespace ColorMinesweeper.Game
         Transform content;
 
         /// <summary>
+        /// 오른쪽 가장자리의 스크롤 막대. 손잡이를 잡고 끌면 300개가 넘는 목록을 한 번에 훑을 수 있고,
+        /// 끄는 동안에는 지금 보이는 스테이지 번호를 손잡이 옆에 띄운다. 버튼과 같은 모양(흰 면에 아래 단면)이다.
+        /// </summary>
+        const float BarRoom = 0.5f;
+        const float ThumbHeight = 1.5f;
+        Transform bar;
+        SpriteRenderer track;
+        Transform thumb;
+        UiButton barButton;
+        Transform bubble;
+        PixelText bubbleText;
+        float trackTop;
+        float trackHeight;
+
+        /// <summary>
         /// 만든 카드(아직 안 만든 칸은 null). 300장을 한꺼번에 만들면 화면을 열 때 버벅여서, 보이는 줄 근처만 그때그때 만들고
         /// 멀어진 카드는 꺼 둔다(그리기와 버튼 검사에서도 빠진다).
         /// </summary>
@@ -73,6 +88,7 @@ namespace ColorMinesweeper.Game
             }
 
             content = Draw.Node(transform, "Content");
+            BuildScrollBar();
             int unlockedNow = 0;
             for (int i = 0; i < StageCatalog.All.Count; i++)
             {
@@ -154,14 +170,67 @@ namespace ColorMinesweeper.Game
             header.localPosition = new Vector3(safe.center.x, safe.yMax - HeaderHeight / 2f, 0f);
             int rows = (StageCatalog.All.Count + Columns - 1) / Columns;
             float gridWidth = Columns * CardSize.x + (Columns - 1) * Gap;
-            gridScale = Mathf.Min(1f, (safe.width - 0.6f) / gridWidth);
+            // 오른쪽에 스크롤 막대 자리를 남기고, 목록은 그만큼 왼쪽으로 붙인다.
+            gridScale = Mathf.Min(1f, (safe.width - 0.6f - BarRoom) / gridWidth);
             content.localScale = new Vector3(gridScale, gridScale, 1f);
             float contentHeight = rows * (CardSize.y + Gap) * gridScale;
             float visible = safe.height - HeaderHeight;
             maxScroll = Mathf.Max(0f, contentHeight - visible + 0.8f);
             scroll = Mathf.Clamp(scroll, 0f, maxScroll);
-            content.localPosition = new Vector3(safe.center.x, safe.yMax - HeaderHeight - 0.3f + scroll, 0f);
+            content.localPosition = new Vector3(safe.center.x - BarRoom / 2f, safe.yMax - HeaderHeight - 0.3f + scroll, 0f);
+            LayoutScrollBar(safe);
             ShowCardsNear(visible);
+        }
+
+        void BuildScrollBar()
+        {
+            bar = Draw.Node(transform, "ScrollBar");
+            track = Draw.Panel(bar, "Track", new Vector2(0.16f, 1f), Theme.WithAlpha(Theme.Locked, 0.55f), 140, Vector2.zero, 0.08f);
+            thumb = Draw.Node(bar, "Thumb");
+            Draw.Panel(thumb, "Under", new Vector2(0.34f, ThumbHeight), Theme.Locked, 141, new Vector2(0f, -0.08f), 0.17f);
+            Draw.Panel(thumb, "Face", new Vector2(0.34f, ThumbHeight), Theme.Accent, 142, Vector2.zero, 0.17f);
+
+            bubble = Draw.Node(thumb, "Bubble", new Vector2(-1.25f, 0f));
+            Draw.Panel(bubble, "Under", new Vector2(1.5f, 0.9f), Theme.Locked, 143, new Vector2(0f, -0.08f), 0.4f);
+            Draw.Panel(bubble, "Face", new Vector2(1.5f, 0.9f), Color.white, 144, Vector2.zero, 0.4f);
+            bubbleText = PixelText.Create(bubble, "Number", "1", Theme.Ink, 145, Vector2.zero, 0.36f);
+            bubble.gameObject.SetActive(false);
+
+            // 막대는 가늘지만 잡는 자리는 손가락 폭만큼 넓게 둔다.
+            barButton = UiButton.Attach(bar, new Vector2(1f, 1f), 140, null);
+            barButton.Pressable = false;
+            barButton.Silent = true;
+            barButton.OnDragTo = DragBarTo;
+            barButton.OnDragEnd = () => bubble.gameObject.SetActive(false);
+        }
+
+        void LayoutScrollBar(Rect safe)
+        {
+            trackTop = safe.yMax - HeaderHeight - 0.35f;
+            trackHeight = trackTop - (safe.yMin + 0.4f);
+            bar.gameObject.SetActive(maxScroll > 0f);
+            bar.localPosition = new Vector3(safe.xMax - 0.38f, trackTop - trackHeight / 2f, 0f);
+            track.size = new Vector2(0.16f, trackHeight);
+            barButton.Size = new Vector2(1f, trackHeight);
+            float fraction = maxScroll > 0f ? scroll / maxScroll : 0f;
+            thumb.localPosition = new Vector3(0f, trackHeight / 2f - ThumbHeight / 2f - fraction * (trackHeight - ThumbHeight), 0f);
+            if (bubble.gameObject.activeSelf)
+            {
+                // 맨 윗줄에 보이는 스테이지 번호.
+                int row = Mathf.FloorToInt(scroll / ((CardSize.y + Gap) * gridScale) + 0.5f);
+                bubbleText.SetText(Mathf.Clamp(row * Columns + 1, 1, StageCatalog.All.Count).ToString());
+            }
+        }
+
+        /// <summary>막대의 누른 자리(UI 좌표)로 손잡이 가운데를 옮기고 목록을 그만큼 넘긴다.</summary>
+        void DragBarTo(Vector2 world)
+        {
+            float y = transform.InverseTransformPoint(world).y;
+            float fraction = Mathf.Clamp01((trackTop - ThumbHeight / 2f - y) / (trackHeight - ThumbHeight));
+            velocity = 0f;
+            bubble.gameObject.SetActive(true);
+            scroll = fraction * maxScroll;
+            Layout();
         }
 
         /// <summary>지금 보이는 줄과 그 위아래 몇 줄의 카드를 만들어 켜고, 멀리 있는 카드는 끈다.</summary>
