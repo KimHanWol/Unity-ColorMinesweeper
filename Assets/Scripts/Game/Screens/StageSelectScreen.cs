@@ -270,21 +270,12 @@ namespace ColorMinesweeper.Game
                 float size = pictureSize.x * 0.84f;
                 Draw.Sprite(visual, "Picture", SpriteFactory.StagePicture(stage), Color.white, 13, pictureCenter,
                     new Vector2(size, size));
-                // 그림 위에 번호를 얹으면 그림 색에 묻혀서, 아래 줄에 번호(왼쪽)와 별(오른쪽)을 나란히 둔다.
-                PixelText.Create(visual, "Number", (index + 1).ToString(), Theme.Ink, 14,
-                    infoLine + new Vector2(-0.8f, 0f), 0.3f);
-                Sprite star = Icons.Star;
-                for (int i = 0; i < 3; i++)
-                {
-                    Draw.Sprite(visual, "Star" + i, star, i < stars ? Theme.Gold : Theme.Locked, 12,
-                        infoLine + new Vector2(0.35f + (i - 1) * 0.44f, 0f), new Vector2(0.42f, 0.42f));
-                }
             }
             else if (unlocked)
             {
+                // 이번에 깰 차례: 가려진 판 위에 재생 표시만 둔다(판 크기는 들어가면 보이므로 적지 않는다).
                 Draw.Panel(visual, "PictureBack", pictureSize, Theme.HiddenTile, 12, pictureCenter, 0.3f);
-                PixelText.Create(visual, "Number", (index + 1).ToString(), Color.white, 13, pictureCenter, 0.7f);
-                PixelText.Create(visual, "Size", stage.Width + "x" + stage.Height, Theme.SubInk, 12, infoLine, 0.26f);
+                Draw.Sprite(visual, "Play", Icons.Play, Color.white, 13, pictureCenter, new Vector2(0.8f, 0.8f));
             }
             else
             {
@@ -292,6 +283,18 @@ namespace ColorMinesweeper.Game
                 Draw.Sprite(visual, "Lock", Icons.Lock, Color.white, 13, pictureCenter,
                     new Vector2(0.7f, 0.7f));
             }
+
+            // 아래 줄은 어느 카드나 같다: 번호(왼쪽)와 별 셋(오른쪽). 아직 못 깬 스테이지는 빈 별로 둔다.
+            // 그림 위에 번호를 얹으면 그림 색에 묻혀서 번호는 늘 아래 줄에 둔다. 잠긴 카드는 번호도 옅게 한다.
+            PixelText.Create(visual, "Number", (index + 1).ToString(), unlocked ? Theme.Ink : Theme.SubInk, 14,
+                infoLine + new Vector2(-0.8f, 0f), 0.3f);
+            Sprite star = Icons.Star;
+            for (int i = 0; i < 3; i++)
+            {
+                Draw.Sprite(visual, "Star" + i, star, i < stars ? Theme.Gold : Theme.Locked, 12,
+                    infoLine + new Vector2(0.35f + (i - 1) * 0.44f, 0f), new Vector2(0.42f, 0.42f));
+            }
+
             if (unlocked && stars == 0 && index >= seenUnlocked)
             {
                 PlayUnlock(visual, pictureSize, pictureCenter, newlyUnlockedShown++);
