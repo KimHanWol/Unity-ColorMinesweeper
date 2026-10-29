@@ -17,11 +17,29 @@ namespace ColorMinesweeper.Game
         Color color = Color.white;
         Color? outlineColor;
         int order;
+        bool round;
 
         public static PixelText Create(Transform parent, string name, string text, Color color, int order,
             Vector2 localPosition, float height)
         {
             return Create(parent, name, text, color, order, localPosition, height, null);
+        }
+
+        /// <summary>
+        /// 둥근 숫자(<see cref="RoundDigits"/>)로 그린다. 판의 숫자처럼 크게 보이는 곳에 쓴다. 숫자가 아닌 글자는 도트로 그린다.
+        /// </summary>
+        public static PixelText CreateRound(Transform parent, string name, string text, Color color, int order,
+            Vector2 localPosition, float height, Color? outline = null)
+        {
+            Transform t = Draw.Node(parent, name, localPosition);
+            t.localScale = new Vector3(height, height, 1f);
+            var pixelText = t.gameObject.AddComponent<PixelText>();
+            pixelText.color = color;
+            pixelText.outlineColor = outline;
+            pixelText.order = order;
+            pixelText.round = RoundDigits.Available;
+            pixelText.SetText(text);
+            return pixelText;
         }
 
         /// <param name="outline">테두리 색. 테두리는 order - 1 에 그린다.</param>
@@ -38,7 +56,9 @@ namespace ColorMinesweeper.Game
             return pixelText;
         }
 
-        public float Width => text.Length * Advance - (text.Length > 0 ? 1f / 7f : 0f);
+        float Step => round ? RoundDigits.Advance : Advance;
+
+        public float Width => round ? text.Length * Step : text.Length * Advance - (text.Length > 0 ? 1f / 7f : 0f);
 
         public void SetText(string value)
         {
@@ -58,7 +78,7 @@ namespace ColorMinesweeper.Game
                 }
             }
 
-            float x = -Width / 2f + 5f / 14f;
+            float x = round ? -Width / 2f + Step / 2f : -Width / 2f + 5f / 14f;
             for (int i = 0; i < glyphs.Count; i++)
             {
                 bool used = i < text.Length && PixelGlyphs.HasGlyph(text[i]);
@@ -73,12 +93,13 @@ namespace ColorMinesweeper.Game
                     continue;
                 }
 
-                var position = new Vector3(x + i * Advance, 0f, 0f);
-                glyphs[i].sprite = PixelGlyphs.Digit(text[i]);
+                var position = new Vector3(x + i * Step, 0f, 0f);
+                bool roundGlyph = round && RoundDigits.HasGlyph(text[i]);
+                glyphs[i].sprite = roundGlyph ? RoundDigits.Digit(text[i]) : PixelGlyphs.Digit(text[i]);
                 glyphs[i].transform.localPosition = position;
                 if (i < outlines.Count)
                 {
-                    outlines[i].sprite = PixelGlyphs.Outline(text[i]);
+                    outlines[i].sprite = roundGlyph ? RoundDigits.Outline(text[i]) : PixelGlyphs.Outline(text[i]);
                     outlines[i].transform.localPosition = position;
                 }
             }

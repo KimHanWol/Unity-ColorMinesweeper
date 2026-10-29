@@ -82,7 +82,7 @@ namespace ColorMinesweeper.Game
                     Remaining = total,
                     Root = root,
                     // 테두리는 밝은 색이면 진한 잉크, 진한 색(남색 등)이면 흰색으로 둘러 어느 칸 위에서도 숫자 윤곽이 보이게 한다.
-                    Digit = PixelText.Create(root, "Digit", total.ToString(), Theme.ToColor(rgb), 22, Vector2.zero, 0.78f,
+                    Digit = PixelText.CreateRound(root, "Digit", total.ToString(), Theme.ToColor(rgb), 22, Vector2.zero, 0.72f,
                         Theme.InkOn(rgb)),
                     RestScale = root.localScale,
                 });

@@ -94,7 +94,7 @@ namespace ColorMinesweeper.Game
             };
             // 밝은 색(흰색, 배경 크림색)은 흰 바탕에 묻히므로 얇은 회색 테두리를 둔다.
             Shape(visual, "Edge", new Color(0f, 0f, 0f, 0.1f), 93, SwatchSize + 0.06f);
-            swatch.Count = PixelText.Create(visual, "Count", "0", Theme.InkOn(rgb), 95, Vector2.zero, 0.34f);
+            swatch.Count = PixelText.CreateRound(visual, "Count", "0", Theme.InkOn(rgb), 95, Vector2.zero, 0.4f);
             if (background)
             {
                 // 배경색은 단서 칩에 나오지 않는다. 모양(네모)과 이름으로 다른 색과 구분한다.
