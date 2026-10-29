@@ -13,6 +13,9 @@ namespace ColorMinesweeper.Game
         SpriteRenderer[] hearts;
         Label title;
 
+        /// <summary>이름을 공개할 때 쓰는 제목 폭. 다 풀면 힌트 버튼을 치우므로 뒤로·설정 버튼 사이를 다 쓴다.</summary>
+        float revealedRoom;
+
         /// <summary>위쪽 버튼(뒤로, 힌트, 설정)의 원래 크기, 화면 가장자리와의 여백, 버튼 사이 간격.</summary>
         const float ButtonSize = 1.3f;
         const float EdgeMargin = 0.4f;
@@ -50,6 +53,7 @@ namespace ColorMinesweeper.Game
 
             float buttonSize = ButtonSize * scale;
             float room = 2f * (half - EdgeMargin - 2f * buttonSize - ButtonGap - 0.15f);
+            hud.revealedRoom = 2f * (half - EdgeMargin - buttonSize - 0.2f);
             hud.title = Label.Create(root, "Name", title, Theme.Ink, 100, new Vector2(0f, 0.32f), 0.58f,
                 TextAnchor.MiddleCenter, true)
                 .FitWidth(Mathf.Max(2f, room));
@@ -80,6 +84,7 @@ namespace ColorMinesweeper.Game
             Tween.Run(t, 0.18f, k => t.localScale = Vector3.LerpUnclamped(rest, new Vector3(rest.x, 0f, 1f), k), Ease.InCubic,
                 0f, () =>
                 {
+                    title.FitWidth(revealedRoom);
                     title.Text = text;
                     title.SetColor(Theme.Accent);
                     // 새 이름 길이에 맞춰 줄어든 크기로 펼친다(이름이 길면 위쪽 버튼과 겹치지 않게).

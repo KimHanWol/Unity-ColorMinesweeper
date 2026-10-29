@@ -511,7 +511,9 @@ namespace ColorMinesweeper.Game
             }
 
             hud.RevealTitle(StageTitle.Revealed(stageIndex, stage));
+            // 다 풀면 힌트 버튼은 쓸 일이 없으므로 치운다. 그 자리까지 공개된 이름이 넓게 쓴다(긴 이름이 작아지지 않게).
             hintButton?.Disable();
+            hintButton?.gameObject.SetActive(false);
             board.SetFocus(-1);
             palette.Hide();
             App.BoardCamera.Frame(board.Bounds, Viewport(true), true);
@@ -609,7 +611,6 @@ namespace ColorMinesweeper.Game
                 {
                     // 위쪽 막대의 버튼도 같이 숨겨서 그림과 결과만 남긴다(제목과 하트는 둔다).
                     next, list, share, hud.transform.Find("Back"), hud.transform.Find("Settings"),
-                    hintButton != null ? hintButton.transform : null,
                 }, new[] { brand }, ShareText(stars))).transform;
         }
 
