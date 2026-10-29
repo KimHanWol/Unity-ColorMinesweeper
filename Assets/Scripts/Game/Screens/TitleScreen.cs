@@ -34,6 +34,7 @@ namespace ColorMinesweeper.Game
         Transform menu;
         Transform logo;
         float loopTime;
+        UiKit.Modal quitModal;
 
         protected override void Build()
         {
@@ -119,6 +120,39 @@ namespace ColorMinesweeper.Game
             UiKit.IconLabel(menu, star, Theme.Gold, Loc.F("title.progress", cleared, StageCatalog.All.Count), Theme.SubInk, 0.36f,
                 0.42f, 70, new Vector2(0f, -1.85f), false, Ui.Safe.width - 0.8f);
         }
+
+        /// <summary>
+        /// 메인 화면에서 뒤로 가기(안드로이드 뒤로 버튼): 바로 끄지 않고 종료할지 묻는다. 창이 떠 있을 때 한 번 더 누르면 창만 닫는다.
+        /// </summary>
+        public override void OnBack()
+        {
+            if (quitModal != null)
+            {
+                CloseQuit();
+                return;
+            }
+
+            quitModal = UiKit.Modal.Open(transform, Ui, new Vector2(8f, 6.4f), 300);
+            Transform card = quitModal.Card;
+            card.localPosition = new Vector3(Ui.Safe.center.x, Ui.Safe.center.y, 0f);
+            const int order = 310;
+            Label.Create(card, "Title", Loc.T("quit.title"), Theme.Ink, order, new Vector2(0f, 2.2f), 0.72f, TextAnchor.MiddleCenter, true)
+                .FitWidth(7.2f);
+            Label.Create(card, "Body", Loc.T("quit.body"), Theme.SubInk, order, new Vector2(0f, 1.15f), 0.4f)
+                .FitWidth(7.2f);
+            UiKit.Button(card, "Stay", Loc.T("leave.stay"), null, Theme.Accent, Color.white, UiKit.ModalButtonSize,
+                new Vector2(0f, -0.35f), order, CloseQuit);
+            UiKit.Button(card, "Quit", Loc.T("quit.quit"), null, Theme.HiddenTile, Theme.Ink, UiKit.ModalButtonSize,
+                new Vector2(0f, -1.95f), order, Application.Quit);
+        }
+
+        void CloseQuit()
+        {
+            UiKit.Modal closing = quitModal;
+            quitModal = null;
+            closing?.Close();
+        }
+
 
         void PlayEntrance()
         {
