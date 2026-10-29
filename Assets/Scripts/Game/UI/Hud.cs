@@ -13,6 +13,27 @@ namespace ColorMinesweeper.Game
         SpriteRenderer[] hearts;
         Label title;
 
+        /// <summary>위쪽 버튼(뒤로, 힌트, 설정)의 원래 크기, 화면 가장자리와의 여백, 버튼 사이 간격.</summary>
+        const float ButtonSize = 1.3f;
+        const float EdgeMargin = 0.4f;
+        const float ButtonGap = 0.15f;
+
+        /// <summary>
+        /// 위쪽 버튼의 크기 비율. 보통 폰(9:20 이상 넓은 화면)에서는 1이고, 더 좁으면 가운데 제목 자리(2.4)가 남을 만큼 줄인다.
+        /// </summary>
+        public static float ButtonScale(UiRoot ui)
+        {
+            float half = ui.Safe.width / 2f;
+            return Mathf.Clamp((half - EdgeMargin - ButtonGap - 0.15f - 1.2f) / 2f / ButtonSize, 0.75f, 1f);
+        }
+
+        /// <summary>오른쪽 끝에서 slot 번째(0 설정, 1 힌트) 버튼 가운데의 x. 뒤로 버튼은 -ButtonX(ui, 0) 이다.</summary>
+        public static float ButtonX(UiRoot ui, int slot)
+        {
+            float size = ButtonSize * ButtonScale(ui);
+            return ui.Safe.width / 2f - EdgeMargin - size / 2f - slot * (size + ButtonGap);
+        }
+
         /// <summary>title 은 <see cref="StageTitle"/> 규칙대로 만든 제목(완성 전에는 이름 대신 ???).</summary>
         public static Hud Create(Transform parent, UiRoot ui, string title, Action onBack, Action onSettings)
         {
@@ -20,22 +41,16 @@ namespace ColorMinesweeper.Game
             var hud = root.gameObject.AddComponent<Hud>();
             float half = ui.Safe.width / 2f;
 
-            UiKit.IconButton(root, "Back", Icons.Back, new Vector2(-half + 1.05f, 0f), 100,
-                onBack);
-            UiKit.IconButton(root, "Settings", Icons.Settings, new Vector2(half - 1.05f, 0f),
-                100, onSettings);
+            // 버튼은 화면이 좁으면(플립 같은 21:9 폰) 조금 작게 해서, 제목과 하트가 늘 화면 정가운데에 오게 한다.
+            float scale = ButtonScale(ui);
+            UiKit.IconButton(root, "Back", Icons.Back, new Vector2(-ButtonX(ui, 0), 0f), 100, onBack)
+                .transform.localScale = new Vector3(scale, scale, 1f);
+            UiKit.IconButton(root, "Settings", Icons.Settings, new Vector2(ButtonX(ui, 0), 0f), 100, onSettings)
+                .transform.localScale = new Vector3(scale, scale, 1f);
 
-            // 제목과 하트는 가운데에 둔다. 다만 폭이 아주 좁은 화면(접는 폰의 바깥 화면 등)에서는 가운데에 두면
-            // 오른쪽의 힌트 버튼과 겹치므로, 뒤로 버튼과 힌트 버튼 사이의 가운데로 옮긴다.
-            float room = ui.Safe.width - 6.6f;
-            float centerX = 0f;
-            if (room < 3f)
-            {
-                centerX = -0.72f;
-                room = ui.Safe.width - 5.3f;
-            }
-
-            hud.title = Label.Create(root, "Name", title, Theme.Ink, 100, new Vector2(centerX, 0.32f), 0.58f,
+            float buttonSize = ButtonSize * scale;
+            float room = 2f * (half - EdgeMargin - 2f * buttonSize - ButtonGap - 0.15f);
+            hud.title = Label.Create(root, "Name", title, Theme.Ink, 100, new Vector2(0f, 0.32f), 0.58f,
                 TextAnchor.MiddleCenter, true)
                 .FitWidth(Mathf.Max(2f, room));
 
@@ -44,7 +59,7 @@ namespace ColorMinesweeper.Game
             for (int i = 0; i < hud.hearts.Length; i++)
             {
                 hud.hearts[i] = Draw.Sprite(root, "Heart" + i, heart, Theme.Danger, 100,
-                    new Vector2(centerX + (i - (hud.hearts.Length - 1) / 2f) * 0.62f, -0.45f), new Vector2(HeartSize, HeartSize));
+                    new Vector2((i - (hud.hearts.Length - 1) / 2f) * 0.62f, -0.45f), new Vector2(HeartSize, HeartSize));
             }
 
             return hud;

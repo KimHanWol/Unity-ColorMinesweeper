@@ -327,7 +327,9 @@ namespace ColorMinesweeper.Game
         /// <summary>위쪽 전구 버튼과, 힌트 모드에서 팔레트 위에 뜨는 안내 문구를 만든다.</summary>
         void BuildHint()
         {
-            hintButton = HintButton.Create(top, new Vector2(Ui.Safe.width / 2f - 2.5f, 0f), 100, OnHintButton);
+            hintButton = HintButton.Create(top, new Vector2(Hud.ButtonX(Ui, 1), 0f), 100, OnHintButton);
+            float hudScale = Hud.ButtonScale(Ui);
+            hintButton.transform.localScale = new Vector3(hudScale, hudScale, 1f);
             hintButton.SetCount(SaveStore.Hints);
 
             hintPrompt = Draw.Node(bottom, "HintPrompt", new Vector2(0f, PaletteBar.BarHeight / 2f + 0.55f));
