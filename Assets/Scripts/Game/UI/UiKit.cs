@@ -86,15 +86,18 @@ namespace ColorMinesweeper.Game
             card.localPosition = new Vector3(ui.Safe.center.x, ui.Safe.center.y, 0f);
             int inner = order + 10;
             float top = size.y / 2f;
-            Label.Create(card, "Title", title, Theme.Ink, inner, new Vector2(0f, top - 0.9f), 0.68f, TextAnchor.MiddleCenter, true)
-                .FitWidth(size.x - 0.8f);
+            float primaryY = -size.y / 2f + (two ? 2.75f : 1.15f);
+            // 설명이 없으면 제목을 크게 해서 창 윗변과 첫 버튼 사이 한가운데에 둔다.
+            float titleY = hasBody ? top - 0.9f : (top + primaryY + ModalButtonSize.y / 2f) / 2f;
+            Label.Create(card, "Title", title, Theme.Ink, inner, new Vector2(0f, titleY), hasBody ? 0.68f : 0.82f,
+                    TextAnchor.MiddleCenter, true)
+                .FitWidth(size.x - 0.6f);
             if (hasBody)
             {
                 Label.Create(card, "Body", body, Theme.SubInk, inner, new Vector2(0f, top - 2.05f), 0.4f)
                     .FitWidth(size.x - 0.8f);
             }
 
-            float primaryY = -size.y / 2f + (two ? 2.75f : 1.15f);
             Button(card, "Primary", primary, null, Theme.Accent, Color.white, ModalButtonSize, new Vector2(0f, primaryY), inner,
                 () =>
                 {
