@@ -190,6 +190,12 @@ namespace ColorMinesweeper.Game
         /// </summary>
         public static Sprite Bitmap(string key, string[] rows)
         {
+            return Bitmap(key, rows, rows.Length);
+        }
+
+        /// <param name="pixelsPerUnit">한 유닛에 들어갈 도트 수. 테두리처럼 원래 그림보다 한 줄씩 큰 비트맵을 원래 크기 눈금에 맞출 때 쓴다.</param>
+        public static Sprite Bitmap(string key, string[] rows, float pixelsPerUnit)
+        {
             return Cached("bmp" + key, () =>
             {
                 int h = rows.Length;
@@ -209,7 +215,7 @@ namespace ColorMinesweeper.Game
 
                 tex.SetPixels32(pixels);
                 tex.Apply();
-                return Sprite.Create(tex, new Rect(0, 0, w + 2, h + 2), new Vector2(0.5f, 0.5f), h, 0,
+                return Sprite.Create(tex, new Rect(0, 0, w + 2, h + 2), new Vector2(0.5f, 0.5f), pixelsPerUnit, 0,
                     SpriteMeshType.FullRect);
             });
         }

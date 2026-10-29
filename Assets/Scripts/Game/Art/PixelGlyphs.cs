@@ -173,6 +173,41 @@ namespace ColorMinesweeper.Game
             return SpriteFactory.Bitmap("glyph" + c, digits[c]);
         }
 
+        /// <summary>
+        /// 글자 둘레를 한 도트씩 두른 테두리 그림. 글자와 같은 눈금에 맞춰 글자 뒤에 깔면, 칸 색과 같은 색 숫자도 읽힌다.
+        /// </summary>
+        public static Sprite Outline(char c)
+        {
+            string[] rows = digits[c];
+            int h = rows.Length;
+            int w = rows[0].Length;
+            var grown = new string[h + 2];
+            for (int y = 0; y < h + 2; y++)
+            {
+                var line = new char[w + 2];
+                for (int x = 0; x < w + 2; x++)
+                {
+                    bool near = false;
+                    for (int dy = -1; dy <= 1 && !near; dy++)
+                    {
+                        for (int dx = -1; dx <= 1 && !near; dx++)
+                        {
+                            int sy = y - 1 + dy;
+                            int sx = x - 1 + dx;
+                            near = sy >= 0 && sy < h && sx >= 0 && sx < w && rows[sy][sx] == '#';
+                        }
+                    }
+
+                    line[x] = near ? '#' : '.';
+                }
+
+                grown[y] = new string(line);
+            }
+
+            return SpriteFactory.Bitmap("outline" + c, grown, h);
+        }
+
+
         public static bool HasGlyph(char c)
         {
             return digits.ContainsKey(c);

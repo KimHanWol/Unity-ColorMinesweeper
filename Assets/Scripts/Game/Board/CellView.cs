@@ -20,8 +20,7 @@ namespace ColorMinesweeper.Game
             public int Total;
             public int Remaining;
             public Transform Root;
-            public SpriteRenderer Ring;
-            public SpriteRenderer Fill;
+            public float Alpha = 1f;
             public PixelText Digit;
             public Vector3 RestScale;
 
@@ -58,6 +57,8 @@ namespace ColorMinesweeper.Game
         /// <summary>
         /// 주변 8칸의 색별 개수를 색마다 칩 하나로 만들어 가운데에 겹쳐 둔다(배경색 포함).
         /// 화면에는 팔레트에서 고른 색의 칩 하나만 크게 보인다. 한 칸에 여러 색 숫자가 몰리면 읽기 어렵기 때문이다.
+        /// 칩은 숫자 하나다: 숫자 자체를 그 색으로 칠하고 진한 테두리를 두른다. 예전에는 색 동그라미 안에 숫자를 넣었는데,
+        /// 칸 색과 동그라미 색이 함께 보여 어느 쪽 색의 개수인지 헷갈린다는 의견이 있었다. 이제 칸에는 칸 색과 숫자 색만 남는다.
         /// </summary>
         void BuildChips()
         {
@@ -80,10 +81,9 @@ namespace ColorMinesweeper.Game
                     Total = total,
                     Remaining = total,
                     Root = root,
-                    Ring = Draw.Sprite(root, "Ring", SpriteFactory.Circle(), new Color(1f, 1f, 1f, 0.95f), 20,
-                        Vector2.zero, new Vector2(1.16f, 1.16f)),
-                    Fill = Draw.Sprite(root, "Fill", SpriteFactory.Circle(), Theme.ToColor(rgb), 21),
-                    Digit = PixelText.Create(root, "Digit", total.ToString(), Theme.InkOn(rgb), 22, Vector2.zero, 0.5f),
+                    // 테두리는 밝은 색이면 진한 잉크, 진한 색(남색 등)이면 흰색으로 둘러 어느 칸 위에서도 숫자 윤곽이 보이게 한다.
+                    Digit = PixelText.Create(root, "Digit", total.ToString(), Theme.ToColor(rgb), 22, Vector2.zero, 0.78f,
+                        Theme.InkOn(rgb)),
                     RestScale = root.localScale,
                 });
             }
@@ -146,7 +146,7 @@ namespace ColorMinesweeper.Game
 
             Tween.Kill(chip.Root);
             Vector3 from = chip.Root.localScale;
-            float fromAlpha = chip.Fill.color.a;
+            float fromAlpha = chip.Alpha;
             Tween.Run(chip.Root, 0.3f, t =>
             {
                 chip.Root.localScale = Vector3.LerpUnclamped(from, to, t);
@@ -156,8 +156,7 @@ namespace ColorMinesweeper.Game
 
         static void SetChipAlpha(Chip chip, float alpha)
         {
-            Draw.SetAlpha(chip.Fill, alpha);
-            Draw.SetAlpha(chip.Ring, alpha * 0.92f);
+            chip.Alpha = alpha;
             chip.Digit.SetAlpha(alpha);
         }
 

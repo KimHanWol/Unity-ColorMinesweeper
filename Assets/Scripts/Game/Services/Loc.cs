@@ -133,7 +133,7 @@ namespace ColorMinesweeper.Game
             ["tut.intro.title"] = new[] { "숨은 그림을 찾아요", "Find the hidden picture" },
             ["tut.intro.detail"] = new[] { "숫자를 보고 칸을 칠하면 그림이 완성돼요.", "Paint cells using the numbers to complete the picture." },
             ["tut.bg.title"] = new[] { "배경도 색이에요", "The background is a color too" },
-            ["tut.bg.detail"] = new[] { "아래 네모 칸(배경)을 눌러 보세요.", "Tap the square swatch (background) below." },
+            ["tut.bg.detail"] = new[] { "아래에서 \"배경\" 이라고 적힌 색을 눌러 보세요.", "Tap the color marked \"Background\" below." },
             ["tut.pick.title"] = new[] { "이 색을 골라요", "Pick this color" },
             ["tut.pick.detail"] = new[] { "아래에서 반짝이는 색을 눌러 보세요.", "Tap the glowing color below." },
             ["tut.self.title"] = new[] { "이번엔 직접 찾아봐요", "Now find it yourself" },

@@ -89,11 +89,11 @@ namespace ColorMinesweeper.Game
                 Root = root,
                 Base = root.localPosition,
                 Visual = visual,
-                Ring = Shape(visual, "Ring", background, Theme.Accent, 92, SwatchSize + 0.24f),
-                Fill = Shape(visual, "Fill", background, Theme.ToColor(rgb), 94, SwatchSize),
+                Ring = Shape(visual, "Ring", Theme.Accent, 92, SwatchSize + 0.24f),
+                Fill = Shape(visual, "Fill", Theme.ToColor(rgb), 94, SwatchSize),
             };
             // 밝은 색(흰색, 배경 크림색)은 흰 바탕에 묻히므로 얇은 회색 테두리를 둔다.
-            Shape(visual, "Edge", background, new Color(0f, 0f, 0f, 0.1f), 93, SwatchSize + 0.06f);
+            Shape(visual, "Edge", new Color(0f, 0f, 0f, 0.1f), 93, SwatchSize + 0.06f);
             swatch.Count = PixelText.Create(visual, "Count", "0", Theme.InkOn(rgb), 95, Vector2.zero, 0.34f);
             if (background)
             {
@@ -112,12 +112,13 @@ namespace ColorMinesweeper.Game
             return swatch;
         }
 
-        /// <summary>그림 색은 동그라미, 배경색은 둥근 네모.</summary>
-        static SpriteRenderer Shape(Transform parent, string name, bool square, Color color, int order, float size)
+        /// <summary>
+        /// 모든 색을 판의 칸과 같은 둥근 네모로 그린다(배경색은 아래에 "배경" 이름표로 구분). 예전에는 그림 색을 동그라미로 그렸는데,
+        /// 판 위 숫자 칩의 동그라미와 같아 보여 헷갈렸다.
+        /// </summary>
+        static SpriteRenderer Shape(Transform parent, string name, Color color, int order, float size)
         {
-            return square
-                ? Draw.Panel(parent, name, Vector2.one * size, color, order, Vector2.zero, size * 0.28f)
-                : Draw.Sprite(parent, name, SpriteFactory.Circle(), color, order, Vector2.zero, Vector2.one * size);
+            return Draw.Panel(parent, name, Vector2.one * size, color, order, Vector2.zero, size * 0.28f);
         }
 
         public void Refresh(PuzzleSession session)
