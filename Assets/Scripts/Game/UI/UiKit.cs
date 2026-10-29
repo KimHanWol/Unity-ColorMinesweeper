@@ -70,6 +70,52 @@ namespace ColorMinesweeper.Game
                 onClick);
         }
 
+        /// <summary>
+        /// 제목, 설명, 버튼 한두 개짜리 알림 창을 화면 가운데에 띄운다. 버튼을 누르면 창을 닫고 그 동작을 한다.
+        /// secondary 가 없으면 버튼 하나만 둔다. keepOpen 이면 주 버튼을 눌러도 창을 닫지 않는다(업데이트해야만 하는 경우).
+        /// </summary>
+        public static Modal Dialog(Transform parent, UiRoot ui, int order, string title, string body, string primary,
+            Action onPrimary, string secondary = null, Action onSecondary = null, bool keepOpen = false)
+        {
+            bool two = secondary != null;
+            var size = new Vector2(8f, two ? 6.8f : 5.2f);
+            Modal modal = Modal.Open(parent, ui, size, order);
+            Transform card = modal.Card;
+            card.localPosition = new Vector3(ui.Safe.center.x, ui.Safe.center.y, 0f);
+            int inner = order + 10;
+            float top = size.y / 2f;
+            Label.Create(card, "Title", title, Theme.Ink, inner, new Vector2(0f, top - 0.9f), 0.68f, TextAnchor.MiddleCenter, true)
+                .FitWidth(size.x - 0.8f);
+            if (!string.IsNullOrEmpty(body))
+            {
+                Label.Create(card, "Body", body, Theme.SubInk, inner, new Vector2(0f, top - 2.05f), 0.4f)
+                    .FitWidth(size.x - 0.8f);
+            }
+
+            float primaryY = -size.y / 2f + (two ? 2.75f : 1.15f);
+            Button(card, "Primary", primary, null, Theme.Accent, Color.white, ModalButtonSize, new Vector2(0f, primaryY), inner,
+                () =>
+                {
+                    if (!keepOpen)
+                    {
+                        modal.Close();
+                    }
+
+                    onPrimary?.Invoke();
+                });
+            if (two)
+            {
+                Button(card, "Secondary", secondary, null, Theme.HiddenTile, Theme.Ink, ModalButtonSize,
+                    new Vector2(0f, primaryY - 1.6f), inner, () =>
+                    {
+                        modal.Close();
+                        onSecondary?.Invoke();
+                    });
+            }
+
+            return modal;
+        }
+
         /// <summary>뒤를 어둡게 가리고 가운데 카드를 띄우는 창. 뒤쪽 입력은 막힌다.</summary>
         public sealed class Modal
         {

@@ -109,6 +109,9 @@ namespace ColorMinesweeper.Game
             PlayerPrefs.SetInt(SeenUnlockedKey, unlockedNow);
             PlayerPrefs.Save();
 
+            // 그림을 몇 개 완성했고 며칠 써 본 사람에게 한 번 리뷰를 부탁한다(목록에 들어온 순간이 판 사이의 쉬는 때다).
+            ReviewPopup.TryShow(transform, Ui, 300);
+
             animateEntrance = true;
             Layout();
             animateEntrance = false;

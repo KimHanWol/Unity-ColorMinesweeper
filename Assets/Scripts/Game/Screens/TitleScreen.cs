@@ -35,6 +35,8 @@ namespace ColorMinesweeper.Game
         Transform logo;
         float loopTime;
         UiKit.Modal quitModal;
+        UiKit.Modal updateModal;
+        bool updateRequired;
 
         protected override void Build()
         {
@@ -49,6 +51,11 @@ namespace ColorMinesweeper.Game
             BuildMenu();
             Layout();
             PlayEntrance();
+            StartCoroutine(AppUpdate.Check(transform, Ui, 300, (shown, required) =>
+            {
+                updateModal = shown;
+                updateRequired = required;
+            }));
         }
 
         public override void Layout()
@@ -126,6 +133,14 @@ namespace ColorMinesweeper.Game
         /// </summary>
         public override void OnBack()
         {
+            // 새 버전 안내가 떠 있으면 그 창만 닫는다. 업데이트해야만 하는 경우에는 닫지 않고 종료할지 묻는다.
+            if (updateModal != null && updateModal.Root != null && !updateRequired)
+            {
+                updateModal.Close();
+                updateModal = null;
+                return;
+            }
+
             if (quitModal != null)
             {
                 CloseQuit();
