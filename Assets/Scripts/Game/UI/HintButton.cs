@@ -31,7 +31,7 @@ namespace ColorMinesweeper.Game
             hint.badge = Draw.Node(root, "Badge", new Vector2(0.5f, 0.48f));
             Draw.Sprite(hint.badge, "Back", SpriteFactory.Circle(), Theme.Accent, order + 4, Vector2.zero,
                 new Vector2(BadgeSize, BadgeSize));
-            hint.count = PixelText.Create(hint.badge, "Count", "0", Color.white, order + 5, Vector2.zero, 0.24f);
+            hint.count = PixelText.CreateRound(hint.badge, "Count", "0", Color.white, order + 5, Vector2.zero, 0.28f);
             hint.adIcon = Draw.Sprite(hint.badge, "Ad", Icons.Ad, Color.white, order + 5, Vector2.zero,
                 new Vector2(0.3f, 0.3f));
             return hint;

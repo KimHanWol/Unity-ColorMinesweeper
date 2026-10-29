@@ -196,7 +196,7 @@ namespace ColorMinesweeper.Game
             bubble = Draw.Node(thumb, "Bubble", new Vector2(-1.25f, 0f));
             Draw.Panel(bubble, "Under", new Vector2(1.5f, 0.9f), Theme.Locked, 143, new Vector2(0f, -0.08f), 0.4f);
             Draw.Panel(bubble, "Face", new Vector2(1.5f, 0.9f), Color.white, 144, Vector2.zero, 0.4f);
-            bubbleText = PixelText.Create(bubble, "Number", "1", Theme.Ink, 145, Vector2.zero, 0.36f);
+            bubbleText = PixelText.CreateRound(bubble, "Number", "1", Theme.Ink, 145, Vector2.zero, 0.4f);
             bubble.gameObject.SetActive(false);
 
             // 막대는 가늘지만 잡는 자리는 손가락 폭만큼 넓게 둔다.
@@ -360,8 +360,8 @@ namespace ColorMinesweeper.Game
 
             // 아래 줄은 어느 카드나 같다: 번호(왼쪽)와 별 셋(오른쪽). 아직 못 깬 스테이지는 빈 별로 둔다.
             // 그림 위에 번호를 얹으면 그림 색에 묻혀서 번호는 늘 아래 줄에 둔다. 잠긴 카드는 번호도 옅게 한다.
-            PixelText.Create(visual, "Number", (index + 1).ToString(), unlocked ? Theme.Ink : Theme.SubInk, 14,
-                infoLine + new Vector2(-0.8f, 0f), 0.3f);
+            PixelText.CreateRound(visual, "Number", (index + 1).ToString(), unlocked ? Theme.Ink : Theme.SubInk, 14,
+                infoLine + new Vector2(-0.8f, 0f), 0.32f);
             Sprite star = Icons.Star;
             for (int i = 0; i < 3; i++)
             {

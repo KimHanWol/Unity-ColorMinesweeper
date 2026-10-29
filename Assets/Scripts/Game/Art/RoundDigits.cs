@@ -4,7 +4,7 @@ using UnityEngine;
 namespace ColorMinesweeper.Game
 {
     /// <summary>
-    /// 둥근 숫자(게임 글꼴 Dongle 의 0~9)와 그 테두리. Resources/Digits/RoundDigits.png 한 장에 위 줄은 숫자, 아래 줄은
+    /// 둥근 숫자(게임 글꼴 Dongle 의 0~9 와 +)와 그 테두리. Resources/Digits/RoundDigits.png 한 장에 위 줄은 숫자, 아래 줄은
     /// 테두리(숫자를 두껍게 부풀린 모양)가 150x200 칸마다 들어 있다. 흰색이라 그릴 때 색을 입힌다.
     /// 판의 숫자처럼 크게 보이는 곳에 쓴다. 도트 숫자는 딱딱해 보인다는 의견이 있었다.
     /// </summary>
@@ -39,17 +39,23 @@ namespace ColorMinesweeper.Game
 
         public static bool HasGlyph(char c)
         {
-            return c >= '0' && c <= '9';
+            return (c >= '0' && c <= '9') || c == '+';
         }
 
         public static Sprite Digit(char c)
         {
-            return Slice(c - '0', true);
+            return Slice(Index(c), true);
         }
 
         public static Sprite Outline(char c)
         {
-            return Slice(c - '0', false);
+            return Slice(Index(c), false);
+        }
+
+        /// <summary>그림 파일에서 몇 번째 칸인지: 0~9 다음 칸이 + 다.</summary>
+        static int Index(char c)
+        {
+            return c == '+' ? 10 : c - '0';
         }
 
         static Sprite Slice(int digit, bool fill)

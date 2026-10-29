@@ -78,7 +78,9 @@ namespace ColorMinesweeper.Game
             Action onPrimary, string secondary = null, Action onSecondary = null, bool keepOpen = false)
         {
             bool two = secondary != null;
-            var size = new Vector2(8f, two ? 6.8f : 5.2f);
+            // 설명이 없으면 그 줄만큼 창을 줄인다(제목과 버튼 사이가 비어 보이지 않게).
+            bool hasBody = !string.IsNullOrEmpty(body);
+            var size = new Vector2(8f, (two ? 6.8f : 5.2f) - (hasBody ? 0f : 1.1f));
             Modal modal = Modal.Open(parent, ui, size, order);
             Transform card = modal.Card;
             card.localPosition = new Vector3(ui.Safe.center.x, ui.Safe.center.y, 0f);
@@ -86,7 +88,7 @@ namespace ColorMinesweeper.Game
             float top = size.y / 2f;
             Label.Create(card, "Title", title, Theme.Ink, inner, new Vector2(0f, top - 0.9f), 0.68f, TextAnchor.MiddleCenter, true)
                 .FitWidth(size.x - 0.8f);
-            if (!string.IsNullOrEmpty(body))
+            if (hasBody)
             {
                 Label.Create(card, "Body", body, Theme.SubInk, inner, new Vector2(0f, top - 2.05f), 0.4f)
                     .FitWidth(size.x - 0.8f);

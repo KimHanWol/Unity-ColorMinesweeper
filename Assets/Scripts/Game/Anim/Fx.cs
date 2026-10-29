@@ -73,7 +73,7 @@ namespace ColorMinesweeper.Game
                 Vector2.zero, (height + 0.42f) / 2f);
             SpriteRenderer fill = Draw.Panel(root, "Fill", new Vector2(width, height + 0.3f), color, order + 1, Vector2.zero,
                 (height + 0.3f) / 2f);
-            PixelText digits = PixelText.Create(root, "Digits", text, ink, order + 2, Vector2.zero, height);
+            PixelText digits = PixelText.CreateRound(root, "Digits", text, ink, order + 2, Vector2.zero, height);
             root.localScale = Vector3.zero;
             Tween.Run(root, 1.05f, k =>
             {
