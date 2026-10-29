@@ -109,7 +109,6 @@ namespace ColorMinesweeper.Game
             ["leave.stay"] = new[] { "계속하기", "Keep playing" },
             ["leave.leave"] = new[] { "나가기", "Leave" },
             ["review.ask.title"] = new[] { "Pixel Clue 재밌게 하고 계신가요?", "Enjoying Pixel Clue?" },
-            ["review.ask.body"] = new[] { "솔직하게 알려 주세요.", "Let us know honestly." },
             ["review.ask.yes"] = new[] { "네, 재밌어요!", "Yes, I love it!" },
             ["review.ask.no"] = new[] { "아쉬운 점이 있어요", "Not really" },
             ["review.rate.title"] = new[] { "고마워요!", "Thank you!" },

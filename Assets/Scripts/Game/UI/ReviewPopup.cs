@@ -64,7 +64,7 @@ namespace ColorMinesweeper.Game
             }
 
             shownThisRun = true;
-            UiKit.Dialog(parent, ui, order, Loc.T("review.ask.title"), Loc.T("review.ask.body"),
+            UiKit.Dialog(parent, ui, order, Loc.T("review.ask.title"), null,
                 Loc.T("review.ask.yes"), () => AskForReview(parent, ui, order, cleared),
                 Loc.T("review.ask.no"), () => AskForFeedback(parent, ui, order));
         }
