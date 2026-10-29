@@ -83,6 +83,12 @@ namespace ColorMinesweeper.Game
             PlayerPrefs.Save();
         }
 
+        /// <summary>광고가 떠 있는 동안 true. 광고 화면이 앱을 가리는 것도 "잠깐 나갔다 옴"으로 잡히므로, 일시정지 창이 이것을 보고 건너뛴다.</summary>
+        public static bool Showing { get; private set; }
+
+        /// <summary>마지막으로 광고가 닫힌 시각(realtimeSinceStartup). 앱으로 돌아오는 신호가 닫힘 콜백보다 늦게 올 때를 위해 둔다.</summary>
+        public static float LastClosedAt { get; private set; } = -100f;
+
         /// <summary>
         /// 판을 마치고 "다음 그림"이나 "목록"을 눌렀을 때 부른다. 보여 줄 차례면 광고를 띄우고 닫힌 뒤 next 를,
         /// 아니면 바로 next 를 부른다. 플레이어가 누른 뒤에 뜨므로 연타로 광고를 잘못 누르는 일이 적다.
@@ -98,8 +104,11 @@ namespace ColorMinesweeper.Game
 
             Pacing.OnInterstitialShown(now);
             Music.Duck(true);
+            Showing = true;
             Interstitial.Show(() =>
             {
+                Showing = false;
+                LastClosedAt = Time.realtimeSinceStartup;
                 Music.Duck(false);
                 // 광고를 막 본 순간에 하루 한 번 광고 제거를 권한다.
                 RemoveAdsPromo.Show(next);
@@ -110,8 +119,11 @@ namespace ColorMinesweeper.Game
         public static void ShowRewarded(RewardedPlacement placement, Action<bool> onFinished)
         {
             Music.Duck(true);
+            Showing = true;
             Rewarded(placement).Show(rewarded =>
             {
+                Showing = false;
+                LastClosedAt = Time.realtimeSinceStartup;
                 Music.Duck(false);
                 if (rewarded)
                 {

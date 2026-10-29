@@ -698,6 +698,39 @@ namespace ColorMinesweeper.Game
                 Theme.Ink, UiKit.ModalButtonSize, new Vector2(0f, -2.5f), order, () => App.ShowPlay(stage, stageIndex));
         }
 
+        /// <summary>
+        /// 앱이 가려졌다가(전화, 홈 버튼, 화면 꺼짐) 돌아오면 "계속하기" 창을 띄워 바로 판을 누르지 않게 한다.
+        /// 광고나 공유 창이 앱을 가린 경우, 이미 다른 창이 떠 있거나 판을 다 풀었거나 튜토리얼 중이면 띄우지 않는다.
+        /// </summary>
+        void OnApplicationPause(bool paused)
+        {
+            if (paused)
+            {
+                return;
+            }
+
+            bool fromAd = Ads.Showing || Time.realtimeSinceStartup - Ads.LastClosedAt < 2f;
+            if (fromAd || modal != null || session == null || session.IsCleared || tutorial != null)
+            {
+                return;
+            }
+
+            if (hintMode)
+            {
+                SetHintMode(false);
+            }
+
+            modal = UiKit.Modal.Open(transform, Ui, new Vector2(7.6f, 4.6f), ModalOrder);
+            modalClosable = true;
+            Transform card = modal.Card;
+            int order = ModalOrder + 10;
+            Label.Create(card, "Title", Loc.T("pause.title"), Theme.Ink, order, new Vector2(0f, 1.2f), 0.72f,
+                TextAnchor.MiddleCenter, true)
+                .FitWidth(6.8f);
+            UiKit.Button(card, "Resume", Loc.T("pause.resume"), Icons.Play, Theme.Accent, Color.white, UiKit.ModalButtonSize,
+                new Vector2(0f, -0.75f), order, CloseModal);
+        }
+
         void CloseModal()
         {
             UiKit.Modal closing = modal;
