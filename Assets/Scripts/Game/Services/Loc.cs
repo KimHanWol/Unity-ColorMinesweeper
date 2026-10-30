@@ -14,7 +14,7 @@ namespace ColorMinesweeper.Game
     /// 화면 문구 번역. 모든 UI 문구는 여기 표의 키로 부른다(화면 코드에 문장을 직접 쓰지 않는다).
     /// 숫자·이름이 들어가는 문장은 언어마다 어순이 달라 {0}, {1} 자리 표시자를 쓴다.
     /// 언어를 늘릴 때는 <see cref="Language"/> 에 항목을 더하고 표의 각 줄에 번역을 한 칸씩 더한다.
-    /// 한국어 문장의 조사(이/가, 은/는)는 들어갈 말(색 이름, 배경)이 모두 받침으로 끝나서 고정해 둘 수 있다.
+    /// 한국어 문장의 조사(이/가, 은/는)는 들어갈 말(색 이름)이 모두 받침으로 끝나서 고정해 둘 수 있다.
     /// 일본어·중국어는 지금 폰트(동글)에 글자가 없어 폰트를 함께 추가해야 한다.
     /// </summary>
     public static class Loc
@@ -103,7 +103,6 @@ namespace ColorMinesweeper.Game
 
             // 플레이
             ["play.tutorial"] = new[] { "튜토리얼", "Tutorial" },
-            ["play.background"] = new[] { "배경", "Background" },
             ["leave.title"] = new[] { "그만할까요?", "Leave this puzzle?" },
             ["leave.body"] = new[] { "지금 나가면 이 그림의 진행 상황은\n저장되지 않아요. 다음에 처음부터 풀어요.", "Your progress on this picture won't be saved.\nYou'll start over next time." },
             ["leave.stay"] = new[] { "계속하기", "Keep playing" },
@@ -147,11 +146,11 @@ namespace ColorMinesweeper.Game
             ["tutorialClear.body"] = new[] { "그림을 완성하면 이름이 공개돼요.\n색을 고르고, 숫자를 보고, 칠하면 끝!", "Finish a picture to reveal its name.\nPick a color, read the numbers, paint!" },
             ["tutorialClear.start"] = new[] { "시작하기", "Start" },
 
-            // 튜토리얼. {색} 자리에는 색 이름이나 "배경"이 들어간다.
+            // 튜토리얼. {색} 자리에는 색 이름이 들어간다.
             ["tut.intro.title"] = new[] { "숨은 그림을 찾아요", "Find the hidden picture" },
             ["tut.intro.detail"] = new[] { "숫자를 보고 칸을 칠하면 그림이 완성돼요.", "Paint cells using the numbers to complete the picture." },
-            ["tut.bg.title"] = new[] { "배경도 색이에요", "The background is a color too" },
-            ["tut.bg.detail"] = new[] { "아래에서 \"배경\" 이라고 적힌 색을 눌러 보세요.", "Tap the color marked \"Background\" below." },
+            ["tut.bg.title"] = new[] { "색을 바꿀 수도 있어요", "You can switch colors" },
+            ["tut.bg.detail"] = new[] { "아래에서 다른 색을 눌러 색을 바꿔 보세요.", "Tap another color below to switch." },
             ["tut.pick.title"] = new[] { "이 색을 골라요", "Pick this color" },
             ["tut.pick.detail"] = new[] { "아래에서 반짝이는 색을 눌러 보세요.", "Tap the glowing color below." },
             ["tut.self.title"] = new[] { "이번엔 직접 찾아봐요", "Now find it yourself" },
@@ -162,9 +161,8 @@ namespace ColorMinesweeper.Game
             // 숫자의 뜻부터 알려 준다. {0}=숫자, {1}=주변 칸 수, {2}=색
             ["tut.number.title"] = new[] { "가운데 숫자 {0}, 보이나요?", "See the {0} in the middle?" },
             ["tut.number.detail"] = new[] { "숫자는 고른 색이 주변 {1}칸에 몇 칸 있는지 알려 줘요. 지금은 {2} {0}! 주변에 {2}이 {0}칸 있다는 거예요.", "A number tells how many of the {1} cells around it are the color you picked. It's {0} for {2}, so {0} cells around it are {2}!" },
-            // 숫자에서 결론까지. {0}=색, {1}=숫자, {2}=남은(아직 안 연) 칸 또는 체크한 칸
-            ["tut.guide.title.none"] = new[] { "{0} {1}, 남은 칸도 딱 {2}칸!", "{1} for {0}, exactly {2} left!" },
-            ["tut.guide.title.some"] = new[] { "{0} {1}, 체크한 칸은 {2}칸!", "{1} for {0}, {2} checked!" },
+            // 숫자에서 결론까지. {0}=색, {1}=숫자, {2}=숫자에 맞는 "니까/이니까"
+            ["tut.guide.title"] = new[] { "중앙이 {0} {1}{2} 주변에 {0}이 {1}칸!", "{1} for {0} in the middle, so {1} {0} around it!" },
             // {0}=색, {1}=숫자(none) 또는 더 찾을 칸(some), {2}=남은(아직 안 연) 칸
             ["tut.guide.detail.none"] = new[] { "주변에 {0}이 {1}칸 있어야 하는데 남은 칸이 딱 {2}칸이니, 모두 {0}이에요.", "{1} cells around it must be {0} and exactly {2} are left, so they're all {0}." },
             ["tut.guide.detail.some"] = new[] { "{0}이 {1}칸 더 있어야 하는데 남은 칸이 딱 {2}칸이니, 모두 {0}이에요.", "{1} more must be {0} and exactly {2} are left, so they're all {0}." },
@@ -188,7 +186,6 @@ namespace ColorMinesweeper.Game
             ["color.skyblue"] = new[] { "하늘색", "sky blue" },
             ["color.blue"] = new[] { "파란색", "blue" },
             ["color.purple"] = new[] { "보라색", "purple" },
-            ["color.background"] = new[] { "배경", "background" },
 
             // 설정
             ["settings.title"] = new[] { "설정", "Settings" },

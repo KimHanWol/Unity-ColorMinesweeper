@@ -79,7 +79,6 @@ namespace ColorMinesweeper.Game
         Swatch CreateSwatch(Transform parent, Stage stage, int color, Vector2 position, float scale)
         {
             Rgb rgb = stage.Colors[color].Color;
-            bool background = color == stage.BackgroundColor;
             Transform root = Draw.Node(parent, "Swatch" + color, position);
             Transform visual = Draw.Node(root, "Visual");
             visual.localScale = Vector3.one * scale;
@@ -92,16 +91,9 @@ namespace ColorMinesweeper.Game
                 Ring = Shape(visual, "Ring", Theme.Accent, 92, SwatchSize + 0.24f),
                 Fill = Shape(visual, "Fill", Theme.ToColor(rgb), 94, SwatchSize),
             };
-            // 밝은 색(흰색, 배경 크림색)은 흰 바탕에 묻히므로 얇은 회색 테두리를 둔다.
+            // 밝은 색(흰색, 크림색)은 흰 바탕에 묻히므로 얇은 회색 테두리를 둔다.
             Shape(visual, "Edge", new Color(0f, 0f, 0f, 0.1f), 93, SwatchSize + 0.06f);
             swatch.Count = PixelText.CreateRound(visual, "Count", "0", Theme.InkOn(rgb), 95, Vector2.zero, 0.4f);
-            if (background)
-            {
-                // 배경색은 단서 칩에 나오지 않는다. 모양(네모)과 이름으로 다른 색과 구분한다.
-                Label.Create(visual, "BackgroundTag", Loc.T("play.background"), Theme.SubInk, 95, new Vector2(0f, -SwatchSize / 2f - 0.32f),
-                    0.3f, TextAnchor.MiddleCenter, true)
-                .FitWidth(SwatchSize * 1.5f);
-            }
             swatch.Ring.enabled = false;
             swatch.Button = UiButton.Attach(root, Vector2.one * 1.5f * scale, 96, () =>
             {
@@ -113,7 +105,7 @@ namespace ColorMinesweeper.Game
         }
 
         /// <summary>
-        /// 모든 색을 판의 칸과 같은 둥근 네모로 그린다(배경색은 아래에 "배경" 이름표로 구분). 예전에는 그림 색을 동그라미로 그렸는데,
+        /// 모든 색을 판의 칸과 같은 둥근 네모로 그린다. 예전에는 그림 색을 동그라미로 그렸는데,
         /// 판 위 숫자 칩의 동그라미와 같아 보여 헷갈렸다.
         /// </summary>
         static SpriteRenderer Shape(Transform parent, string name, Color color, int order, float size)

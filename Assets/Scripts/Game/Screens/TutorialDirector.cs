@@ -23,6 +23,9 @@ namespace ColorMinesweeper.Game
         const int DimOrder = 56;
         const int MarkOrder = 60;
 
+        /// <summary>근거 칸을 짚는 테두리 색. 강조색과 같은 보라를 더 진하게 쓴다.</summary>
+        static readonly Color ClueMark = Theme.Hex(0x6C5CE7);
+
         /// <summary>연습 판. 5x5 하트(4칸 폭은 하트로 보이지 않았다). 한 색만 보고 5단계에 풀리고, 첫 추론에서 빨간색 6칸이 열린다.</summary>
         const string StageJson = @"{
   ""id"": ""tutorial"",
@@ -184,20 +187,20 @@ namespace ColorMinesweeper.Game
             int around = stage.Neighbors(hint.Clue).Length;
             int remaining = total - opened;
             bool background = hint.Color == stage.BackgroundColor;
-            string colorName = background ? Loc.T("color.background") : ColorNames.Describe(stage.Colors[hint.Color].Color);
+            string colorName = ColorNames.Describe(stage.Colors[hint.Color].Color);
             if (guidedDone == 0 && !background && !numberExplained)
             {
                 // 맨 처음에는 결론보다 먼저 숫자가 무슨 뜻인지부터 알려 준다(가운데 숫자가 숨 쉬고, 칠할 칸은 아직 짚지 않는다).
                 numberExplained = true;
                 phase = Phase.Talking;
-                Spotlight(hint.Clue, true);
+                Spotlight(hint.Clue);
                 AnchorArea(hint.Clue);
                 bubble.Show(Loc.F("tut.number.title", total), Loc.F("tut.number.detail", total, around, colorName),
                     () => Guide(hint));
                 return;
             }
 
-            Spotlight(hint.Clue, false);
+            Spotlight(hint.Clue);
             MarkFound(hint.Clue, hint.Color);
 
             allowed.Clear();
@@ -223,13 +226,18 @@ namespace ColorMinesweeper.Game
 
             // 굵은 줄은 가운데 숫자에서 출발하는 근거, 옅은 줄은 거기서 나오는 결론, 보라 줄은 할 일.
             // 색 이름은 모두 받침이 있어 "이" 를 쓴다.
-            string title = opened == 0
-                ? Loc.F("tut.guide.title.none", colorName, total, hidden)
-                : Loc.F("tut.guide.title.some", colorName, total, opened);
+            string title = Loc.F("tut.guide.title", colorName, total, Because(total));
             string detail = opened == 0
                 ? Loc.F("tut.guide.detail.none", colorName, total, hidden)
                 : Loc.F("tut.guide.detail.some", colorName, remaining, hidden);
             bubble.Show(title, detail, null, Loc.T(hidden == 1 ? "tut.todo.one" : "tut.todo.many"));
+        }
+
+        /// <summary>숫자 뒤에 붙는 말. 2(이), 4(사), 5(오), 9(구)는 받침이 없어 "니까", 나머지는 "이니까"다.</summary>
+        static string Because(int number)
+        {
+            int last = number % 10;
+            return last == 2 || last == 4 || last == 5 || last == 9 ? "니까" : "이니까";
         }
 
         void StartFreePlay()
@@ -377,8 +385,7 @@ namespace ColorMinesweeper.Game
         /// <summary>
         /// 판 전체를 어둡게 하고 근거 칸의 3x3 만 밝게 남긴다. 가운데(근거) 칸만 흰색·진한 색 겹 테두리로 짚는다.
         /// </summary>
-        /// <param name="pulse">가운데 테두리가 숨 쉬게 한다(숫자를 보라고 할 때).</param>
-        void Spotlight(int clue, bool pulse)
+        void Spotlight(int clue)
         {
             Stage stage = play.Stage;
             Transform board = play.Board.transform;
@@ -399,19 +406,16 @@ namespace ColorMinesweeper.Game
             // 3x3 을 감싸는 큰 테두리는 두지 않는다. 밝은 칸과 가린 칸의 경계에 걸쳐 쪽마다 굵기가 달라 보였다.
             // 가린 조각끼리 살짝 겹쳐 밝은 창의 가장자리가 곧은 선이 되게 하는 것으로 영역을 보여 준다.
             Vector2 center = play.Board.CellCenter(clue);
-            // 가운데 칸은 흰 테두리 안에 진한 테두리를 겹쳐 짚는다. 연한 보라 한 줄은 빨간 칸 위에서도 배경 칸 위에서도
-            // 눈에 띄지 않았다. 흰색과 진한 색을 겹치면 칸이 어떤 색이든 테두리가 또렷하다.
+            // 가운데 칸은 흰 테두리 안에 진한 보라 테두리를 겹쳐 짚고, 크기가 커졌다 작아지며 눈길을 끈다.
+            // 연한 강조색 한 줄은 칸 위에서 묻혔고, 글자색(남색)은 파스텔 판에서 혼자 튀었다. 같은 보라 계열로 진하게 쓴다.
             SpriteRenderer rim = Draw.OutlinePanel(board, "TutorialClueRim", new Vector2(1.1f, 1.1f), Color.white, MarkOrder + 1,
                 center, 0.28f, 0.2f);
-            SpriteRenderer ring = Draw.OutlinePanel(board, "TutorialClue", new Vector2(1.02f, 1.02f), Theme.Ink, MarkOrder + 2,
+            SpriteRenderer ring = Draw.OutlinePanel(board, "TutorialClue", new Vector2(1.02f, 1.02f), ClueMark, MarkOrder + 2,
                 center, 0.24f, 0.13f);
             marks.Add(rim.transform);
             marks.Add(ring.transform);
-            if (pulse)
-            {
-                Breathe(rim, 1.1f, 1.28f);
-                Breathe(ring, 1.02f, 1.2f);
-            }
+            Breathe(rim, 1.1f, 1.36f);
+            Breathe(ring, 1.02f, 1.28f);
         }
 
         /// <summary>주변 8칸 중 이미 보이는 같은 색 칸에 체크 표시를 단다("이미 찾은 칸"을 셀 수 있게).</summary>
