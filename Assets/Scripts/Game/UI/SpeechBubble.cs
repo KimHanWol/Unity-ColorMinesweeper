@@ -15,6 +15,7 @@ namespace ColorMinesweeper.Game
         const float Padding = 0.42f;
         const float LineGap = 0.16f;
         const float ButtonRow = 1.0f;
+        const float NextWidth = 2.2f;
         const float MinHeight = 1.3f;
 
         /// <summary>판 아래에 말풍선용으로 비워 두는 높이. 튜토리얼 문구가 이 안에 들어가게 짧게 쓴다.</summary>
@@ -53,7 +54,7 @@ namespace ColorMinesweeper.Game
                 TextAnchor.UpperLeft);
             bubble.action = Label.Create(root, "Action", string.Empty, Theme.Accent, Order + 2, Vector2.zero, 0.42f,
                 TextAnchor.UpperLeft, true);
-            bubble.nextButton = UiKit.Button(root, "Next", Loc.T("common.next"), null, Theme.Accent, Color.white, new Vector2(2.2f, 0.8f),
+            bubble.nextButton = UiKit.Button(root, "Next", Loc.T("common.next"), null, Theme.Accent, Color.white, new Vector2(NextWidth, 0.8f),
                 Vector2.zero, Order + 3, () => bubble.onNext?.Invoke()).transform;
             root.gameObject.SetActive(false);
             return bubble;
@@ -109,14 +110,32 @@ namespace ColorMinesweeper.Game
             }
 
             bool hasButton = nextButton.gameObject.activeSelf;
-            height = Mathf.Max(MinHeight, -y + Padding + (hasButton ? ButtonRow : 0f));
+            // 글이 짧으면 버튼을 글 오른쪽에 나란히 둔다. 버튼 줄을 따로 잡으면 내용에 비해 말풍선이 커 보인다.
+            float room = width - Padding * 2f - NextWidth - 0.3f;
+            bool beside = hasButton && TextWidth() <= room;
+            height = Mathf.Max(MinHeight, -y + Padding + (hasButton && !beside ? ButtonRow : 0f));
             face.size = new Vector2(width, height);
             face.transform.localPosition = new Vector3(0f, -height / 2f, 0f);
             shadow.transform.localPosition = new Vector3(0f, -height / 2f - 0.2f, 0f);
             shadow.transform.localScale = new Vector3(width * 1.15f, height * 1.3f, 1f);
-            nextButton.localPosition = new Vector3(width / 2f - 1.4f, -height + Padding + 0.4f, 0f);
+            nextButton.localPosition = new Vector3(width / 2f - 1.4f, beside ? -height / 2f : -height + Padding + 0.4f, 0f);
             t.localScale = scale;
             Place();
+        }
+
+        /// <summary>켜져 있는 글 줄 중 가장 넓은 폭(유닛).</summary>
+        float TextWidth()
+        {
+            float widest = 0f;
+            foreach (Label label in new[] { headline, body, action })
+            {
+                if (label.gameObject.activeSelf)
+                {
+                    widest = Mathf.Max(widest, label.RenderBounds.size.x / transform.lossyScale.x);
+                }
+            }
+
+            return widest;
         }
 
         /// <summary>area(부모 좌표) 바로 아래에, 자리가 없으면 바로 위에 뜨고 꼬리로 가리킨다.</summary>
