@@ -160,7 +160,7 @@ namespace ColorMinesweeper.Game
             ["tut.self.todo"] = new[] { "나머지 {0}칸은 어디일까요? 눌러서 칠해 보세요", "Where are the other {0}? Tap to paint them" },
             // 숫자의 뜻부터 알려 준다. {0}=숫자, {1}=주변 칸 수, {2}=색
             ["tut.number.title"] = new[] { "가운데 숫자 {0}, 보이나요?", "See the {0} in the middle?" },
-            ["tut.number.detail"] = new[] { "숫자는 고른 색이 주변 {1}칸에 몇 칸 있는지 알려 줘요. 지금은 {2} {0}! 주변에 {2}이 {0}칸 있다는 거예요.", "A number tells how many of the {1} cells around it are the color you picked. It's {0} for {2}, so {0} cells around it are {2}!" },
+            ["tut.number.detail"] = new[] { "지금은 {2} {0}! 주변 {1}칸에 {2}이 {0}칸 있다는 뜻이에요.", "It's {0} for {2}: {0} of the {1} cells around it are {2}." },
             // 숫자에서 결론까지. {0}=색, {1}=숫자, {2}=숫자에 맞는 "니까/이니까"
             ["tut.guide.title"] = new[] { "중앙이 {0} {1}{2} 주변에 {0}이 {1}칸!", "{1} for {0} in the middle, so {1} {0} around it!" },
             // {0}=색, {1}=숫자(none) 또는 더 찾을 칸(some), {2}=남은(아직 안 연) 칸

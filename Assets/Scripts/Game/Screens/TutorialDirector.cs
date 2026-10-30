@@ -193,14 +193,14 @@ namespace ColorMinesweeper.Game
                 // 맨 처음에는 결론보다 먼저 숫자가 무슨 뜻인지부터 알려 준다(가운데 숫자가 숨 쉬고, 칠할 칸은 아직 짚지 않는다).
                 numberExplained = true;
                 phase = Phase.Talking;
-                Spotlight(hint.Clue);
+                Spotlight(hint.Clue, true);
                 AnchorArea(hint.Clue);
                 bubble.Show(Loc.F("tut.number.title", total), Loc.F("tut.number.detail", total, around, colorName),
                     () => Guide(hint));
                 return;
             }
 
-            Spotlight(hint.Clue);
+            Spotlight(hint.Clue, false);
             MarkFound(hint.Clue, hint.Color);
 
             allowed.Clear();
@@ -385,7 +385,8 @@ namespace ColorMinesweeper.Game
         /// <summary>
         /// 판 전체를 어둡게 하고 근거 칸의 3x3 만 밝게 남긴다. 가운데(근거) 칸만 흰색·진한 색 겹 테두리로 짚는다.
         /// </summary>
-        void Spotlight(int clue)
+        /// <param name="pulse">가운데 테두리가 커졌다 작아지게 한다. 숫자를 처음 짚을 때만 켠다. 칠할 칸의 분홍 테두리가 함께 움직이는 단계에서는 엇박자로 정신없어서 끈다.</param>
+        void Spotlight(int clue, bool pulse)
         {
             Stage stage = play.Stage;
             Transform board = play.Board.transform;
@@ -406,7 +407,7 @@ namespace ColorMinesweeper.Game
             // 3x3 을 감싸는 큰 테두리는 두지 않는다. 밝은 칸과 가린 칸의 경계에 걸쳐 쪽마다 굵기가 달라 보였다.
             // 가린 조각끼리 살짝 겹쳐 밝은 창의 가장자리가 곧은 선이 되게 하는 것으로 영역을 보여 준다.
             Vector2 center = play.Board.CellCenter(clue);
-            // 가운데 칸은 흰 테두리 안에 진한 보라 테두리를 겹쳐 짚고, 크기가 커졌다 작아지며 눈길을 끈다.
+            // 가운데 칸은 흰 테두리 안에 진한 보라 테두리를 겹쳐 짚는다.
             // 연한 강조색 한 줄은 칸 위에서 묻혔고, 글자색(남색)은 파스텔 판에서 혼자 튀었다. 같은 보라 계열로 진하게 쓴다.
             SpriteRenderer rim = Draw.OutlinePanel(board, "TutorialClueRim", new Vector2(1.1f, 1.1f), Color.white, MarkOrder + 1,
                 center, 0.28f, 0.2f);
@@ -414,8 +415,11 @@ namespace ColorMinesweeper.Game
                 center, 0.24f, 0.13f);
             marks.Add(rim.transform);
             marks.Add(ring.transform);
-            Breathe(rim, 1.1f, 1.36f);
-            Breathe(ring, 1.02f, 1.28f);
+            if (pulse)
+            {
+                Breathe(rim, 1.1f, 1.36f);
+                Breathe(ring, 1.02f, 1.28f);
+            }
         }
 
         /// <summary>주변 8칸 중 이미 보이는 같은 색 칸에 체크 표시를 단다("이미 찾은 칸"을 셀 수 있게).</summary>

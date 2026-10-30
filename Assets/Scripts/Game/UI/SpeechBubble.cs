@@ -19,7 +19,7 @@ namespace ColorMinesweeper.Game
         const float MinHeight = 1.3f;
 
         /// <summary>판 아래에 말풍선용으로 비워 두는 높이. 튜토리얼 문구가 이 안에 들어가게 짧게 쓴다.</summary>
-        public const float DockHeight = 3.4f;
+        public const float DockHeight = 3.7f;
 
         const float TailSize = 0.36f;
 
@@ -28,6 +28,9 @@ namespace ColorMinesweeper.Game
         Label action;
         Transform nextButton;
         SpriteRenderer face;
+
+        /// <summary>말풍선 둘레의 연보라 테두리. 판도 흰색이라 테두리가 없으면 붙어 보인다.</summary>
+        SpriteRenderer edge;
         SpriteRenderer shadow;
         Action onNext;
         float width;
@@ -43,7 +46,9 @@ namespace ColorMinesweeper.Game
             var bubble = root.gameObject.AddComponent<SpeechBubble>();
             bubble.width = ui.Safe.width - 0.6f;
             bubble.safe = ui.Safe;
-            bubble.shadow = Draw.Sprite(root, "Shadow", SpriteFactory.SoftShadow(), Theme.Shadow, Order, Vector2.zero);
+            bubble.shadow = Draw.Sprite(root, "Shadow", SpriteFactory.SoftShadow(), Theme.Shadow, Order - 1, Vector2.zero);
+            bubble.edge = Draw.Panel(root, "Edge", new Vector2(bubble.width + 0.14f, MinHeight + 0.14f),
+                Color.Lerp(Theme.Accent, Color.white, 0.35f), Order, Vector2.zero, 0.56f);
             bubble.face = Draw.Panel(root, "Face", new Vector2(bubble.width, MinHeight), Color.white, Order + 1, Vector2.zero, 0.5f);
             bubble.tail = Draw.Sprite(root, "Tail", SpriteFactory.RoundedRect(0.18f), Color.white, Order + 1, Vector2.zero,
                 Vector2.one * TailSize).transform;
@@ -115,6 +120,8 @@ namespace ColorMinesweeper.Game
             bool beside = hasButton && TextWidth() <= room;
             height = Mathf.Max(MinHeight, -y + Padding + (hasButton && !beside ? ButtonRow : 0f));
             face.size = new Vector2(width, height);
+            edge.size = new Vector2(width + 0.14f, height + 0.14f);
+            edge.transform.localPosition = new Vector3(0f, -height / 2f, 0f);
             face.transform.localPosition = new Vector3(0f, -height / 2f, 0f);
             shadow.transform.localPosition = new Vector3(0f, -height / 2f - 0.2f, 0f);
             shadow.transform.localScale = new Vector3(width * 1.15f, height * 1.3f, 1f);
