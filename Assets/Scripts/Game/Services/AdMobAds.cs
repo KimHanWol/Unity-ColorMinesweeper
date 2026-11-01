@@ -78,6 +78,29 @@ namespace ColorMinesweeper.Game
         }
 #endif
 
+        /// <summary>이 지역에서 동의를 다시 고를 수 있는 곳을 앱 안에 두어야 하는지. 동의 정보를 받기 전과 동의가 필요 없는 지역에서는 false.</summary>
+        public static bool PrivacyOptionsRequired =>
+            ConsentInformation.PrivacyOptionsRequirementStatus == PrivacyOptionsRequirementStatus.Required;
+
+        /// <summary>동의를 다시 고르는 창을 띄운다. 처음에 거부했다가 이번에 허용했을 수 있으므로 닫힌 뒤 SDK 시작을 다시 살핀다.</summary>
+        public static void ShowPrivacyOptions(Action onClosed)
+        {
+            ConsentForm.ShowPrivacyOptionsForm(formError =>
+            {
+                if (formError != null)
+                {
+                    Debug.LogWarning("[AdMob] 동의 설정 창을 띄우지 못했습니다: " + formError.Message);
+                }
+
+                if (ConsentInformation.CanRequestAds())
+                {
+                    StartSdk();
+                }
+
+                onClosed();
+            });
+        }
+
         static bool sdkStarted;
 
         static void StartSdk()

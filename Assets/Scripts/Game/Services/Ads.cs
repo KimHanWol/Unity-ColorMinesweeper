@@ -115,6 +115,32 @@ namespace ColorMinesweeper.Game
             });
         }
 
+        /// <summary>유럽 등 동의를 다시 고를 수 있어야 하는 지역인지. 설정 창이 이것을 보고 개인정보 설정 버튼을 둔다.</summary>
+        public static bool PrivacyOptionsRequired
+        {
+            get
+            {
+#if GOOGLE_MOBILE_ADS
+                return AdMobAds.PrivacyOptionsRequired;
+#else
+                return false;
+#endif
+            }
+        }
+
+        /// <summary>광고 동의를 다시 고르는 창을 띄운다. 돌아올 때 일시정지 창이 뜨지 않게 광고처럼 표시한다.</summary>
+        public static void ShowPrivacyOptions()
+        {
+#if GOOGLE_MOBILE_ADS
+            Showing = true;
+            AdMobAds.ShowPrivacyOptions(() =>
+            {
+                Showing = false;
+                LastClosedAt = Time.realtimeSinceStartup;
+            });
+#endif
+        }
+
         /// <summary>보상형 광고를 보여 주고, 끝까지 봤으면 빈도 기록에 남긴다.</summary>
         public static void ShowRewarded(RewardedPlacement placement, Action<bool> onFinished)
         {

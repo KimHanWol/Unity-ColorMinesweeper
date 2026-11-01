@@ -194,6 +194,7 @@ namespace ColorMinesweeper.Game
             ["settings.vibration"] = new[] { "진동", "Vibration" },
             ["settings.language"] = new[] { "언어", "Language" },
             ["settings.tutorial"] = new[] { "튜토리얼 다시 보기", "Replay tutorial" },
+            ["settings.privacy"] = new[] { "개인정보 설정", "Privacy settings" },
             ["settings.removeAds"] = new[] { "광고 제거", "Remove ads" },
             ["settings.removeAds.owned"] = new[] { "구매함", "Purchased" },
             ["settings.removeAds.loading"] = new[] { "준비 중", "Loading" },

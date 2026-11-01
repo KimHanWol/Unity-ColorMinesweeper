@@ -42,6 +42,14 @@ namespace ColorMinesweeper.Game
                 bottom = tutorialY - ButtonHalf;
             }
 
+            bool privacy = Ads.PrivacyOptionsRequired;
+            float privacyY = 0f;
+            if (privacy)
+            {
+                privacyY = bottom - 0.3f - ButtonHalf;
+                bottom = privacyY - ButtonHalf;
+            }
+
             float closeY = bottom - 0.35f - ButtonHalf;
             float height = 0.7f - (closeY - ButtonHalf);
             float top = height / 2f;
@@ -86,6 +94,12 @@ namespace ColorMinesweeper.Game
                         Settings.Flush();
                         GameApp.Instance?.ShowTutorial();
                     });
+            }
+
+            if (privacy)
+            {
+                UiKit.Button(card, "Privacy", Loc.T("settings.privacy"), null, Theme.HiddenTile, Theme.Ink, new Vector2(5.6f, UiKit.ModalButtonSize.y),
+                    new Vector2(0f, top + privacyY), o, Ads.ShowPrivacyOptions);
             }
 
             UiKit.Button(card, "Close", Loc.T("common.close"), null, Theme.Accent, Color.white, new Vector2(5.6f, UiKit.ModalButtonSize.y),
