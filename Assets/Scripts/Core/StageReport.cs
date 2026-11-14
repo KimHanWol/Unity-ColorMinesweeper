@@ -45,6 +45,21 @@ namespace ColorMinesweeper.Core
                            "칸 남음). givens 를 다시 생성하세요.");
             }
 
+            var whites = new List<string>();
+            foreach (StageColor color in stage.Colors)
+            {
+                if (color.Color.LooksWhite())
+                {
+                    whites.Add(color.Color.ToHex());
+                }
+            }
+
+            if (whites.Count > 1)
+            {
+                Errors.Add("흰색으로 보이는 색이 " + whites.Count + "개입니다(" + string.Join(", ", whites) +
+                           "). 플레이어가 구분하지 못하니 배경색을 더 진하게 바꾸세요.");
+            }
+
             int givens = Givens.Length;
             if (givens > GivensBudget)
             {

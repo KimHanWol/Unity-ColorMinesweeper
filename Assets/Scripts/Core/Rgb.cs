@@ -46,6 +46,17 @@ namespace ColorMinesweeper.Core
             return "#" + R.ToString("X2") + G.ToString("X2") + B.ToString("X2");
         }
 
+        /// <summary>
+        /// 사람 눈에 흰색으로 보이는지(채도 0.14 미만, 밝기 0.85 초과). 튜토리얼이 "흰색"이라 부르는 기준과 같다.
+        /// 한 그림에 이런 색이 둘이면 플레이어가 구분하지 못한다.
+        /// </summary>
+        public bool LooksWhite()
+        {
+            int max = Math.Max(R, Math.Max(G, B));
+            int min = Math.Min(R, Math.Min(G, B));
+            return max > 0.85 * 255 && max - min < 0.14 * max;
+        }
+
         /// <summary>WCAG 상대 휘도(0~1). 단서 숫자를 밝은 색/어두운 색 중 무엇으로 그릴지 정할 때 쓴다.</summary>
         public double Luminance()
         {
