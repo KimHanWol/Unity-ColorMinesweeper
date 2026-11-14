@@ -8,7 +8,8 @@ namespace ColorMinesweeper.Game
     {
         public static readonly Color BackgroundTop = Hex(0xF7F3EC);
         public static readonly Color BackgroundBottom = Hex(0xE9E4F2);
-        public static readonly Color Plate = Hex(0xFFFFFF);
+        /// <summary>판 바탕. 흰색 칸이 판에 묻히지 않게 아주 연한 보라로 둔다.</summary>
+        public static readonly Color Plate = Hex(0xEEEBF7);
         public static readonly Color Shadow = new Color(0.24f, 0.2f, 0.38f, 0.16f);
         public static readonly Color HiddenTile = Hex(0xD8D3E6);
         public static readonly Color Ink = Hex(0x2E2A40);
