@@ -4,7 +4,7 @@
   "names": { "en": "Candy Cane" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#E9F5DB" },
+    { "key": ".", "color": "#DEF5C4" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "R", "color": "#E63946" },
     { "key": "G", "color": "#2D6A4F" }

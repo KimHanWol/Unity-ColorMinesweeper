@@ -4,7 +4,7 @@
   "names": { "en": "Party Hat" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#FFF9E6" },
+    { "key": ".", "color": "#FFF3CC" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "P", "color": "#FF6B9A" },
     { "key": "Y", "color": "#FFD60A" },

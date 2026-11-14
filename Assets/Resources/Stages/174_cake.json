@@ -4,7 +4,7 @@
   "names": { "en": "Cake" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#F4EEFF" },
+    { "key": ".", "color": "#DECCFF" },
     { "key": "R", "color": "#E63946" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "P", "color": "#FFB5C2" }

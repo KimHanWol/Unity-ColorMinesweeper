@@ -4,7 +4,7 @@
   "names": { "en": "Tomato" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#EEF8EE" },
+    { "key": ".", "color": "#C6F8C6" },
     { "key": "G", "color": "#40916C" },
     { "key": "R", "color": "#E63946" },
     { "key": "W", "color": "#FFFFFF" }

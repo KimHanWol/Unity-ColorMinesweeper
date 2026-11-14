@@ -4,7 +4,7 @@
   "names": { "en": "Matryoshka" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#FFF8EE" },
+    { "key": ".", "color": "#FFEACC" },
     { "key": "R", "color": "#E63946" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "K", "color": "#2B2D42" },

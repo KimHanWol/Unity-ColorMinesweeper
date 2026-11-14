@@ -4,7 +4,7 @@
   "names": { "en": "Cow" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#D8F3DC" },
+    { "key": ".", "color": "#C2F3CA" },
     { "key": "K", "color": "#2B2D42" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "P", "color": "#FFB5C2" }

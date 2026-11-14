@@ -5,7 +5,7 @@
   "logic": "basic",
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#E0FBFC" },
+    { "key": ".", "color": "#CAFAFC" },
     { "key": "B", "color": "#3A86FF" },
     { "key": "W", "color": "#FFFFFF" }
   ],

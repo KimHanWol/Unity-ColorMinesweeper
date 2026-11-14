@@ -4,7 +4,7 @@
   "names": { "en": "Double Scoop" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#E7F0FF" },
+    { "key": ".", "color": "#CCDFFF" },
     { "key": "P", "color": "#FF8FAB" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "M", "color": "#95D5B2" },

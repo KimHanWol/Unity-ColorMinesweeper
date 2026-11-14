@@ -4,7 +4,7 @@
   "names": { "en": "Fox" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#E9F5DB" },
+    { "key": ".", "color": "#DEF5C4" },
     { "key": "O", "color": "#F77F00" },
     { "key": "K", "color": "#2B2D42" },
     { "key": "W", "color": "#FFFFFF" }

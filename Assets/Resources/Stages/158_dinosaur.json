@@ -4,7 +4,7 @@
   "names": { "en": "Dinosaur" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#FFF8EE" },
+    { "key": ".", "color": "#FFEACC" },
     { "key": "G", "color": "#52B788" },
     { "key": "K", "color": "#2B2D42" },
     { "key": "L", "color": "#D8F3DC" }

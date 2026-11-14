@@ -4,7 +4,7 @@
   "names": { "en": "Paint Palette" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#EAF4FF" },
+    { "key": ".", "color": "#CCE4FF" },
     { "key": "B", "color": "#D4A373" },
     { "key": "R", "color": "#E63946" },
     { "key": "Y", "color": "#FFD60A" },

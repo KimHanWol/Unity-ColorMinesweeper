@@ -4,7 +4,7 @@
   "names": { "en": "Drum" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#F4F1FF" },
+    { "key": ".", "color": "#D7CCFF" },
     { "key": "Y", "color": "#E9C46A" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "R", "color": "#E63946" },

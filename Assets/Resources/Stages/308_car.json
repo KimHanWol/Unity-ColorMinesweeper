@@ -4,7 +4,7 @@
   "names": { "en": "Car" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#E9ECEF" },
+    { "key": ".", "color": "#BFD7EF" },
     { "key": "R", "color": "#F94144" },
     { "key": "B", "color": "#A8DADC" },
     { "key": "W", "color": "#FFFFFF" },

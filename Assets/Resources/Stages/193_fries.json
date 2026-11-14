@@ -4,7 +4,7 @@
   "names": { "en": "Fries" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#FFF8EE" },
+    { "key": ".", "color": "#FFEACC" },
     { "key": "Y", "color": "#FFD166" },
     { "key": "R", "color": "#E63946" },
     { "key": "W", "color": "#FFFFFF" }

@@ -4,7 +4,7 @@
   "names": { "en": "Rain Cloud" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#EAF4FF" },
+    { "key": ".", "color": "#CCE4FF" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "S", "color": "#8D99AE" },
     { "key": "B", "color": "#3A86FF" },

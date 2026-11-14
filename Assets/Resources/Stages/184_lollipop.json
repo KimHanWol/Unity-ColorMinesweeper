@@ -4,7 +4,7 @@
   "names": { "en": "Lollipop" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#EAF4FF" },
+    { "key": ".", "color": "#CCE4FF" },
     { "key": "R", "color": "#E63946" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "S", "color": "#ADB5BD" }

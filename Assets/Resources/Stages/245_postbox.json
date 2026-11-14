@@ -4,7 +4,7 @@
   "names": { "en": "Postbox" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#E9F5DB" },
+    { "key": ".", "color": "#DEF5C4" },
     { "key": "R", "color": "#E63946" },
     { "key": "K", "color": "#2B2D42" },
     { "key": "W", "color": "#FFFFFF" },

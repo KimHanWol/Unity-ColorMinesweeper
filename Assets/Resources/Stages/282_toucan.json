@@ -4,7 +4,7 @@
   "names": { "en": "Toucan" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#E9F5DB" },
+    { "key": ".", "color": "#DEF5C4" },
     { "key": "K", "color": "#1B1B2F" },
     { "key": "B", "color": "#3A86FF" },
     { "key": "O", "color": "#F77F00" },

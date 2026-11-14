@@ -4,7 +4,7 @@
   "names": { "en": "Mushroom House" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#DDF1FF" },
+    { "key": ".", "color": "#CCEAFF" },
     { "key": "R", "color": "#E63946" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "B", "color": "#3A86FF" },

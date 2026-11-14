@@ -4,7 +4,7 @@
   "names": { "en": "Fly Agaric" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#E8F5E9" },
+    { "key": ".", "color": "#C4F5C8" },
     { "key": "R", "color": "#E63946" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "S", "color": "#F2D7A6" }

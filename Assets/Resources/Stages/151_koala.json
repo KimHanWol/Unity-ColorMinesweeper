@@ -4,7 +4,7 @@
   "names": { "en": "Koala" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#E9F5DB" },
+    { "key": ".", "color": "#DEF5C4" },
     { "key": "S", "color": "#8D99AE" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "K", "color": "#2B2D42" }

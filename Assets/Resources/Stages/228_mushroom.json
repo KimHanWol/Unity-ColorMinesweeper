@@ -4,7 +4,7 @@
   "names": { "en": "Mushroom Buddy" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#CFE8D5" },
+    { "key": ".", "color": "#BAE8C5" },
     { "key": "R", "color": "#E8505B" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "S", "color": "#F2D7A6" },

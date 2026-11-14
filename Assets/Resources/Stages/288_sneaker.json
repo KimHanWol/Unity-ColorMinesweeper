@@ -4,7 +4,7 @@
   "names": { "en": "Sneaker" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#F4F1FF" },
+    { "key": ".", "color": "#D7CCFF" },
     { "key": "R", "color": "#E63946" },
     { "key": "Y", "color": "#FFD60A" },
     { "key": "W", "color": "#FFFFFF" },

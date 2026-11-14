@@ -4,7 +4,7 @@
   "names": { "en": "Donut" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#EAF4FF" },
+    { "key": ".", "color": "#CCE4FF" },
     { "key": "O", "color": "#D4A373" },
     { "key": "P", "color": "#FF8FAB" },
     { "key": "W", "color": "#FFFFFF" }

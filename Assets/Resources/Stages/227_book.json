@@ -4,7 +4,7 @@
   "names": { "en": "Book" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#EAF4FF" },
+    { "key": ".", "color": "#CCE4FF" },
     { "key": "B", "color": "#3A86FF" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "Y", "color": "#FFD166" },

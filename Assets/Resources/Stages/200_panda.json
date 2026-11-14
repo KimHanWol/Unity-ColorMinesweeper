@@ -4,7 +4,7 @@
   "names": { "en": "Panda" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#E9F5DB" },
+    { "key": ".", "color": "#DEF5C4" },
     { "key": "K", "color": "#2B2D42" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "G", "color": "#52B788" }

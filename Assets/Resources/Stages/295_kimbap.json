@@ -4,7 +4,7 @@
   "names": { "en": "Kimbap" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#FFF8EE" },
+    { "key": ".", "color": "#FFEACC" },
     { "key": "K", "color": "#1B4332" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "G", "color": "#52B788" },

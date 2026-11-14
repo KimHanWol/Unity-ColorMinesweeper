@@ -4,7 +4,7 @@
   "names": { "en": "Windmill" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#DDF1FF" },
+    { "key": ".", "color": "#CCEAFF" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "R", "color": "#C8553D" },
     { "key": "B", "color": "#6F4E37" }

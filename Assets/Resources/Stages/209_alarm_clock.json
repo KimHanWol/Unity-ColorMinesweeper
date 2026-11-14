@@ -4,7 +4,7 @@
   "names": { "en": "Alarm Clock" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#EAF4FF" },
+    { "key": ".", "color": "#CCE4FF" },
     { "key": "R", "color": "#E63946" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "K", "color": "#2B2D42" }

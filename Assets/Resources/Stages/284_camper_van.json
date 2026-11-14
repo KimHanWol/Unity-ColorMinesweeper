@@ -4,7 +4,7 @@
   "names": { "en": "Camper Van" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#DDF1FF" },
+    { "key": ".", "color": "#CCEAFF" },
     { "key": "S", "color": "#8D99AE" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "B", "color": "#3A86FF" },

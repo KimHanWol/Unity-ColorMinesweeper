@@ -4,7 +4,7 @@
   "names": { "en": "Raccoon" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#E9F5DB" },
+    { "key": ".", "color": "#DEF5C4" },
     { "key": "S", "color": "#8D99AE" },
     { "key": "B", "color": "#6F4E37" },
     { "key": "W", "color": "#FFFFFF" },

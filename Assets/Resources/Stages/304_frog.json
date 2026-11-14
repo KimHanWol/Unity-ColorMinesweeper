@@ -4,7 +4,7 @@
   "names": { "en": "Tree Frog" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#E8F7FF" },
+    { "key": ".", "color": "#CCEDFF" },
     { "key": "G", "color": "#80B918" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "K", "color": "#1B1B2F" },

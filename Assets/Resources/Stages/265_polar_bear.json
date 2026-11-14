@@ -4,7 +4,7 @@
   "names": { "en": "Polar Bear" },
   "background": ".",
   "palette": [
-    { "key": ".", "color": "#DDF1FF" },
+    { "key": ".", "color": "#CCEAFF" },
     { "key": "W", "color": "#FFFFFF" },
     { "key": "K", "color": "#2B2D42" },
     { "key": "S", "color": "#BFC8D6" },
