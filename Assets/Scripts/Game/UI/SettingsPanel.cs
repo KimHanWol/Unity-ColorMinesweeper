@@ -69,7 +69,7 @@ namespace ColorMinesweeper.Game
             y -= RowHeight;
             Toggle(card, Loc.T("settings.vibration"), null, new Vector2(0f, y), o, () => Settings.Vibration, v => Settings.Vibration = v);
             y -= RowHeight;
-            Toggle(card, Loc.T("settings.turnDigits"), Loc.T("settings.turnDigits.desc"), new Vector2(0f, y), o,
+            Toggle(card, Loc.T("settings.turnDigits"), null, new Vector2(0f, y), o,
                 () => Settings.TurnDigits, v => Settings.TurnDigits = v);
             if (allowTutorial)
             {
