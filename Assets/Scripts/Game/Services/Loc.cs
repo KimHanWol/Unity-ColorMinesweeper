@@ -192,6 +192,8 @@ namespace ColorMinesweeper.Game
             ["settings.music"] = new[] { "배경음악", "Music" },
             ["settings.sfx"] = new[] { "효과음", "Sound effects" },
             ["settings.vibration"] = new[] { "진동", "Vibration" },
+            ["settings.turnDigits"] = new[] { "숫자 회전", "Rotate numbers" },
+            ["settings.turnDigits.desc"] = new[] { "기기를 옆으로 돌리면 숫자도 돌아갑니다", "Numbers turn when you rotate the device" },
             ["settings.language"] = new[] { "언어", "Language" },
             ["settings.tutorial"] = new[] { "튜토리얼 다시 보기", "Replay tutorial" },
             ["settings.privacy"] = new[] { "개인정보 설정", "Privacy settings" },

@@ -10,6 +10,7 @@ namespace ColorMinesweeper.Game
         const string SfxKey = "settings.sfxVolume";
         const string LegacySoundKey = "settings.sound";
         const string HapticsKey = "settings.haptics";
+        const string TurnDigitsKey = "settings.turnDigits";
 
         public static event Action Changed;
 
@@ -31,6 +32,13 @@ namespace ColorMinesweeper.Game
         {
             get => PlayerPrefs.GetInt(HapticsKey, 1) == 1;
             set => SetBool(HapticsKey, value);
+        }
+
+        /// <summary>기기를 옆으로 돌리면 숫자를 바로 세울지(<see cref="DeviceTurn"/>).</summary>
+        public static bool TurnDigits
+        {
+            get => PlayerPrefs.GetInt(TurnDigitsKey, 1) == 1;
+            set => SetBool(TurnDigitsKey, value);
         }
 
         /// <summary>저장된 값을 소리·진동에 반영한다. 시작할 때와 바뀔 때 부른다.</summary>

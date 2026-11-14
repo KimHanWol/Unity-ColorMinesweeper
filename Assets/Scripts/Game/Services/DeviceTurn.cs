@@ -5,7 +5,7 @@ namespace ColorMinesweeper.Game
     /// <summary>
     /// 기기를 옆으로 돌렸을 때 숫자를 바로 세워 보이게 할 각도. 화면 배치는 세로 그대로 두고 숫자(<see cref="PixelText"/>)만
     /// 제자리에서 돌린다. 각도가 바뀌면 살짝 튕기며 돌아간다.
-    /// 휴대폰의 자동 회전이 꺼져 있으면 돌리지 않는다(누워서 볼 때 엉뚱하게 돌지 않게).
+    /// 휴대폰의 자동 회전이 꺼져 있거나 설정의 "숫자 회전"을 끄면 돌리지 않는다(누워서 볼 때 엉뚱하게 돌지 않게).
     /// </summary>
     public static class DeviceTurn
     {
@@ -36,7 +36,9 @@ namespace ColorMinesweeper.Game
                 autoRotate = ReadAutoRotate();
             }
 
-            float wanted = DebugTarget ?? (autoRotate ? TargetFor(Input.deviceOrientation) : 0f);
+            // PlayerPrefs 는 메모리에서 읽으므로 매 프레임 물어도 가볍다.
+            bool follow = autoRotate && Settings.TurnDigits;
+            float wanted = DebugTarget ?? (follow ? TargetFor(Input.deviceOrientation) : 0f);
             if (!Mathf.Approximately(wanted, target))
             {
                 from = Angle;

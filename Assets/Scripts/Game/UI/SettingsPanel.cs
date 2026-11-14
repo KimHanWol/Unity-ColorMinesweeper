@@ -23,7 +23,7 @@ namespace ColorMinesweeper.Game
             bool removeAds = RemoveAdsStore.IsSupported;
             // iOS 는 구매 복원 버튼을 사용자가 누를 수 있게 두어야 한다(Android 는 시작할 때 저절로 되살린다).
             bool restore = removeAds && Application.platform == RuntimePlatform.IPhonePlayer && !RemoveAdsStore.Owned;
-            int rows = (allowTutorial ? 4 : 3) + (removeAds ? 1 : 0);
+            int rows = (allowTutorial ? 5 : 4) + (removeAds ? 1 : 0);
             float titleY = -0.9f;
             float firstRowY = titleY - 1.35f;
             // 마지막 줄 아래 끝. 줄 한가운데에서 반 줄 내려간 곳이다.
@@ -68,6 +68,9 @@ namespace ColorMinesweeper.Game
             Volume(card, Loc.T("settings.sfx"), new Vector2(0f, y), o, Settings.SfxVolume, v => Settings.SfxVolume = v, true);
             y -= RowHeight;
             Toggle(card, Loc.T("settings.vibration"), null, new Vector2(0f, y), o, () => Settings.Vibration, v => Settings.Vibration = v);
+            y -= RowHeight;
+            Toggle(card, Loc.T("settings.turnDigits"), Loc.T("settings.turnDigits.desc"), new Vector2(0f, y), o,
+                () => Settings.TurnDigits, v => Settings.TurnDigits = v);
             if (allowTutorial)
             {
                 y -= RowHeight;
