@@ -87,6 +87,8 @@ namespace ColorMinesweeper.Game
 
         void Update()
         {
+            DeviceTurn.Tick();
+
             // 안드로이드 뒤로 가기 버튼은 Escape 로 들어온다.
             if (Input.GetKeyDown(KeyCode.Escape) && !wipe.Busy)
             {

@@ -6,6 +6,8 @@ namespace ColorMinesweeper.Game
     /// <summary>
     /// 도트 숫자 줄. 높이 1 유닛, 가운데 정렬. transform 크기로 키운다.
     /// 테두리 색을 주면 글자마다 한 도트 두께의 테두리를 뒤에 깐다(칸 색과 같은 색 숫자도 읽히게).
+    /// 기기를 옆으로 돌리면 글자 묶음을 제자리에서 돌려 바로 세운다(<see cref="DeviceTurn"/>). 돌린 동안 세로로 길어지는
+    /// 두 자리 이상 숫자는 원래 높이 안에 들도록 줄인다.
     /// </summary>
     public sealed class PixelText : MonoBehaviour
     {
@@ -18,6 +20,8 @@ namespace ColorMinesweeper.Game
         Color? outlineColor;
         int order;
         bool round;
+        Transform turn;
+        float shownAngle = float.NaN;
 
         public static PixelText Create(Transform parent, string name, string text, Color color, int order,
             Vector2 localPosition, float height)
@@ -69,12 +73,18 @@ namespace ColorMinesweeper.Game
             }
 
             text = value;
+            shownAngle = float.NaN;
+            if (turn == null)
+            {
+                turn = Draw.Node(transform, "Turn");
+            }
+
             while (glyphs.Count < text.Length)
             {
-                glyphs.Add(Draw.Sprite(transform, "g", null, color, order));
+                glyphs.Add(Draw.Sprite(turn, "g", null, color, order));
                 if (outlineColor.HasValue)
                 {
-                    outlines.Add(Draw.Sprite(transform, "o", null, outlineColor.Value, order - 1));
+                    outlines.Add(Draw.Sprite(turn, "o", null, outlineColor.Value, order - 1));
                 }
             }
 
@@ -103,6 +113,21 @@ namespace ColorMinesweeper.Game
                     outlines[i].transform.localPosition = position;
                 }
             }
+        }
+
+        void LateUpdate()
+        {
+            float angle = DeviceTurn.Angle;
+            if (turn == null || angle == shownAngle)
+            {
+                return;
+            }
+
+            shownAngle = angle;
+            float side = Mathf.Abs(Mathf.Sin(angle * Mathf.Deg2Rad));
+            float fit = Width > 1f ? 1f / Width : 1f;
+            turn.localRotation = Quaternion.Euler(0f, 0f, angle);
+            turn.localScale = Vector3.one * Mathf.Lerp(1f, fit, side);
         }
 
         public void SetColor(Color value)
